@@ -1,0 +1,1345 @@
+2026-06-02 17:35:11,130 | INFO     | backtest | Log dosyası: C:\Users\efeke\Documents\Python\Trade Bot\V1\logs\backtest_20260602_173511.log
+2026-06-02 17:35:11,131 | INFO     | backtest | ==============================================================
+2026-06-02 17:35:11,131 | INFO     | backtest |   nasdaq_bot_v2 BACKTEST BAŞLADI
+2026-06-02 17:35:11,131 | INFO     | backtest | ==============================================================
+2026-06-02 17:35:11,131 | INFO     | backtest | 📥 Veri indiriliyor ve indikatörler hesaplanıyor...
+2026-06-02 17:35:11,156 | INFO     | backtest | Toplam bar: 6402 | Isınma periyodu: 26 bar | Simüle edilecek bar: 6376
+2026-06-02 17:35:11,157 | INFO     | strategy.engine | StrategyEngine başlatıldı | EMA_FAST=9, EMA_SLOW=21, RSI_OVERBOUGHT=70, RSI_OVERSOLD=30
+2026-06-02 17:35:11,241 | INFO     | strategy.voting | XGBoost modeli başarıyla yüklendi: 'C:\Users\efeke\Documents\Python\Trade Bot\V1\models\xgb_model.json'
+2026-06-02 17:35:11,241 | INFO     | risk.portfolio | PortfolioManager başlatıldı | Başlangıç Bakiyesi=100,000.00 USD | Risk/Trade=%0.2 | ATR Çarpanı=1.5 | R:R=1:1.2 | Max Lot=3.0 | ATR Zemin=2.0 | Max Maliyet Oranı=%60
+2026-06-02 17:35:11,241 | INFO     | risk.guardrails | RiskGuardrails başlatıldı | Günlük Limit=%4.0 | Toplam Limit=%9.0 | İşlem Saatleri=16:00–23:59 UTC | Hafta Sonu Holding=YASAK
+2026-06-02 17:35:11,241 | INFO     | execution.simulator | BacktestSimulator başlatıldı.
+2026-06-02 17:35:11,241 | INFO     | backtest | 🚀 Simülasyon döngüsü başlıyor...
+2026-06-02 17:35:11,249 | INFO     | strategy.voting | Bar 26: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.6695 >= Eşik=0.52]
+2026-06-02 17:35:11,249 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2066 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,249 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3333 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,249 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 49.9050 | Zaman=2025-06-09 23:00:00 | Lot=3.0000 | SL=46.9050 | TP=53.5050 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,249 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,249 | INFO     | backtest | 📅 Yeni gün: 2025-06-10 | Bakiye: $99,999.97
+2026-06-02 17:35:11,251 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,251 | INFO     | backtest | 📅 Yeni gün: 2025-06-11 | Bakiye: $99,999.97
+2026-06-02 17:35:11,252 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,252 | INFO     | backtest | 📅 Yeni gün: 2025-06-12 | Bakiye: $99,999.97
+2026-06-02 17:35:11,254 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,254 | INFO     | backtest | 📅 Yeni gün: 2025-06-13 | Bakiye: $99,999.97
+2026-06-02 17:35:11,256 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,256 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 50.5200 | Net PnL=+1.81 USD | Yeni Bakiye=100,001.78 USD | Zaman=2025-06-13 23:00:00
+2026-06-02 17:35:11,256 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 50.5200 | PnL=+1.81 USD
+2026-06-02 17:35:11,256 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,256 | INFO     | backtest | 📅 Yeni gün: 2025-06-16 | Bakiye: $100,001.78
+2026-06-02 17:35:11,259 | INFO     | strategy.voting | Bar 135: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4127 < Eşik=0.52]
+2026-06-02 17:35:11,261 | INFO     | strategy.voting | Bar 136: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4241 < Eşik=0.52]
+2026-06-02 17:35:11,263 | INFO     | strategy.voting | Bar 137: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4241 < Eşik=0.52]
+2026-06-02 17:35:11,265 | INFO     | strategy.voting | Bar 138: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5708 >= Eşik=0.52]
+2026-06-02 17:35:11,266 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3258 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,266 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3348 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,266 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 50.9750 | Zaman=2025-06-16 17:15:00 | Lot=3.0000 | SL=53.9750 | TP=47.3750 | Komisyon=0.03 USD | Maliyet Oranı=%1.9
+2026-06-02 17:35:11,267 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,267 | INFO     | backtest | 📅 Yeni gün: 2025-06-17 | Bakiye: $100,001.75
+2026-06-02 17:35:11,268 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,268 | INFO     | backtest | 📅 Yeni gün: 2025-06-18 | Bakiye: $100,001.75
+2026-06-02 17:35:11,269 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,270 | INFO     | backtest | 📅 Yeni gün: 2025-06-20 | Bakiye: $100,001.75
+2026-06-02 17:35:11,271 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,271 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 49.8900 | Net PnL=+3.23 USD | Yeni Bakiye=100,004.98 USD | Zaman=2025-06-20 23:00:00
+2026-06-02 17:35:11,271 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 49.8900 | PnL=+3.23 USD
+2026-06-02 17:35:11,271 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,271 | INFO     | backtest | 📅 Yeni gün: 2025-06-23 | Bakiye: $100,004.98
+2026-06-02 17:35:11,273 | INFO     | strategy.voting | Bar 244: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3198 < Eşik=0.52]
+2026-06-02 17:35:11,275 | INFO     | strategy.voting | Bar 245: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3781 < Eşik=0.52]
+2026-06-02 17:35:11,277 | INFO     | strategy.voting | Bar 246: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4328 < Eşik=0.52]
+2026-06-02 17:35:11,279 | INFO     | strategy.voting | Bar 247: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4395 < Eşik=0.52]
+2026-06-02 17:35:11,281 | INFO     | strategy.voting | Bar 248: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4395 < Eşik=0.52]
+2026-06-02 17:35:11,284 | INFO     | strategy.voting | Bar 249: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4395 < Eşik=0.52]
+2026-06-02 17:35:11,286 | INFO     | strategy.voting | Bar 250: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4225 < Eşik=0.52]
+2026-06-02 17:35:11,288 | INFO     | strategy.voting | Bar 251: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4165 < Eşik=0.52]
+2026-06-02 17:35:11,290 | INFO     | strategy.voting | Bar 252: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3800 < Eşik=0.52]
+2026-06-02 17:35:11,292 | INFO     | strategy.voting | Bar 253: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3184 < Eşik=0.52]
+2026-06-02 17:35:11,294 | INFO     | strategy.voting | Bar 254: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3064 < Eşik=0.52]
+2026-06-02 17:35:11,296 | INFO     | strategy.voting | Bar 255: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3403 < Eşik=0.52]
+2026-06-02 17:35:11,298 | INFO     | strategy.voting | Bar 256: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3348 < Eşik=0.52]
+2026-06-02 17:35:11,300 | INFO     | strategy.voting | Bar 257: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3218 < Eşik=0.52]
+2026-06-02 17:35:11,302 | INFO     | strategy.voting | Bar 258: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3348 < Eşik=0.52]
+2026-06-02 17:35:11,304 | INFO     | strategy.voting | Bar 259: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3064 < Eşik=0.52]
+2026-06-02 17:35:11,306 | INFO     | strategy.voting | Bar 260: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3064 < Eşik=0.52]
+2026-06-02 17:35:11,309 | INFO     | strategy.voting | Bar 261: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3064 < Eşik=0.52]
+2026-06-02 17:35:11,311 | INFO     | strategy.voting | Bar 262: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3064 < Eşik=0.52]
+2026-06-02 17:35:11,313 | INFO     | strategy.voting | Bar 263: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3064 < Eşik=0.52]
+2026-06-02 17:35:11,315 | INFO     | strategy.voting | Bar 264: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3064 < Eşik=0.52]
+2026-06-02 17:35:11,317 | INFO     | strategy.voting | Bar 265: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3064 < Eşik=0.52]
+2026-06-02 17:35:11,319 | INFO     | strategy.voting | Bar 266: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3178 < Eşik=0.52]
+2026-06-02 17:35:11,321 | INFO     | strategy.voting | Bar 267: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3064 < Eşik=0.52]
+2026-06-02 17:35:11,323 | INFO     | strategy.voting | Bar 268: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3080 < Eşik=0.52]
+2026-06-02 17:35:11,325 | INFO     | strategy.voting | Bar 269: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3080 < Eşik=0.52]
+2026-06-02 17:35:11,326 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,326 | INFO     | backtest | 📅 Yeni gün: 2025-06-24 | Bakiye: $100,004.98
+2026-06-02 17:35:11,328 | INFO     | strategy.voting | Bar 270: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5004 < Eşik=0.52]
+2026-06-02 17:35:11,330 | INFO     | strategy.voting | Bar 271: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5136 < Eşik=0.52]
+2026-06-02 17:35:11,332 | INFO     | strategy.voting | Bar 272: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4571 < Eşik=0.52]
+2026-06-02 17:35:11,334 | INFO     | strategy.voting | Bar 273: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4778 < Eşik=0.52]
+2026-06-02 17:35:11,336 | INFO     | strategy.voting | Bar 274: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4996 < Eşik=0.52]
+2026-06-02 17:35:11,338 | INFO     | strategy.voting | Bar 275: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4648 < Eşik=0.52]
+2026-06-02 17:35:11,341 | INFO     | strategy.voting | Bar 276: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4648 < Eşik=0.52]
+2026-06-02 17:35:11,343 | INFO     | strategy.voting | Bar 277: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5069 < Eşik=0.52]
+2026-06-02 17:35:11,345 | INFO     | strategy.voting | Bar 278: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5069 < Eşik=0.52]
+2026-06-02 17:35:11,347 | INFO     | strategy.voting | Bar 279: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5093 < Eşik=0.52]
+2026-06-02 17:35:11,350 | INFO     | strategy.voting | Bar 280: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4875 < Eşik=0.52]
+2026-06-02 17:35:11,352 | INFO     | strategy.voting | Bar 281: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.6036 >= Eşik=0.52]
+2026-06-02 17:35:11,352 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2286 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,352 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3375 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,352 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 49.8450 | Zaman=2025-06-24 19:15:00 | Lot=3.0000 | SL=46.8450 | TP=53.4450 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,353 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,353 | INFO     | backtest | 📅 Yeni gün: 2025-06-25 | Bakiye: $100,004.95
+2026-06-02 17:35:11,354 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,354 | INFO     | backtest | 📅 Yeni gün: 2025-06-26 | Bakiye: $100,004.95
+2026-06-02 17:35:11,355 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,356 | INFO     | backtest | 📅 Yeni gün: 2025-06-27 | Bakiye: $100,004.95
+2026-06-02 17:35:11,357 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,357 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 51.8400 | Net PnL=+5.95 USD | Yeni Bakiye=100,010.90 USD | Zaman=2025-06-27 23:00:00
+2026-06-02 17:35:11,357 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 51.8400 | PnL=+5.95 USD
+2026-06-02 17:35:11,357 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,357 | INFO     | backtest | 📅 Yeni gün: 2025-06-30 | Bakiye: $100,010.90
+2026-06-02 17:35:11,359 | INFO     | strategy.voting | Bar 378: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.6037 >= Eşik=0.52]
+2026-06-02 17:35:11,359 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3003 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,359 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3424 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,359 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 52.0050 | Zaman=2025-06-30 16:30:00 | Lot=3.0000 | SL=55.0050 | TP=48.4050 | Komisyon=0.03 USD | Maliyet Oranı=%1.9
+2026-06-02 17:35:11,361 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,361 | INFO     | backtest | 📅 Yeni gün: 2025-07-01 | Bakiye: $100,010.87
+2026-06-02 17:35:11,362 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,362 | INFO     | backtest | 📅 Yeni gün: 2025-07-02 | Bakiye: $100,010.87
+2026-06-02 17:35:11,363 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,363 | INFO     | backtest | 📅 Yeni gün: 2025-07-03 | Bakiye: $100,010.87
+2026-06-02 17:35:11,364 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,364 | INFO     | backtest | 📅 Yeni gün: 2025-07-07 | Bakiye: $100,010.87
+2026-06-02 17:35:11,365 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,365 | INFO     | backtest | 📅 Yeni gün: 2025-07-08 | Bakiye: $100,010.87
+2026-06-02 17:35:11,367 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,367 | INFO     | backtest | 📅 Yeni gün: 2025-07-09 | Bakiye: $100,010.87
+2026-06-02 17:35:11,368 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,368 | INFO     | backtest | 📅 Yeni gün: 2025-07-10 | Bakiye: $100,010.87
+2026-06-02 17:35:11,368 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 55.0050 | Net PnL=-9.03 USD | Yeni Bakiye=100,001.84 USD | Zaman=2025-07-10 18:00:00
+2026-06-02 17:35:11,372 | INFO     | strategy.voting | Bar 576: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3952 < Eşik=0.52]
+2026-06-02 17:35:11,372 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,372 | INFO     | backtest | 📅 Yeni gün: 2025-07-11 | Bakiye: $100,001.84
+2026-06-02 17:35:11,373 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,374 | INFO     | backtest | 📅 Yeni gün: 2025-07-14 | Bakiye: $100,001.84
+2026-06-02 17:35:11,376 | INFO     | strategy.voting | Bar 613: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4214 < Eşik=0.52]
+2026-06-02 17:35:11,378 | INFO     | strategy.voting | Bar 614: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4406 < Eşik=0.52]
+2026-06-02 17:35:11,380 | INFO     | strategy.voting | Bar 615: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4687 < Eşik=0.52]
+2026-06-02 17:35:11,382 | INFO     | strategy.voting | Bar 616: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4286 < Eşik=0.52]
+2026-06-02 17:35:11,384 | INFO     | strategy.voting | Bar 617: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4660 < Eşik=0.52]
+2026-06-02 17:35:11,386 | INFO     | strategy.voting | Bar 618: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4307 < Eşik=0.52]
+2026-06-02 17:35:11,388 | INFO     | strategy.voting | Bar 619: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4601 < Eşik=0.52]
+2026-06-02 17:35:11,390 | INFO     | strategy.voting | Bar 620: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4951 < Eşik=0.52]
+2026-06-02 17:35:11,393 | INFO     | strategy.voting | Bar 621: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5507 >= Eşik=0.52]
+2026-06-02 17:35:11,393 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3391 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,393 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3349 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,393 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 53.1650 | Zaman=2025-07-14 19:30:00 | Lot=3.0000 | SL=56.1650 | TP=49.5650 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,394 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,394 | INFO     | backtest | 📅 Yeni gün: 2025-07-15 | Bakiye: $100,001.81
+2026-06-02 17:35:11,395 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,395 | INFO     | backtest | 📅 Yeni gün: 2025-07-16 | Bakiye: $100,001.81
+2026-06-02 17:35:11,396 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,397 | INFO     | backtest | 📅 Yeni gün: 2025-07-17 | Bakiye: $100,001.81
+2026-06-02 17:35:11,398 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,398 | INFO     | backtest | 📅 Yeni gün: 2025-07-18 | Bakiye: $100,001.81
+2026-06-02 17:35:11,399 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,400 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 52.0200 | Net PnL=+3.40 USD | Yeni Bakiye=100,005.21 USD | Zaman=2025-07-18 23:00:00
+2026-06-02 17:35:11,400 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 52.0200 | PnL=+3.40 USD
+2026-06-02 17:35:11,400 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,400 | INFO     | backtest | 📅 Yeni gün: 2025-07-21 | Bakiye: $100,005.21
+2026-06-02 17:35:11,403 | INFO     | strategy.voting | Bar 747: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4562 < Eşik=0.52]
+2026-06-02 17:35:11,405 | INFO     | strategy.voting | Bar 748: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4630 < Eşik=0.52]
+2026-06-02 17:35:11,407 | INFO     | strategy.voting | Bar 749: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4630 < Eşik=0.52]
+2026-06-02 17:35:11,409 | INFO     | strategy.voting | Bar 750: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4520 < Eşik=0.52]
+2026-06-02 17:35:11,412 | INFO     | strategy.voting | Bar 751: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4169 < Eşik=0.52]
+2026-06-02 17:35:11,414 | INFO     | strategy.voting | Bar 752: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4109 < Eşik=0.52]
+2026-06-02 17:35:11,416 | INFO     | strategy.voting | Bar 753: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3844 < Eşik=0.52]
+2026-06-02 17:35:11,418 | INFO     | strategy.voting | Bar 756: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3511 < Eşik=0.52]
+2026-06-02 17:35:11,421 | INFO     | strategy.voting | Bar 757: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3511 < Eşik=0.52]
+2026-06-02 17:35:11,423 | INFO     | strategy.voting | Bar 758: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3525 < Eşik=0.52]
+2026-06-02 17:35:11,426 | INFO     | strategy.voting | Bar 759: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3525 < Eşik=0.52]
+2026-06-02 17:35:11,428 | INFO     | strategy.voting | Bar 760: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3790 < Eşik=0.52]
+2026-06-02 17:35:11,430 | INFO     | strategy.voting | Bar 761: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3790 < Eşik=0.52]
+2026-06-02 17:35:11,432 | INFO     | strategy.voting | Bar 762: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3790 < Eşik=0.52]
+2026-06-02 17:35:11,434 | INFO     | strategy.voting | Bar 763: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3903 < Eşik=0.52]
+2026-06-02 17:35:11,436 | INFO     | strategy.voting | Bar 764: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3903 < Eşik=0.52]
+2026-06-02 17:35:11,439 | INFO     | strategy.voting | Bar 765: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3681 < Eşik=0.52]
+2026-06-02 17:35:11,441 | INFO     | strategy.voting | Bar 766: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3570 < Eşik=0.52]
+2026-06-02 17:35:11,443 | INFO     | strategy.voting | Bar 767: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3681 < Eşik=0.52]
+2026-06-02 17:35:11,445 | INFO     | strategy.voting | Bar 768: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3681 < Eşik=0.52]
+2026-06-02 17:35:11,448 | INFO     | strategy.voting | Bar 769: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3570 < Eşik=0.52]
+2026-06-02 17:35:11,450 | INFO     | strategy.voting | Bar 770: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3681 < Eşik=0.52]
+2026-06-02 17:35:11,450 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,450 | INFO     | backtest | 📅 Yeni gün: 2025-07-22 | Bakiye: $100,005.21
+2026-06-02 17:35:11,453 | INFO     | strategy.voting | Bar 773: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5012 < Eşik=0.52]
+2026-06-02 17:35:11,455 | INFO     | strategy.voting | Bar 774: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5090 < Eşik=0.52]
+2026-06-02 17:35:11,457 | INFO     | strategy.voting | Bar 775: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5750 >= Eşik=0.52]
+2026-06-02 17:35:11,457 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.5370 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,457 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3377 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,457 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 52.1150 | Zaman=2025-07-22 17:30:00 | Lot=3.0000 | SL=49.1150 | TP=55.7150 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,458 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,458 | INFO     | backtest | 📅 Yeni gün: 2025-07-23 | Bakiye: $100,005.18
+2026-06-02 17:35:11,459 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 55.7150 | Net PnL=+10.77 USD | Yeni Bakiye=100,015.95 USD | Zaman=2025-07-23 16:30:00
+2026-06-02 17:35:11,461 | INFO     | strategy.voting | Bar 805: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.6314 >= Eşik=0.52]
+2026-06-02 17:35:11,462 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4739 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,462 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3466 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,462 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 54.9950 | Zaman=2025-07-23 18:15:00 | Lot=3.0000 | SL=51.9950 | TP=58.5950 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,463 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,463 | INFO     | backtest | 📅 Yeni gün: 2025-07-24 | Bakiye: $100,015.91
+2026-06-02 17:35:11,464 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 58.5950 | Net PnL=+10.76 USD | Yeni Bakiye=100,026.68 USD | Zaman=2025-07-24 22:45:00
+2026-06-02 17:35:11,464 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,464 | INFO     | backtest | 📅 Yeni gün: 2025-07-25 | Bakiye: $100,026.68
+2026-06-02 17:35:11,466 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,466 | INFO     | backtest | 📅 Yeni gün: 2025-07-28 | Bakiye: $100,026.68
+2026-06-02 17:35:11,469 | INFO     | strategy.voting | Bar 879: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4657 < Eşik=0.52]
+2026-06-02 17:35:11,471 | INFO     | strategy.voting | Bar 880: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4657 < Eşik=0.52]
+2026-06-02 17:35:11,474 | INFO     | strategy.voting | Bar 881: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4347 < Eşik=0.52]
+2026-06-02 17:35:11,476 | INFO     | strategy.voting | Bar 882: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4746 < Eşik=0.52]
+2026-06-02 17:35:11,478 | INFO     | strategy.voting | Bar 883: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4488 < Eşik=0.52]
+2026-06-02 17:35:11,480 | INFO     | strategy.voting | Bar 884: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4315 < Eşik=0.52]
+2026-06-02 17:35:11,483 | INFO     | strategy.voting | Bar 885: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3753 < Eşik=0.52]
+2026-06-02 17:35:11,488 | INFO     | strategy.voting | Bar 886: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3847 < Eşik=0.52]
+2026-06-02 17:35:11,494 | INFO     | strategy.voting | Bar 887: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3513 < Eşik=0.52]
+2026-06-02 17:35:11,497 | INFO     | strategy.voting | Bar 888: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3741 < Eşik=0.52]
+2026-06-02 17:35:11,500 | INFO     | strategy.voting | Bar 890: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3886 < Eşik=0.52]
+2026-06-02 17:35:11,502 | INFO     | strategy.voting | Bar 891: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3886 < Eşik=0.52]
+2026-06-02 17:35:11,505 | INFO     | strategy.voting | Bar 892: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3402 < Eşik=0.52]
+2026-06-02 17:35:11,507 | INFO     | strategy.voting | Bar 893: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3582 < Eşik=0.52]
+2026-06-02 17:35:11,509 | INFO     | strategy.voting | Bar 894: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3402 < Eşik=0.52]
+2026-06-02 17:35:11,512 | INFO     | strategy.voting | Bar 895: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3057 < Eşik=0.52]
+2026-06-02 17:35:11,514 | INFO     | strategy.voting | Bar 896: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2767 < Eşik=0.52]
+2026-06-02 17:35:11,517 | INFO     | strategy.voting | Bar 897: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2857 < Eşik=0.52]
+2026-06-02 17:35:11,519 | INFO     | strategy.voting | Bar 898: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2767 < Eşik=0.52]
+2026-06-02 17:35:11,521 | INFO     | strategy.voting | Bar 899: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2929 < Eşik=0.52]
+2026-06-02 17:35:11,523 | INFO     | strategy.voting | Bar 900: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2857 < Eşik=0.52]
+2026-06-02 17:35:11,526 | INFO     | strategy.voting | Bar 901: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3741 < Eşik=0.52]
+2026-06-02 17:35:11,528 | INFO     | strategy.voting | Bar 902: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3453 < Eşik=0.52]
+2026-06-02 17:35:11,530 | INFO     | strategy.voting | Bar 903: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4246 < Eşik=0.52]
+2026-06-02 17:35:11,533 | INFO     | strategy.voting | Bar 904: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4962 < Eşik=0.52]
+2026-06-02 17:35:11,535 | INFO     | strategy.voting | Bar 905: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4962 < Eşik=0.52]
+2026-06-02 17:35:11,535 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,535 | INFO     | backtest | 📅 Yeni gün: 2025-07-29 | Bakiye: $100,026.68
+2026-06-02 17:35:11,538 | INFO     | strategy.voting | Bar 906: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5415 >= Eşik=0.52]
+2026-06-02 17:35:11,538 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3170 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,538 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3556 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,538 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 58.3050 | Zaman=2025-07-29 16:30:00 | Lot=3.0000 | SL=61.3050 | TP=54.7050 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,539 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,539 | INFO     | backtest | 📅 Yeni gün: 2025-07-30 | Bakiye: $100,026.64
+2026-06-02 17:35:11,540 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,540 | INFO     | backtest | 📅 Yeni gün: 2025-07-31 | Bakiye: $100,026.64
+2026-06-02 17:35:11,542 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 54.7050 | Net PnL=+10.77 USD | Yeni Bakiye=100,037.41 USD | Zaman=2025-07-31 22:45:00
+2026-06-02 17:35:11,542 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,542 | INFO     | backtest | 📅 Yeni gün: 2025-08-01 | Bakiye: $100,037.41
+2026-06-02 17:35:11,544 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,544 | INFO     | backtest | 📅 Yeni gün: 2025-08-13 | Bakiye: $100,037.41
+2026-06-02 17:35:11,546 | INFO     | strategy.voting | Bar 1014: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4196 < Eşik=0.52]
+2026-06-02 17:35:11,549 | INFO     | strategy.voting | Bar 1015: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4196 < Eşik=0.52]
+2026-06-02 17:35:11,551 | INFO     | strategy.voting | Bar 1016: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4196 < Eşik=0.52]
+2026-06-02 17:35:11,554 | INFO     | strategy.voting | Bar 1017: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4415 < Eşik=0.52]
+2026-06-02 17:35:11,556 | INFO     | strategy.voting | Bar 1018: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5204 >= Eşik=0.52]
+2026-06-02 17:35:11,556 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4307 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,556 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3645 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,556 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 53.9750 | Zaman=2025-08-13 17:30:00 | Lot=3.0000 | SL=56.9750 | TP=50.3750 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,557 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,557 | INFO     | backtest | 📅 Yeni gün: 2025-08-14 | Bakiye: $100,037.38
+2026-06-02 17:35:11,559 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,559 | INFO     | backtest | 📅 Yeni gün: 2025-08-15 | Bakiye: $100,037.38
+2026-06-02 17:35:11,560 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,560 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 53.6000 | Net PnL=+1.09 USD | Yeni Bakiye=100,038.47 USD | Zaman=2025-08-15 23:00:00
+2026-06-02 17:35:11,560 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 53.6000 | PnL=+1.09 USD
+2026-06-02 17:35:11,560 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,561 | INFO     | backtest | 📅 Yeni gün: 2025-08-18 | Bakiye: $100,038.47
+2026-06-02 17:35:11,563 | INFO     | strategy.voting | Bar 1095: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4139 < Eşik=0.52]
+2026-06-02 17:35:11,565 | INFO     | strategy.voting | Bar 1096: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.6261 >= Eşik=0.52]
+2026-06-02 17:35:11,565 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.1876 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,565 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3654 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,565 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 53.8450 | Zaman=2025-08-18 16:45:00 | Lot=3.0000 | SL=56.8450 | TP=50.2450 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,567 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,567 | INFO     | backtest | 📅 Yeni gün: 2025-08-19 | Bakiye: $100,038.44
+2026-06-02 17:35:11,568 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,568 | INFO     | backtest | 📅 Yeni gün: 2025-08-20 | Bakiye: $100,038.44
+2026-06-02 17:35:11,570 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,570 | INFO     | backtest | 📅 Yeni gün: 2025-08-21 | Bakiye: $100,038.44
+2026-06-02 17:35:11,571 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,571 | INFO     | backtest | 📅 Yeni gün: 2025-08-22 | Bakiye: $100,038.44
+2026-06-02 17:35:11,572 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 56.8450 | Net PnL=-9.03 USD | Yeni Bakiye=100,029.40 USD | Zaman=2025-08-22 17:30:00
+2026-06-02 17:35:11,573 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,573 | INFO     | backtest | 📅 Yeni gün: 2025-08-25 | Bakiye: $100,029.40
+2026-06-02 17:35:11,576 | INFO     | strategy.voting | Bar 1230: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4412 < Eşik=0.52]
+2026-06-02 17:35:11,578 | INFO     | strategy.voting | Bar 1231: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4404 < Eşik=0.52]
+2026-06-02 17:35:11,581 | INFO     | strategy.voting | Bar 1232: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4404 < Eşik=0.52]
+2026-06-02 17:35:11,583 | INFO     | strategy.voting | Bar 1233: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5807 >= Eşik=0.52]
+2026-06-02 17:35:11,583 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2748 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,583 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3578 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,583 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 56.3650 | Zaman=2025-08-25 17:15:00 | Lot=3.0000 | SL=59.3650 | TP=52.7650 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,584 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,584 | INFO     | backtest | 📅 Yeni gün: 2025-08-26 | Bakiye: $100,029.37
+2026-06-02 17:35:11,586 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,586 | INFO     | backtest | 📅 Yeni gün: 2025-08-27 | Bakiye: $100,029.37
+2026-06-02 17:35:11,587 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,587 | INFO     | backtest | 📅 Yeni gün: 2025-08-28 | Bakiye: $100,029.37
+2026-06-02 17:35:11,589 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,589 | INFO     | backtest | 📅 Yeni gün: 2025-08-29 | Bakiye: $100,029.37
+2026-06-02 17:35:11,590 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,591 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 54.6300 | Net PnL=+5.17 USD | Yeni Bakiye=100,034.54 USD | Zaman=2025-08-29 23:00:00
+2026-06-02 17:35:11,591 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 54.6300 | PnL=+5.17 USD
+2026-06-02 17:35:11,591 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,591 | INFO     | backtest | 📅 Yeni gün: 2025-09-02 | Bakiye: $100,034.54
+2026-06-02 17:35:11,594 | INFO     | strategy.voting | Bar 1367: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4755 < Eşik=0.52]
+2026-06-02 17:35:11,598 | INFO     | strategy.voting | Bar 1380: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.2632 < Eşik=0.52]
+2026-06-02 17:35:11,600 | INFO     | strategy.voting | Bar 1381: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.2509 < Eşik=0.52]
+2026-06-02 17:35:11,602 | INFO     | strategy.voting | Bar 1382: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.2584 < Eşik=0.52]
+2026-06-02 17:35:11,605 | INFO     | strategy.voting | Bar 1383: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.2584 < Eşik=0.52]
+2026-06-02 17:35:11,608 | INFO     | strategy.voting | Bar 1384: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.2584 < Eşik=0.52]
+2026-06-02 17:35:11,610 | INFO     | strategy.voting | Bar 1385: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.2667 < Eşik=0.52]
+2026-06-02 17:35:11,613 | INFO     | strategy.voting | Bar 1386: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.2667 < Eşik=0.52]
+2026-06-02 17:35:11,615 | INFO     | strategy.voting | Bar 1387: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.2667 < Eşik=0.52]
+2026-06-02 17:35:11,618 | INFO     | strategy.voting | Bar 1388: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.2682 < Eşik=0.52]
+2026-06-02 17:35:11,620 | INFO     | strategy.voting | Bar 1389: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.2682 < Eşik=0.52]
+2026-06-02 17:35:11,623 | INFO     | strategy.voting | Bar 1390: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3508 < Eşik=0.52]
+2026-06-02 17:35:11,625 | INFO     | strategy.voting | Bar 1391: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3391 < Eşik=0.52]
+2026-06-02 17:35:11,625 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,625 | INFO     | backtest | 📅 Yeni gün: 2025-09-03 | Bakiye: $100,034.54
+2026-06-02 17:35:11,628 | INFO     | strategy.voting | Bar 1393: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3072 < Eşik=0.52]
+2026-06-02 17:35:11,630 | INFO     | strategy.voting | Bar 1394: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3437 < Eşik=0.52]
+2026-06-02 17:35:11,633 | INFO     | strategy.voting | Bar 1395: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3816 < Eşik=0.52]
+2026-06-02 17:35:11,635 | INFO     | strategy.voting | Bar 1396: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3859 < Eşik=0.52]
+2026-06-02 17:35:11,638 | INFO     | strategy.voting | Bar 1397: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3859 < Eşik=0.52]
+2026-06-02 17:35:11,640 | INFO     | strategy.voting | Bar 1398: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3859 < Eşik=0.52]
+2026-06-02 17:35:11,642 | INFO     | strategy.voting | Bar 1399: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3848 < Eşik=0.52]
+2026-06-02 17:35:11,645 | INFO     | strategy.voting | Bar 1400: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3756 < Eşik=0.52]
+2026-06-02 17:35:11,647 | INFO     | strategy.voting | Bar 1401: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5920 >= Eşik=0.52]
+2026-06-02 17:35:11,647 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2880 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,647 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3621 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,647 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 52.8650 | Zaman=2025-09-03 18:45:00 | Lot=3.0000 | SL=55.8650 | TP=49.2650 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,649 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,649 | INFO     | backtest | 📅 Yeni gün: 2025-09-04 | Bakiye: $100,034.51
+2026-06-02 17:35:11,650 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,650 | INFO     | backtest | 📅 Yeni gün: 2025-09-05 | Bakiye: $100,034.51
+2026-06-02 17:35:11,652 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,652 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 54.4100 | Net PnL=-4.67 USD | Yeni Bakiye=100,029.84 USD | Zaman=2025-09-05 23:00:00
+2026-06-02 17:35:11,652 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 54.4100 | PnL=-4.67 USD
+2026-06-02 17:35:11,652 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,652 | INFO     | backtest | 📅 Yeni gün: 2025-09-08 | Bakiye: $100,029.84
+2026-06-02 17:35:11,654 | INFO     | strategy.voting | Bar 1473: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5399 >= Eşik=0.52]
+2026-06-02 17:35:11,655 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2780 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,655 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3582 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,655 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 53.7150 | Zaman=2025-09-08 16:30:00 | Lot=3.0000 | SL=50.7150 | TP=57.3150 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,656 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,656 | INFO     | backtest | 📅 Yeni gün: 2025-09-09 | Bakiye: $100,029.81
+2026-06-02 17:35:11,658 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,658 | INFO     | backtest | 📅 Yeni gün: 2025-09-10 | Bakiye: $100,029.81
+2026-06-02 17:35:11,659 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,659 | INFO     | backtest | 📅 Yeni gün: 2025-09-11 | Bakiye: $100,029.81
+2026-06-02 17:35:11,660 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,660 | INFO     | backtest | 📅 Yeni gün: 2025-09-12 | Bakiye: $100,029.81
+2026-06-02 17:35:11,662 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,662 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 51.2600 | Net PnL=-7.40 USD | Yeni Bakiye=100,022.42 USD | Zaman=2025-09-12 23:00:00
+2026-06-02 17:35:11,662 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 51.2600 | PnL=-7.40 USD
+2026-06-02 17:35:11,662 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,662 | INFO     | backtest | 📅 Yeni gün: 2025-09-15 | Bakiye: $100,022.42
+2026-06-02 17:35:11,665 | INFO     | strategy.voting | Bar 1608: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3905 < Eşik=0.52]
+2026-06-02 17:35:11,669 | INFO     | strategy.voting | Bar 1609: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.5011 < Eşik=0.52]
+2026-06-02 17:35:11,673 | INFO     | strategy.voting | Bar 1610: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4852 < Eşik=0.52]
+2026-06-02 17:35:11,676 | INFO     | strategy.voting | Bar 1611: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5554 >= Eşik=0.52]
+2026-06-02 17:35:11,676 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3040 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,676 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3520 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,676 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 51.6250 | Zaman=2025-09-15 17:15:00 | Lot=3.0000 | SL=54.6250 | TP=48.0250 | Komisyon=0.03 USD | Maliyet Oranı=%1.9
+2026-06-02 17:35:11,679 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,679 | INFO     | backtest | 📅 Yeni gün: 2025-09-16 | Bakiye: $100,022.38
+2026-06-02 17:35:11,681 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,682 | INFO     | backtest | 📅 Yeni gün: 2025-09-17 | Bakiye: $100,022.38
+2026-06-02 17:35:11,684 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,684 | INFO     | backtest | 📅 Yeni gün: 2025-09-18 | Bakiye: $100,022.38
+2026-06-02 17:35:11,687 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,687 | INFO     | backtest | 📅 Yeni gün: 2025-09-19 | Bakiye: $100,022.38
+2026-06-02 17:35:11,690 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,690 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 53.1500 | Net PnL=-4.61 USD | Yeni Bakiye=100,017.78 USD | Zaman=2025-09-19 23:00:00
+2026-06-02 17:35:11,690 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 53.1500 | PnL=-4.61 USD
+2026-06-02 17:35:11,690 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,690 | INFO     | backtest | 📅 Yeni gün: 2025-09-22 | Bakiye: $100,017.78
+2026-06-02 17:35:11,694 | INFO     | strategy.voting | Bar 1744: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3202 < Eşik=0.52]
+2026-06-02 17:35:11,698 | INFO     | strategy.voting | Bar 1745: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3241 < Eşik=0.52]
+2026-06-02 17:35:11,701 | INFO     | strategy.voting | Bar 1746: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3241 < Eşik=0.52]
+2026-06-02 17:35:11,705 | INFO     | strategy.voting | Bar 1747: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3241 < Eşik=0.52]
+2026-06-02 17:35:11,708 | INFO     | strategy.voting | Bar 1748: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3227 < Eşik=0.52]
+2026-06-02 17:35:11,711 | INFO     | strategy.voting | Bar 1749: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4317 < Eşik=0.52]
+2026-06-02 17:35:11,715 | INFO     | strategy.voting | Bar 1750: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4377 < Eşik=0.52]
+2026-06-02 17:35:11,718 | INFO     | strategy.voting | Bar 1751: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4643 < Eşik=0.52]
+2026-06-02 17:35:11,721 | INFO     | strategy.voting | Bar 1752: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5758 >= Eşik=0.52]
+2026-06-02 17:35:11,721 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2895 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,722 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3481 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,722 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 52.7350 | Zaman=2025-09-22 19:00:00 | Lot=3.0000 | SL=49.7350 | TP=56.3350 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,723 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,723 | INFO     | backtest | 📅 Yeni gün: 2025-09-23 | Bakiye: $100,017.75
+2026-06-02 17:35:11,726 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,726 | INFO     | backtest | 📅 Yeni gün: 2025-09-24 | Bakiye: $100,017.75
+2026-06-02 17:35:11,729 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,729 | INFO     | backtest | 📅 Yeni gün: 2025-09-25 | Bakiye: $100,017.75
+2026-06-02 17:35:11,731 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,731 | INFO     | backtest | 📅 Yeni gün: 2025-09-26 | Bakiye: $100,017.75
+2026-06-02 17:35:11,734 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,734 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 51.8500 | Net PnL=-2.69 USD | Yeni Bakiye=100,015.06 USD | Zaman=2025-09-26 23:00:00
+2026-06-02 17:35:11,734 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 51.8500 | PnL=-2.69 USD
+2026-06-02 17:35:11,734 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,734 | INFO     | backtest | 📅 Yeni gün: 2025-09-29 | Bakiye: $100,015.06
+2026-06-02 17:35:11,738 | INFO     | strategy.voting | Bar 1877: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5912 >= Eşik=0.52]
+2026-06-02 17:35:11,738 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2188 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,738 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3459 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,738 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 51.6450 | Zaman=2025-09-29 16:30:00 | Lot=3.0000 | SL=48.6450 | TP=55.2450 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,741 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,741 | INFO     | backtest | 📅 Yeni gün: 2025-09-30 | Bakiye: $100,015.03
+2026-06-02 17:35:11,743 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 55.2450 | Net PnL=+10.77 USD | Yeni Bakiye=100,025.80 USD | Zaman=2025-09-30 22:30:00
+2026-06-02 17:35:11,744 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,744 | INFO     | backtest | 📅 Yeni gün: 2025-10-01 | Bakiye: $100,025.80
+2026-06-02 17:35:11,750 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,750 | INFO     | backtest | 📅 Yeni gün: 2025-10-02 | Bakiye: $100,025.80
+2026-06-02 17:35:11,754 | INFO     | strategy.voting | Bar 1960: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.6114 >= Eşik=0.52]
+2026-06-02 17:35:11,754 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4794 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,754 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3548 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,754 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 60.0250 | Zaman=2025-10-02 17:00:00 | Lot=3.0000 | SL=57.0250 | TP=63.6250 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:11,757 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,757 | INFO     | backtest | 📅 Yeni gün: 2025-10-03 | Bakiye: $100,025.76
+2026-06-02 17:35:11,757 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 63.6250 | Net PnL=+10.76 USD | Yeni Bakiye=100,036.52 USD | Zaman=2025-10-03 16:45:00
+2026-06-02 17:35:11,760 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,760 | INFO     | backtest | 📅 Yeni gün: 2025-10-06 | Bakiye: $100,036.52
+2026-06-02 17:35:11,763 | INFO     | strategy.voting | Bar 2012: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5045 < Eşik=0.52]
+2026-06-02 17:35:11,767 | INFO     | strategy.voting | Bar 2013: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5722 >= Eşik=0.52]
+2026-06-02 17:35:11,767 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3562 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,767 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3638 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,767 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 62.3350 | Zaman=2025-10-06 16:45:00 | Lot=3.0000 | SL=65.3350 | TP=58.7350 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:11,770 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,770 | INFO     | backtest | 📅 Yeni gün: 2025-10-07 | Bakiye: $100,036.48
+2026-06-02 17:35:11,772 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,772 | INFO     | backtest | 📅 Yeni gün: 2025-10-08 | Bakiye: $100,036.48
+2026-06-02 17:35:11,775 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,775 | INFO     | backtest | 📅 Yeni gün: 2025-10-09 | Bakiye: $100,036.48
+2026-06-02 17:35:11,778 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,778 | INFO     | backtest | 📅 Yeni gün: 2025-10-10 | Bakiye: $100,036.48
+2026-06-02 17:35:11,779 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 58.7350 | Net PnL=+10.76 USD | Yeni Bakiye=100,047.25 USD | Zaman=2025-10-10 18:00:00
+2026-06-02 17:35:11,781 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,781 | INFO     | backtest | 📅 Yeni gün: 2025-10-13 | Bakiye: $100,047.25
+2026-06-02 17:35:11,784 | INFO     | strategy.voting | Bar 2147: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4333 < Eşik=0.52]
+2026-06-02 17:35:11,788 | INFO     | strategy.voting | Bar 2148: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5024 < Eşik=0.52]
+2026-06-02 17:35:11,791 | INFO     | strategy.voting | Bar 2149: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5024 < Eşik=0.52]
+2026-06-02 17:35:11,795 | INFO     | strategy.voting | Bar 2150: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4871 < Eşik=0.52]
+2026-06-02 17:35:11,798 | INFO     | strategy.voting | Bar 2151: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5127 < Eşik=0.52]
+2026-06-02 17:35:11,802 | INFO     | strategy.voting | Bar 2152: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5191 < Eşik=0.52]
+2026-06-02 17:35:11,805 | INFO     | strategy.voting | Bar 2153: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4922 < Eşik=0.52]
+2026-06-02 17:35:11,809 | INFO     | strategy.voting | Bar 2154: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4922 < Eşik=0.52]
+2026-06-02 17:35:11,812 | INFO     | strategy.voting | Bar 2155: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3967 < Eşik=0.52]
+2026-06-02 17:35:11,815 | INFO     | strategy.voting | Bar 2156: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4008 < Eşik=0.52]
+2026-06-02 17:35:11,819 | INFO     | strategy.voting | Bar 2157: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4008 < Eşik=0.52]
+2026-06-02 17:35:11,822 | INFO     | strategy.voting | Bar 2158: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4008 < Eşik=0.52]
+2026-06-02 17:35:11,825 | INFO     | strategy.voting | Bar 2159: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4008 < Eşik=0.52]
+2026-06-02 17:35:11,829 | INFO     | strategy.voting | Bar 2160: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4008 < Eşik=0.52]
+2026-06-02 17:35:11,832 | INFO     | strategy.voting | Bar 2161: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4378 < Eşik=0.52]
+2026-06-02 17:35:11,835 | INFO     | strategy.voting | Bar 2162: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4115 < Eşik=0.52]
+2026-06-02 17:35:11,839 | INFO     | strategy.voting | Bar 2163: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3913 < Eşik=0.52]
+2026-06-02 17:35:11,842 | INFO     | strategy.voting | Bar 2164: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3701 < Eşik=0.52]
+2026-06-02 17:35:11,845 | INFO     | strategy.voting | Bar 2165: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3701 < Eşik=0.52]
+2026-06-02 17:35:11,849 | INFO     | strategy.voting | Bar 2166: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3953 < Eşik=0.52]
+2026-06-02 17:35:11,852 | INFO     | strategy.voting | Bar 2167: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3701 < Eşik=0.52]
+2026-06-02 17:35:11,856 | INFO     | strategy.voting | Bar 2168: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4154 < Eşik=0.52]
+2026-06-02 17:35:11,859 | INFO     | strategy.voting | Bar 2169: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4202 < Eşik=0.52]
+2026-06-02 17:35:11,863 | INFO     | strategy.voting | Bar 2170: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4187 < Eşik=0.52]
+2026-06-02 17:35:11,866 | INFO     | strategy.voting | Bar 2171: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4187 < Eşik=0.52]
+2026-06-02 17:35:11,870 | INFO     | strategy.voting | Bar 2172: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4186 < Eşik=0.52]
+2026-06-02 17:35:11,873 | INFO     | strategy.voting | Bar 2173: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3288 < Eşik=0.52]
+2026-06-02 17:35:11,873 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,873 | INFO     | backtest | 📅 Yeni gün: 2025-10-14 | Bakiye: $100,047.25
+2026-06-02 17:35:11,876 | INFO     | strategy.voting | Bar 2174: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4235 < Eşik=0.52]
+2026-06-02 17:35:11,880 | INFO     | strategy.voting | Bar 2175: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4524 < Eşik=0.52]
+2026-06-02 17:35:11,883 | INFO     | strategy.voting | Bar 2176: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4663 < Eşik=0.52]
+2026-06-02 17:35:11,887 | INFO     | strategy.voting | Bar 2177: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4701 < Eşik=0.52]
+2026-06-02 17:35:11,890 | INFO     | strategy.voting | Bar 2178: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4424 < Eşik=0.52]
+2026-06-02 17:35:11,894 | INFO     | strategy.voting | Bar 2179: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4424 < Eşik=0.52]
+2026-06-02 17:35:11,898 | INFO     | strategy.voting | Bar 2180: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4424 < Eşik=0.52]
+2026-06-02 17:35:11,901 | INFO     | strategy.voting | Bar 2181: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4313 < Eşik=0.52]
+2026-06-02 17:35:11,905 | INFO     | strategy.voting | Bar 2182: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4252 < Eşik=0.52]
+2026-06-02 17:35:11,908 | INFO     | strategy.voting | Bar 2183: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4746 < Eşik=0.52]
+2026-06-02 17:35:11,912 | INFO     | strategy.voting | Bar 2184: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4620 < Eşik=0.52]
+2026-06-02 17:35:11,916 | INFO     | strategy.voting | Bar 2185: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3860 < Eşik=0.52]
+2026-06-02 17:35:11,919 | INFO     | strategy.voting | Bar 2186: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4728 < Eşik=0.52]
+2026-06-02 17:35:11,922 | INFO     | strategy.voting | Bar 2187: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4706 < Eşik=0.52]
+2026-06-02 17:35:11,926 | INFO     | strategy.voting | Bar 2188: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5719 >= Eşik=0.52]
+2026-06-02 17:35:11,926 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3355 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,926 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3727 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,926 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 59.1950 | Zaman=2025-10-14 20:00:00 | Lot=3.0000 | SL=62.1950 | TP=55.5950 | Komisyon=0.04 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:11,927 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,927 | INFO     | backtest | 📅 Yeni gün: 2025-10-15 | Bakiye: $100,047.21
+2026-06-02 17:35:11,930 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,930 | INFO     | backtest | 📅 Yeni gün: 2025-10-16 | Bakiye: $100,047.21
+2026-06-02 17:35:11,931 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 62.1950 | Net PnL=-9.04 USD | Yeni Bakiye=100,038.18 USD | Zaman=2025-10-16 17:15:00
+2026-06-02 17:35:11,935 | INFO     | strategy.voting | Bar 2233: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5357 >= Eşik=0.52]
+2026-06-02 17:35:11,935 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4471 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,935 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3651 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,935 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 61.5750 | Zaman=2025-10-16 17:45:00 | Lot=3.0000 | SL=58.5750 | TP=65.1750 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:11,937 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,937 | INFO     | backtest | 📅 Yeni gün: 2025-10-17 | Bakiye: $100,038.14
+2026-06-02 17:35:11,940 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:11,940 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 61.8600 | Net PnL=+0.82 USD | Yeni Bakiye=100,038.96 USD | Zaman=2025-10-17 23:00:00
+2026-06-02 17:35:11,940 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 61.8600 | PnL=+0.82 USD
+2026-06-02 17:35:11,940 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,940 | INFO     | backtest | 📅 Yeni gün: 2025-10-20 | Bakiye: $100,038.96
+2026-06-02 17:35:11,944 | INFO     | strategy.voting | Bar 2283: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.6010 >= Eşik=0.52]
+2026-06-02 17:35:11,944 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3743 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,944 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3658 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,945 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 62.5950 | Zaman=2025-10-20 16:45:00 | Lot=3.0000 | SL=59.5950 | TP=66.1950 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:11,947 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,947 | INFO     | backtest | 📅 Yeni gün: 2025-10-21 | Bakiye: $100,038.92
+2026-06-02 17:35:11,950 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,950 | INFO     | backtest | 📅 Yeni gün: 2025-10-22 | Bakiye: $100,038.92
+2026-06-02 17:35:11,952 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,952 | INFO     | backtest | 📅 Yeni gün: 2025-10-23 | Bakiye: $100,038.92
+2026-06-02 17:35:11,954 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 66.1950 | Net PnL=+10.76 USD | Yeni Bakiye=100,049.68 USD | Zaman=2025-10-23 19:15:00
+2026-06-02 17:35:11,959 | INFO     | strategy.voting | Bar 2380: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4527 < Eşik=0.52]
+2026-06-02 17:35:11,962 | INFO     | strategy.voting | Bar 2381: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4136 < Eşik=0.52]
+2026-06-02 17:35:11,965 | INFO     | strategy.voting | Bar 2382: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3854 < Eşik=0.52]
+2026-06-02 17:35:11,969 | INFO     | strategy.voting | Bar 2383: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3658 < Eşik=0.52]
+2026-06-02 17:35:11,969 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,969 | INFO     | backtest | 📅 Yeni gün: 2025-10-24 | Bakiye: $100,049.68
+2026-06-02 17:35:11,972 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,972 | INFO     | backtest | 📅 Yeni gün: 2025-10-27 | Bakiye: $100,049.68
+2026-06-02 17:35:11,976 | INFO     | strategy.voting | Bar 2418: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.6468 >= Eşik=0.52]
+2026-06-02 17:35:11,976 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3350 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,976 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3747 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,977 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 65.4250 | Zaman=2025-10-27 16:00:00 | Lot=3.0000 | SL=68.4250 | TP=61.8250 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:11,979 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,979 | INFO     | backtest | 📅 Yeni gün: 2025-10-28 | Bakiye: $100,049.64
+2026-06-02 17:35:11,982 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,982 | INFO     | backtest | 📅 Yeni gün: 2025-10-29 | Bakiye: $100,049.64
+2026-06-02 17:35:11,984 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 61.8250 | Net PnL=+10.76 USD | Yeni Bakiye=100,060.40 USD | Zaman=2025-10-29 21:00:00
+2026-06-02 17:35:11,988 | INFO     | strategy.voting | Bar 2495: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5946 >= Eşik=0.52]
+2026-06-02 17:35:11,988 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3850 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:11,988 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3837 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:11,989 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 61.9950 | Zaman=2025-10-29 21:45:00 | Lot=3.0000 | SL=64.9950 | TP=58.3950 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:11,989 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,989 | INFO     | backtest | 📅 Yeni gün: 2025-10-30 | Bakiye: $100,060.37
+2026-06-02 17:35:11,992 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,992 | INFO     | backtest | 📅 Yeni gün: 2025-10-31 | Bakiye: $100,060.37
+2026-06-02 17:35:11,994 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,994 | INFO     | backtest | 📅 Yeni gün: 2025-11-03 | Bakiye: $100,060.37
+2026-06-02 17:35:11,997 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,997 | INFO     | backtest | 📅 Yeni gün: 2025-11-04 | Bakiye: $100,060.37
+2026-06-02 17:35:11,999 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:11,999 | INFO     | backtest | 📅 Yeni gün: 2025-11-05 | Bakiye: $100,060.37
+2026-06-02 17:35:11,999 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 58.3950 | Net PnL=+10.76 USD | Yeni Bakiye=100,071.13 USD | Zaman=2025-11-05 16:30:00
+2026-06-02 17:35:12,003 | INFO     | strategy.voting | Bar 2607: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.7145 >= Eşik=0.52]
+2026-06-02 17:35:12,004 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.9810 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,004 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3926 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,004 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 60.7850 | Zaman=2025-11-05 17:00:00 | Lot=3.0000 | SL=63.7850 | TP=57.1850 | Komisyon=0.04 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,006 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,006 | INFO     | backtest | 📅 Yeni gün: 2025-11-06 | Bakiye: $100,071.09
+2026-06-02 17:35:12,007 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 57.1850 | Net PnL=+10.77 USD | Yeni Bakiye=100,081.86 USD | Zaman=2025-11-06 18:00:00
+2026-06-02 17:35:12,011 | INFO     | strategy.voting | Bar 2640: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5644 >= Eşik=0.52]
+2026-06-02 17:35:12,011 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.6808 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,011 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4016 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,011 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 57.4250 | Zaman=2025-11-06 18:30:00 | Lot=3.0000 | SL=60.4250 | TP=53.8250 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,013 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,014 | INFO     | backtest | 📅 Yeni gün: 2025-11-07 | Bakiye: $100,081.83
+2026-06-02 17:35:12,016 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,016 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 57.4100 | Net PnL=+0.01 USD | Yeni Bakiye=100,081.84 USD | Zaman=2025-11-07 23:00:00
+2026-06-02 17:35:12,016 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 57.4100 | PnL=+0.01 USD
+2026-06-02 17:35:12,016 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,017 | INFO     | backtest | 📅 Yeni gün: 2025-11-10 | Bakiye: $100,081.84
+2026-06-02 17:35:12,020 | INFO     | strategy.voting | Bar 2686: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5196 < Eşik=0.52]
+2026-06-02 17:35:12,023 | INFO     | strategy.voting | Bar 2687: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4778 < Eşik=0.52]
+2026-06-02 17:35:12,027 | INFO     | strategy.voting | Bar 2688: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4946 < Eşik=0.52]
+2026-06-02 17:35:12,030 | INFO     | strategy.voting | Bar 2689: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5008 < Eşik=0.52]
+2026-06-02 17:35:12,034 | INFO     | strategy.voting | Bar 2690: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5106 < Eşik=0.52]
+2026-06-02 17:35:12,037 | INFO     | strategy.voting | Bar 2691: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5252 >= Eşik=0.52]
+2026-06-02 17:35:12,037 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3924 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,037 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4015 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,037 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 57.2850 | Zaman=2025-11-10 17:45:00 | Lot=3.0000 | SL=54.2850 | TP=60.8850 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,040 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,040 | INFO     | backtest | 📅 Yeni gün: 2025-11-11 | Bakiye: $100,081.80
+2026-06-02 17:35:12,042 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,042 | INFO     | backtest | 📅 Yeni gün: 2025-11-12 | Bakiye: $100,081.80
+2026-06-02 17:35:12,043 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 60.8850 | Net PnL=+10.76 USD | Yeni Bakiye=100,092.57 USD | Zaman=2025-11-12 18:30:00
+2026-06-02 17:35:12,047 | INFO     | strategy.voting | Bar 2749: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5546 >= Eşik=0.52]
+2026-06-02 17:35:12,047 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3619 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,047 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4105 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,047 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 60.7250 | Zaman=2025-11-12 18:45:00 | Lot=3.0000 | SL=57.7250 | TP=64.3250 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,049 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,049 | INFO     | backtest | 📅 Yeni gün: 2025-11-13 | Bakiye: $100,092.53
+2026-06-02 17:35:12,052 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,052 | INFO     | backtest | 📅 Yeni gün: 2025-11-14 | Bakiye: $100,092.53
+2026-06-02 17:35:12,054 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,054 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 59.3800 | Net PnL=-4.07 USD | Yeni Bakiye=100,088.46 USD | Zaman=2025-11-14 23:00:00
+2026-06-02 17:35:12,054 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 59.3800 | PnL=-4.07 USD
+2026-06-02 17:35:12,055 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,055 | INFO     | backtest | 📅 Yeni gün: 2025-11-17 | Bakiye: $100,088.46
+2026-06-02 17:35:12,058 | INFO     | strategy.voting | Bar 2823: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4740 < Eşik=0.52]
+2026-06-02 17:35:12,062 | INFO     | strategy.voting | Bar 2824: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5673 >= Eşik=0.52]
+2026-06-02 17:35:12,062 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4270 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,062 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4070 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,062 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 59.1950 | Zaman=2025-11-17 17:15:00 | Lot=3.0000 | SL=62.1950 | TP=55.5950 | Komisyon=0.04 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,065 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,065 | INFO     | backtest | 📅 Yeni gün: 2025-11-18 | Bakiye: $100,088.42
+2026-06-02 17:35:12,067 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,067 | INFO     | backtest | 📅 Yeni gün: 2025-11-19 | Bakiye: $100,088.42
+2026-06-02 17:35:12,070 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,070 | INFO     | backtest | 📅 Yeni gün: 2025-11-20 | Bakiye: $100,088.42
+2026-06-02 17:35:12,073 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,073 | INFO     | backtest | 📅 Yeni gün: 2025-11-21 | Bakiye: $100,088.42
+2026-06-02 17:35:12,074 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 62.1950 | Net PnL=-9.04 USD | Yeni Bakiye=100,079.39 USD | Zaman=2025-11-21 19:00:00
+2026-06-02 17:35:12,075 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,076 | INFO     | backtest | 📅 Yeni gün: 2025-11-24 | Bakiye: $100,079.39
+2026-06-02 17:35:12,079 | INFO     | strategy.voting | Bar 2956: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.6540 >= Eşik=0.52]
+2026-06-02 17:35:12,079 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3644 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,079 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.3995 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,079 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 61.7050 | Zaman=2025-11-24 16:30:00 | Lot=3.0000 | SL=58.7050 | TP=65.3050 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,082 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,082 | INFO     | backtest | 📅 Yeni gün: 2025-11-25 | Bakiye: $100,079.35
+2026-06-02 17:35:12,083 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 65.3050 | Net PnL=+10.76 USD | Yeni Bakiye=100,090.11 USD | Zaman=2025-11-25 17:30:00
+2026-06-02 17:35:12,088 | INFO     | strategy.voting | Bar 2997: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4405 < Eşik=0.52]
+2026-06-02 17:35:12,092 | INFO     | strategy.voting | Bar 2998: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4007 < Eşik=0.52]
+2026-06-02 17:35:12,095 | INFO     | strategy.voting | Bar 2999: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3751 < Eşik=0.52]
+2026-06-02 17:35:12,099 | INFO     | strategy.voting | Bar 3000: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3808 < Eşik=0.52]
+2026-06-02 17:35:12,107 | INFO     | strategy.voting | Bar 3001: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3734 < Eşik=0.52]
+2026-06-02 17:35:12,109 | INFO     | strategy.voting | Bar 3002: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3353 < Eşik=0.52]
+2026-06-02 17:35:12,112 | INFO     | strategy.voting | Bar 3003: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3033 < Eşik=0.52]
+2026-06-02 17:35:12,115 | INFO     | strategy.voting | Bar 3004: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3033 < Eşik=0.52]
+2026-06-02 17:35:12,118 | INFO     | strategy.voting | Bar 3005: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3071 < Eşik=0.52]
+2026-06-02 17:35:12,118 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,118 | INFO     | backtest | 📅 Yeni gün: 2025-11-26 | Bakiye: $100,090.11
+2026-06-02 17:35:12,121 | INFO     | strategy.voting | Bar 3010: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3000 < Eşik=0.52]
+2026-06-02 17:35:12,124 | INFO     | strategy.voting | Bar 3011: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3549 < Eşik=0.52]
+2026-06-02 17:35:12,126 | INFO     | strategy.voting | Bar 3012: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3957 < Eşik=0.52]
+2026-06-02 17:35:12,128 | INFO     | strategy.voting | Bar 3013: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3534 < Eşik=0.52]
+2026-06-02 17:35:12,131 | INFO     | strategy.voting | Bar 3014: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.6094 >= Eşik=0.52]
+2026-06-02 17:35:12,131 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3900 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,131 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4084 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,131 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 64.1650 | Zaman=2025-11-26 17:30:00 | Lot=3.0000 | SL=67.1650 | TP=60.5650 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,133 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,133 | INFO     | backtest | 📅 Yeni gün: 2025-11-28 | Bakiye: $100,090.07
+2026-06-02 17:35:12,134 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,134 | INFO     | backtest | 📅 Yeni gün: 2025-12-01 | Bakiye: $100,090.07
+2026-06-02 17:35:12,135 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,135 | INFO     | backtest | 📅 Yeni gün: 2025-12-02 | Bakiye: $100,090.07
+2026-06-02 17:35:12,137 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,137 | INFO     | backtest | 📅 Yeni gün: 2025-12-03 | Bakiye: $100,090.07
+2026-06-02 17:35:12,138 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,138 | INFO     | backtest | 📅 Yeni gün: 2025-12-04 | Bakiye: $100,090.07
+2026-06-02 17:35:12,140 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,140 | INFO     | backtest | 📅 Yeni gün: 2025-12-05 | Bakiye: $100,090.07
+2026-06-02 17:35:12,141 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,141 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 61.6800 | Net PnL=+7.42 USD | Yeni Bakiye=100,097.49 USD | Zaman=2025-12-05 23:00:00
+2026-06-02 17:35:12,141 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 61.6800 | PnL=+7.42 USD
+2026-06-02 17:35:12,141 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,141 | INFO     | backtest | 📅 Yeni gün: 2025-12-08 | Bakiye: $100,097.49
+2026-06-02 17:35:12,145 | INFO     | strategy.voting | Bar 3195: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.6493 >= Eşik=0.52]
+2026-06-02 17:35:12,145 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3566 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,145 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4146 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,145 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 60.8150 | Zaman=2025-12-08 18:30:00 | Lot=3.0000 | SL=63.8150 | TP=57.2150 | Komisyon=0.04 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,146 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,147 | INFO     | backtest | 📅 Yeni gün: 2025-12-09 | Bakiye: $100,097.45
+2026-06-02 17:35:12,148 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,148 | INFO     | backtest | 📅 Yeni gün: 2025-12-10 | Bakiye: $100,097.45
+2026-06-02 17:35:12,149 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,149 | INFO     | backtest | 📅 Yeni gün: 2025-12-11 | Bakiye: $100,097.45
+2026-06-02 17:35:12,151 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,151 | INFO     | backtest | 📅 Yeni gün: 2025-12-12 | Bakiye: $100,097.45
+2026-06-02 17:35:12,152 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,152 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 58.5100 | Net PnL=+6.88 USD | Yeni Bakiye=100,104.33 USD | Zaman=2025-12-12 23:00:00
+2026-06-02 17:35:12,152 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 58.5100 | PnL=+6.88 USD
+2026-06-02 17:35:12,153 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,153 | INFO     | backtest | 📅 Yeni gün: 2025-12-15 | Bakiye: $100,104.33
+2026-06-02 17:35:12,155 | INFO     | strategy.voting | Bar 3322: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5634 >= Eşik=0.52]
+2026-06-02 17:35:12,155 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3931 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,155 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4203 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,155 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 59.2550 | Zaman=2025-12-15 16:30:00 | Lot=3.0000 | SL=62.2550 | TP=55.6550 | Komisyon=0.04 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,157 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,157 | INFO     | backtest | 📅 Yeni gün: 2025-12-16 | Bakiye: $100,104.30
+2026-06-02 17:35:12,158 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,158 | INFO     | backtest | 📅 Yeni gün: 2025-12-17 | Bakiye: $100,104.30
+2026-06-02 17:35:12,160 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,160 | INFO     | backtest | 📅 Yeni gün: 2025-12-18 | Bakiye: $100,104.30
+2026-06-02 17:35:12,161 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,161 | INFO     | backtest | 📅 Yeni gün: 2025-12-19 | Bakiye: $100,104.30
+2026-06-02 17:35:12,162 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,163 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 58.2700 | Net PnL=+2.92 USD | Yeni Bakiye=100,107.22 USD | Zaman=2025-12-19 23:00:00
+2026-06-02 17:35:12,163 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 58.2700 | PnL=+2.92 USD
+2026-06-02 17:35:12,163 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,163 | INFO     | backtest | 📅 Yeni gün: 2025-12-22 | Bakiye: $100,107.22
+2026-06-02 17:35:12,166 | INFO     | strategy.voting | Bar 3457: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3617 < Eşik=0.52]
+2026-06-02 17:35:12,168 | INFO     | strategy.voting | Bar 3458: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3804 < Eşik=0.52]
+2026-06-02 17:35:12,170 | INFO     | strategy.voting | Bar 3459: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3804 < Eşik=0.52]
+2026-06-02 17:35:12,173 | INFO     | strategy.voting | Bar 3460: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3616 < Eşik=0.52]
+2026-06-02 17:35:12,175 | INFO     | strategy.voting | Bar 3461: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3616 < Eşik=0.52]
+2026-06-02 17:35:12,178 | INFO     | strategy.voting | Bar 3466: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2984 < Eşik=0.52]
+2026-06-02 17:35:12,180 | INFO     | strategy.voting | Bar 3467: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3114 < Eşik=0.52]
+2026-06-02 17:35:12,182 | INFO     | strategy.voting | Bar 3468: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2994 < Eşik=0.52]
+2026-06-02 17:35:12,185 | INFO     | strategy.voting | Bar 3469: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2994 < Eşik=0.52]
+2026-06-02 17:35:12,187 | INFO     | strategy.voting | Bar 3470: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2994 < Eşik=0.52]
+2026-06-02 17:35:12,189 | INFO     | strategy.voting | Bar 3471: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2767 < Eşik=0.52]
+2026-06-02 17:35:12,191 | INFO     | strategy.voting | Bar 3472: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2929 < Eşik=0.52]
+2026-06-02 17:35:12,194 | INFO     | strategy.voting | Bar 3473: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2767 < Eşik=0.52]
+2026-06-02 17:35:12,196 | INFO     | strategy.voting | Bar 3474: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2994 < Eşik=0.52]
+2026-06-02 17:35:12,199 | INFO     | strategy.voting | Bar 3475: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2767 < Eşik=0.52]
+2026-06-02 17:35:12,202 | INFO     | strategy.voting | Bar 3476: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2857 < Eşik=0.52]
+2026-06-02 17:35:12,204 | INFO     | strategy.voting | Bar 3477: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2857 < Eşik=0.52]
+2026-06-02 17:35:12,207 | INFO     | strategy.voting | Bar 3478: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2767 < Eşik=0.52]
+2026-06-02 17:35:12,209 | INFO     | strategy.voting | Bar 3479: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2625 < Eşik=0.52]
+2026-06-02 17:35:12,211 | INFO     | strategy.voting | Bar 3480: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2415 < Eşik=0.52]
+2026-06-02 17:35:12,214 | INFO     | strategy.voting | Bar 3481: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2731 < Eşik=0.52]
+2026-06-02 17:35:12,217 | INFO     | strategy.voting | Bar 3482: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3440 < Eşik=0.52]
+2026-06-02 17:35:12,219 | INFO     | strategy.voting | Bar 3483: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3081 < Eşik=0.52]
+2026-06-02 17:35:12,219 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,219 | INFO     | backtest | 📅 Yeni gün: 2025-12-23 | Bakiye: $100,107.22
+2026-06-02 17:35:12,221 | INFO     | strategy.voting | Bar 3484: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4542 < Eşik=0.52]
+2026-06-02 17:35:12,224 | INFO     | strategy.voting | Bar 3485: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.5165 < Eşik=0.52]
+2026-06-02 17:35:12,226 | INFO     | strategy.voting | Bar 3486: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.5165 < Eşik=0.52]
+2026-06-02 17:35:12,229 | INFO     | strategy.voting | Bar 3487: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.6687 >= Eşik=0.52]
+2026-06-02 17:35:12,229 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2423 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,229 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4227 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,229 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 59.0450 | Zaman=2025-12-23 17:15:00 | Lot=3.0000 | SL=62.0450 | TP=55.4450 | Komisyon=0.04 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,230 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,230 | INFO     | backtest | 📅 Yeni gün: 2025-12-24 | Bakiye: $100,107.18
+2026-06-02 17:35:12,231 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,231 | INFO     | backtest | 📅 Yeni gün: 2025-12-26 | Bakiye: $100,107.18
+2026-06-02 17:35:12,232 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,232 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 59.2200 | Net PnL=-0.56 USD | Yeni Bakiye=100,106.62 USD | Zaman=2025-12-26 23:00:00
+2026-06-02 17:35:12,232 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 59.2200 | PnL=-0.56 USD
+2026-06-02 17:35:12,233 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,233 | INFO     | backtest | 📅 Yeni gün: 2025-12-29 | Bakiye: $100,106.62
+2026-06-02 17:35:12,235 | INFO     | strategy.voting | Bar 3554: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2702 < Eşik=0.52]
+2026-06-02 17:35:12,238 | INFO     | strategy.voting | Bar 3555: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2276 < Eşik=0.52]
+2026-06-02 17:35:12,240 | INFO     | strategy.voting | Bar 3556: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2276 < Eşik=0.52]
+2026-06-02 17:35:12,243 | INFO     | strategy.voting | Bar 3557: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2759 < Eşik=0.52]
+2026-06-02 17:35:12,245 | INFO     | strategy.voting | Bar 3558: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2668 < Eşik=0.52]
+2026-06-02 17:35:12,248 | INFO     | strategy.voting | Bar 3559: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2684 < Eşik=0.52]
+2026-06-02 17:35:12,250 | INFO     | strategy.voting | Bar 3560: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2668 < Eşik=0.52]
+2026-06-02 17:35:12,253 | INFO     | strategy.voting | Bar 3561: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2717 < Eşik=0.52]
+2026-06-02 17:35:12,255 | INFO     | strategy.voting | Bar 3562: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2881 < Eşik=0.52]
+2026-06-02 17:35:12,257 | INFO     | strategy.voting | Bar 3563: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2815 < Eşik=0.52]
+2026-06-02 17:35:12,260 | INFO     | strategy.voting | Bar 3564: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.7151 >= Eşik=0.52]
+2026-06-02 17:35:12,260 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.1817 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,260 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4222 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,260 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 58.9650 | Zaman=2025-12-29 19:15:00 | Lot=3.0000 | SL=61.9650 | TP=55.3650 | Komisyon=0.04 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,261 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,261 | INFO     | backtest | 📅 Yeni gün: 2025-12-30 | Bakiye: $100,106.59
+2026-06-02 17:35:12,262 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,262 | INFO     | backtest | 📅 Yeni gün: 2025-12-31 | Bakiye: $100,106.59
+2026-06-02 17:35:12,264 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,264 | INFO     | backtest | 📅 Yeni gün: 2026-01-02 | Bakiye: $100,106.59
+2026-06-02 17:35:12,265 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,265 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 59.6500 | Net PnL=-2.09 USD | Yeni Bakiye=100,104.49 USD | Zaman=2026-01-02 23:00:00
+2026-06-02 17:35:12,265 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 59.6500 | PnL=-2.09 USD
+2026-06-02 17:35:12,266 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,266 | INFO     | backtest | 📅 Yeni gün: 2026-01-05 | Bakiye: $100,104.49
+2026-06-02 17:35:12,271 | INFO     | strategy.voting | Bar 3679: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.6275 >= Eşik=0.52]
+2026-06-02 17:35:12,271 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3431 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,271 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4204 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,271 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 62.0550 | Zaman=2026-01-05 21:00:00 | Lot=3.0000 | SL=59.0550 | TP=65.6550 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,271 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,272 | INFO     | backtest | 📅 Yeni gün: 2026-01-06 | Bakiye: $100,104.46
+2026-06-02 17:35:12,272 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 65.6550 | Net PnL=+10.76 USD | Yeni Bakiye=100,115.22 USD | Zaman=2026-01-06 16:45:00
+2026-06-02 17:35:12,276 | INFO     | strategy.voting | Bar 3697: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5084 < Eşik=0.52]
+2026-06-02 17:35:12,279 | INFO     | strategy.voting | Bar 3701: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4905 < Eşik=0.52]
+2026-06-02 17:35:12,281 | INFO     | strategy.voting | Bar 3702: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5017 < Eşik=0.52]
+2026-06-02 17:35:12,284 | INFO     | strategy.voting | Bar 3703: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4905 < Eşik=0.52]
+2026-06-02 17:35:12,287 | INFO     | strategy.voting | Bar 3704: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4905 < Eşik=0.52]
+2026-06-02 17:35:12,290 | INFO     | strategy.voting | Bar 3705: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4345 < Eşik=0.52]
+2026-06-02 17:35:12,293 | INFO     | strategy.voting | Bar 3706: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4405 < Eşik=0.52]
+2026-06-02 17:35:12,296 | INFO     | strategy.voting | Bar 3707: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4182 < Eşik=0.52]
+2026-06-02 17:35:12,299 | INFO     | strategy.voting | Bar 3708: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4023 < Eşik=0.52]
+2026-06-02 17:35:12,302 | INFO     | strategy.voting | Bar 3709: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3980 < Eşik=0.52]
+2026-06-02 17:35:12,304 | INFO     | strategy.voting | Bar 3710: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3962 < Eşik=0.52]
+2026-06-02 17:35:12,307 | INFO     | strategy.voting | Bar 3711: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3447 < Eşik=0.52]
+2026-06-02 17:35:12,310 | INFO     | strategy.voting | Bar 3712: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3619 < Eşik=0.52]
+2026-06-02 17:35:12,313 | INFO     | strategy.voting | Bar 3713: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3191 < Eşik=0.52]
+2026-06-02 17:35:12,315 | INFO     | strategy.voting | Bar 3714: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3191 < Eşik=0.52]
+2026-06-02 17:35:12,316 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,316 | INFO     | backtest | 📅 Yeni gün: 2026-01-07 | Bakiye: $100,115.22
+2026-06-02 17:35:12,318 | INFO     | strategy.voting | Bar 3715: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3357 < Eşik=0.52]
+2026-06-02 17:35:12,321 | INFO     | strategy.voting | Bar 3716: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3319 < Eşik=0.52]
+2026-06-02 17:35:12,324 | INFO     | strategy.voting | Bar 3717: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3319 < Eşik=0.52]
+2026-06-02 17:35:12,326 | INFO     | strategy.voting | Bar 3718: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3319 < Eşik=0.52]
+2026-06-02 17:35:12,329 | INFO     | strategy.voting | Bar 3719: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3319 < Eşik=0.52]
+2026-06-02 17:35:12,331 | INFO     | strategy.voting | Bar 3720: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3303 < Eşik=0.52]
+2026-06-02 17:35:12,334 | INFO     | strategy.voting | Bar 3721: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3303 < Eşik=0.52]
+2026-06-02 17:35:12,337 | INFO     | strategy.voting | Bar 3722: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3268 < Eşik=0.52]
+2026-06-02 17:35:12,339 | INFO     | strategy.voting | Bar 3723: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2713 < Eşik=0.52]
+2026-06-02 17:35:12,342 | INFO     | strategy.voting | Bar 3724: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3123 < Eşik=0.52]
+2026-06-02 17:35:12,345 | INFO     | strategy.voting | Bar 3725: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.6833 >= Eşik=0.52]
+2026-06-02 17:35:12,345 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2887 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,345 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4293 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,345 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 64.7450 | Zaman=2026-01-07 19:00:00 | Lot=3.0000 | SL=67.7450 | TP=61.1450 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,346 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,346 | INFO     | backtest | 📅 Yeni gün: 2026-01-08 | Bakiye: $100,115.18
+2026-06-02 17:35:12,348 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,348 | INFO     | backtest | 📅 Yeni gün: 2026-01-09 | Bakiye: $100,115.18
+2026-06-02 17:35:12,349 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,349 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 65.7000 | Net PnL=-2.90 USD | Yeni Bakiye=100,112.27 USD | Zaman=2026-01-09 23:00:00
+2026-06-02 17:35:12,349 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 65.7000 | PnL=-2.90 USD
+2026-06-02 17:35:12,349 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,349 | INFO     | backtest | 📅 Yeni gün: 2026-01-12 | Bakiye: $100,112.27
+2026-06-02 17:35:12,352 | INFO     | strategy.voting | Bar 3796: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5738 >= Eşik=0.52]
+2026-06-02 17:35:12,352 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3815 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,352 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4269 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,352 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 66.6050 | Zaman=2026-01-12 16:30:00 | Lot=3.0000 | SL=63.6050 | TP=70.2050 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,354 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,354 | INFO     | backtest | 📅 Yeni gün: 2026-01-13 | Bakiye: $100,112.23
+2026-06-02 17:35:12,355 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,355 | INFO     | backtest | 📅 Yeni gün: 2026-01-14 | Bakiye: $100,112.23
+2026-06-02 17:35:12,357 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,357 | INFO     | backtest | 📅 Yeni gün: 2026-01-15 | Bakiye: $100,112.23
+2026-06-02 17:35:12,358 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 70.2050 | Net PnL=+10.76 USD | Yeni Bakiye=100,122.99 USD | Zaman=2026-01-15 21:00:00
+2026-06-02 17:35:12,362 | INFO     | strategy.voting | Bar 3896: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4794 < Eşik=0.52]
+2026-06-02 17:35:12,364 | INFO     | strategy.voting | Bar 3897: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4663 < Eşik=0.52]
+2026-06-02 17:35:12,367 | INFO     | strategy.voting | Bar 3898: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4663 < Eşik=0.52]
+2026-06-02 17:35:12,368 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,368 | INFO     | backtest | 📅 Yeni gün: 2026-01-16 | Bakiye: $100,122.99
+2026-06-02 17:35:12,369 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,370 | INFO     | backtest | 📅 Yeni gün: 2026-01-20 | Bakiye: $100,122.99
+2026-06-02 17:35:12,372 | INFO     | strategy.voting | Bar 3933: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4924 < Eşik=0.52]
+2026-06-02 17:35:12,375 | INFO     | strategy.voting | Bar 3934: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4953 < Eşik=0.52]
+2026-06-02 17:35:12,378 | INFO     | strategy.voting | Bar 3935: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4807 < Eşik=0.52]
+2026-06-02 17:35:12,380 | INFO     | strategy.voting | Bar 3936: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4896 < Eşik=0.52]
+2026-06-02 17:35:12,383 | INFO     | strategy.voting | Bar 3937: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4896 < Eşik=0.52]
+2026-06-02 17:35:12,385 | INFO     | strategy.voting | Bar 3938: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4807 < Eşik=0.52]
+2026-06-02 17:35:12,388 | INFO     | strategy.voting | Bar 3939: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4807 < Eşik=0.52]
+2026-06-02 17:35:12,391 | INFO     | strategy.voting | Bar 3940: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5737 >= Eşik=0.52]
+2026-06-02 17:35:12,391 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4731 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,391 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4358 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,391 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 69.2950 | Zaman=2026-01-20 18:45:00 | Lot=3.0000 | SL=66.2950 | TP=72.8950 | Komisyon=0.04 USD | Maliyet Oranı=%2.2
+2026-06-02 17:35:12,392 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,392 | INFO     | backtest | 📅 Yeni gün: 2026-01-21 | Bakiye: $100,122.95
+2026-06-02 17:35:12,394 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,394 | INFO     | backtest | 📅 Yeni gün: 2026-01-22 | Bakiye: $100,122.95
+2026-06-02 17:35:12,395 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,395 | INFO     | backtest | 📅 Yeni gün: 2026-01-23 | Bakiye: $100,122.95
+2026-06-02 17:35:12,397 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,397 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 68.1600 | Net PnL=-3.45 USD | Yeni Bakiye=100,119.51 USD | Zaman=2026-01-23 23:00:00
+2026-06-02 17:35:12,397 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 68.1600 | PnL=-3.45 USD
+2026-06-02 17:35:12,397 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,397 | INFO     | backtest | 📅 Yeni gün: 2026-01-26 | Bakiye: $100,119.51
+2026-06-02 17:35:12,400 | INFO     | strategy.voting | Bar 4039: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.6004 >= Eşik=0.52]
+2026-06-02 17:35:12,400 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3604 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,400 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4329 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,400 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 67.6950 | Zaman=2026-01-26 16:30:00 | Lot=3.0000 | SL=70.6950 | TP=64.0950 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,402 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,402 | INFO     | backtest | 📅 Yeni gün: 2026-01-27 | Bakiye: $100,119.46
+2026-06-02 17:35:12,403 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,403 | INFO     | backtest | 📅 Yeni gün: 2026-01-28 | Bakiye: $100,119.46
+2026-06-02 17:35:12,405 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,405 | INFO     | backtest | 📅 Yeni gün: 2026-01-29 | Bakiye: $100,119.46
+2026-06-02 17:35:12,405 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 64.0950 | Net PnL=+10.76 USD | Yeni Bakiye=100,130.23 USD | Zaman=2026-01-29 16:30:00
+2026-06-02 17:35:12,409 | INFO     | strategy.voting | Bar 4129: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.6360 >= Eşik=0.52]
+2026-06-02 17:35:12,409 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4691 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,409 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4419 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,409 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 63.9950 | Zaman=2026-01-29 18:45:00 | Lot=3.0000 | SL=66.9950 | TP=60.3950 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,410 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,410 | INFO     | backtest | 📅 Yeni gün: 2026-01-30 | Bakiye: $100,130.19
+2026-06-02 17:35:12,412 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,412 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 64.0900 | Net PnL=-0.32 USD | Yeni Bakiye=100,129.86 USD | Zaman=2026-01-30 23:00:00
+2026-06-02 17:35:12,412 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 64.0900 | PnL=-0.32 USD
+2026-06-02 17:35:12,412 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,412 | INFO     | backtest | 📅 Yeni gün: 2026-02-02 | Bakiye: $100,129.86
+2026-06-02 17:35:12,415 | INFO     | strategy.voting | Bar 4174: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4112 < Eşik=0.52]
+2026-06-02 17:35:12,418 | INFO     | strategy.voting | Bar 4175: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4559 < Eşik=0.52]
+2026-06-02 17:35:12,423 | INFO     | strategy.voting | Bar 4176: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5183 < Eşik=0.52]
+2026-06-02 17:35:12,426 | INFO     | strategy.voting | Bar 4177: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4971 < Eşik=0.52]
+2026-06-02 17:35:12,429 | INFO     | strategy.voting | Bar 4178: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5183 < Eşik=0.52]
+2026-06-02 17:35:12,431 | INFO     | strategy.voting | Bar 4179: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5576 >= Eşik=0.52]
+2026-06-02 17:35:12,432 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3984 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,432 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4416 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,432 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 64.1250 | Zaman=2026-02-02 17:45:00 | Lot=3.0000 | SL=61.1250 | TP=67.7250 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,433 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,433 | INFO     | backtest | 📅 Yeni gün: 2026-02-03 | Bakiye: $100,129.83
+2026-06-02 17:35:12,435 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,435 | INFO     | backtest | 📅 Yeni gün: 2026-02-04 | Bakiye: $100,129.83
+2026-06-02 17:35:12,436 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 67.7250 | Net PnL=+10.76 USD | Yeni Bakiye=100,140.59 USD | Zaman=2026-02-04 16:45:00
+2026-06-02 17:35:12,439 | INFO     | strategy.voting | Bar 4234: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3494 < Eşik=0.52]
+2026-06-02 17:35:12,442 | INFO     | strategy.voting | Bar 4235: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3355 < Eşik=0.52]
+2026-06-02 17:35:12,444 | INFO     | strategy.voting | Bar 4236: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3355 < Eşik=0.52]
+2026-06-02 17:35:12,447 | INFO     | strategy.voting | Bar 4239: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3541 < Eşik=0.52]
+2026-06-02 17:35:12,450 | INFO     | strategy.voting | Bar 4241: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3541 < Eşik=0.52]
+2026-06-02 17:35:12,452 | INFO     | strategy.voting | Bar 4242: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3541 < Eşik=0.52]
+2026-06-02 17:35:12,455 | INFO     | strategy.voting | Bar 4243: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3541 < Eşik=0.52]
+2026-06-02 17:35:12,457 | INFO     | strategy.voting | Bar 4244: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3541 < Eşik=0.52]
+2026-06-02 17:35:12,460 | INFO     | strategy.voting | Bar 4245: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3587 < Eşik=0.52]
+2026-06-02 17:35:12,462 | INFO     | strategy.voting | Bar 4246: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3587 < Eşik=0.52]
+2026-06-02 17:35:12,465 | INFO     | strategy.voting | Bar 4247: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3587 < Eşik=0.52]
+2026-06-02 17:35:12,467 | INFO     | strategy.voting | Bar 4248: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3587 < Eşik=0.52]
+2026-06-02 17:35:12,470 | INFO     | strategy.voting | Bar 4249: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3754 < Eşik=0.52]
+2026-06-02 17:35:12,472 | INFO     | strategy.voting | Bar 4250: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3491 < Eşik=0.52]
+2026-06-02 17:35:12,475 | INFO     | strategy.voting | Bar 4251: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3754 < Eşik=0.52]
+2026-06-02 17:35:12,477 | INFO     | strategy.voting | Bar 4252: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3754 < Eşik=0.52]
+2026-06-02 17:35:12,479 | INFO     | strategy.voting | Bar 4253: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3754 < Eşik=0.52]
+2026-06-02 17:35:12,482 | INFO     | strategy.voting | Bar 4254: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3587 < Eşik=0.52]
+2026-06-02 17:35:12,482 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,482 | INFO     | backtest | 📅 Yeni gün: 2026-02-05 | Bakiye: $100,140.59
+2026-06-02 17:35:12,485 | INFO     | strategy.voting | Bar 4255: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2496 < Eşik=0.52]
+2026-06-02 17:35:12,487 | INFO     | strategy.voting | Bar 4256: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2707 < Eşik=0.52]
+2026-06-02 17:35:12,490 | INFO     | strategy.voting | Bar 4257: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.2417 < Eşik=0.52]
+2026-06-02 17:35:12,492 | INFO     | strategy.voting | Bar 4258: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.7416 >= Eşik=0.52]
+2026-06-02 17:35:12,492 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.7500 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,492 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4505 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,492 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 67.1950 | Zaman=2026-02-05 17:15:00 | Lot=3.0000 | SL=70.1950 | TP=63.5950 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,494 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,494 | INFO     | backtest | 📅 Yeni gün: 2026-02-06 | Bakiye: $100,140.54
+2026-06-02 17:35:12,495 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,496 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 66.7800 | Net PnL=+1.20 USD | Yeni Bakiye=100,141.75 USD | Zaman=2026-02-06 23:00:00
+2026-06-02 17:35:12,496 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 66.7800 | PnL=+1.20 USD
+2026-06-02 17:35:12,496 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,496 | INFO     | backtest | 📅 Yeni gün: 2026-02-09 | Bakiye: $100,141.75
+2026-06-02 17:35:12,498 | INFO     | strategy.voting | Bar 4309: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5941 >= Eşik=0.52]
+2026-06-02 17:35:12,498 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3797 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,498 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4515 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,499 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 65.6850 | Zaman=2026-02-09 16:30:00 | Lot=3.0000 | SL=68.6850 | TP=62.0850 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,500 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,500 | INFO     | backtest | 📅 Yeni gün: 2026-02-10 | Bakiye: $100,141.71
+2026-06-02 17:35:12,502 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,502 | INFO     | backtest | 📅 Yeni gün: 2026-02-11 | Bakiye: $100,141.71
+2026-06-02 17:35:12,503 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,503 | INFO     | backtest | 📅 Yeni gün: 2026-02-12 | Bakiye: $100,141.71
+2026-06-02 17:35:12,503 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 62.0850 | Net PnL=+10.76 USD | Yeni Bakiye=100,152.47 USD | Zaman=2026-02-12 16:30:00
+2026-06-02 17:35:12,508 | INFO     | strategy.voting | Bar 4411: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3833 < Eşik=0.52]
+2026-06-02 17:35:12,509 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,509 | INFO     | backtest | 📅 Yeni gün: 2026-02-13 | Bakiye: $100,152.47
+2026-06-02 17:35:12,510 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,511 | INFO     | backtest | 📅 Yeni gün: 2026-02-17 | Bakiye: $100,152.47
+2026-06-02 17:35:12,513 | INFO     | strategy.voting | Bar 4444: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4330 < Eşik=0.52]
+2026-06-02 17:35:12,515 | INFO     | strategy.voting | Bar 4445: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5518 >= Eşik=0.52]
+2026-06-02 17:35:12,515 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4685 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,516 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4604 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,516 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 59.2750 | Zaman=2026-02-17 16:45:00 | Lot=3.0000 | SL=62.2750 | TP=55.6750 | Komisyon=0.04 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,517 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,517 | INFO     | backtest | 📅 Yeni gün: 2026-02-18 | Bakiye: $100,152.44
+2026-06-02 17:35:12,519 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,519 | INFO     | backtest | 📅 Yeni gün: 2026-02-19 | Bakiye: $100,152.44
+2026-06-02 17:35:12,520 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,520 | INFO     | backtest | 📅 Yeni gün: 2026-02-20 | Bakiye: $100,152.44
+2026-06-02 17:35:12,521 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,521 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 57.5200 | Net PnL=+5.23 USD | Yeni Bakiye=100,157.67 USD | Zaman=2026-02-20 23:00:00
+2026-06-02 17:35:12,521 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 57.5200 | PnL=+5.23 USD
+2026-06-02 17:35:12,522 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,522 | INFO     | backtest | 📅 Yeni gün: 2026-02-23 | Bakiye: $100,157.67
+2026-06-02 17:35:12,525 | INFO     | strategy.voting | Bar 4552: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4120 < Eşik=0.52]
+2026-06-02 17:35:12,527 | INFO     | strategy.voting | Bar 4553: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4335 < Eşik=0.52]
+2026-06-02 17:35:12,530 | INFO     | strategy.voting | Bar 4554: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4411 < Eşik=0.52]
+2026-06-02 17:35:12,533 | INFO     | strategy.voting | Bar 4565: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4516 < Eşik=0.52]
+2026-06-02 17:35:12,536 | INFO     | strategy.voting | Bar 4566: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4394 < Eşik=0.52]
+2026-06-02 17:35:12,539 | INFO     | strategy.voting | Bar 4567: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4467 < Eşik=0.52]
+2026-06-02 17:35:12,541 | INFO     | strategy.voting | Bar 4568: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4394 < Eşik=0.52]
+2026-06-02 17:35:12,544 | INFO     | strategy.voting | Bar 4569: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4394 < Eşik=0.52]
+2026-06-02 17:35:12,546 | INFO     | strategy.voting | Bar 4570: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4544 < Eşik=0.52]
+2026-06-02 17:35:12,549 | INFO     | strategy.voting | Bar 4571: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4544 < Eşik=0.52]
+2026-06-02 17:35:12,551 | INFO     | strategy.voting | Bar 4572: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4544 < Eşik=0.52]
+2026-06-02 17:35:12,554 | INFO     | strategy.voting | Bar 4573: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4544 < Eşik=0.52]
+2026-06-02 17:35:12,556 | INFO     | strategy.voting | Bar 4574: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4544 < Eşik=0.52]
+2026-06-02 17:35:12,559 | INFO     | strategy.voting | Bar 4575: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4875 < Eşik=0.52]
+2026-06-02 17:35:12,562 | INFO     | strategy.voting | Bar 4576: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.5002 < Eşik=0.52]
+2026-06-02 17:35:12,564 | INFO     | strategy.voting | Bar 4577: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4894 < Eşik=0.52]
+2026-06-02 17:35:12,567 | INFO     | strategy.voting | Bar 4578: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.5126 < Eşik=0.52]
+2026-06-02 17:35:12,567 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,567 | INFO     | backtest | 📅 Yeni gün: 2026-02-24 | Bakiye: $100,157.67
+2026-06-02 17:35:12,569 | INFO     | strategy.voting | Bar 4579: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4708 < Eşik=0.52]
+2026-06-02 17:35:12,572 | INFO     | strategy.voting | Bar 4580: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4708 < Eşik=0.52]
+2026-06-02 17:35:12,574 | INFO     | strategy.voting | Bar 4581: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4731 < Eşik=0.52]
+2026-06-02 17:35:12,577 | INFO     | strategy.voting | Bar 4582: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.6250 >= Eşik=0.52]
+2026-06-02 17:35:12,577 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4330 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,577 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4647 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,577 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 56.7150 | Zaman=2026-02-24 17:15:00 | Lot=3.0000 | SL=53.7150 | TP=60.3150 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,578 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,578 | INFO     | backtest | 📅 Yeni gün: 2026-02-25 | Bakiye: $100,157.63
+2026-06-02 17:35:12,580 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,580 | INFO     | backtest | 📅 Yeni gün: 2026-02-26 | Bakiye: $100,157.63
+2026-06-02 17:35:12,581 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,581 | INFO     | backtest | 📅 Yeni gün: 2026-02-27 | Bakiye: $100,157.63
+2026-06-02 17:35:12,583 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,583 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 59.0000 | Net PnL=+6.82 USD | Yeni Bakiye=100,164.45 USD | Zaman=2026-02-27 23:00:00
+2026-06-02 17:35:12,583 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 59.0000 | PnL=+6.82 USD
+2026-06-02 17:35:12,583 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,583 | INFO     | backtest | 📅 Yeni gün: 2026-03-02 | Bakiye: $100,164.45
+2026-06-02 17:35:12,586 | INFO     | strategy.voting | Bar 4674: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5395 >= Eşik=0.52]
+2026-06-02 17:35:12,586 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4525 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,586 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4704 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,586 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 56.8350 | Zaman=2026-03-02 16:30:00 | Lot=3.0000 | SL=53.8350 | TP=60.4350 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,588 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,588 | INFO     | backtest | 📅 Yeni gün: 2026-03-03 | Bakiye: $100,164.42
+2026-06-02 17:35:12,590 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,590 | INFO     | backtest | 📅 Yeni gün: 2026-03-04 | Bakiye: $100,164.42
+2026-06-02 17:35:12,592 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,592 | INFO     | backtest | 📅 Yeni gün: 2026-03-05 | Bakiye: $100,164.42
+2026-06-02 17:35:12,593 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,593 | INFO     | backtest | 📅 Yeni gün: 2026-03-06 | Bakiye: $100,164.42
+2026-06-02 17:35:12,593 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 53.8350 | Net PnL=-9.03 USD | Yeni Bakiye=100,155.39 USD | Zaman=2026-03-06 16:45:00
+2026-06-02 17:35:12,595 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,595 | INFO     | backtest | 📅 Yeni gün: 2026-03-09 | Bakiye: $100,155.39
+2026-06-02 17:35:12,598 | INFO     | strategy.voting | Bar 4813: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3933 < Eşik=0.52]
+2026-06-02 17:35:12,601 | INFO     | strategy.voting | Bar 4814: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3933 < Eşik=0.52]
+2026-06-02 17:35:12,603 | INFO     | strategy.voting | Bar 4815: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3804 < Eşik=0.52]
+2026-06-02 17:35:12,606 | INFO     | strategy.voting | Bar 4816: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4017 < Eşik=0.52]
+2026-06-02 17:35:12,609 | INFO     | strategy.voting | Bar 4817: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4214 < Eşik=0.52]
+2026-06-02 17:35:12,611 | INFO     | strategy.voting | Bar 4818: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4273 < Eşik=0.52]
+2026-06-02 17:35:12,614 | INFO     | strategy.voting | Bar 4819: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4273 < Eşik=0.52]
+2026-06-02 17:35:12,616 | INFO     | strategy.voting | Bar 4820: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4138 < Eşik=0.52]
+2026-06-02 17:35:12,619 | INFO     | strategy.voting | Bar 4821: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4476 < Eşik=0.52]
+2026-06-02 17:35:12,621 | INFO     | strategy.voting | Bar 4822: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4245 < Eşik=0.52]
+2026-06-02 17:35:12,624 | INFO     | strategy.voting | Bar 4823: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4686 < Eşik=0.52]
+2026-06-02 17:35:12,626 | INFO     | strategy.voting | Bar 4824: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3730 < Eşik=0.52]
+2026-06-02 17:35:12,629 | INFO     | strategy.voting | Bar 4825: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3730 < Eşik=0.52]
+2026-06-02 17:35:12,631 | INFO     | strategy.voting | Bar 4826: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3730 < Eşik=0.52]
+2026-06-02 17:35:12,634 | INFO     | strategy.voting | Bar 4827: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5600 >= Eşik=0.52]
+2026-06-02 17:35:12,634 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3132 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,634 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4628 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,634 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 53.7950 | Zaman=2026-03-09 20:00:00 | Lot=3.0000 | SL=50.7950 | TP=57.3950 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,635 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,635 | INFO     | backtest | 📅 Yeni gün: 2026-03-10 | Bakiye: $100,155.35
+2026-06-02 17:35:12,636 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,636 | INFO     | backtest | 📅 Yeni gün: 2026-03-11 | Bakiye: $100,155.35
+2026-06-02 17:35:12,638 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,638 | INFO     | backtest | 📅 Yeni gün: 2026-03-12 | Bakiye: $100,155.35
+2026-06-02 17:35:12,638 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 50.7950 | Net PnL=-9.03 USD | Yeni Bakiye=100,146.32 USD | Zaman=2026-03-12 18:15:00
+2026-06-02 17:35:12,642 | INFO     | strategy.voting | Bar 4905: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3441 < Eşik=0.52]
+2026-06-02 17:35:12,644 | INFO     | strategy.voting | Bar 4906: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3505 < Eşik=0.52]
+2026-06-02 17:35:12,646 | INFO     | strategy.voting | Bar 4907: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3441 < Eşik=0.52]
+2026-06-02 17:35:12,649 | INFO     | strategy.voting | Bar 4908: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4137 < Eşik=0.52]
+2026-06-02 17:35:12,651 | INFO     | strategy.voting | Bar 4909: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4245 < Eşik=0.52]
+2026-06-02 17:35:12,654 | INFO     | strategy.voting | Bar 4910: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4331 < Eşik=0.52]
+2026-06-02 17:35:12,656 | INFO     | strategy.voting | Bar 4911: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4233 < Eşik=0.52]
+2026-06-02 17:35:12,658 | INFO     | strategy.voting | Bar 4912: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4331 < Eşik=0.52]
+2026-06-02 17:35:12,661 | INFO     | strategy.voting | Bar 4913: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4471 < Eşik=0.52]
+2026-06-02 17:35:12,663 | INFO     | strategy.voting | Bar 4914: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4471 < Eşik=0.52]
+2026-06-02 17:35:12,666 | INFO     | strategy.voting | Bar 4915: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4471 < Eşik=0.52]
+2026-06-02 17:35:12,666 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,666 | INFO     | backtest | 📅 Yeni gün: 2026-03-13 | Bakiye: $100,146.32
+2026-06-02 17:35:12,668 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,668 | INFO     | backtest | 📅 Yeni gün: 2026-03-16 | Bakiye: $100,146.32
+2026-06-02 17:35:12,671 | INFO     | strategy.voting | Bar 4946: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5658 >= Eşik=0.52]
+2026-06-02 17:35:12,671 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4028 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,671 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4553 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,671 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 51.3450 | Zaman=2026-03-16 16:00:00 | Lot=3.0000 | SL=48.3450 | TP=54.9450 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,672 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 48.3450 | Net PnL=-9.03 USD | Yeni Bakiye=100,137.26 USD | Zaman=2026-03-16 21:30:00
+2026-06-02 17:35:12,675 | INFO     | strategy.voting | Bar 4969: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,677 | INFO     | strategy.voting | Bar 4970: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,678 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,678 | INFO     | backtest | 📅 Yeni gün: 2026-03-17 | Bakiye: $100,137.26
+2026-06-02 17:35:12,680 | INFO     | strategy.voting | Bar 4973: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5125 < Eşik=0.52]
+2026-06-02 17:35:12,683 | INFO     | strategy.voting | Bar 4974: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5435 >= Eşik=0.52]
+2026-06-02 17:35:12,683 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4717 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,683 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4477 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,683 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 50.3750 | Zaman=2026-03-17 16:15:00 | Lot=3.0000 | SL=47.3750 | TP=53.9750 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,685 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,685 | INFO     | backtest | 📅 Yeni gün: 2026-03-18 | Bakiye: $100,137.23
+2026-06-02 17:35:12,686 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,686 | INFO     | backtest | 📅 Yeni gün: 2026-03-19 | Bakiye: $100,137.23
+2026-06-02 17:35:12,688 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,688 | INFO     | backtest | 📅 Yeni gün: 2026-03-20 | Bakiye: $100,137.23
+2026-06-02 17:35:12,689 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,689 | INFO     | backtest | 📅 Yeni gün: 2026-03-23 | Bakiye: $100,137.23
+2026-06-02 17:35:12,691 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,691 | INFO     | backtest | 📅 Yeni gün: 2026-03-24 | Bakiye: $100,137.23
+2026-06-02 17:35:12,693 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,693 | INFO     | backtest | 📅 Yeni gün: 2026-03-25 | Bakiye: $100,137.23
+2026-06-02 17:35:12,694 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,694 | INFO     | backtest | 📅 Yeni gün: 2026-03-26 | Bakiye: $100,137.23
+2026-06-02 17:35:12,695 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,695 | INFO     | backtest | 📅 Yeni gün: 2026-03-27 | Bakiye: $100,137.23
+2026-06-02 17:35:12,697 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,697 | INFO     | backtest | 📅 Yeni gün: 2026-03-30 | Bakiye: $100,137.23
+2026-06-02 17:35:12,699 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,699 | INFO     | backtest | 📅 Yeni gün: 2026-03-31 | Bakiye: $100,137.23
+2026-06-02 17:35:12,701 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,701 | INFO     | backtest | 📅 Yeni gün: 2026-04-01 | Bakiye: $100,137.23
+2026-06-02 17:35:12,701 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 53.9750 | Net PnL=+10.77 USD | Yeni Bakiye=100,148.00 USD | Zaman=2026-04-01 18:00:00
+2026-06-02 17:35:12,704 | INFO     | strategy.voting | Bar 5274: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5194 < Eşik=0.52]
+2026-06-02 17:35:12,707 | INFO     | strategy.voting | Bar 5275: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5045 < Eşik=0.52]
+2026-06-02 17:35:12,710 | INFO     | strategy.voting | Bar 5276: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.5045 < Eşik=0.52]
+2026-06-02 17:35:12,713 | INFO     | strategy.voting | Bar 5277: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5231 >= Eşik=0.52]
+2026-06-02 17:35:12,713 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3787 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,713 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4567 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,713 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 53.7950 | Zaman=2026-04-01 18:45:00 | Lot=3.0000 | SL=50.7950 | TP=57.3950 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,714 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,714 | INFO     | backtest | 📅 Yeni gün: 2026-04-02 | Bakiye: $100,147.97
+2026-06-02 17:35:12,716 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,716 | INFO     | backtest | 📅 Yeni gün: 2026-04-06 | Bakiye: $100,147.97
+2026-06-02 17:35:12,717 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,717 | INFO     | backtest | 📅 Yeni gün: 2026-04-07 | Bakiye: $100,147.97
+2026-06-02 17:35:12,719 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,719 | INFO     | backtest | 📅 Yeni gün: 2026-04-08 | Bakiye: $100,147.97
+2026-06-02 17:35:12,721 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,721 | INFO     | backtest | 📅 Yeni gün: 2026-04-09 | Bakiye: $100,147.97
+2026-06-02 17:35:12,722 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,722 | INFO     | backtest | 📅 Yeni gün: 2026-04-10 | Bakiye: $100,147.97
+2026-06-02 17:35:12,724 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,724 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 55.5400 | Net PnL=+5.20 USD | Yeni Bakiye=100,153.17 USD | Zaman=2026-04-10 23:00:00
+2026-06-02 17:35:12,724 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 55.5400 | PnL=+5.20 USD
+2026-06-02 17:35:12,724 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,724 | INFO     | backtest | 📅 Yeni gün: 2026-04-13 | Bakiye: $100,153.17
+2026-06-02 17:35:12,727 | INFO     | strategy.voting | Bar 5457: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4537 < Eşik=0.52]
+2026-06-02 17:35:12,730 | INFO     | strategy.voting | Bar 5459: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3544 < Eşik=0.52]
+2026-06-02 17:35:12,733 | INFO     | strategy.voting | Bar 5460: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3544 < Eşik=0.52]
+2026-06-02 17:35:12,735 | INFO     | strategy.voting | Bar 5461: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3544 < Eşik=0.52]
+2026-06-02 17:35:12,738 | INFO     | strategy.voting | Bar 5462: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3544 < Eşik=0.52]
+2026-06-02 17:35:12,740 | INFO     | strategy.voting | Bar 5463: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3920 < Eşik=0.52]
+2026-06-02 17:35:12,743 | INFO     | strategy.voting | Bar 5464: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4104 < Eşik=0.52]
+2026-06-02 17:35:12,745 | INFO     | strategy.voting | Bar 5465: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3684 < Eşik=0.52]
+2026-06-02 17:35:12,748 | INFO     | strategy.voting | Bar 5466: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3727 < Eşik=0.52]
+2026-06-02 17:35:12,750 | INFO     | strategy.voting | Bar 5467: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3835 < Eşik=0.52]
+2026-06-02 17:35:12,754 | INFO     | strategy.voting | Bar 5479: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4060 < Eşik=0.52]
+2026-06-02 17:35:12,757 | INFO     | strategy.voting | Bar 5480: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4556 < Eşik=0.52]
+2026-06-02 17:35:12,757 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,758 | INFO     | backtest | 📅 Yeni gün: 2026-04-14 | Bakiye: $100,153.17
+2026-06-02 17:35:12,762 | INFO     | strategy.voting | Bar 5497: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4237 < Eşik=0.52]
+2026-06-02 17:35:12,764 | INFO     | strategy.voting | Bar 5498: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4062 < Eşik=0.52]
+2026-06-02 17:35:12,767 | INFO     | strategy.voting | Bar 5499: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4062 < Eşik=0.52]
+2026-06-02 17:35:12,770 | INFO     | strategy.voting | Bar 5500: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3778 < Eşik=0.52]
+2026-06-02 17:35:12,772 | INFO     | strategy.voting | Bar 5501: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3778 < Eşik=0.52]
+2026-06-02 17:35:12,775 | INFO     | strategy.voting | Bar 5502: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3778 < Eşik=0.52]
+2026-06-02 17:35:12,777 | INFO     | strategy.voting | Bar 5503: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4444 < Eşik=0.52]
+2026-06-02 17:35:12,780 | INFO     | strategy.voting | Bar 5504: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4377 < Eşik=0.52]
+2026-06-02 17:35:12,782 | INFO     | strategy.voting | Bar 5505: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3893 < Eşik=0.52]
+2026-06-02 17:35:12,785 | INFO     | strategy.voting | Bar 5506: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4736 < Eşik=0.52]
+2026-06-02 17:35:12,787 | INFO     | strategy.voting | Bar 5507: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4851 < Eşik=0.52]
+2026-06-02 17:35:12,790 | INFO     | strategy.voting | Bar 5508: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.5058 < Eşik=0.52]
+2026-06-02 17:35:12,792 | INFO     | strategy.voting | Bar 5509: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4851 < Eşik=0.52]
+2026-06-02 17:35:12,795 | INFO     | strategy.voting | Bar 5510: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.5058 < Eşik=0.52]
+2026-06-02 17:35:12,795 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,795 | INFO     | backtest | 📅 Yeni gün: 2026-04-15 | Bakiye: $100,153.17
+2026-06-02 17:35:12,798 | INFO     | strategy.voting | Bar 5511: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5624 >= Eşik=0.52]
+2026-06-02 17:35:12,798 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3348 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,798 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4610 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,798 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 59.0950 | Zaman=2026-04-15 16:30:00 | Lot=3.0000 | SL=62.0950 | TP=55.4950 | Komisyon=0.04 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,799 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,799 | INFO     | backtest | 📅 Yeni gün: 2026-04-16 | Bakiye: $100,153.14
+2026-06-02 17:35:12,801 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,801 | INFO     | backtest | 📅 Yeni gün: 2026-04-17 | Bakiye: $100,153.14
+2026-06-02 17:35:12,803 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,803 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 59.2300 | Net PnL=-0.44 USD | Yeni Bakiye=100,152.70 USD | Zaman=2026-04-17 23:00:00
+2026-06-02 17:35:12,803 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 59.2300 | PnL=-0.44 USD
+2026-06-02 17:35:12,803 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,803 | INFO     | backtest | 📅 Yeni gün: 2026-04-20 | Bakiye: $100,152.70
+2026-06-02 17:35:12,806 | INFO     | strategy.voting | Bar 5592: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3223 < Eşik=0.52]
+2026-06-02 17:35:12,808 | INFO     | strategy.voting | Bar 5593: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4365 < Eşik=0.52]
+2026-06-02 17:35:12,811 | INFO     | strategy.voting | Bar 5595: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3892 < Eşik=0.52]
+2026-06-02 17:35:12,813 | INFO     | strategy.voting | Bar 5596: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3847 < Eşik=0.52]
+2026-06-02 17:35:12,816 | INFO     | strategy.voting | Bar 5597: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3705 < Eşik=0.52]
+2026-06-02 17:35:12,818 | INFO     | strategy.voting | Bar 5598: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3847 < Eşik=0.52]
+2026-06-02 17:35:12,821 | INFO     | strategy.voting | Bar 5599: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3705 < Eşik=0.52]
+2026-06-02 17:35:12,823 | INFO     | strategy.voting | Bar 5600: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.3513 < Eşik=0.52]
+2026-06-02 17:35:12,826 | INFO     | strategy.voting | Bar 5601: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5374 >= Eşik=0.52]
+2026-06-02 17:35:12,826 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3315 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,826 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4606 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,826 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 60.2750 | Zaman=2026-04-20 18:45:00 | Lot=3.0000 | SL=57.2750 | TP=63.8750 | Komisyon=0.04 USD | Maliyet Oranı=%2.1
+2026-06-02 17:35:12,827 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,827 | INFO     | backtest | 📅 Yeni gün: 2026-04-21 | Bakiye: $100,152.66
+2026-06-02 17:35:12,829 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,829 | INFO     | backtest | 📅 Yeni gün: 2026-04-22 | Bakiye: $100,152.66
+2026-06-02 17:35:12,831 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,831 | INFO     | backtest | 📅 Yeni gün: 2026-04-23 | Bakiye: $100,152.66
+2026-06-02 17:35:12,831 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 57.2750 | Net PnL=-9.03 USD | Yeni Bakiye=100,143.62 USD | Zaman=2026-04-23 16:30:00
+2026-06-02 17:35:12,835 | INFO     | strategy.voting | Bar 5692: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4049 < Eşik=0.52]
+2026-06-02 17:35:12,838 | INFO     | strategy.voting | Bar 5694: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4296 < Eşik=0.52]
+2026-06-02 17:35:12,839 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,839 | INFO     | backtest | 📅 Yeni gün: 2026-04-24 | Bakiye: $100,143.62
+2026-06-02 17:35:12,840 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,840 | INFO     | backtest | 📅 Yeni gün: 2026-04-27 | Bakiye: $100,143.62
+2026-06-02 17:35:12,843 | INFO     | strategy.voting | Bar 5727: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4699 < Eşik=0.52]
+2026-06-02 17:35:12,845 | INFO     | strategy.voting | Bar 5728: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4699 < Eşik=0.52]
+2026-06-02 17:35:12,849 | INFO     | strategy.voting | Bar 5729: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5457 >= Eşik=0.52]
+2026-06-02 17:35:12,849 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4171 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,849 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4530 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,849 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 55.0350 | Zaman=2026-04-27 17:00:00 | Lot=3.0000 | SL=52.0350 | TP=58.6350 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,851 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,851 | INFO     | backtest | 📅 Yeni gün: 2026-04-28 | Bakiye: $100,143.59
+2026-06-02 17:35:12,852 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,852 | INFO     | backtest | 📅 Yeni gün: 2026-04-29 | Bakiye: $100,143.59
+2026-06-02 17:35:12,853 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 52.0350 | Net PnL=-9.03 USD | Yeni Bakiye=100,134.56 USD | Zaman=2026-04-29 18:15:00
+2026-06-02 17:35:12,859 | INFO     | strategy.voting | Bar 5803: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4234 < Eşik=0.52]
+2026-06-02 17:35:12,863 | INFO     | strategy.voting | Bar 5804: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4324 < Eşik=0.52]
+2026-06-02 17:35:12,866 | INFO     | strategy.voting | Bar 5805: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4234 < Eşik=0.52]
+2026-06-02 17:35:12,870 | INFO     | strategy.voting | Bar 5806: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4159 < Eşik=0.52]
+2026-06-02 17:35:12,872 | INFO     | strategy.voting | Bar 5807: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3997 < Eşik=0.52]
+2026-06-02 17:35:12,873 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,873 | INFO     | backtest | 📅 Yeni gün: 2026-04-30 | Bakiye: $100,134.56
+2026-06-02 17:35:12,875 | INFO     | strategy.voting | Bar 5808: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5820 >= Eşik=0.52]
+2026-06-02 17:35:12,875 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2955 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,875 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4455 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,875 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 52.7250 | Zaman=2026-04-30 16:30:00 | Lot=3.0000 | SL=55.7250 | TP=49.1250 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,877 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 55.7250 | Net PnL=-9.03 USD | Yeni Bakiye=100,125.50 USD | Zaman=2026-04-30 22:00:00
+2026-06-02 17:35:12,877 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,877 | INFO     | backtest | 📅 Yeni gün: 2026-05-01 | Bakiye: $100,125.50
+2026-06-02 17:35:12,878 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,878 | INFO     | backtest | 📅 Yeni gün: 2026-05-04 | Bakiye: $100,125.50
+2026-06-02 17:35:12,881 | INFO     | strategy.voting | Bar 5862: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5602 >= Eşik=0.52]
+2026-06-02 17:35:12,881 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2929 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,881 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4379 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,881 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 54.4950 | Zaman=2026-05-04 16:30:00 | Lot=3.0000 | SL=57.4950 | TP=50.8950 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:12,883 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,883 | INFO     | backtest | 📅 Yeni gün: 2026-05-05 | Bakiye: $100,125.46
+2026-06-02 17:35:12,884 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,884 | INFO     | backtest | 📅 Yeni gün: 2026-05-06 | Bakiye: $100,125.46
+2026-06-02 17:35:12,884 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 50.8950 | Net PnL=+10.77 USD | Yeni Bakiye=100,136.23 USD | Zaman=2026-05-06 16:30:00
+2026-06-02 17:35:12,887 | INFO     | strategy.voting | Bar 5918: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5372 >= Eşik=0.52]
+2026-06-02 17:35:12,887 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.8881 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,887 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4469 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,888 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 52.2450 | Zaman=2026-05-06 17:00:00 | Lot=3.0000 | SL=55.2450 | TP=48.6450 | Komisyon=0.03 USD | Maliyet Oranı=%1.9
+2026-06-02 17:35:12,888 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 48.6450 | Net PnL=+10.77 USD | Yeni Bakiye=100,146.97 USD | Zaman=2026-05-06 18:45:00
+2026-06-02 17:35:12,892 | INFO     | strategy.voting | Bar 5938: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3530 < Eşik=0.52]
+2026-06-02 17:35:12,895 | INFO     | strategy.voting | Bar 5941: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3530 < Eşik=0.52]
+2026-06-02 17:35:12,897 | INFO     | strategy.voting | Bar 5942: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3530 < Eşik=0.52]
+2026-06-02 17:35:12,897 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,897 | INFO     | backtest | 📅 Yeni gün: 2026-05-07 | Bakiye: $100,146.97
+2026-06-02 17:35:12,900 | INFO     | strategy.voting | Bar 5943: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3788 < Eşik=0.52]
+2026-06-02 17:35:12,902 | INFO     | strategy.voting | Bar 5944: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3758 < Eşik=0.52]
+2026-06-02 17:35:12,905 | INFO     | strategy.voting | Bar 5945: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4859 < Eşik=0.52]
+2026-06-02 17:35:12,908 | INFO     | strategy.voting | Bar 5946: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4289 < Eşik=0.52]
+2026-06-02 17:35:12,910 | INFO     | strategy.voting | Bar 5947: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4356 < Eşik=0.52]
+2026-06-02 17:35:12,913 | INFO     | strategy.voting | Bar 5948: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4388 < Eşik=0.52]
+2026-06-02 17:35:12,915 | INFO     | strategy.voting | Bar 5949: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4388 < Eşik=0.52]
+2026-06-02 17:35:12,918 | INFO     | strategy.voting | Bar 5950: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4246 < Eşik=0.52]
+2026-06-02 17:35:12,921 | INFO     | strategy.voting | Bar 5951: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4217 < Eşik=0.52]
+2026-06-02 17:35:12,923 | INFO     | strategy.voting | Bar 5952: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5863 >= Eşik=0.52]
+2026-06-02 17:35:12,923 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.7898 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:12,923 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4558 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:12,923 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 48.6650 | Zaman=2026-05-07 18:45:00 | Lot=3.0000 | SL=45.6650 | TP=52.2650 | Komisyon=0.03 USD | Maliyet Oranı=%1.9
+2026-06-02 17:35:12,924 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,924 | INFO     | backtest | 📅 Yeni gün: 2026-05-08 | Bakiye: $100,146.94
+2026-06-02 17:35:12,926 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:12,926 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 48.3600 | Net PnL=-0.94 USD | Yeni Bakiye=100,146.00 USD | Zaman=2026-05-08 23:00:00
+2026-06-02 17:35:12,926 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 48.3600 | PnL=-0.94 USD
+2026-06-02 17:35:12,926 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,926 | INFO     | backtest | 📅 Yeni gün: 2026-05-11 | Bakiye: $100,146.00
+2026-06-02 17:35:12,928 | INFO     | strategy.voting | Bar 5997: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3613 < Eşik=0.52]
+2026-06-02 17:35:12,931 | INFO     | strategy.voting | Bar 5998: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3613 < Eşik=0.52]
+2026-06-02 17:35:12,933 | INFO     | strategy.voting | Bar 5999: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3743 < Eşik=0.52]
+2026-06-02 17:35:12,936 | INFO     | strategy.voting | Bar 6000: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4137 < Eşik=0.52]
+2026-06-02 17:35:12,938 | INFO     | strategy.voting | Bar 6001: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4204 < Eşik=0.52]
+2026-06-02 17:35:12,941 | INFO     | strategy.voting | Bar 6002: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4204 < Eşik=0.52]
+2026-06-02 17:35:12,943 | INFO     | strategy.voting | Bar 6003: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4204 < Eşik=0.52]
+2026-06-02 17:35:12,945 | INFO     | strategy.voting | Bar 6004: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4095 < Eşik=0.52]
+2026-06-02 17:35:12,948 | INFO     | strategy.voting | Bar 6005: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4035 < Eşik=0.52]
+2026-06-02 17:35:12,950 | INFO     | strategy.voting | Bar 6006: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3812 < Eşik=0.52]
+2026-06-02 17:35:12,953 | INFO     | strategy.voting | Bar 6007: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3353 < Eşik=0.52]
+2026-06-02 17:35:12,955 | INFO     | strategy.voting | Bar 6008: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3229 < Eşik=0.52]
+2026-06-02 17:35:12,957 | INFO     | strategy.voting | Bar 6009: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3229 < Eşik=0.52]
+2026-06-02 17:35:12,960 | INFO     | strategy.voting | Bar 6010: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3229 < Eşik=0.52]
+2026-06-02 17:35:12,962 | INFO     | strategy.voting | Bar 6011: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3229 < Eşik=0.52]
+2026-06-02 17:35:12,965 | INFO     | strategy.voting | Bar 6012: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3229 < Eşik=0.52]
+2026-06-02 17:35:12,967 | INFO     | strategy.voting | Bar 6013: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3229 < Eşik=0.52]
+2026-06-02 17:35:12,970 | INFO     | strategy.voting | Bar 6014: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,972 | INFO     | strategy.voting | Bar 6015: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,974 | INFO     | strategy.voting | Bar 6016: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,977 | INFO     | strategy.voting | Bar 6017: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,979 | INFO     | strategy.voting | Bar 6018: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,981 | INFO     | strategy.voting | Bar 6019: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,984 | INFO     | strategy.voting | Bar 6020: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,986 | INFO     | strategy.voting | Bar 6021: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,989 | INFO     | strategy.voting | Bar 6022: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3283 < Eşik=0.52]
+2026-06-02 17:35:12,991 | INFO     | strategy.voting | Bar 6023: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3296 < Eşik=0.52]
+2026-06-02 17:35:12,991 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:12,991 | INFO     | backtest | 📅 Yeni gün: 2026-05-12 | Bakiye: $100,146.00
+2026-06-02 17:35:12,994 | INFO     | strategy.voting | Bar 6024: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3427 < Eşik=0.52]
+2026-06-02 17:35:12,996 | INFO     | strategy.voting | Bar 6025: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4366 < Eşik=0.52]
+2026-06-02 17:35:12,999 | INFO     | strategy.voting | Bar 6026: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3910 < Eşik=0.52]
+2026-06-02 17:35:13,001 | INFO     | strategy.voting | Bar 6027: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4019 < Eşik=0.52]
+2026-06-02 17:35:13,004 | INFO     | strategy.voting | Bar 6028: 🚫 VETO — STRONG_LONG reddedildi, HOLD. [Olasılık=0.4844 < Eşik=0.52]
+2026-06-02 17:35:13,006 | INFO     | strategy.voting | Bar 6029: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5994 >= Eşik=0.52]
+2026-06-02 17:35:13,006 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3683 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:13,006 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4550 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:13,007 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 47.9650 | Zaman=2026-05-12 17:45:00 | Lot=3.0000 | SL=44.9650 | TP=51.5650 | Komisyon=0.03 USD | Maliyet Oranı=%1.9
+2026-06-02 17:35:13,008 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,008 | INFO     | backtest | 📅 Yeni gün: 2026-05-13 | Bakiye: $100,145.97
+2026-06-02 17:35:13,008 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 44.9650 | Net PnL=-9.03 USD | Yeni Bakiye=100,136.94 USD | Zaman=2026-05-13 17:45:00
+2026-06-02 17:35:13,012 | INFO     | strategy.voting | Bar 6072: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3105 < Eşik=0.52]
+2026-06-02 17:35:13,015 | INFO     | strategy.voting | Bar 6073: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3105 < Eşik=0.52]
+2026-06-02 17:35:13,017 | INFO     | strategy.voting | Bar 6074: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3105 < Eşik=0.52]
+2026-06-02 17:35:13,020 | INFO     | strategy.voting | Bar 6075: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3067 < Eşik=0.52]
+2026-06-02 17:35:13,023 | INFO     | strategy.voting | Bar 6076: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3067 < Eşik=0.52]
+2026-06-02 17:35:13,025 | INFO     | strategy.voting | Bar 6077: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3105 < Eşik=0.52]
+2026-06-02 17:35:13,025 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,025 | INFO     | backtest | 📅 Yeni gün: 2026-05-14 | Bakiye: $100,136.94
+2026-06-02 17:35:13,027 | INFO     | strategy.voting | Bar 6078: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3335 < Eşik=0.52]
+2026-06-02 17:35:13,030 | INFO     | strategy.voting | Bar 6079: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3407 < Eşik=0.52]
+2026-06-02 17:35:13,032 | INFO     | strategy.voting | Bar 6080: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.4840 < Eşik=0.52]
+2026-06-02 17:35:13,034 | INFO     | strategy.voting | Bar 6081: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3812 < Eşik=0.52]
+2026-06-02 17:35:13,037 | INFO     | strategy.voting | Bar 6082: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.6123 >= Eşik=0.52]
+2026-06-02 17:35:13,037 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.4186 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:13,037 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4475 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:13,037 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 45.1150 | Zaman=2026-05-14 17:30:00 | Lot=3.0000 | SL=42.1150 | TP=48.7150 | Komisyon=0.03 USD | Maliyet Oranı=%1.9
+2026-06-02 17:35:13,038 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,038 | INFO     | backtest | 📅 Yeni gün: 2026-05-15 | Bakiye: $100,136.92
+2026-06-02 17:35:13,040 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-02 17:35:13,040 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [WEEKEND_FLATTEN] @ 43.3000 | Net PnL=-5.47 USD | Yeni Bakiye=100,131.44 USD | Zaman=2026-05-15 23:00:00
+2026-06-02 17:35:13,040 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 43.3000 | PnL=-5.47 USD
+2026-06-02 17:35:13,040 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,040 | INFO     | backtest | 📅 Yeni gün: 2026-05-18 | Bakiye: $100,131.44
+2026-06-02 17:35:13,042 | INFO     | strategy.voting | Bar 6132: 🚫 VETO — STRONG_SHORT reddedildi, HOLD. [Olasılık=0.3795 < Eşik=0.52]
+2026-06-02 17:35:13,044 | INFO     | strategy.voting | Bar 6133: ✅ ONAYLANDI — STRONG_SHORT [Olasılık=0.5682 >= Eşik=0.52]
+2026-06-02 17:35:13,044 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.3485 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:13,044 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4429 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:13,045 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_SHORT] @ 44.5650 | Zaman=2026-05-18 16:45:00 | Lot=3.0000 | SL=47.5650 | TP=40.9650 | Komisyon=0.03 USD | Maliyet Oranı=%1.9
+2026-06-02 17:35:13,046 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,046 | INFO     | backtest | 📅 Yeni gün: 2026-05-19 | Bakiye: $100,131.42
+2026-06-02 17:35:13,047 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,047 | INFO     | backtest | 📅 Yeni gün: 2026-05-20 | Bakiye: $100,131.42
+2026-06-02 17:35:13,049 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,049 | INFO     | backtest | 📅 Yeni gün: 2026-05-21 | Bakiye: $100,131.42
+2026-06-02 17:35:13,050 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,050 | INFO     | backtest | 📅 Yeni gün: 2026-05-22 | Bakiye: $100,131.42
+2026-06-02 17:35:13,050 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [SL] @ 47.5650 | Net PnL=-9.03 USD | Yeni Bakiye=100,122.39 USD | Zaman=2026-05-22 16:30:00
+2026-06-02 17:35:13,051 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,052 | INFO     | backtest | 📅 Yeni gün: 2026-05-26 | Bakiye: $100,122.39
+2026-06-02 17:35:13,054 | INFO     | strategy.voting | Bar 6267: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.6613 >= Eşik=0.52]
+2026-06-02 17:35:13,054 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2740 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:13,054 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4353 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:13,054 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 47.2250 | Zaman=2026-05-26 16:30:00 | Lot=3.0000 | SL=44.2250 | TP=50.8250 | Komisyon=0.03 USD | Maliyet Oranı=%1.9
+2026-06-02 17:35:13,055 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,055 | INFO     | backtest | 📅 Yeni gün: 2026-05-27 | Bakiye: $100,122.36
+2026-06-02 17:35:13,057 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,057 | INFO     | backtest | 📅 Yeni gün: 2026-05-28 | Bakiye: $100,122.36
+2026-06-02 17:35:13,057 | INFO     | risk.portfolio | 🟢 POZİSYON KAPATILDI [TP] @ 50.8250 | Net PnL=+10.77 USD | Yeni Bakiye=100,133.13 USD | Zaman=2026-05-28 19:15:00
+2026-06-02 17:35:13,059 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,059 | INFO     | backtest | 📅 Yeni gün: 2026-05-29 | Bakiye: $100,133.13
+2026-06-02 17:35:13,060 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-02 17:35:13,060 | INFO     | backtest | 📅 Yeni gün: 2026-06-01 | Bakiye: $100,133.13
+2026-06-02 17:35:13,063 | INFO     | strategy.voting | Bar 6375: ✅ ONAYLANDI — STRONG_LONG [Olasılık=0.5433 >= Eşik=0.52]
+2026-06-02 17:35:13,063 | WARNING  | risk.portfolio | ⚠️ ATR Zemin Devrede | Ham ATR=0.2903 → Efektif ATR=2.0000 (ATR_FLOOR=2.0)
+2026-06-02 17:35:13,063 | WARNING  | risk.portfolio | ⚠️ Lot Limiti Devrede | Ham Lot=83.4443 → Sınırlandırıldı=3.0000 (MAX_LOT_LIMIT=3.0)
+2026-06-02 17:35:13,063 | INFO     | risk.portfolio | ✅ POZİSYON AÇILDI [STRONG_LONG] @ 51.0950 | Zaman=2026-06-01 16:30:00 | Lot=3.0000 | SL=48.0950 | TP=54.6950 | Komisyon=0.03 USD | Maliyet Oranı=%2.0
+2026-06-02 17:35:13,064 | INFO     | risk.portfolio | 🔴 POZİSYON KAPATILDI [FORCE_CLOSE] @ 50.7900 | Net PnL=-0.95 USD | Yeni Bakiye=100,132.15 USD | Zaman=2026-06-01 23:00:00
+2026-06-02 17:35:13,064 | INFO     | backtest | 🔚 Açık pozisyon simülasyon sonunda zorla kapatıldı.
+2026-06-02 17:35:13,065 | INFO     | backtest | 
+══════════════════════════════════════════════════════════════
+  nasdaq_bot_v2  |  BACKTEST SONUÇLARI
+══════════════════════════════════════════════════════════════
+  📅  Simülasyon Süresi   : 1.9 saniye
+  📊  İşlenen Bar Sayısı  : 6,376
+
+  ── PORTFÖY ──────────────────────────────────────────────
+  💰  Başlangıç Bakiyesi  : $  100,000.00
+  💵  Bitiş Bakiyesi      : $  100,132.15
+  📈  Net PnL             : $     +132.15  (+0.13%)
+  📉  Maks. Drawdown      : $       57.92  (0.06%)
+  💸  Toplam Komisyon     : $        4.24
+
+  ── TRADE İSTATİSTİKLERİ ─────────────────────────────────
+  🔢  Toplam İşlem        : 62
+  ✅  Kazanan             : 36
+  ❌  Kaybeden            : 26
+  🎯  Win Rate            : 58.1%
+  ⚖️   Profit Factor       : 1.902
+  📐  Ort. Kazanan R      : 0.03R
+
+  ── KAPANIM SEBEPLERİ ────────────────────────────────────
+  🟢  TP Hit              : 21
+  🔴  SL Hit              : 12
+  🗓️   Weekend Flatten     : 28
+  🛡️   Guardrail Kapanışı  : 0
+
+  ── QUANT METRİKLER ──────────────────────────────────────
+  📊  Sharpe Oranı        : 1.9192
+  📏  R:R Hedefi          : 1:1.2
+  ⚠️   Günlük DD Limiti   : %4.0
+  ⚠️   Toplam DD Limiti   : %9.0
+══════════════════════════════════════════════════════════════
+2026-06-02 17:35:13,065 | INFO     | backtest | 
+  ✅ PROP FIRM EŞİKLERİ GEÇİLEBİLİR GÖRÜNÜYOR
+══════════════════════════════════════════════════════════════
+

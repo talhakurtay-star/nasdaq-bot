@@ -1,0 +1,5 @@
+2026-06-02 18:14:57,736 | INFO     | backtest | Log dosyası: C:\Users\efeke\Documents\Python\Trade Bot\V1\logs\backtest_20260602_181457.log
+2026-06-02 18:14:57,736 | INFO     | backtest | ==============================================================
+2026-06-02 18:14:57,736 | INFO     | backtest |   nasdaq_bot_v2 BACKTEST BAŞLADI
+2026-06-02 18:14:57,736 | INFO     | backtest | ==============================================================
+2026-06-02 18:14:57,737 | INFO     | backtest | 📥 Veri indiriliyor ve indikatörler hesaplanıyor...

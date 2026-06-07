@@ -1,0 +1,11 @@
+{
+  "net_pnl": 1335.885,
+  "net_pnl_pct": 1.3359,
+  "maks_drawdown_pct": -0.2685,
+  "win_rate_pct": 51.8152,
+  "sharpe": 4.6734,
+  "toplam_islem": 303,
+  "kazanan": 157,
+  "kaybeden": 146,
+  "weekend_flattens": 27
+}
