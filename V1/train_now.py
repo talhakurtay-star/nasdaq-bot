@@ -1,0 +1,199 @@
+"""
+train_now.py — MT5 olmadan cache'den eğitim çalıştırıcı.
+Çalıştır: python train_now.py
+"""
+import logging
+import os
+import sys
+import time
+
+import numpy as np
+import pandas as pd
+from sklearn.metrics import accuracy_score, classification_report, roc_auc_score
+import xgboost as xgb
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from config.settings import ATR_MULTIPLIER, MODEL_DIR, REWARD_RISK_RATIO, CACHE_DIR
+from ml.features import FeatureEngine
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)-8s | %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)],
+)
+logger = logging.getLogger("train_now")
+
+TRAIN_RATIO   = 0.80
+LOOKAHEAD     = 20
+RANDOM_STATE  = 42
+MODEL_FILES   = {"long": "xgb_model_long.json", "short": "xgb_model_short.json"}
+
+
+def load_cache() -> pd.DataFrame:
+    cache_file = os.path.join(CACHE_DIR, "cache_15m_360d.csv")
+    if not os.path.exists(cache_file):
+        raise FileNotFoundError(f"Cache bulunamadı: {cache_file}")
+    df = pd.read_csv(cache_file, index_col=0, parse_dates=True)
+    logger.info("Cache yüklendi: %d bar | %s → %s", len(df), df.index[0], df.index[-1])
+    return df
+
+
+def _first_touch_label(high_arr, low_arr, start_idx, sl_price, tp_price, direction):
+    n = len(high_arr)
+    for j in range(start_idx + 1, min(start_idx + 1 + LOOKAHEAD, n)):
+        if direction == "long":
+            sl_hit = low_arr[j] <= sl_price
+            tp_hit = high_arr[j] >= tp_price
+        else:
+            sl_hit = high_arr[j] >= sl_price
+            tp_hit = low_arr[j] <= tp_price
+        if sl_hit and tp_hit:
+            return 0.0
+        if sl_hit:
+            return 0.0
+        if tp_hit:
+            return 1.0
+    return np.nan
+
+
+def generate_labels(df: pd.DataFrame) -> pd.DataFrame:
+    labels = pd.DataFrame(index=df.index, columns=["target_long", "target_short"], dtype=float)
+    close_arr = df["Close"].values
+    high_arr  = df["High"].values
+    low_arr   = df["Low"].values
+    atr_arr   = df["ATR"].values
+
+    for i in range(len(df) - 1):
+        atr = atr_arr[i]
+        if np.isnan(atr) or atr <= 0:
+            continue
+        entry   = close_arr[i]
+        sl_dist = atr * ATR_MULTIPLIER
+        tp_dist = sl_dist * REWARD_RISK_RATIO
+
+        labels.iat[i, 0] = _first_touch_label(high_arr, low_arr, i, entry - sl_dist, entry + tp_dist, "long")
+        labels.iat[i, 1] = _first_touch_label(high_arr, low_arr, i, entry + sl_dist, entry - tp_dist, "short")
+
+    for col in labels.columns:
+        valid  = labels[col].dropna()
+        pos    = int((valid == 1).sum())
+        neg    = int((valid == 0).sum())
+        total  = pos + neg
+        logger.info("%s | toplam=%d | TP(1)=%d (%0.1f%%) | SL(0)=%d",
+                    col, total, pos, pos / total * 100 if total else 0, neg)
+    return labels
+
+
+def build_feature_matrix(df, feature_engine, valid_indices):
+    rows = []
+    skipped = 0
+    logger.info("Feature matrix oluşturuluyor (%d bar)...", len(valid_indices))
+    t0 = time.time()
+    for idx in valid_indices:
+        feat = feature_engine.generate_live_features(df, idx)
+        if feat is None or feat.empty:
+            skipped += 1
+            continue
+        rows.append(feat)
+    if not rows:
+        raise ValueError("Feature matrix boş — veri yetersiz.")
+    logger.info("Feature matrix hazır | rows=%d | skipped=%d | %.1fs",
+                len(rows), skipped, time.time() - t0)
+    return pd.concat(rows, axis=0)
+
+
+def train_model(name, X_train, y_train, X_test, y_test):
+    neg = int((y_train == 0).sum())
+    pos = int((y_train == 1).sum())
+    spw = neg / pos if pos > 0 else 1.0
+    logger.info("%s | SL(0)=%d | TP(1)=%d | scale_pos_weight=%.3f", name, neg, pos, spw)
+
+    model = xgb.XGBClassifier(
+        n_estimators=1000,
+        max_depth=5,
+        learning_rate=0.02,
+        subsample=0.80,
+        colsample_bytree=0.75,
+        colsample_bylevel=0.75,
+        min_child_weight=6,
+        gamma=0.10,
+        reg_alpha=0.10,
+        reg_lambda=1.5,
+        scale_pos_weight=spw,
+        objective="binary:logistic",
+        eval_metric="auc",
+        random_state=RANDOM_STATE,
+        n_jobs=-1,
+        early_stopping_rounds=60,
+        verbosity=1,
+    )
+    model.fit(X_train, y_train,
+              eval_set=[(X_train, y_train), (X_test, y_test)],
+              verbose=100)
+    return model
+
+
+def print_metrics(name, model, X_test, y_test):
+    proba = model.predict_proba(X_test)[:, 1]
+    pred  = (proba >= 0.5).astype(int)
+    acc   = accuracy_score(y_test, pred)
+    auc   = roc_auc_score(y_test, proba) if y_test.nunique() > 1 else 0.0
+    logger.info("\n%s | samples=%d | accuracy=%.4f | roc_auc=%.4f\n%s",
+                name, len(y_test), acc, auc,
+                classification_report(y_test, pred, labels=[0,1],
+                                      target_names=["SL(0)","TP(1)"], zero_division=0))
+    fi = pd.Series(model.feature_importances_, index=X_test.columns).sort_values(ascending=False).head(10)
+    logger.info("%s top features:", name)
+    for feat, score in fi.items():
+        logger.info("  %-30s %.4f", feat, score)
+
+
+def main():
+    logger.info("=" * 64)
+    logger.info("Eğitim başlıyor (cache tabanlı, MT5 gereksiz)")
+    logger.info("=" * 64)
+
+    feature_engine = FeatureEngine()
+    raw_df = load_cache()
+    df = feature_engine.calculate_indicators(raw_df)
+    logger.info("İndikatörler hesaplandı: %d bar x %d sütun", len(df), len(df.columns))
+
+    labels = generate_labels(df)
+    valid_mask    = labels["target_long"].notna() | labels["target_short"].notna()
+    valid_indices = [df.index.get_loc(ts) for ts in labels.index[valid_mask]]
+
+    X_all = build_feature_matrix(df, feature_engine, valid_indices)
+    X_all.replace([np.inf, -np.inf], np.nan, inplace=True)
+    X_all.dropna(axis=0, inplace=True)
+    labels = labels.loc[X_all.index]
+    logger.info("Temiz feature matrix: %d sample x %d feature", len(X_all), X_all.shape[1])
+
+    os.makedirs(MODEL_DIR, exist_ok=True)
+    target_map = {"long": "target_long", "short": "target_short"}
+
+    for side, col in target_map.items():
+        y_all      = labels[col].dropna()
+        common_idx = X_all.index.intersection(y_all.index)
+        X_side     = X_all.loc[common_idx]
+        y_side     = y_all.loc[common_idx].astype(int)
+
+        split = int(len(X_side) * TRAIN_RATIO)
+        X_train, X_test = X_side.iloc[:split], X_side.iloc[split:]
+        y_train, y_test = y_side.iloc[:split], y_side.iloc[split:]
+        logger.info("%s | train=%d | test=%d", side, len(X_train), len(X_test))
+
+        model = train_model(side, X_train, y_train, X_test, y_test)
+        print_metrics(side, model, X_test, y_test)
+
+        path = os.path.join(MODEL_DIR, MODEL_FILES[side])
+        model.save_model(path)
+        logger.info("Model kaydedildi → %s (%.1f KB)", path, os.path.getsize(path) / 1024)
+
+    logger.info("=" * 64)
+    logger.info("Eğitim tamamlandı!")
+    logger.info("=" * 64)
+
+
+if __name__ == "__main__":
+    main()
