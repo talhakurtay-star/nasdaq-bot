@@ -1,0 +1,410 @@
+2026-06-07 18:12:28,209 | INFO     | backtest | Log dosyası: /home/user/nasdaq-bot/V1/logs/backtest_20260607_181228.log
+2026-06-07 18:12:28,210 | INFO     | backtest | ==============================================================
+2026-06-07 18:12:28,210 | INFO     | backtest |   nasdaq_bot_v2 BACKTEST BAŞLADI
+2026-06-07 18:12:28,210 | INFO     | backtest | ==============================================================
+2026-06-07 18:12:28,210 | INFO     | backtest | 📥 Veri indiriliyor ve indikatörler hesaplanıyor...
+2026-06-07 18:12:28,229 | INFO     | backtest | Toplam bar: 1080 | Isınma periyodu: 210 bar | Simüle edilecek bar: 870 | Pencere: FULL
+2026-06-07 18:12:28,229 | INFO     | strategy.engine | StrategyEngine başlatıldı | EMA_FAST=9, EMA_SLOW=21, RSI_OB=80, RSI_OS=20, ADX_MIN=20.0
+2026-06-07 18:12:28,233 | INFO     | strategy.voting | STRONG_LONG XGBoost model loaded: /home/user/nasdaq-bot/V1/models/xgb_model_long.json
+2026-06-07 18:12:28,237 | INFO     | strategy.voting | STRONG_SHORT XGBoost model loaded: /home/user/nasdaq-bot/V1/models/xgb_model_short.json
+2026-06-07 18:12:28,237 | INFO     | risk.portfolio | PortfolioManager initialized | balance=100000.00 | risk/trade=0.75% | ATRx=1.50 | RR=1:3.00 | max_lot=20.00 | max_notional_leverage=20.0x
+2026-06-07 18:12:28,237 | INFO     | risk.guardrails | RiskGuardrails başlatıldı | Günlük Limit=%4.0 | Toplam Limit=%9.0 | İşlem Saatleri=13:00–23:59 UTC | Hafta Sonu Holding=YASAK
+2026-06-07 18:12:28,237 | INFO     | execution.simulator | BacktestSimulator başlatıldı.
+2026-06-07 18:12:28,237 | INFO     | backtest | 🚀 Simülasyon döngüsü başlıyor...
+2026-06-07 18:12:28,238 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,238 | INFO     | backtest | 📅 Yeni gün: 2026-04-16 | Bakiye: $100,000.00
+2026-06-07 18:12:28,245 | INFO     | strategy.voting | Bar 217: STRONG_SHORT vetoed | probability=0.1715 < threshold=0.70
+2026-06-07 18:12:28,249 | INFO     | strategy.voting | Bar 218: STRONG_SHORT vetoed | probability=0.1789 < threshold=0.70
+2026-06-07 18:12:28,254 | INFO     | strategy.voting | Bar 219: STRONG_SHORT vetoed | probability=0.1709 < threshold=0.70
+2026-06-07 18:12:28,258 | INFO     | strategy.voting | Bar 220: STRONG_SHORT vetoed | probability=0.1720 < threshold=0.70
+2026-06-07 18:12:28,262 | INFO     | strategy.voting | Bar 221: STRONG_SHORT vetoed | probability=0.1677 < threshold=0.70
+2026-06-07 18:12:28,267 | INFO     | strategy.voting | Bar 222: STRONG_SHORT vetoed | probability=0.1726 < threshold=0.70
+2026-06-07 18:12:28,271 | INFO     | strategy.voting | Bar 223: STRONG_SHORT vetoed | probability=0.1757 < threshold=0.70
+2026-06-07 18:12:28,275 | INFO     | strategy.voting | Bar 224: STRONG_SHORT vetoed | probability=0.1763 < threshold=0.70
+2026-06-07 18:12:28,280 | INFO     | strategy.voting | Bar 225: STRONG_SHORT vetoed | probability=0.1615 < threshold=0.70
+2026-06-07 18:12:28,284 | INFO     | strategy.voting | Bar 226: STRONG_SHORT vetoed | probability=0.1707 < threshold=0.70
+2026-06-07 18:12:28,291 | INFO     | strategy.voting | Bar 240: STRONG_SHORT vetoed | probability=0.1726 < threshold=0.70
+2026-06-07 18:12:28,295 | INFO     | strategy.voting | Bar 241: STRONG_SHORT vetoed | probability=0.1883 < threshold=0.70
+2026-06-07 18:12:28,295 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,295 | INFO     | backtest | 📅 Yeni gün: 2026-04-17 | Bakiye: $100,000.00
+2026-06-07 18:12:28,300 | INFO     | strategy.voting | Bar 244: STRONG_LONG vetoed | probability=0.3890 < threshold=0.70
+2026-06-07 18:12:28,305 | INFO     | strategy.voting | Bar 245: STRONG_LONG vetoed | probability=0.3645 < threshold=0.70
+2026-06-07 18:12:28,309 | INFO     | strategy.voting | Bar 246: STRONG_LONG vetoed | probability=0.3965 < threshold=0.70
+2026-06-07 18:12:28,313 | INFO     | strategy.voting | Bar 247: STRONG_LONG vetoed | probability=0.4093 < threshold=0.70
+2026-06-07 18:12:28,317 | INFO     | strategy.voting | Bar 248: STRONG_LONG vetoed | probability=0.3976 < threshold=0.70
+2026-06-07 18:12:28,321 | INFO     | strategy.voting | Bar 249: STRONG_LONG vetoed | probability=0.3677 < threshold=0.70
+2026-06-07 18:12:28,326 | INFO     | strategy.voting | Bar 250: STRONG_LONG vetoed | probability=0.3432 < threshold=0.70
+2026-06-07 18:12:28,330 | INFO     | strategy.voting | Bar 251: STRONG_LONG vetoed | probability=0.2874 < threshold=0.70
+2026-06-07 18:12:28,334 | INFO     | strategy.voting | Bar 252: STRONG_LONG vetoed | probability=0.2415 < threshold=0.70
+2026-06-07 18:12:28,339 | INFO     | strategy.voting | Bar 253: STRONG_LONG vetoed | probability=0.2356 < threshold=0.70
+2026-06-07 18:12:28,343 | INFO     | strategy.voting | Bar 254: STRONG_LONG vetoed | probability=0.1859 < threshold=0.70
+2026-06-07 18:12:28,347 | INFO     | strategy.voting | Bar 255: STRONG_LONG vetoed | probability=0.1981 < threshold=0.70
+2026-06-07 18:12:28,351 | INFO     | strategy.voting | Bar 256: STRONG_LONG vetoed | probability=0.1859 < threshold=0.70
+2026-06-07 18:12:28,354 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,354 | INFO     | backtest | 📅 Yeni gün: 2026-04-20 | Bakiye: $100,000.00
+2026-06-07 18:12:28,362 | INFO     | strategy.voting | Bar 292: STRONG_LONG vetoed | probability=0.5409 < threshold=0.70
+2026-06-07 18:12:28,366 | INFO     | strategy.voting | Bar 293: STRONG_LONG vetoed | probability=0.5016 < threshold=0.70
+2026-06-07 18:12:28,370 | INFO     | strategy.voting | Bar 294: STRONG_LONG vetoed | probability=0.4776 < threshold=0.70
+2026-06-07 18:12:28,374 | INFO     | strategy.voting | Bar 295: STRONG_LONG vetoed | probability=0.4068 < threshold=0.70
+2026-06-07 18:12:28,379 | INFO     | strategy.voting | Bar 296: STRONG_LONG vetoed | probability=0.4077 < threshold=0.70
+2026-06-07 18:12:28,379 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,379 | INFO     | backtest | 📅 Yeni gün: 2026-04-21 | Bakiye: $100,000.00
+2026-06-07 18:12:28,383 | INFO     | strategy.voting | Bar 297: STRONG_LONG vetoed | probability=0.2524 < threshold=0.70
+2026-06-07 18:12:28,388 | INFO     | strategy.voting | Bar 301: STRONG_LONG vetoed | probability=0.2643 < threshold=0.70
+2026-06-07 18:12:28,393 | INFO     | strategy.voting | Bar 302: STRONG_LONG vetoed | probability=0.2362 < threshold=0.70
+2026-06-07 18:12:28,398 | INFO     | strategy.voting | Bar 303: STRONG_LONG vetoed | probability=0.2212 < threshold=0.70
+2026-06-07 18:12:28,402 | INFO     | strategy.voting | Bar 307: STRONG_SHORT vetoed | probability=0.6006 < threshold=0.70
+2026-06-07 18:12:28,407 | INFO     | strategy.voting | Bar 308: STRONG_SHORT vetoed | probability=0.5551 < threshold=0.70
+2026-06-07 18:12:28,411 | INFO     | strategy.voting | Bar 309: STRONG_SHORT vetoed | probability=0.5071 < threshold=0.70
+2026-06-07 18:12:28,415 | INFO     | strategy.voting | Bar 310: STRONG_SHORT vetoed | probability=0.5398 < threshold=0.70
+2026-06-07 18:12:28,419 | INFO     | strategy.voting | Bar 311: STRONG_SHORT vetoed | probability=0.5672 < threshold=0.70
+2026-06-07 18:12:28,424 | INFO     | strategy.voting | Bar 312: STRONG_SHORT vetoed | probability=0.5690 < threshold=0.70
+2026-06-07 18:12:28,428 | INFO     | strategy.voting | Bar 313: STRONG_SHORT vetoed | probability=0.6276 < threshold=0.70
+2026-06-07 18:12:28,433 | INFO     | strategy.voting | Bar 314: STRONG_SHORT vetoed | probability=0.6541 < threshold=0.70
+2026-06-07 18:12:28,437 | INFO     | strategy.voting | Bar 315: STRONG_SHORT vetoed | probability=0.6249 < threshold=0.70
+2026-06-07 18:12:28,441 | INFO     | strategy.voting | Bar 316: STRONG_SHORT vetoed | probability=0.6542 < threshold=0.70
+2026-06-07 18:12:28,442 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,442 | INFO     | backtest | 📅 Yeni gün: 2026-04-22 | Bakiye: $100,000.00
+2026-06-07 18:12:28,447 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,447 | INFO     | backtest | 📅 Yeni gün: 2026-04-23 | Bakiye: $100,000.00
+2026-06-07 18:12:28,453 | INFO     | strategy.voting | Bar 362: STRONG_SHORT vetoed | probability=0.1695 < threshold=0.70
+2026-06-07 18:12:28,457 | INFO     | strategy.voting | Bar 363: STRONG_SHORT vetoed | probability=0.1738 < threshold=0.70
+2026-06-07 18:12:28,462 | INFO     | strategy.voting | Bar 364: STRONG_SHORT vetoed | probability=0.1612 < threshold=0.70
+2026-06-07 18:12:28,464 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,464 | INFO     | backtest | 📅 Yeni gün: 2026-04-24 | Bakiye: $100,000.00
+2026-06-07 18:12:28,469 | INFO     | strategy.voting | Bar 381: STRONG_LONG vetoed | probability=0.3170 < threshold=0.70
+2026-06-07 18:12:28,473 | INFO     | strategy.voting | Bar 382: STRONG_LONG vetoed | probability=0.3237 < threshold=0.70
+2026-06-07 18:12:28,477 | INFO     | strategy.voting | Bar 383: STRONG_LONG vetoed | probability=0.3079 < threshold=0.70
+2026-06-07 18:12:28,482 | INFO     | strategy.voting | Bar 384: STRONG_LONG vetoed | probability=0.3074 < threshold=0.70
+2026-06-07 18:12:28,486 | INFO     | strategy.voting | Bar 385: STRONG_LONG vetoed | probability=0.2777 < threshold=0.70
+2026-06-07 18:12:28,490 | INFO     | strategy.voting | Bar 386: STRONG_LONG vetoed | probability=0.2782 < threshold=0.70
+2026-06-07 18:12:28,494 | INFO     | strategy.voting | Bar 387: STRONG_LONG vetoed | probability=0.2719 < threshold=0.70
+2026-06-07 18:12:28,499 | INFO     | strategy.voting | Bar 388: STRONG_LONG vetoed | probability=0.2707 < threshold=0.70
+2026-06-07 18:12:28,503 | INFO     | strategy.voting | Bar 389: STRONG_LONG vetoed | probability=0.2592 < threshold=0.70
+2026-06-07 18:12:28,508 | INFO     | strategy.voting | Bar 390: STRONG_LONG vetoed | probability=0.2576 < threshold=0.70
+2026-06-07 18:12:28,512 | INFO     | strategy.voting | Bar 391: STRONG_LONG vetoed | probability=0.2573 < threshold=0.70
+2026-06-07 18:12:28,516 | INFO     | strategy.voting | Bar 392: STRONG_LONG vetoed | probability=0.2329 < threshold=0.70
+2026-06-07 18:12:28,520 | INFO     | strategy.voting | Bar 393: STRONG_LONG vetoed | probability=0.2290 < threshold=0.70
+2026-06-07 18:12:28,525 | INFO     | strategy.voting | Bar 394: STRONG_LONG vetoed | probability=0.2149 < threshold=0.70
+2026-06-07 18:12:28,529 | INFO     | strategy.voting | Bar 395: STRONG_LONG vetoed | probability=0.1972 < threshold=0.70
+2026-06-07 18:12:28,533 | INFO     | strategy.voting | Bar 396: STRONG_LONG vetoed | probability=0.2039 < threshold=0.70
+2026-06-07 18:12:28,538 | INFO     | strategy.voting | Bar 397: STRONG_LONG vetoed | probability=0.2242 < threshold=0.70
+2026-06-07 18:12:28,542 | INFO     | strategy.voting | Bar 398: STRONG_LONG vetoed | probability=0.2094 < threshold=0.70
+2026-06-07 18:12:28,543 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,543 | INFO     | backtest | 📅 Yeni gün: 2026-04-27 | Bakiye: $100,000.00
+2026-06-07 18:12:28,548 | INFO     | strategy.voting | Bar 407: STRONG_LONG vetoed | probability=0.3639 < threshold=0.70
+2026-06-07 18:12:28,552 | INFO     | strategy.voting | Bar 408: STRONG_LONG vetoed | probability=0.3420 < threshold=0.70
+2026-06-07 18:12:28,557 | INFO     | strategy.voting | Bar 409: STRONG_LONG vetoed | probability=0.3169 < threshold=0.70
+2026-06-07 18:12:28,561 | INFO     | strategy.voting | Bar 410: STRONG_LONG vetoed | probability=0.3325 < threshold=0.70
+2026-06-07 18:12:28,566 | INFO     | strategy.voting | Bar 411: STRONG_LONG vetoed | probability=0.3487 < threshold=0.70
+2026-06-07 18:12:28,570 | INFO     | strategy.voting | Bar 412: STRONG_LONG vetoed | probability=0.3546 < threshold=0.70
+2026-06-07 18:12:28,577 | INFO     | strategy.voting | Bar 428: STRONG_LONG vetoed | probability=0.4058 < threshold=0.70
+2026-06-07 18:12:28,581 | INFO     | strategy.voting | Bar 429: STRONG_LONG vetoed | probability=0.3978 < threshold=0.70
+2026-06-07 18:12:28,586 | INFO     | strategy.voting | Bar 430: STRONG_LONG vetoed | probability=0.4001 < threshold=0.70
+2026-06-07 18:12:28,590 | INFO     | strategy.voting | Bar 431: STRONG_LONG vetoed | probability=0.4118 < threshold=0.70
+2026-06-07 18:12:28,590 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,591 | INFO     | backtest | 📅 Yeni gün: 2026-04-28 | Bakiye: $100,000.00
+2026-06-07 18:12:28,595 | INFO     | strategy.voting | Bar 433: STRONG_SHORT vetoed | probability=0.5404 < threshold=0.70
+2026-06-07 18:12:28,599 | INFO     | strategy.voting | Bar 434: STRONG_SHORT vetoed | probability=0.6477 < threshold=0.70
+2026-06-07 18:12:28,603 | INFO     | strategy.voting | Bar 435: STRONG_SHORT vetoed | probability=0.5614 < threshold=0.70
+2026-06-07 18:12:28,608 | INFO     | strategy.voting | Bar 436: STRONG_SHORT vetoed | probability=0.4471 < threshold=0.70
+2026-06-07 18:12:28,612 | INFO     | strategy.voting | Bar 437: STRONG_SHORT vetoed | probability=0.5153 < threshold=0.70
+2026-06-07 18:12:28,616 | INFO     | strategy.voting | Bar 438: STRONG_SHORT vetoed | probability=0.6784 < threshold=0.70
+2026-06-07 18:12:28,620 | INFO     | strategy.voting | Bar 439: STRONG_SHORT vetoed | probability=0.5119 < threshold=0.70
+2026-06-07 18:12:28,625 | INFO     | strategy.voting | Bar 440: STRONG_SHORT vetoed | probability=0.4061 < threshold=0.70
+2026-06-07 18:12:28,629 | INFO     | strategy.voting | Bar 441: STRONG_SHORT approved | probability=0.7176 >= threshold=0.70
+2026-06-07 18:12:28,629 | WARNING  | risk.portfolio | Lot cap active | raw=1493.0337 -> final=20.0000 | cap=20.0000 | risk_target=750.00
+2026-06-07 18:12:28,629 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.4450 | lot=20.0000 | SL=53.9473 | TP=51.9380 | risk_target=750.00 | cost_ratio=4.7%
+2026-06-07 18:12:28,631 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,631 | INFO     | backtest | 📅 Yeni gün: 2026-04-29 | Bakiye: $99,999.79
+2026-06-07 18:12:28,632 | INFO     | risk.portfolio | Position closed [TP] @ 51.9380 | net_pnl=+29.93 | balance=100029.72 | time=2026-04-29 18:30:00
+2026-06-07 18:12:28,636 | INFO     | strategy.voting | Bar 471: STRONG_SHORT vetoed | probability=0.3125 < threshold=0.70
+2026-06-07 18:12:28,641 | INFO     | strategy.voting | Bar 474: STRONG_SHORT vetoed | probability=0.2027 < threshold=0.70
+2026-06-07 18:12:28,646 | INFO     | strategy.voting | Bar 475: STRONG_SHORT vetoed | probability=0.1687 < threshold=0.70
+2026-06-07 18:12:28,650 | INFO     | strategy.voting | Bar 476: STRONG_SHORT vetoed | probability=0.1680 < threshold=0.70
+2026-06-07 18:12:28,655 | INFO     | strategy.voting | Bar 478: STRONG_SHORT vetoed | probability=0.1701 < threshold=0.70
+2026-06-07 18:12:28,659 | INFO     | strategy.voting | Bar 479: STRONG_SHORT vetoed | probability=0.1677 < threshold=0.70
+2026-06-07 18:12:28,663 | INFO     | strategy.voting | Bar 480: STRONG_SHORT vetoed | probability=0.1651 < threshold=0.70
+2026-06-07 18:12:28,664 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,664 | INFO     | backtest | 📅 Yeni gün: 2026-04-30 | Bakiye: $100,029.72
+2026-06-07 18:12:28,669 | INFO     | strategy.voting | Bar 487: STRONG_LONG approved | probability=0.7621 >= threshold=0.70
+2026-06-07 18:12:28,669 | WARNING  | risk.portfolio | Lot cap active | raw=1555.5718 -> final=20.0000 | cap=20.0000 | risk_target=750.22
+2026-06-07 18:12:28,669 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.7050 | lot=20.0000 | SL=52.2227 | TP=54.1518 | risk_target=750.22 | cost_ratio=4.9%
+2026-06-07 18:12:28,669 | INFO     | risk.portfolio | Position closed [TP] @ 54.1518 | net_pnl=+28.72 | balance=100058.23 | time=2026-04-30 17:45:00
+2026-06-07 18:12:28,675 | INFO     | strategy.voting | Bar 491: STRONG_LONG approved | probability=0.7531 >= threshold=0.70
+2026-06-07 18:12:28,675 | WARNING  | risk.portfolio | Lot cap active | raw=1367.1590 -> final=20.0000 | cap=20.0000 | risk_target=750.44
+2026-06-07 18:12:28,675 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 54.0250 | lot=20.0000 | SL=53.4761 | TP=55.6717 | risk_target=750.44 | cost_ratio=4.4%
+2026-06-07 18:12:28,676 | INFO     | risk.portfolio | Position closed [TP] @ 55.6717 | net_pnl=+32.71 | balance=100090.72 | time=2026-04-30 22:00:00
+2026-06-07 18:12:28,681 | INFO     | strategy.voting | Bar 510: STRONG_LONG vetoed | probability=0.3207 < threshold=0.70
+2026-06-07 18:12:28,682 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,682 | INFO     | backtest | 📅 Yeni gün: 2026-05-01 | Bakiye: $100,090.72
+2026-06-07 18:12:28,686 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,686 | INFO     | backtest | 📅 Yeni gün: 2026-05-04 | Bakiye: $100,090.72
+2026-06-07 18:12:28,691 | INFO     | strategy.voting | Bar 546: STRONG_SHORT vetoed | probability=0.1595 < threshold=0.70
+2026-06-07 18:12:28,696 | INFO     | strategy.voting | Bar 547: STRONG_SHORT vetoed | probability=0.1603 < threshold=0.70
+2026-06-07 18:12:28,700 | INFO     | strategy.voting | Bar 548: STRONG_SHORT vetoed | probability=0.1593 < threshold=0.70
+2026-06-07 18:12:28,704 | INFO     | strategy.voting | Bar 549: STRONG_SHORT vetoed | probability=0.1583 < threshold=0.70
+2026-06-07 18:12:28,709 | INFO     | strategy.voting | Bar 550: STRONG_SHORT vetoed | probability=0.1544 < threshold=0.70
+2026-06-07 18:12:28,713 | INFO     | strategy.voting | Bar 551: STRONG_SHORT vetoed | probability=0.1490 < threshold=0.70
+2026-06-07 18:12:28,717 | INFO     | strategy.voting | Bar 552: STRONG_SHORT vetoed | probability=0.1519 < threshold=0.70
+2026-06-07 18:12:28,722 | INFO     | strategy.voting | Bar 553: STRONG_SHORT vetoed | probability=0.1516 < threshold=0.70
+2026-06-07 18:12:28,726 | INFO     | strategy.voting | Bar 554: STRONG_SHORT vetoed | probability=0.1511 < threshold=0.70
+2026-06-07 18:12:28,731 | INFO     | strategy.voting | Bar 555: STRONG_SHORT vetoed | probability=0.1610 < threshold=0.70
+2026-06-07 18:12:28,736 | INFO     | strategy.voting | Bar 561: STRONG_LONG approved | probability=0.7946 >= threshold=0.70
+2026-06-07 18:12:28,736 | WARNING  | risk.portfolio | Lot cap active | raw=1811.9428 -> final=20.0000 | cap=20.0000 | risk_target=750.68
+2026-06-07 18:12:28,736 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 54.8950 | lot=20.0000 | SL=54.4807 | TP=56.1379 | risk_target=750.68 | cost_ratio=5.8%
+2026-06-07 18:12:28,737 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,737 | INFO     | backtest | 📅 Yeni gün: 2026-05-05 | Bakiye: $100,090.50
+2026-06-07 18:12:28,737 | INFO     | risk.portfolio | Position closed [TP] @ 56.1379 | net_pnl=+24.63 | balance=100115.14 | time=2026-05-05 16:30:00
+2026-06-07 18:12:28,741 | INFO     | strategy.voting | Bar 567: STRONG_LONG vetoed | probability=0.3346 < threshold=0.70
+2026-06-07 18:12:28,745 | INFO     | strategy.voting | Bar 568: STRONG_LONG vetoed | probability=0.4574 < threshold=0.70
+2026-06-07 18:12:28,750 | INFO     | strategy.voting | Bar 569: STRONG_LONG vetoed | probability=0.2480 < threshold=0.70
+2026-06-07 18:12:28,754 | INFO     | strategy.voting | Bar 570: STRONG_LONG vetoed | probability=0.2427 < threshold=0.70
+2026-06-07 18:12:28,759 | INFO     | strategy.voting | Bar 571: STRONG_LONG vetoed | probability=0.2280 < threshold=0.70
+2026-06-07 18:12:28,763 | INFO     | strategy.voting | Bar 572: STRONG_LONG vetoed | probability=0.2397 < threshold=0.70
+2026-06-07 18:12:28,768 | INFO     | strategy.voting | Bar 573: STRONG_LONG vetoed | probability=0.2269 < threshold=0.70
+2026-06-07 18:12:28,772 | INFO     | strategy.voting | Bar 574: STRONG_LONG vetoed | probability=0.2127 < threshold=0.70
+2026-06-07 18:12:28,776 | INFO     | strategy.voting | Bar 575: STRONG_LONG vetoed | probability=0.2018 < threshold=0.70
+2026-06-07 18:12:28,781 | INFO     | strategy.voting | Bar 576: STRONG_LONG vetoed | probability=0.1961 < threshold=0.70
+2026-06-07 18:12:28,785 | INFO     | strategy.voting | Bar 577: STRONG_LONG vetoed | probability=0.1961 < threshold=0.70
+2026-06-07 18:12:28,790 | INFO     | strategy.voting | Bar 578: STRONG_LONG vetoed | probability=0.1918 < threshold=0.70
+2026-06-07 18:12:28,794 | INFO     | strategy.voting | Bar 579: STRONG_LONG vetoed | probability=0.1933 < threshold=0.70
+2026-06-07 18:12:28,799 | INFO     | strategy.voting | Bar 580: STRONG_LONG vetoed | probability=0.1907 < threshold=0.70
+2026-06-07 18:12:28,803 | INFO     | strategy.voting | Bar 581: STRONG_LONG vetoed | probability=0.1966 < threshold=0.70
+2026-06-07 18:12:28,807 | INFO     | strategy.voting | Bar 582: STRONG_LONG vetoed | probability=0.1816 < threshold=0.70
+2026-06-07 18:12:28,812 | INFO     | strategy.voting | Bar 583: STRONG_LONG vetoed | probability=0.1783 < threshold=0.70
+2026-06-07 18:12:28,816 | INFO     | strategy.voting | Bar 584: STRONG_LONG vetoed | probability=0.2009 < threshold=0.70
+2026-06-07 18:12:28,821 | INFO     | strategy.voting | Bar 585: STRONG_LONG vetoed | probability=0.2160 < threshold=0.70
+2026-06-07 18:12:28,825 | INFO     | strategy.voting | Bar 586: STRONG_LONG vetoed | probability=0.1825 < threshold=0.70
+2026-06-07 18:12:28,829 | INFO     | strategy.voting | Bar 587: STRONG_LONG vetoed | probability=0.1775 < threshold=0.70
+2026-06-07 18:12:28,834 | INFO     | strategy.voting | Bar 588: STRONG_LONG vetoed | probability=0.1812 < threshold=0.70
+2026-06-07 18:12:28,838 | INFO     | strategy.voting | Bar 589: STRONG_LONG vetoed | probability=0.1818 < threshold=0.70
+2026-06-07 18:12:28,844 | INFO     | strategy.voting | Bar 590: STRONG_LONG vetoed | probability=0.1779 < threshold=0.70
+2026-06-07 18:12:28,848 | INFO     | strategy.voting | Bar 591: STRONG_LONG vetoed | probability=0.1782 < threshold=0.70
+2026-06-07 18:12:28,852 | INFO     | strategy.voting | Bar 592: STRONG_LONG vetoed | probability=0.2164 < threshold=0.70
+2026-06-07 18:12:28,857 | INFO     | strategy.voting | Bar 593: STRONG_LONG vetoed | probability=0.2238 < threshold=0.70
+2026-06-07 18:12:28,857 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,857 | INFO     | backtest | 📅 Yeni gün: 2026-05-06 | Bakiye: $100,115.14
+2026-06-07 18:12:28,862 | INFO     | strategy.voting | Bar 595: STRONG_SHORT vetoed | probability=0.3046 < threshold=0.70
+2026-06-07 18:12:28,866 | INFO     | strategy.voting | Bar 596: STRONG_SHORT approved | probability=0.7186 >= threshold=0.70
+2026-06-07 18:12:28,867 | WARNING  | risk.portfolio | Lot cap active | raw=563.6789 -> final=20.0000 | cap=20.0000 | risk_target=750.86
+2026-06-07 18:12:28,867 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.2450 | lot=20.0000 | SL=53.5771 | TP=48.2488 | risk_target=750.86 | cost_ratio=1.8%
+2026-06-07 18:12:28,867 | INFO     | risk.portfolio | Position closed [TP] @ 48.2488 | net_pnl=+79.73 | balance=100194.66 | time=2026-05-06 18:45:00
+2026-06-07 18:12:28,872 | INFO     | strategy.voting | Bar 606: STRONG_SHORT vetoed | probability=0.1903 < threshold=0.70
+2026-06-07 18:12:28,877 | INFO     | strategy.voting | Bar 607: STRONG_SHORT vetoed | probability=0.1891 < threshold=0.70
+2026-06-07 18:12:28,881 | INFO     | strategy.voting | Bar 608: STRONG_SHORT vetoed | probability=0.1891 < threshold=0.70
+2026-06-07 18:12:28,886 | INFO     | strategy.voting | Bar 609: STRONG_SHORT vetoed | probability=0.1860 < threshold=0.70
+2026-06-07 18:12:28,890 | INFO     | strategy.voting | Bar 610: STRONG_SHORT vetoed | probability=0.1860 < threshold=0.70
+2026-06-07 18:12:28,894 | INFO     | strategy.voting | Bar 611: STRONG_SHORT vetoed | probability=0.1760 < threshold=0.70
+2026-06-07 18:12:28,899 | INFO     | strategy.voting | Bar 612: STRONG_SHORT vetoed | probability=0.1760 < threshold=0.70
+2026-06-07 18:12:28,903 | INFO     | strategy.voting | Bar 613: STRONG_SHORT vetoed | probability=0.1737 < threshold=0.70
+2026-06-07 18:12:28,905 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,905 | INFO     | backtest | 📅 Yeni gün: 2026-05-07 | Bakiye: $100,194.66
+2026-06-07 18:12:28,910 | INFO     | strategy.voting | Bar 630: STRONG_LONG vetoed | probability=0.2194 < threshold=0.70
+2026-06-07 18:12:28,915 | INFO     | strategy.voting | Bar 631: STRONG_LONG vetoed | probability=0.2135 < threshold=0.70
+2026-06-07 18:12:28,919 | INFO     | strategy.voting | Bar 632: STRONG_LONG vetoed | probability=0.1921 < threshold=0.70
+2026-06-07 18:12:28,923 | INFO     | strategy.voting | Bar 633: STRONG_LONG vetoed | probability=0.1826 < threshold=0.70
+2026-06-07 18:12:28,928 | INFO     | strategy.voting | Bar 634: STRONG_LONG vetoed | probability=0.1871 < threshold=0.70
+2026-06-07 18:12:28,932 | INFO     | strategy.voting | Bar 635: STRONG_LONG vetoed | probability=0.1889 < threshold=0.70
+2026-06-07 18:12:28,936 | INFO     | strategy.voting | Bar 636: STRONG_LONG vetoed | probability=0.1708 < threshold=0.70
+2026-06-07 18:12:28,941 | INFO     | strategy.voting | Bar 637: STRONG_LONG vetoed | probability=0.1696 < threshold=0.70
+2026-06-07 18:12:28,943 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:28,943 | INFO     | backtest | 📅 Yeni gün: 2026-05-08 | Bakiye: $100,194.66
+2026-06-07 18:12:28,948 | INFO     | strategy.voting | Bar 652: STRONG_SHORT vetoed | probability=0.1627 < threshold=0.70
+2026-06-07 18:12:28,952 | INFO     | strategy.voting | Bar 653: STRONG_SHORT vetoed | probability=0.1645 < threshold=0.70
+2026-06-07 18:12:28,956 | INFO     | strategy.voting | Bar 654: STRONG_SHORT vetoed | probability=0.1648 < threshold=0.70
+2026-06-07 18:12:28,961 | INFO     | strategy.voting | Bar 655: STRONG_SHORT vetoed | probability=0.1746 < threshold=0.70
+2026-06-07 18:12:28,965 | INFO     | strategy.voting | Bar 656: STRONG_SHORT vetoed | probability=0.1626 < threshold=0.70
+2026-06-07 18:12:28,969 | INFO     | strategy.voting | Bar 657: STRONG_SHORT vetoed | probability=0.1609 < threshold=0.70
+2026-06-07 18:12:28,973 | INFO     | strategy.voting | Bar 658: STRONG_SHORT vetoed | probability=0.1491 < threshold=0.70
+2026-06-07 18:12:28,978 | INFO     | strategy.voting | Bar 659: STRONG_SHORT vetoed | probability=0.2079 < threshold=0.70
+2026-06-07 18:12:28,982 | INFO     | strategy.voting | Bar 662: STRONG_LONG vetoed | probability=0.1618 < threshold=0.70
+2026-06-07 18:12:28,989 | INFO     | strategy.voting | Bar 671: STRONG_SHORT vetoed | probability=0.1539 < threshold=0.70
+2026-06-07 18:12:28,994 | INFO     | strategy.voting | Bar 672: STRONG_SHORT vetoed | probability=0.1600 < threshold=0.70
+2026-06-07 18:12:28,998 | INFO     | strategy.voting | Bar 673: STRONG_SHORT vetoed | probability=0.1604 < threshold=0.70
+2026-06-07 18:12:29,002 | INFO     | strategy.voting | Bar 674: STRONG_SHORT vetoed | probability=0.1505 < threshold=0.70
+2026-06-07 18:12:29,003 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,003 | INFO     | backtest | 📅 Yeni gün: 2026-05-11 | Bakiye: $100,194.66
+2026-06-07 18:12:29,007 | INFO     | strategy.voting | Bar 675: STRONG_SHORT vetoed | probability=0.1459 < threshold=0.70
+2026-06-07 18:12:29,011 | INFO     | strategy.voting | Bar 676: STRONG_SHORT vetoed | probability=0.1688 < threshold=0.70
+2026-06-07 18:12:29,016 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,016 | INFO     | backtest | 📅 Yeni gün: 2026-05-12 | Bakiye: $100,194.66
+2026-06-07 18:12:29,023 | INFO     | strategy.voting | Bar 720: STRONG_SHORT approved | probability=0.8106 >= threshold=0.70
+2026-06-07 18:12:29,023 | WARNING  | risk.portfolio | Lot cap active | raw=1346.0890 -> final=20.0000 | cap=20.0000 | risk_target=751.46
+2026-06-07 18:12:29,023 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 47.3650 | lot=20.0000 | SL=47.9233 | TP=45.6902 | risk_target=751.46 | cost_ratio=4.1%
+2026-06-07 18:12:29,024 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,024 | INFO     | backtest | 📅 Yeni gün: 2026-05-13 | Bakiye: $100,194.47
+2026-06-07 18:12:29,024 | INFO     | risk.portfolio | Position closed [TP] @ 45.6902 | net_pnl=+33.31 | balance=100227.78 | time=2026-05-13 16:45:00
+2026-06-07 18:12:29,028 | INFO     | strategy.voting | Bar 730: STRONG_SHORT vetoed | probability=0.2461 < threshold=0.70
+2026-06-07 18:12:29,033 | INFO     | strategy.voting | Bar 731: STRONG_SHORT vetoed | probability=0.2998 < threshold=0.70
+2026-06-07 18:12:29,038 | INFO     | strategy.voting | Bar 732: STRONG_SHORT vetoed | probability=0.2634 < threshold=0.70
+2026-06-07 18:12:29,042 | INFO     | strategy.voting | Bar 733: STRONG_SHORT vetoed | probability=0.2700 < threshold=0.70
+2026-06-07 18:12:29,048 | INFO     | strategy.voting | Bar 738: STRONG_SHORT vetoed | probability=0.1660 < threshold=0.70
+2026-06-07 18:12:29,052 | INFO     | strategy.voting | Bar 739: STRONG_SHORT vetoed | probability=0.1539 < threshold=0.70
+2026-06-07 18:12:29,056 | INFO     | strategy.voting | Bar 740: STRONG_SHORT vetoed | probability=0.1526 < threshold=0.70
+2026-06-07 18:12:29,061 | INFO     | strategy.voting | Bar 741: STRONG_SHORT vetoed | probability=0.1515 < threshold=0.70
+2026-06-07 18:12:29,065 | INFO     | strategy.voting | Bar 742: STRONG_SHORT vetoed | probability=0.1526 < threshold=0.70
+2026-06-07 18:12:29,070 | INFO     | strategy.voting | Bar 743: STRONG_SHORT vetoed | probability=0.1489 < threshold=0.70
+2026-06-07 18:12:29,075 | INFO     | strategy.voting | Bar 745: STRONG_SHORT vetoed | probability=0.1489 < threshold=0.70
+2026-06-07 18:12:29,079 | INFO     | strategy.voting | Bar 746: STRONG_SHORT vetoed | probability=0.1489 < threshold=0.70
+2026-06-07 18:12:29,081 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,082 | INFO     | backtest | 📅 Yeni gün: 2026-05-14 | Bakiye: $100,227.78
+2026-06-07 18:12:29,087 | INFO     | strategy.voting | Bar 760: STRONG_LONG vetoed | probability=0.1901 < threshold=0.70
+2026-06-07 18:12:29,092 | INFO     | strategy.voting | Bar 761: STRONG_LONG vetoed | probability=0.1823 < threshold=0.70
+2026-06-07 18:12:29,096 | INFO     | strategy.voting | Bar 762: STRONG_LONG vetoed | probability=0.1709 < threshold=0.70
+2026-06-07 18:12:29,101 | INFO     | strategy.voting | Bar 763: STRONG_LONG vetoed | probability=0.1722 < threshold=0.70
+2026-06-07 18:12:29,105 | INFO     | strategy.voting | Bar 764: STRONG_LONG vetoed | probability=0.1911 < threshold=0.70
+2026-06-07 18:12:29,110 | INFO     | strategy.voting | Bar 765: STRONG_LONG vetoed | probability=0.1714 < threshold=0.70
+2026-06-07 18:12:29,114 | INFO     | strategy.voting | Bar 766: STRONG_LONG vetoed | probability=0.1792 < threshold=0.70
+2026-06-07 18:12:29,119 | INFO     | strategy.voting | Bar 767: STRONG_LONG vetoed | probability=0.1741 < threshold=0.70
+2026-06-07 18:12:29,124 | INFO     | strategy.voting | Bar 768: STRONG_LONG vetoed | probability=0.1605 < threshold=0.70
+2026-06-07 18:12:29,128 | INFO     | strategy.voting | Bar 769: STRONG_LONG vetoed | probability=0.1611 < threshold=0.70
+2026-06-07 18:12:29,133 | INFO     | strategy.voting | Bar 771: STRONG_SHORT vetoed | probability=0.1646 < threshold=0.70
+2026-06-07 18:12:29,137 | INFO     | strategy.voting | Bar 772: STRONG_SHORT vetoed | probability=0.1763 < threshold=0.70
+2026-06-07 18:12:29,141 | INFO     | strategy.voting | Bar 773: STRONG_SHORT vetoed | probability=0.1752 < threshold=0.70
+2026-06-07 18:12:29,146 | INFO     | strategy.voting | Bar 774: STRONG_SHORT vetoed | probability=0.1716 < threshold=0.70
+2026-06-07 18:12:29,150 | INFO     | strategy.voting | Bar 775: STRONG_SHORT vetoed | probability=0.1762 < threshold=0.70
+2026-06-07 18:12:29,155 | INFO     | strategy.voting | Bar 776: STRONG_SHORT vetoed | probability=0.1712 < threshold=0.70
+2026-06-07 18:12:29,160 | INFO     | strategy.voting | Bar 777: STRONG_SHORT vetoed | probability=0.1794 < threshold=0.70
+2026-06-07 18:12:29,161 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,161 | INFO     | backtest | 📅 Yeni gün: 2026-05-15 | Bakiye: $100,227.78
+2026-06-07 18:12:29,168 | INFO     | strategy.voting | Bar 803: STRONG_SHORT vetoed | probability=0.1538 < threshold=0.70
+2026-06-07 18:12:29,172 | INFO     | strategy.voting | Bar 804: STRONG_SHORT vetoed | probability=0.1549 < threshold=0.70
+2026-06-07 18:12:29,177 | INFO     | strategy.voting | Bar 805: STRONG_SHORT vetoed | probability=0.1557 < threshold=0.70
+2026-06-07 18:12:29,181 | INFO     | strategy.voting | Bar 806: STRONG_SHORT vetoed | probability=0.1557 < threshold=0.70
+2026-06-07 18:12:29,186 | INFO     | strategy.voting | Bar 807: STRONG_SHORT vetoed | probability=0.1557 < threshold=0.70
+2026-06-07 18:12:29,190 | INFO     | strategy.voting | Bar 808: STRONG_SHORT vetoed | probability=0.1557 < threshold=0.70
+2026-06-07 18:12:29,195 | INFO     | strategy.voting | Bar 809: STRONG_SHORT vetoed | probability=0.1546 < threshold=0.70
+2026-06-07 18:12:29,195 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,195 | INFO     | backtest | 📅 Yeni gün: 2026-05-18 | Bakiye: $100,227.78
+2026-06-07 18:12:29,199 | INFO     | strategy.voting | Bar 810: STRONG_SHORT vetoed | probability=0.1667 < threshold=0.70
+2026-06-07 18:12:29,204 | INFO     | strategy.voting | Bar 814: STRONG_LONG vetoed | probability=0.6834 < threshold=0.70
+2026-06-07 18:12:29,209 | INFO     | strategy.voting | Bar 815: STRONG_LONG vetoed | probability=0.3030 < threshold=0.70
+2026-06-07 18:12:29,213 | INFO     | strategy.voting | Bar 816: STRONG_LONG vetoed | probability=0.6970 < threshold=0.70
+2026-06-07 18:12:29,218 | INFO     | strategy.voting | Bar 817: STRONG_LONG approved | probability=0.7407 >= threshold=0.70
+2026-06-07 18:12:29,218 | WARNING  | risk.portfolio | Lot cap active | raw=1223.6100 -> final=20.0000 | cap=20.0000 | risk_target=751.71
+2026-06-07 18:12:29,218 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 44.3650 | lot=20.0000 | SL=43.7507 | TP=46.2080 | risk_target=751.71 | cost_ratio=3.7%
+2026-06-07 18:12:29,220 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,220 | INFO     | backtest | 📅 Yeni gün: 2026-05-19 | Bakiye: $100,227.61
+2026-06-07 18:12:29,220 | INFO     | risk.portfolio | Position closed [TP] @ 46.2080 | net_pnl=+36.68 | balance=100264.28 | time=2026-05-19 16:30:00
+2026-06-07 18:12:29,225 | INFO     | strategy.voting | Bar 838: STRONG_LONG vetoed | probability=0.2723 < threshold=0.70
+2026-06-07 18:12:29,229 | INFO     | strategy.voting | Bar 839: STRONG_LONG vetoed | probability=0.2333 < threshold=0.70
+2026-06-07 18:12:29,233 | INFO     | strategy.voting | Bar 840: STRONG_LONG vetoed | probability=0.2260 < threshold=0.70
+2026-06-07 18:12:29,238 | INFO     | strategy.voting | Bar 841: STRONG_LONG vetoed | probability=0.2190 < threshold=0.70
+2026-06-07 18:12:29,242 | INFO     | strategy.voting | Bar 842: STRONG_LONG vetoed | probability=0.2054 < threshold=0.70
+2026-06-07 18:12:29,247 | INFO     | strategy.voting | Bar 843: STRONG_LONG vetoed | probability=0.1999 < threshold=0.70
+2026-06-07 18:12:29,251 | INFO     | strategy.voting | Bar 844: STRONG_LONG vetoed | probability=0.1931 < threshold=0.70
+2026-06-07 18:12:29,255 | INFO     | strategy.voting | Bar 845: STRONG_LONG vetoed | probability=0.1847 < threshold=0.70
+2026-06-07 18:12:29,260 | INFO     | strategy.voting | Bar 846: STRONG_LONG vetoed | probability=0.1787 < threshold=0.70
+2026-06-07 18:12:29,264 | INFO     | strategy.voting | Bar 847: STRONG_LONG vetoed | probability=0.1634 < threshold=0.70
+2026-06-07 18:12:29,267 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,267 | INFO     | backtest | 📅 Yeni gün: 2026-05-20 | Bakiye: $100,264.28
+2026-06-07 18:12:29,271 | INFO     | strategy.voting | Bar 864: STRONG_SHORT vetoed | probability=0.2090 < threshold=0.70
+2026-06-07 18:12:29,276 | INFO     | strategy.voting | Bar 865: STRONG_SHORT vetoed | probability=0.1918 < threshold=0.70
+2026-06-07 18:12:29,280 | INFO     | strategy.voting | Bar 866: STRONG_SHORT vetoed | probability=0.2267 < threshold=0.70
+2026-06-07 18:12:29,285 | INFO     | strategy.voting | Bar 867: STRONG_SHORT vetoed | probability=0.2288 < threshold=0.70
+2026-06-07 18:12:29,289 | INFO     | strategy.voting | Bar 868: STRONG_SHORT vetoed | probability=0.2209 < threshold=0.70
+2026-06-07 18:12:29,293 | INFO     | strategy.voting | Bar 869: STRONG_SHORT vetoed | probability=0.2218 < threshold=0.70
+2026-06-07 18:12:29,298 | INFO     | strategy.voting | Bar 870: STRONG_SHORT vetoed | probability=0.2184 < threshold=0.70
+2026-06-07 18:12:29,302 | INFO     | strategy.voting | Bar 871: STRONG_SHORT vetoed | probability=0.2184 < threshold=0.70
+2026-06-07 18:12:29,307 | INFO     | strategy.voting | Bar 872: STRONG_LONG vetoed | probability=0.1617 < threshold=0.70
+2026-06-07 18:12:29,311 | INFO     | strategy.voting | Bar 873: STRONG_LONG vetoed | probability=0.1620 < threshold=0.70
+2026-06-07 18:12:29,315 | INFO     | strategy.voting | Bar 874: STRONG_LONG vetoed | probability=0.1640 < threshold=0.70
+2026-06-07 18:12:29,320 | INFO     | strategy.voting | Bar 875: STRONG_LONG vetoed | probability=0.1635 < threshold=0.70
+2026-06-07 18:12:29,326 | INFO     | strategy.voting | Bar 887: STRONG_LONG vetoed | probability=0.2165 < threshold=0.70
+2026-06-07 18:12:29,330 | INFO     | strategy.voting | Bar 888: STRONG_LONG vetoed | probability=0.2416 < threshold=0.70
+2026-06-07 18:12:29,334 | INFO     | strategy.voting | Bar 889: STRONG_LONG vetoed | probability=0.2739 < threshold=0.70
+2026-06-07 18:12:29,339 | INFO     | strategy.voting | Bar 890: STRONG_LONG vetoed | probability=0.2542 < threshold=0.70
+2026-06-07 18:12:29,339 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,339 | INFO     | backtest | 📅 Yeni gün: 2026-05-21 | Bakiye: $100,264.28
+2026-06-07 18:12:29,344 | INFO     | strategy.voting | Bar 896: STRONG_LONG vetoed | probability=0.1711 < threshold=0.70
+2026-06-07 18:12:29,348 | INFO     | strategy.voting | Bar 897: STRONG_LONG vetoed | probability=0.1731 < threshold=0.70
+2026-06-07 18:12:29,355 | INFO     | strategy.voting | Bar 912: STRONG_LONG vetoed | probability=0.1879 < threshold=0.70
+2026-06-07 18:12:29,359 | INFO     | strategy.voting | Bar 913: STRONG_LONG vetoed | probability=0.1973 < threshold=0.70
+2026-06-07 18:12:29,363 | INFO     | strategy.voting | Bar 914: STRONG_LONG vetoed | probability=0.2033 < threshold=0.70
+2026-06-07 18:12:29,368 | INFO     | strategy.voting | Bar 915: STRONG_LONG vetoed | probability=0.2270 < threshold=0.70
+2026-06-07 18:12:29,372 | INFO     | strategy.voting | Bar 916: STRONG_LONG vetoed | probability=0.2216 < threshold=0.70
+2026-06-07 18:12:29,372 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,373 | INFO     | backtest | 📅 Yeni gün: 2026-05-22 | Bakiye: $100,264.28
+2026-06-07 18:12:29,377 | INFO     | strategy.voting | Bar 918: STRONG_LONG vetoed | probability=0.1998 < threshold=0.70
+2026-06-07 18:12:29,381 | INFO     | strategy.voting | Bar 919: STRONG_LONG vetoed | probability=0.1963 < threshold=0.70
+2026-06-07 18:12:29,385 | INFO     | strategy.voting | Bar 920: STRONG_LONG vetoed | probability=0.1906 < threshold=0.70
+2026-06-07 18:12:29,391 | INFO     | strategy.voting | Bar 929: STRONG_LONG vetoed | probability=0.2419 < threshold=0.70
+2026-06-07 18:12:29,395 | INFO     | strategy.voting | Bar 930: STRONG_LONG vetoed | probability=0.2428 < threshold=0.70
+2026-06-07 18:12:29,401 | INFO     | strategy.voting | Bar 931: STRONG_LONG vetoed | probability=0.2274 < threshold=0.70
+2026-06-07 18:12:29,405 | INFO     | strategy.voting | Bar 932: STRONG_LONG vetoed | probability=0.2277 < threshold=0.70
+2026-06-07 18:12:29,409 | INFO     | strategy.voting | Bar 933: STRONG_LONG vetoed | probability=0.2380 < threshold=0.70
+2026-06-07 18:12:29,413 | INFO     | strategy.voting | Bar 934: STRONG_LONG vetoed | probability=0.2349 < threshold=0.70
+2026-06-07 18:12:29,418 | INFO     | strategy.voting | Bar 935: STRONG_LONG vetoed | probability=0.2343 < threshold=0.70
+2026-06-07 18:12:29,422 | INFO     | strategy.voting | Bar 936: STRONG_LONG vetoed | probability=0.2385 < threshold=0.70
+2026-06-07 18:12:29,426 | INFO     | strategy.voting | Bar 937: STRONG_LONG vetoed | probability=0.2368 < threshold=0.70
+2026-06-07 18:12:29,428 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,428 | INFO     | backtest | 📅 Yeni gün: 2026-05-26 | Bakiye: $100,264.28
+2026-06-07 18:12:29,433 | INFO     | strategy.voting | Bar 950: STRONG_LONG vetoed | probability=0.1845 < threshold=0.70
+2026-06-07 18:12:29,436 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,436 | INFO     | backtest | 📅 Yeni gün: 2026-05-27 | Bakiye: $100,264.28
+2026-06-07 18:12:29,442 | INFO     | strategy.voting | Bar 975: STRONG_LONG vetoed | probability=0.2016 < threshold=0.70
+2026-06-07 18:12:29,446 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,446 | INFO     | backtest | 📅 Yeni gün: 2026-05-28 | Bakiye: $100,264.28
+2026-06-07 18:12:29,451 | INFO     | strategy.voting | Bar 1002: STRONG_LONG vetoed | probability=0.2709 < threshold=0.70
+2026-06-07 18:12:29,455 | INFO     | strategy.voting | Bar 1003: STRONG_LONG vetoed | probability=0.2566 < threshold=0.70
+2026-06-07 18:12:29,459 | INFO     | strategy.voting | Bar 1004: STRONG_LONG vetoed | probability=0.2422 < threshold=0.70
+2026-06-07 18:12:29,465 | INFO     | strategy.voting | Bar 1016: STRONG_LONG vetoed | probability=0.4059 < threshold=0.70
+2026-06-07 18:12:29,467 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,467 | INFO     | backtest | 📅 Yeni gün: 2026-05-29 | Bakiye: $100,264.28
+2026-06-07 18:12:29,472 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-07 18:12:29,472 | INFO     | backtest | 📅 Yeni gün: 2026-06-01 | Bakiye: $100,264.28
+2026-06-07 18:12:29,477 | INFO     | strategy.voting | Bar 1054: STRONG_SHORT vetoed | probability=0.1650 < threshold=0.70
+2026-06-07 18:12:29,482 | INFO     | strategy.voting | Bar 1055: STRONG_SHORT vetoed | probability=0.1604 < threshold=0.70
+2026-06-07 18:12:29,486 | INFO     | strategy.voting | Bar 1056: STRONG_SHORT vetoed | probability=0.1517 < threshold=0.70
+2026-06-07 18:12:29,490 | INFO     | strategy.voting | Bar 1057: STRONG_SHORT vetoed | probability=0.1545 < threshold=0.70
+2026-06-07 18:12:29,494 | INFO     | strategy.voting | Bar 1058: STRONG_SHORT vetoed | probability=0.1545 < threshold=0.70
+2026-06-07 18:12:29,499 | INFO     | strategy.voting | Bar 1059: STRONG_SHORT vetoed | probability=0.1526 < threshold=0.70
+2026-06-07 18:12:29,503 | INFO     | strategy.voting | Bar 1060: STRONG_SHORT vetoed | probability=0.1519 < threshold=0.70
+2026-06-07 18:12:29,508 | INFO     | strategy.voting | Bar 1061: STRONG_SHORT vetoed | probability=0.1586 < threshold=0.70
+2026-06-07 18:12:29,512 | INFO     | strategy.voting | Bar 1062: STRONG_SHORT vetoed | probability=0.1533 < threshold=0.70
+2026-06-07 18:12:29,516 | INFO     | strategy.voting | Bar 1063: STRONG_LONG approved | probability=0.7039 >= threshold=0.70
+2026-06-07 18:12:29,517 | WARNING  | risk.portfolio | Lot cap active | raw=1585.5314 -> final=20.0000 | cap=20.0000 | risk_target=751.98
+2026-06-07 18:12:29,517 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 51.5450 | lot=20.0000 | SL=51.0707 | TP=52.9678 | risk_target=751.98 | cost_ratio=5.0%
+2026-06-07 18:12:29,518 | INFO     | risk.portfolio | Position closed [SL] @ 51.0707 | net_pnl=-9.69 | balance=100254.38 | time=2026-06-01 21:45:00
+2026-06-07 18:12:29,522 | INFO     | strategy.voting | Bar 1077: STRONG_SHORT vetoed | probability=0.1845 < threshold=0.70
+2026-06-07 18:12:29,527 | INFO     | strategy.voting | Bar 1078: STRONG_SHORT vetoed | probability=0.1877 < threshold=0.70
+2026-06-07 18:12:29,531 | INFO     | strategy.voting | Bar 1079: STRONG_SHORT vetoed | probability=0.1802 < threshold=0.70
+2026-06-07 18:12:29,531 | INFO     | backtest | 
+══════════════════════════════════════════════════════════════
+  nasdaq_bot_v2  |  BACKTEST SONUÇLARI
+══════════════════════════════════════════════════════════════
+  📅  Simülasyon Süresi   : 1.3 saniye
+  📊  İşlenen Bar Sayısı  : 870
+
+  ── PORTFÖY ──────────────────────────────────────────────
+  💰  Başlangıç Bakiyesi  : $  100,000.00
+  💵  Bitiş Bakiyesi      : $  100,254.38
+  📈  Net PnL             : $     +254.38  (+0.25%)
+  📉  Maks. Drawdown      : $       88.01  (0.09%)
+  💸  Toplam Komisyon     : $        3.28
+
+  ── TRADE İSTATİSTİKLERİ ─────────────────────────────────
+  🔢  Toplam İşlem        : 8
+  ✅  Kazanan             : 7
+  ❌  Kaybeden            : 1
+  🎯  Win Rate            : 87.5%
+  ⚖️   Profit Factor       : 27.422
+  📐  Ort. Kazanan R      : 0.05R
+
+  ── KAPANIM SEBEPLERİ ────────────────────────────────────
+  🟢  TP Hit              : 7
+  🔴  SL Hit              : 1
+  🗓️   Weekend Flatten     : 0
+  🛡️   Guardrail Kapanışı  : 0
+
+  ── QUANT METRİKLER ──────────────────────────────────────
+  📊  Sharpe Oranı        : 5.7656
+  📏  R:R Hedefi          : 1:3
+  ⚠️   Günlük DD Limiti   : %4.0
+  ⚠️   Toplam DD Limiti   : %9.0
+══════════════════════════════════════════════════════════════
+2026-06-07 18:12:29,531 | INFO     | backtest | 
+  ✅ PROP FIRM EŞİKLERİ GEÇİLEBİLİR GÖRÜNÜYOR
+══════════════════════════════════════════════════════════════
+

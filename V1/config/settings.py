@@ -32,10 +32,10 @@ SPY_SYMBOL = os.getenv("STRESS_SPY_SYMBOL", "SPY")    # Korelasyon referansı (S
 WATCHLIST = [SYMBOL, SPY_SYMBOL, VIX_SYMBOL]
 
 # TIMEFRAME: Grafik periyodu ("15m", "1h", "5m")
-TIMEFRAME = os.getenv("STRESS_TIMEFRAME", "15m")
+TIMEFRAME = "15m"
 
 # BACKTEST_DAYS: Geriye dönük çekilecek veri gün sayısı
-BACKTEST_DAYS = int(os.getenv("STRESS_BACKTEST_DAYS", "360"))
+BACKTEST_DAYS = 360
 
 # ── Teknik İndikatör Parametreleri ───────────────────────────────────────────
 EMA_FAST = int(os.getenv("STRESS_EMA_FAST", "9"))
@@ -49,11 +49,11 @@ RSI_OVERSOLD = int(os.getenv("STRESS_RSI_OS", "20"))
 
 # ── XGBoost Olasılık Eşiği (Veto Mekanizması) ────────────────────────────────
 # Modelin güven skoru bu eşiğin altındaysa işlem VETO edilir.
-XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THR", "0.54"))
+XGB_PROBABILITY_THRESHOLD = 0.54
 
 # ── Portföy ve Sermaye Ayarları ──────────────────────────────────────────────
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
-REWARD_RISK_RATIO = float(os.getenv("STRESS_RR_RATIO", "1.8"))
+REWARD_RISK_RATIO = 1.8
 ATR_MULTIPLIER = float(os.getenv("STRESS_ATR_MULT", "1.5"))     # Stop Loss için ATR katsayısı
 
 # ── Risk Yönetimi ve Prop Firm Limitleri ──────────────────────────────────────
