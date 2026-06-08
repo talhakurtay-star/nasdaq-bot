@@ -25,7 +25,7 @@ logging.basicConfig(
 logger = logging.getLogger("train_now")
 
 TRAIN_RATIO   = 0.80
-LOOKAHEAD     = 20
+LOOKAHEAD     = 25
 RANDOM_STATE  = 42
 MODEL_FILES   = {"long": "xgb_model_long.json", "short": "xgb_model_short.json"}
 
@@ -103,33 +103,33 @@ def build_feature_matrix(df, feature_engine, valid_indices):
     return pd.concat(rows, axis=0)
 
 
-def train_model(name, X_train, y_train, X_test, y_test):
+def train_model(name, X_train, y_train, X_val, y_val):
     neg = int((y_train == 0).sum())
     pos = int((y_train == 1).sum())
     spw = neg / pos if pos > 0 else 1.0
     logger.info("%s | SL(0)=%d | TP(1)=%d | scale_pos_weight=%.3f", name, neg, pos, spw)
 
     model = xgb.XGBClassifier(
-        n_estimators=1000,
-        max_depth=5,
-        learning_rate=0.02,
-        subsample=0.80,
-        colsample_bytree=0.75,
-        colsample_bylevel=0.75,
-        min_child_weight=6,
-        gamma=0.10,
-        reg_alpha=0.10,
-        reg_lambda=1.5,
+        n_estimators=500,
+        max_depth=3,
+        learning_rate=0.03,
+        subsample=0.70,
+        colsample_bytree=0.70,
+        colsample_bylevel=0.70,
+        min_child_weight=20,
+        gamma=0.5,
+        reg_alpha=0.5,
+        reg_lambda=3.0,
         scale_pos_weight=spw,
         objective="binary:logistic",
         eval_metric="auc",
         random_state=RANDOM_STATE,
         n_jobs=-1,
-        early_stopping_rounds=60,
+        early_stopping_rounds=50,
         verbosity=1,
     )
     model.fit(X_train, y_train,
-              eval_set=[(X_train, y_train), (X_test, y_test)],
+              eval_set=[(X_val, y_val)],
               verbose=100)
     return model
 
@@ -178,13 +178,15 @@ def main():
         X_side     = X_all.loc[common_idx]
         y_side     = y_all.loc[common_idx].astype(int)
 
-        split = int(len(X_side) * TRAIN_RATIO)
-        X_train, X_test = X_side.iloc[:split], X_side.iloc[split:]
-        y_train, y_test = y_side.iloc[:split], y_side.iloc[split:]
-        logger.info("%s | train=%d | test=%d", side, len(X_train), len(X_test))
+        n = len(X_side)
+        t, v = int(n * 0.70), int(n * 0.85)
+        X_train, y_train = X_side.iloc[:t],  y_side.iloc[:t]
+        X_val,   y_val   = X_side.iloc[t:v], y_side.iloc[t:v]
+        X_test,  y_test  = X_side.iloc[v:],  y_side.iloc[v:]
+        logger.info("%s | train=%d | val=%d | test=%d", side, len(X_train), len(X_val), len(X_test))
 
-        model = train_model(side, X_train, y_train, X_test, y_test)
-        print_metrics(side, model, X_test, y_test)
+        model = train_model(side, X_train, y_train, X_val, y_val)
+        print_metrics(side, model, X_test, y_test)  # test hiç görülmemiş veri
 
         path = os.path.join(MODEL_DIR, MODEL_FILES[side])
         model.save_model(path)

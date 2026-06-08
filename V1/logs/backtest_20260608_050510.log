@@ -1,0 +1,653 @@
+2026-06-08 05:05:10,465 | INFO     | backtest | Log dosyası: /home/user/nasdaq-bot/V1/logs/backtest_20260608_050510.log
+2026-06-08 05:05:10,466 | INFO     | backtest | ==============================================================
+2026-06-08 05:05:10,466 | INFO     | backtest |   nasdaq_bot_v2 BACKTEST BAŞLADI
+2026-06-08 05:05:10,466 | INFO     | backtest | ==============================================================
+2026-06-08 05:05:10,466 | INFO     | backtest | 📥 Veri indiriliyor ve indikatörler hesaplanıyor...
+2026-06-08 05:05:10,510 | INFO     | backtest | Toplam bar: 6402 | Isınma periyodu: 210 bar | Simüle edilecek bar: 6192 | Pencere: FULL
+2026-06-08 05:05:10,510 | INFO     | strategy.engine | StrategyEngine | EMA 9/21 | ADX>28 | AlignBars 2-12 | RSI L[42-68] S[32-58]
+2026-06-08 05:05:10,515 | INFO     | strategy.voting | STRONG_LONG XGBoost model loaded: /home/user/nasdaq-bot/V1/models/xgb_model_long.json
+2026-06-08 05:05:10,518 | INFO     | strategy.voting | STRONG_SHORT XGBoost model loaded: /home/user/nasdaq-bot/V1/models/xgb_model_short.json
+2026-06-08 05:05:10,518 | INFO     | risk.portfolio | PortfolioManager initialized | balance=100000.00 | risk/trade=0.75% | ATRx=1.50 | RR=1:1.80 | max_lot=20.00 | max_notional_leverage=20.0x
+2026-06-08 05:05:10,519 | INFO     | risk.guardrails | RiskGuardrails başlatıldı | Günlük Limit=%4.0 | Toplam Limit=%9.0 | İşlem Saatleri=13:00–23:59 UTC | Hafta Sonu Holding=YASAK
+2026-06-08 05:05:10,519 | INFO     | execution.simulator | BacktestSimulator başlatıldı.
+2026-06-08 05:05:10,519 | INFO     | backtest | 🚀 Simülasyon döngüsü başlıyor...
+2026-06-08 05:05:10,521 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,521 | INFO     | backtest | 📅 Yeni gün: 2025-06-20 | Bakiye: $100,000.00
+2026-06-08 05:05:10,531 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,531 | INFO     | backtest | 📅 Yeni gün: 2025-06-23 | Bakiye: $100,000.00
+2026-06-08 05:05:10,541 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,541 | INFO     | backtest | 📅 Yeni gün: 2025-06-24 | Bakiye: $100,000.00
+2026-06-08 05:05:10,554 | INFO     | strategy.voting | Bar 275: STRONG_LONG vetoed | probability=0.4709 < threshold=0.52
+2026-06-08 05:05:10,563 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,563 | INFO     | backtest | 📅 Yeni gün: 2025-06-25 | Bakiye: $100,000.00
+2026-06-08 05:05:10,573 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,573 | INFO     | backtest | 📅 Yeni gün: 2025-06-26 | Bakiye: $100,000.00
+2026-06-08 05:05:10,582 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,582 | INFO     | backtest | 📅 Yeni gün: 2025-06-27 | Bakiye: $100,000.00
+2026-06-08 05:05:10,593 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,593 | INFO     | backtest | 📅 Yeni gün: 2025-06-30 | Bakiye: $100,000.00
+2026-06-08 05:05:10,601 | INFO     | strategy.voting | Bar 386: STRONG_SHORT vetoed | probability=0.4910 < threshold=0.52
+2026-06-08 05:05:10,608 | INFO     | strategy.voting | Bar 387: STRONG_SHORT vetoed | probability=0.4900 < threshold=0.52
+2026-06-08 05:05:10,613 | INFO     | strategy.voting | Bar 388: STRONG_SHORT vetoed | probability=0.4942 < threshold=0.52
+2026-06-08 05:05:10,619 | INFO     | strategy.voting | Bar 389: STRONG_SHORT vetoed | probability=0.4948 < threshold=0.52
+2026-06-08 05:05:10,626 | INFO     | strategy.voting | Bar 390: STRONG_SHORT vetoed | probability=0.4885 < threshold=0.52
+2026-06-08 05:05:10,631 | INFO     | strategy.voting | Bar 391: STRONG_SHORT vetoed | probability=0.4889 < threshold=0.52
+2026-06-08 05:05:10,663 | INFO     | strategy.voting | Bar 392: STRONG_SHORT vetoed | probability=0.4887 < threshold=0.52
+2026-06-08 05:05:10,669 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,669 | INFO     | backtest | 📅 Yeni gün: 2025-07-01 | Bakiye: $100,000.00
+2026-06-08 05:05:10,678 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,678 | INFO     | backtest | 📅 Yeni gün: 2025-07-02 | Bakiye: $100,000.00
+2026-06-08 05:05:10,688 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,688 | INFO     | backtest | 📅 Yeni gün: 2025-07-03 | Bakiye: $100,000.00
+2026-06-08 05:05:10,694 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,694 | INFO     | backtest | 📅 Yeni gün: 2025-07-07 | Bakiye: $100,000.00
+2026-06-08 05:05:10,701 | INFO     | strategy.voting | Bar 479: STRONG_SHORT vetoed | probability=0.4899 < threshold=0.52
+2026-06-08 05:05:10,709 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,709 | INFO     | backtest | 📅 Yeni gün: 2025-07-08 | Bakiye: $100,000.00
+2026-06-08 05:05:10,719 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,719 | INFO     | backtest | 📅 Yeni gün: 2025-07-09 | Bakiye: $100,000.00
+2026-06-08 05:05:10,729 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,729 | INFO     | backtest | 📅 Yeni gün: 2025-07-10 | Bakiye: $100,000.00
+2026-06-08 05:05:10,738 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,738 | INFO     | backtest | 📅 Yeni gün: 2025-07-11 | Bakiye: $100,000.00
+2026-06-08 05:05:10,744 | INFO     | strategy.voting | Bar 583: STRONG_SHORT approved | probability=0.5379 >= threshold=0.52
+2026-06-08 05:05:10,744 | WARNING  | risk.portfolio | Lot cap active | raw=1483.8831 -> final=20.0000 | cap=20.0000 | risk_target=750.00
+2026-06-08 05:05:10,745 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.7450 | lot=20.0000 | SL=54.2504 | TP=52.8352 | risk_target=750.00 | cost_ratio=7.8%
+2026-06-08 05:05:10,745 | INFO     | risk.portfolio | Position closed [SL] @ 54.2504 | net_pnl=-10.33 | balance=99989.46 | time=2025-07-11 17:30:00
+2026-06-08 05:05:10,753 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,753 | INFO     | backtest | 📅 Yeni gün: 2025-07-14 | Bakiye: $99,989.46
+2026-06-08 05:05:10,763 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,763 | INFO     | backtest | 📅 Yeni gün: 2025-07-15 | Bakiye: $99,989.46
+2026-06-08 05:05:10,773 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,773 | INFO     | backtest | 📅 Yeni gün: 2025-07-16 | Bakiye: $99,989.46
+2026-06-08 05:05:10,783 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,783 | INFO     | backtest | 📅 Yeni gün: 2025-07-17 | Bakiye: $99,989.46
+2026-06-08 05:05:10,791 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,791 | INFO     | backtest | 📅 Yeni gün: 2025-07-18 | Bakiye: $99,989.46
+2026-06-08 05:05:10,801 | INFO     | strategy.voting | Bar 725: STRONG_SHORT approved | probability=0.5501 >= threshold=0.52
+2026-06-08 05:05:10,801 | WARNING  | risk.portfolio | Lot cap active | raw=1734.7149 -> final=20.0000 | cap=20.0000 | risk_target=749.92
+2026-06-08 05:05:10,801 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.2250 | lot=20.0000 | SL=52.6573 | TP=51.4469 | risk_target=749.92 | cost_ratio=9.1%
+2026-06-08 05:05:10,802 | INFO     | risk.portfolio | Position closed [SL] @ 52.6573 | net_pnl=-8.86 | balance=99980.39 | time=2025-07-18 18:45:00
+2026-06-08 05:05:10,809 | INFO     | strategy.voting | Bar 728: STRONG_SHORT approved | probability=0.5721 >= threshold=0.52
+2026-06-08 05:05:10,809 | WARNING  | risk.portfolio | Lot cap active | raw=1613.5382 -> final=20.0000 | cap=20.0000 | risk_target=749.85
+2026-06-08 05:05:10,809 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.0750 | lot=20.0000 | SL=52.5397 | TP=51.2385 | risk_target=749.85 | cost_ratio=8.4%
+2026-06-08 05:05:10,811 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 05:05:10,811 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 52.0200 | net_pnl=+0.89 | balance=99981.08 | time=2025-07-18 23:00:00
+2026-06-08 05:05:10,812 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 52.0200 | PnL=+0.89 USD
+2026-06-08 05:05:10,812 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,812 | INFO     | backtest | 📅 Yeni gün: 2025-07-21 | Bakiye: $99,981.08
+2026-06-08 05:05:10,821 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,821 | INFO     | backtest | 📅 Yeni gün: 2025-07-22 | Bakiye: $99,981.08
+2026-06-08 05:05:10,830 | INFO     | strategy.voting | Bar 773: STRONG_LONG vetoed | probability=0.4940 < threshold=0.52
+2026-06-08 05:05:10,838 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,838 | INFO     | backtest | 📅 Yeni gün: 2025-07-23 | Bakiye: $99,981.08
+2026-06-08 05:05:10,848 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,848 | INFO     | backtest | 📅 Yeni gün: 2025-07-24 | Bakiye: $99,981.08
+2026-06-08 05:05:10,858 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,858 | INFO     | backtest | 📅 Yeni gün: 2025-07-25 | Bakiye: $99,981.08
+2026-06-08 05:05:10,868 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,868 | INFO     | backtest | 📅 Yeni gün: 2025-07-28 | Bakiye: $99,981.08
+2026-06-08 05:05:10,879 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,879 | INFO     | backtest | 📅 Yeni gün: 2025-07-29 | Bakiye: $99,981.08
+2026-06-08 05:05:10,890 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,890 | INFO     | backtest | 📅 Yeni gün: 2025-07-30 | Bakiye: $99,981.08
+2026-06-08 05:05:10,900 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,900 | INFO     | backtest | 📅 Yeni gün: 2025-07-31 | Bakiye: $99,981.08
+2026-06-08 05:05:10,909 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,909 | INFO     | backtest | 📅 Yeni gün: 2025-08-01 | Bakiye: $99,981.08
+2026-06-08 05:05:10,919 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,919 | INFO     | backtest | 📅 Yeni gün: 2025-08-13 | Bakiye: $99,981.08
+2026-06-08 05:05:10,929 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,929 | INFO     | backtest | 📅 Yeni gün: 2025-08-14 | Bakiye: $99,981.08
+2026-06-08 05:05:10,937 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,937 | INFO     | backtest | 📅 Yeni gün: 2025-08-15 | Bakiye: $99,981.08
+2026-06-08 05:05:10,948 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,948 | INFO     | backtest | 📅 Yeni gün: 2025-08-18 | Bakiye: $99,981.08
+2026-06-08 05:05:10,957 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,957 | INFO     | backtest | 📅 Yeni gün: 2025-08-19 | Bakiye: $99,981.08
+2026-06-08 05:05:10,967 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,967 | INFO     | backtest | 📅 Yeni gün: 2025-08-20 | Bakiye: $99,981.08
+2026-06-08 05:05:10,975 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,975 | INFO     | backtest | 📅 Yeni gün: 2025-08-21 | Bakiye: $99,981.08
+2026-06-08 05:05:10,984 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,985 | INFO     | backtest | 📅 Yeni gün: 2025-08-22 | Bakiye: $99,981.08
+2026-06-08 05:05:10,995 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:10,996 | INFO     | backtest | 📅 Yeni gün: 2025-08-25 | Bakiye: $99,981.08
+2026-06-08 05:05:11,003 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,003 | INFO     | backtest | 📅 Yeni gün: 2025-08-26 | Bakiye: $99,981.08
+2026-06-08 05:05:11,012 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,012 | INFO     | backtest | 📅 Yeni gün: 2025-08-27 | Bakiye: $99,981.08
+2026-06-08 05:05:11,022 | INFO     | strategy.voting | Bar 1291: STRONG_SHORT vetoed | probability=0.5110 < threshold=0.52
+2026-06-08 05:05:11,029 | INFO     | strategy.voting | Bar 1292: STRONG_SHORT approved | probability=0.5223 >= threshold=0.52
+2026-06-08 05:05:11,029 | WARNING  | risk.portfolio | Lot cap active | raw=1832.0324 -> final=20.0000 | cap=20.0000 | risk_target=749.86
+2026-06-08 05:05:11,029 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 56.2150 | lot=20.0000 | SL=56.6243 | TP=55.4783 | risk_target=749.86 | cost_ratio=9.8%
+2026-06-08 05:05:11,030 | INFO     | risk.portfolio | Position closed [SL] @ 56.6243 | net_pnl=-8.41 | balance=99972.44 | time=2025-08-27 19:45:00
+2026-06-08 05:05:11,034 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,034 | INFO     | backtest | 📅 Yeni gün: 2025-08-28 | Bakiye: $99,972.44
+2026-06-08 05:05:11,042 | INFO     | strategy.voting | Bar 1313: STRONG_SHORT approved | probability=0.5811 >= threshold=0.52
+2026-06-08 05:05:11,042 | WARNING  | risk.portfolio | Lot cap active | raw=1926.4820 -> final=20.0000 | cap=20.0000 | risk_target=749.79
+2026-06-08 05:05:11,042 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 56.1850 | lot=20.0000 | SL=56.5742 | TP=55.4844 | risk_target=749.79 | cost_ratio=10.3%
+2026-06-08 05:05:11,043 | INFO     | risk.portfolio | Position closed [TP] @ 55.4844 | net_pnl=+13.79 | balance=99986.00 | time=2025-08-28 17:30:00
+2026-06-08 05:05:11,051 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,051 | INFO     | backtest | 📅 Yeni gün: 2025-08-29 | Bakiye: $99,986.00
+2026-06-08 05:05:11,061 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,061 | INFO     | backtest | 📅 Yeni gün: 2025-09-02 | Bakiye: $99,986.00
+2026-06-08 05:05:11,070 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,070 | INFO     | backtest | 📅 Yeni gün: 2025-09-03 | Bakiye: $99,986.00
+2026-06-08 05:05:11,079 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,079 | INFO     | backtest | 📅 Yeni gün: 2025-09-04 | Bakiye: $99,986.00
+2026-06-08 05:05:11,087 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,087 | INFO     | backtest | 📅 Yeni gün: 2025-09-05 | Bakiye: $99,986.00
+2026-06-08 05:05:11,095 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,095 | INFO     | backtest | 📅 Yeni gün: 2025-09-08 | Bakiye: $99,986.00
+2026-06-08 05:05:11,102 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,102 | INFO     | backtest | 📅 Yeni gün: 2025-09-09 | Bakiye: $99,986.00
+2026-06-08 05:05:11,112 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,112 | INFO     | backtest | 📅 Yeni gün: 2025-09-10 | Bakiye: $99,986.00
+2026-06-08 05:05:11,124 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,124 | INFO     | backtest | 📅 Yeni gün: 2025-09-11 | Bakiye: $99,986.00
+2026-06-08 05:05:11,137 | INFO     | strategy.voting | Bar 1570: STRONG_LONG vetoed | probability=0.5010 < threshold=0.52
+2026-06-08 05:05:11,143 | INFO     | strategy.voting | Bar 1572: STRONG_LONG vetoed | probability=0.5019 < threshold=0.52
+2026-06-08 05:05:11,145 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,145 | INFO     | backtest | 📅 Yeni gün: 2025-09-12 | Bakiye: $99,986.00
+2026-06-08 05:05:11,153 | INFO     | strategy.voting | Bar 1584: STRONG_SHORT vetoed | probability=0.4580 < threshold=0.52
+2026-06-08 05:05:11,159 | INFO     | strategy.voting | Bar 1585: STRONG_SHORT vetoed | probability=0.4098 < threshold=0.52
+2026-06-08 05:05:11,168 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,169 | INFO     | backtest | 📅 Yeni gün: 2025-09-15 | Bakiye: $99,986.00
+2026-06-08 05:05:11,181 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,181 | INFO     | backtest | 📅 Yeni gün: 2025-09-16 | Bakiye: $99,986.00
+2026-06-08 05:05:11,198 | INFO     | strategy.voting | Bar 1657: STRONG_LONG vetoed | probability=0.4049 < threshold=0.52
+2026-06-08 05:05:11,205 | INFO     | strategy.voting | Bar 1658: STRONG_LONG vetoed | probability=0.4892 < threshold=0.52
+2026-06-08 05:05:11,214 | INFO     | strategy.voting | Bar 1660: STRONG_LONG vetoed | probability=0.4884 < threshold=0.52
+2026-06-08 05:05:11,219 | INFO     | strategy.voting | Bar 1661: STRONG_LONG vetoed | probability=0.4861 < threshold=0.52
+2026-06-08 05:05:11,219 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,219 | INFO     | backtest | 📅 Yeni gün: 2025-09-17 | Bakiye: $99,986.00
+2026-06-08 05:05:11,233 | INFO     | strategy.voting | Bar 1685: STRONG_SHORT vetoed | probability=0.4359 < threshold=0.52
+2026-06-08 05:05:11,234 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,235 | INFO     | backtest | 📅 Yeni gün: 2025-09-18 | Bakiye: $99,986.00
+2026-06-08 05:05:11,242 | INFO     | strategy.voting | Bar 1695: STRONG_LONG vetoed | probability=0.4555 < threshold=0.52
+2026-06-08 05:05:11,253 | INFO     | strategy.voting | Bar 1701: STRONG_LONG vetoed | probability=0.4856 < threshold=0.52
+2026-06-08 05:05:11,257 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,257 | INFO     | backtest | 📅 Yeni gün: 2025-09-19 | Bakiye: $99,986.00
+2026-06-08 05:05:11,263 | INFO     | strategy.voting | Bar 1720: STRONG_SHORT vetoed | probability=0.4779 < threshold=0.52
+2026-06-08 05:05:11,268 | INFO     | strategy.voting | Bar 1721: STRONG_SHORT vetoed | probability=0.4881 < threshold=0.52
+2026-06-08 05:05:11,276 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,276 | INFO     | backtest | 📅 Yeni gün: 2025-09-22 | Bakiye: $99,986.00
+2026-06-08 05:05:11,284 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,284 | INFO     | backtest | 📅 Yeni gün: 2025-09-23 | Bakiye: $99,986.00
+2026-06-08 05:05:11,293 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,294 | INFO     | backtest | 📅 Yeni gün: 2025-09-24 | Bakiye: $99,986.00
+2026-06-08 05:05:11,303 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,303 | INFO     | backtest | 📅 Yeni gün: 2025-09-25 | Bakiye: $99,986.00
+2026-06-08 05:05:11,312 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,312 | INFO     | backtest | 📅 Yeni gün: 2025-09-26 | Bakiye: $99,986.00
+2026-06-08 05:05:11,319 | INFO     | strategy.voting | Bar 1853: STRONG_LONG vetoed | probability=0.3926 < threshold=0.52
+2026-06-08 05:05:11,327 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,327 | INFO     | backtest | 📅 Yeni gün: 2025-09-29 | Bakiye: $99,986.00
+2026-06-08 05:05:11,337 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,337 | INFO     | backtest | 📅 Yeni gün: 2025-09-30 | Bakiye: $99,986.00
+2026-06-08 05:05:11,346 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,346 | INFO     | backtest | 📅 Yeni gün: 2025-10-01 | Bakiye: $99,986.00
+2026-06-08 05:05:11,355 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,355 | INFO     | backtest | 📅 Yeni gün: 2025-10-02 | Bakiye: $99,986.00
+2026-06-08 05:05:11,365 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,365 | INFO     | backtest | 📅 Yeni gün: 2025-10-03 | Bakiye: $99,986.00
+2026-06-08 05:05:11,373 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,373 | INFO     | backtest | 📅 Yeni gün: 2025-10-06 | Bakiye: $99,986.00
+2026-06-08 05:05:11,380 | INFO     | strategy.voting | Bar 2015: STRONG_SHORT vetoed | probability=0.4837 < threshold=0.52
+2026-06-08 05:05:11,387 | INFO     | strategy.voting | Bar 2016: STRONG_SHORT vetoed | probability=0.4637 < threshold=0.52
+2026-06-08 05:05:11,394 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,394 | INFO     | backtest | 📅 Yeni gün: 2025-10-07 | Bakiye: $99,986.00
+2026-06-08 05:05:11,403 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,403 | INFO     | backtest | 📅 Yeni gün: 2025-10-08 | Bakiye: $99,986.00
+2026-06-08 05:05:11,410 | INFO     | strategy.voting | Bar 2071: STRONG_LONG vetoed | probability=0.4697 < threshold=0.52
+2026-06-08 05:05:11,418 | INFO     | strategy.voting | Bar 2081: STRONG_LONG vetoed | probability=0.4868 < threshold=0.52
+2026-06-08 05:05:11,421 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,421 | INFO     | backtest | 📅 Yeni gün: 2025-10-09 | Bakiye: $99,986.00
+2026-06-08 05:05:11,431 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,431 | INFO     | backtest | 📅 Yeni gün: 2025-10-10 | Bakiye: $99,986.00
+2026-06-08 05:05:11,439 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,439 | INFO     | backtest | 📅 Yeni gün: 2025-10-13 | Bakiye: $99,986.00
+2026-06-08 05:05:11,448 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,448 | INFO     | backtest | 📅 Yeni gün: 2025-10-14 | Bakiye: $99,986.00
+2026-06-08 05:05:11,458 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,458 | INFO     | backtest | 📅 Yeni gün: 2025-10-15 | Bakiye: $99,986.00
+2026-06-08 05:05:11,466 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,466 | INFO     | backtest | 📅 Yeni gün: 2025-10-16 | Bakiye: $99,986.00
+2026-06-08 05:05:11,476 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,476 | INFO     | backtest | 📅 Yeni gün: 2025-10-17 | Bakiye: $99,986.00
+2026-06-08 05:05:11,486 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,486 | INFO     | backtest | 📅 Yeni gün: 2025-10-20 | Bakiye: $99,986.00
+2026-06-08 05:05:11,495 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,495 | INFO     | backtest | 📅 Yeni gün: 2025-10-21 | Bakiye: $99,986.00
+2026-06-08 05:05:11,504 | INFO     | strategy.voting | Bar 2311: STRONG_LONG approved | probability=0.5515 >= threshold=0.52
+2026-06-08 05:05:11,504 | WARNING  | risk.portfolio | Lot cap active | raw=1308.6629 -> final=20.0000 | cap=20.0000 | risk_target=749.90
+2026-06-08 05:05:11,505 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 63.2550 | lot=20.0000 | SL=62.6820 | TP=64.2864 | risk_target=749.89 | cost_ratio=7.3%
+2026-06-08 05:05:11,505 | INFO     | risk.portfolio | Position closed [TP] @ 64.2864 | net_pnl=+20.37 | balance=100006.12 | time=2025-10-21 18:00:00
+2026-06-08 05:05:11,512 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,513 | INFO     | backtest | 📅 Yeni gün: 2025-10-22 | Bakiye: $100,006.12
+2026-06-08 05:05:11,521 | INFO     | strategy.voting | Bar 2340: STRONG_SHORT vetoed | probability=0.4138 < threshold=0.52
+2026-06-08 05:05:11,527 | INFO     | strategy.voting | Bar 2342: STRONG_SHORT vetoed | probability=0.4233 < threshold=0.52
+2026-06-08 05:05:11,533 | INFO     | strategy.voting | Bar 2346: STRONG_SHORT vetoed | probability=0.4941 < threshold=0.52
+2026-06-08 05:05:11,538 | INFO     | strategy.voting | Bar 2347: STRONG_SHORT vetoed | probability=0.5024 < threshold=0.52
+2026-06-08 05:05:11,542 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,542 | INFO     | backtest | 📅 Yeni gün: 2025-10-23 | Bakiye: $100,006.12
+2026-06-08 05:05:11,549 | INFO     | strategy.voting | Bar 2370: STRONG_LONG vetoed | probability=0.4866 < threshold=0.52
+2026-06-08 05:05:11,554 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,554 | INFO     | backtest | 📅 Yeni gün: 2025-10-24 | Bakiye: $100,006.12
+2026-06-08 05:05:11,565 | INFO     | strategy.voting | Bar 2412: STRONG_SHORT approved | probability=0.5824 >= threshold=0.52
+2026-06-08 05:05:11,566 | WARNING  | risk.portfolio | Lot cap active | raw=1950.8848 -> final=20.0000 | cap=20.0000 | risk_target=750.05
+2026-06-08 05:05:11,566 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 65.9850 | lot=20.0000 | SL=66.3695 | TP=65.2930 | risk_target=750.04 | cost_ratio=11.0%
+2026-06-08 05:05:11,566 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 05:05:11,566 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 65.9000 | net_pnl=+1.44 | balance=100007.30 | time=2025-10-24 23:00:00
+2026-06-08 05:05:11,567 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 65.9000 | PnL=+1.44 USD
+2026-06-08 05:05:11,567 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,567 | INFO     | backtest | 📅 Yeni gün: 2025-10-27 | Bakiye: $100,007.30
+2026-06-08 05:05:11,576 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,576 | INFO     | backtest | 📅 Yeni gün: 2025-10-28 | Bakiye: $100,007.30
+2026-06-08 05:05:11,584 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,584 | INFO     | backtest | 📅 Yeni gün: 2025-10-29 | Bakiye: $100,007.30
+2026-06-08 05:05:11,593 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,593 | INFO     | backtest | 📅 Yeni gün: 2025-10-30 | Bakiye: $100,007.30
+2026-06-08 05:05:11,600 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,600 | INFO     | backtest | 📅 Yeni gün: 2025-10-31 | Bakiye: $100,007.30
+2026-06-08 05:05:11,609 | INFO     | strategy.voting | Bar 2528: STRONG_LONG vetoed | probability=0.4252 < threshold=0.52
+2026-06-08 05:05:11,616 | INFO     | strategy.voting | Bar 2529: STRONG_LONG vetoed | probability=0.4140 < threshold=0.52
+2026-06-08 05:05:11,621 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,621 | INFO     | backtest | 📅 Yeni gün: 2025-11-03 | Bakiye: $100,007.30
+2026-06-08 05:05:11,628 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,628 | INFO     | backtest | 📅 Yeni gün: 2025-11-04 | Bakiye: $100,007.30
+2026-06-08 05:05:11,635 | INFO     | strategy.voting | Bar 2584: STRONG_LONG vetoed | probability=0.4803 < threshold=0.52
+2026-06-08 05:05:11,640 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,640 | INFO     | backtest | 📅 Yeni gün: 2025-11-05 | Bakiye: $100,007.30
+2026-06-08 05:05:11,653 | INFO     | strategy.voting | Bar 2626: STRONG_LONG vetoed | probability=0.5126 < threshold=0.52
+2026-06-08 05:05:11,655 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,655 | INFO     | backtest | 📅 Yeni gün: 2025-11-06 | Bakiye: $100,007.30
+2026-06-08 05:05:11,660 | INFO     | strategy.voting | Bar 2633: STRONG_SHORT vetoed | probability=0.4462 < threshold=0.52
+2026-06-08 05:05:11,665 | INFO     | strategy.voting | Bar 2634: STRONG_SHORT vetoed | probability=0.4197 < threshold=0.52
+2026-06-08 05:05:11,670 | INFO     | strategy.voting | Bar 2635: STRONG_SHORT vetoed | probability=0.3994 < threshold=0.52
+2026-06-08 05:05:11,675 | INFO     | strategy.voting | Bar 2636: STRONG_SHORT vetoed | probability=0.3607 < threshold=0.52
+2026-06-08 05:05:11,682 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,682 | INFO     | backtest | 📅 Yeni gün: 2025-11-07 | Bakiye: $100,007.30
+2026-06-08 05:05:11,688 | INFO     | strategy.voting | Bar 2662: STRONG_SHORT vetoed | probability=0.4311 < threshold=0.52
+2026-06-08 05:05:11,694 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,694 | INFO     | backtest | 📅 Yeni gün: 2025-11-10 | Bakiye: $100,007.30
+2026-06-08 05:05:11,701 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,701 | INFO     | backtest | 📅 Yeni gün: 2025-11-11 | Bakiye: $100,007.30
+2026-06-08 05:05:11,709 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,709 | INFO     | backtest | 📅 Yeni gün: 2025-11-12 | Bakiye: $100,007.30
+2026-06-08 05:05:11,717 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,717 | INFO     | backtest | 📅 Yeni gün: 2025-11-13 | Bakiye: $100,007.30
+2026-06-08 05:05:11,725 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,725 | INFO     | backtest | 📅 Yeni gün: 2025-11-14 | Bakiye: $100,007.30
+2026-06-08 05:05:11,732 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,732 | INFO     | backtest | 📅 Yeni gün: 2025-11-17 | Bakiye: $100,007.30
+2026-06-08 05:05:11,739 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,739 | INFO     | backtest | 📅 Yeni gün: 2025-11-18 | Bakiye: $100,007.30
+2026-06-08 05:05:11,746 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,746 | INFO     | backtest | 📅 Yeni gün: 2025-11-19 | Bakiye: $100,007.30
+2026-06-08 05:05:11,753 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,753 | INFO     | backtest | 📅 Yeni gün: 2025-11-20 | Bakiye: $100,007.30
+2026-06-08 05:05:11,761 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,761 | INFO     | backtest | 📅 Yeni gün: 2025-11-21 | Bakiye: $100,007.30
+2026-06-08 05:05:11,769 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,769 | INFO     | backtest | 📅 Yeni gün: 2025-11-24 | Bakiye: $100,007.30
+2026-06-08 05:05:11,775 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,775 | INFO     | backtest | 📅 Yeni gün: 2025-11-25 | Bakiye: $100,007.30
+2026-06-08 05:05:11,783 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,783 | INFO     | backtest | 📅 Yeni gün: 2025-11-26 | Bakiye: $100,007.30
+2026-06-08 05:05:11,790 | INFO     | strategy.voting | Bar 3015: STRONG_SHORT vetoed | probability=0.5017 < threshold=0.52
+2026-06-08 05:05:11,795 | INFO     | strategy.voting | Bar 3016: STRONG_SHORT vetoed | probability=0.5001 < threshold=0.52
+2026-06-08 05:05:11,801 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,801 | INFO     | backtest | 📅 Yeni gün: 2025-11-28 | Bakiye: $100,007.30
+2026-06-08 05:05:11,807 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,807 | INFO     | backtest | 📅 Yeni gün: 2025-12-01 | Bakiye: $100,007.30
+2026-06-08 05:05:11,817 | INFO     | strategy.voting | Bar 3062: STRONG_SHORT approved | probability=0.5224 >= threshold=0.52
+2026-06-08 05:05:11,817 | WARNING  | risk.portfolio | Lot cap active | raw=1510.2457 -> final=20.0000 | cap=20.0000 | risk_target=750.05
+2026-06-08 05:05:11,817 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 64.3450 | lot=20.0000 | SL=64.8416 | TP=63.4510 | risk_target=750.05 | cost_ratio=8.5%
+2026-06-08 05:05:11,819 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,820 | INFO     | backtest | 📅 Yeni gün: 2025-12-02 | Bakiye: $100,007.04
+2026-06-08 05:05:11,820 | INFO     | risk.portfolio | Position closed [TP] @ 63.4510 | net_pnl=+17.63 | balance=100024.66 | time=2025-12-02 16:30:00
+2026-06-08 05:05:11,832 | INFO     | strategy.voting | Bar 3105: STRONG_SHORT vetoed | probability=0.5020 < threshold=0.52
+2026-06-08 05:05:11,832 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,832 | INFO     | backtest | 📅 Yeni gün: 2025-12-03 | Bakiye: $100,024.66
+2026-06-08 05:05:11,838 | INFO     | strategy.voting | Bar 3107: STRONG_LONG vetoed | probability=0.4661 < threshold=0.52
+2026-06-08 05:05:11,845 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,845 | INFO     | backtest | 📅 Yeni gün: 2025-12-04 | Bakiye: $100,024.66
+2026-06-08 05:05:11,853 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,853 | INFO     | backtest | 📅 Yeni gün: 2025-12-05 | Bakiye: $100,024.66
+2026-06-08 05:05:11,861 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,861 | INFO     | backtest | 📅 Yeni gün: 2025-12-08 | Bakiye: $100,024.66
+2026-06-08 05:05:11,867 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,868 | INFO     | backtest | 📅 Yeni gün: 2025-12-09 | Bakiye: $100,024.66
+2026-06-08 05:05:11,874 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,874 | INFO     | backtest | 📅 Yeni gün: 2025-12-10 | Bakiye: $100,024.66
+2026-06-08 05:05:11,883 | INFO     | strategy.voting | Bar 3250: STRONG_SHORT vetoed | probability=0.3774 < threshold=0.52
+2026-06-08 05:05:11,892 | INFO     | strategy.voting | Bar 3261: STRONG_LONG vetoed | probability=0.5138 < threshold=0.52
+2026-06-08 05:05:11,894 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,894 | INFO     | backtest | 📅 Yeni gün: 2025-12-11 | Bakiye: $100,024.66
+2026-06-08 05:05:11,902 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,902 | INFO     | backtest | 📅 Yeni gün: 2025-12-12 | Bakiye: $100,024.66
+2026-06-08 05:05:11,911 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,911 | INFO     | backtest | 📅 Yeni gün: 2025-12-15 | Bakiye: $100,024.66
+2026-06-08 05:05:11,918 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,918 | INFO     | backtest | 📅 Yeni gün: 2025-12-16 | Bakiye: $100,024.66
+2026-06-08 05:05:11,926 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,926 | INFO     | backtest | 📅 Yeni gün: 2025-12-17 | Bakiye: $100,024.66
+2026-06-08 05:05:11,933 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,933 | INFO     | backtest | 📅 Yeni gün: 2025-12-18 | Bakiye: $100,024.66
+2026-06-08 05:05:11,940 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,940 | INFO     | backtest | 📅 Yeni gün: 2025-12-19 | Bakiye: $100,024.66
+2026-06-08 05:05:11,947 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,947 | INFO     | backtest | 📅 Yeni gün: 2025-12-22 | Bakiye: $100,024.66
+2026-06-08 05:05:11,953 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,954 | INFO     | backtest | 📅 Yeni gün: 2025-12-23 | Bakiye: $100,024.66
+2026-06-08 05:05:11,960 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,960 | INFO     | backtest | 📅 Yeni gün: 2025-12-24 | Bakiye: $100,024.66
+2026-06-08 05:05:11,964 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,964 | INFO     | backtest | 📅 Yeni gün: 2025-12-26 | Bakiye: $100,024.66
+2026-06-08 05:05:11,970 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,970 | INFO     | backtest | 📅 Yeni gün: 2025-12-29 | Bakiye: $100,024.66
+2026-06-08 05:05:11,977 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,978 | INFO     | backtest | 📅 Yeni gün: 2025-12-30 | Bakiye: $100,024.66
+2026-06-08 05:05:11,984 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,984 | INFO     | backtest | 📅 Yeni gün: 2025-12-31 | Bakiye: $100,024.66
+2026-06-08 05:05:11,992 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:11,992 | INFO     | backtest | 📅 Yeni gün: 2026-01-02 | Bakiye: $100,024.66
+2026-06-08 05:05:12,001 | INFO     | strategy.voting | Bar 3641: STRONG_LONG vetoed | probability=0.4050 < threshold=0.52
+2026-06-08 05:05:12,009 | INFO     | strategy.voting | Bar 3642: STRONG_LONG vetoed | probability=0.4042 < threshold=0.52
+2026-06-08 05:05:12,013 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,013 | INFO     | backtest | 📅 Yeni gün: 2026-01-05 | Bakiye: $100,024.66
+2026-06-08 05:05:12,021 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,021 | INFO     | backtest | 📅 Yeni gün: 2026-01-06 | Bakiye: $100,024.66
+2026-06-08 05:05:12,029 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,029 | INFO     | backtest | 📅 Yeni gün: 2026-01-07 | Bakiye: $100,024.66
+2026-06-08 05:05:12,036 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,036 | INFO     | backtest | 📅 Yeni gün: 2026-01-08 | Bakiye: $100,024.66
+2026-06-08 05:05:12,043 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,044 | INFO     | backtest | 📅 Yeni gün: 2026-01-09 | Bakiye: $100,024.66
+2026-06-08 05:05:12,052 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,052 | INFO     | backtest | 📅 Yeni gün: 2026-01-12 | Bakiye: $100,024.66
+2026-06-08 05:05:12,059 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,059 | INFO     | backtest | 📅 Yeni gün: 2026-01-13 | Bakiye: $100,024.66
+2026-06-08 05:05:12,067 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,067 | INFO     | backtest | 📅 Yeni gün: 2026-01-14 | Bakiye: $100,024.66
+2026-06-08 05:05:12,074 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,074 | INFO     | backtest | 📅 Yeni gün: 2026-01-15 | Bakiye: $100,024.66
+2026-06-08 05:05:12,080 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,080 | INFO     | backtest | 📅 Yeni gün: 2026-01-16 | Bakiye: $100,024.66
+2026-06-08 05:05:12,088 | INFO     | strategy.voting | Bar 3908: STRONG_SHORT approved | probability=0.5382 >= threshold=0.52
+2026-06-08 05:05:12,088 | WARNING  | risk.portfolio | Lot cap active | raw=978.1849 -> final=20.0000 | cap=20.0000 | risk_target=750.18
+2026-06-08 05:05:12,089 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 68.5150 | lot=20.0000 | SL=69.2819 | TP=67.1346 | risk_target=750.18 | cost_ratio=5.6%
+2026-06-08 05:05:12,090 | INFO     | risk.portfolio | Position closed [SL] @ 69.2819 | net_pnl=-15.62 | balance=100008.77 | time=2026-01-16 21:00:00
+2026-06-08 05:05:12,092 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,092 | INFO     | backtest | 📅 Yeni gün: 2026-01-20 | Bakiye: $100,008.77
+2026-06-08 05:05:12,099 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,099 | INFO     | backtest | 📅 Yeni gün: 2026-01-21 | Bakiye: $100,008.77
+2026-06-08 05:05:12,108 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,108 | INFO     | backtest | 📅 Yeni gün: 2026-01-22 | Bakiye: $100,008.77
+2026-06-08 05:05:12,116 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,116 | INFO     | backtest | 📅 Yeni gün: 2026-01-23 | Bakiye: $100,008.77
+2026-06-08 05:05:12,124 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,124 | INFO     | backtest | 📅 Yeni gün: 2026-01-26 | Bakiye: $100,008.77
+2026-06-08 05:05:12,132 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,132 | INFO     | backtest | 📅 Yeni gün: 2026-01-27 | Bakiye: $100,008.77
+2026-06-08 05:05:12,141 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,141 | INFO     | backtest | 📅 Yeni gün: 2026-01-28 | Bakiye: $100,008.77
+2026-06-08 05:05:12,149 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,149 | INFO     | backtest | 📅 Yeni gün: 2026-01-29 | Bakiye: $100,008.77
+2026-06-08 05:05:12,157 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,157 | INFO     | backtest | 📅 Yeni gün: 2026-01-30 | Bakiye: $100,008.77
+2026-06-08 05:05:12,165 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,166 | INFO     | backtest | 📅 Yeni gün: 2026-02-02 | Bakiye: $100,008.77
+2026-06-08 05:05:12,173 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,173 | INFO     | backtest | 📅 Yeni gün: 2026-02-03 | Bakiye: $100,008.77
+2026-06-08 05:05:12,182 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,182 | INFO     | backtest | 📅 Yeni gün: 2026-02-04 | Bakiye: $100,008.77
+2026-06-08 05:05:12,193 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,194 | INFO     | backtest | 📅 Yeni gün: 2026-02-05 | Bakiye: $100,008.77
+2026-06-08 05:05:12,201 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,201 | INFO     | backtest | 📅 Yeni gün: 2026-02-06 | Bakiye: $100,008.77
+2026-06-08 05:05:12,219 | INFO     | strategy.voting | Bar 4301: STRONG_LONG vetoed | probability=0.4186 < threshold=0.52
+2026-06-08 05:05:12,228 | INFO     | strategy.voting | Bar 4303: STRONG_LONG vetoed | probability=0.4147 < threshold=0.52
+2026-06-08 05:05:12,231 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,231 | INFO     | backtest | 📅 Yeni gün: 2026-02-09 | Bakiye: $100,008.77
+2026-06-08 05:05:12,239 | INFO     | strategy.voting | Bar 4311: STRONG_SHORT vetoed | probability=0.4921 < threshold=0.52
+2026-06-08 05:05:12,246 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,246 | INFO     | backtest | 📅 Yeni gün: 2026-02-10 | Bakiye: $100,008.77
+2026-06-08 05:05:12,254 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,254 | INFO     | backtest | 📅 Yeni gün: 2026-02-11 | Bakiye: $100,008.77
+2026-06-08 05:05:12,263 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,263 | INFO     | backtest | 📅 Yeni gün: 2026-02-12 | Bakiye: $100,008.77
+2026-06-08 05:05:12,269 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,270 | INFO     | backtest | 📅 Yeni gün: 2026-02-13 | Bakiye: $100,008.77
+2026-06-08 05:05:12,278 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,278 | INFO     | backtest | 📅 Yeni gün: 2026-02-17 | Bakiye: $100,008.77
+2026-06-08 05:05:12,287 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,287 | INFO     | backtest | 📅 Yeni gün: 2026-02-18 | Bakiye: $100,008.77
+2026-06-08 05:05:12,294 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,294 | INFO     | backtest | 📅 Yeni gün: 2026-02-19 | Bakiye: $100,008.77
+2026-06-08 05:05:12,300 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,300 | INFO     | backtest | 📅 Yeni gün: 2026-02-20 | Bakiye: $100,008.77
+2026-06-08 05:05:12,307 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,307 | INFO     | backtest | 📅 Yeni gün: 2026-02-23 | Bakiye: $100,008.77
+2026-06-08 05:05:12,315 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,315 | INFO     | backtest | 📅 Yeni gün: 2026-02-24 | Bakiye: $100,008.77
+2026-06-08 05:05:12,323 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,323 | INFO     | backtest | 📅 Yeni gün: 2026-02-25 | Bakiye: $100,008.77
+2026-06-08 05:05:12,332 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,332 | INFO     | backtest | 📅 Yeni gün: 2026-02-26 | Bakiye: $100,008.77
+2026-06-08 05:05:12,342 | INFO     | strategy.voting | Bar 4636: STRONG_SHORT approved | probability=0.5638 >= threshold=0.52
+2026-06-08 05:05:12,342 | WARNING  | risk.portfolio | Lot cap active | raw=1501.1637 -> final=20.0000 | cap=20.0000 | risk_target=750.07
+2026-06-08 05:05:12,342 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 56.9250 | lot=20.0000 | SL=57.4247 | TP=56.0256 | risk_target=750.06 | cost_ratio=8.1%
+2026-06-08 05:05:12,342 | INFO     | risk.portfolio | Position closed [SL] @ 57.4247 | net_pnl=-10.22 | balance=99998.32 | time=2026-02-26 17:30:00
+2026-06-08 05:05:12,349 | INFO     | strategy.voting | Bar 4640: STRONG_SHORT approved | probability=0.5545 >= threshold=0.52
+2026-06-08 05:05:12,350 | WARNING  | risk.portfolio | Lot cap active | raw=1405.5991 -> final=20.0000 | cap=20.0000 | risk_target=749.99
+2026-06-08 05:05:12,350 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.0550 | lot=20.0000 | SL=57.5886 | TP=56.0946 | risk_target=749.99 | cost_ratio=7.6%
+2026-06-08 05:05:12,351 | INFO     | risk.portfolio | Position closed [TP] @ 56.0946 | net_pnl=+18.98 | balance=100017.08 | time=2026-02-26 19:30:00
+2026-06-08 05:05:12,352 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,352 | INFO     | backtest | 📅 Yeni gün: 2026-02-27 | Bakiye: $100,017.08
+2026-06-08 05:05:12,362 | INFO     | strategy.voting | Bar 4654: STRONG_LONG vetoed | probability=0.4145 < threshold=0.52
+2026-06-08 05:05:12,369 | INFO     | strategy.voting | Bar 4655: STRONG_LONG vetoed | probability=0.4145 < threshold=0.52
+2026-06-08 05:05:12,377 | INFO     | strategy.voting | Bar 4656: STRONG_LONG vetoed | probability=0.4153 < threshold=0.52
+2026-06-08 05:05:12,381 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,382 | INFO     | backtest | 📅 Yeni gün: 2026-03-02 | Bakiye: $100,017.08
+2026-06-08 05:05:12,389 | INFO     | strategy.voting | Bar 4677: STRONG_SHORT vetoed | probability=0.4518 < threshold=0.52
+2026-06-08 05:05:12,398 | INFO     | strategy.voting | Bar 4681: STRONG_SHORT vetoed | probability=0.4182 < threshold=0.52
+2026-06-08 05:05:12,405 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,405 | INFO     | backtest | 📅 Yeni gün: 2026-03-03 | Bakiye: $100,017.08
+2026-06-08 05:05:12,412 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,412 | INFO     | backtest | 📅 Yeni gün: 2026-03-04 | Bakiye: $100,017.08
+2026-06-08 05:05:12,422 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,422 | INFO     | backtest | 📅 Yeni gün: 2026-03-05 | Bakiye: $100,017.08
+2026-06-08 05:05:12,432 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,432 | INFO     | backtest | 📅 Yeni gün: 2026-03-06 | Bakiye: $100,017.08
+2026-06-08 05:05:12,440 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,440 | INFO     | backtest | 📅 Yeni gün: 2026-03-09 | Bakiye: $100,017.08
+2026-06-08 05:05:12,457 | INFO     | strategy.voting | Bar 4828: STRONG_LONG vetoed | probability=0.5064 < threshold=0.52
+2026-06-08 05:05:12,467 | INFO     | strategy.voting | Bar 4829: STRONG_LONG vetoed | probability=0.5174 < threshold=0.52
+2026-06-08 05:05:12,473 | INFO     | strategy.voting | Bar 4830: STRONG_LONG vetoed | probability=0.5174 < threshold=0.52
+2026-06-08 05:05:12,475 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,475 | INFO     | backtest | 📅 Yeni gün: 2026-03-10 | Bakiye: $100,017.08
+2026-06-08 05:05:12,485 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,485 | INFO     | backtest | 📅 Yeni gün: 2026-03-11 | Bakiye: $100,017.08
+2026-06-08 05:05:12,494 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,494 | INFO     | backtest | 📅 Yeni gün: 2026-03-12 | Bakiye: $100,017.08
+2026-06-08 05:05:12,501 | INFO     | strategy.voting | Bar 4895: STRONG_SHORT vetoed | probability=0.5162 < threshold=0.52
+2026-06-08 05:05:12,510 | INFO     | strategy.voting | Bar 4896: STRONG_SHORT vetoed | probability=0.4451 < threshold=0.52
+2026-06-08 05:05:12,519 | INFO     | strategy.voting | Bar 4897: STRONG_SHORT vetoed | probability=0.4313 < threshold=0.52
+2026-06-08 05:05:12,526 | INFO     | strategy.voting | Bar 4898: STRONG_SHORT vetoed | probability=0.4025 < threshold=0.52
+2026-06-08 05:05:12,533 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,533 | INFO     | backtest | 📅 Yeni gün: 2026-03-13 | Bakiye: $100,017.08
+2026-06-08 05:05:12,542 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,542 | INFO     | backtest | 📅 Yeni gün: 2026-03-16 | Bakiye: $100,017.08
+2026-06-08 05:05:12,549 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,549 | INFO     | backtest | 📅 Yeni gün: 2026-03-17 | Bakiye: $100,017.08
+2026-06-08 05:05:12,557 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,557 | INFO     | backtest | 📅 Yeni gün: 2026-03-18 | Bakiye: $100,017.08
+2026-06-08 05:05:12,566 | INFO     | strategy.voting | Bar 5001: STRONG_SHORT vetoed | probability=0.4129 < threshold=0.52
+2026-06-08 05:05:12,574 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,574 | INFO     | backtest | 📅 Yeni gün: 2026-03-19 | Bakiye: $100,017.08
+2026-06-08 05:05:12,583 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,583 | INFO     | backtest | 📅 Yeni gün: 2026-03-20 | Bakiye: $100,017.08
+2026-06-08 05:05:12,592 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,593 | INFO     | backtest | 📅 Yeni gün: 2026-03-23 | Bakiye: $100,017.08
+2026-06-08 05:05:12,602 | INFO     | strategy.voting | Bar 5082: STRONG_LONG vetoed | probability=0.4787 < threshold=0.52
+2026-06-08 05:05:12,613 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,613 | INFO     | backtest | 📅 Yeni gün: 2026-03-24 | Bakiye: $100,017.08
+2026-06-08 05:05:12,622 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,622 | INFO     | backtest | 📅 Yeni gün: 2026-03-25 | Bakiye: $100,017.08
+2026-06-08 05:05:12,635 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,635 | INFO     | backtest | 📅 Yeni gün: 2026-03-26 | Bakiye: $100,017.08
+2026-06-08 05:05:12,641 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,641 | INFO     | backtest | 📅 Yeni gün: 2026-03-27 | Bakiye: $100,017.08
+2026-06-08 05:05:12,652 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,652 | INFO     | backtest | 📅 Yeni gün: 2026-03-30 | Bakiye: $100,017.08
+2026-06-08 05:05:12,700 | INFO     | strategy.voting | Bar 5217: STRONG_LONG vetoed | probability=0.4581 < threshold=0.52
+2026-06-08 05:05:12,715 | INFO     | strategy.voting | Bar 5218: STRONG_LONG vetoed | probability=0.4581 < threshold=0.52
+2026-06-08 05:05:12,723 | INFO     | strategy.voting | Bar 5219: STRONG_LONG vetoed | probability=0.4567 < threshold=0.52
+2026-06-08 05:05:12,731 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,731 | INFO     | backtest | 📅 Yeni gün: 2026-03-31 | Bakiye: $100,017.08
+2026-06-08 05:05:12,741 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,741 | INFO     | backtest | 📅 Yeni gün: 2026-04-01 | Bakiye: $100,017.08
+2026-06-08 05:05:12,752 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,752 | INFO     | backtest | 📅 Yeni gün: 2026-04-02 | Bakiye: $100,017.08
+2026-06-08 05:05:12,761 | INFO     | strategy.voting | Bar 5297: STRONG_SHORT approved | probability=0.5464 >= threshold=0.52
+2026-06-08 05:05:12,761 | WARNING  | risk.portfolio | Lot cap active | raw=1242.3608 -> final=20.0000 | cap=20.0000 | risk_target=750.13
+2026-06-08 05:05:12,761 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.8950 | lot=20.0000 | SL=53.4988 | TP=51.8082 | risk_target=750.13 | cost_ratio=6.5%
+2026-06-08 05:05:12,761 | INFO     | risk.portfolio | Position closed [SL] @ 53.4988 | net_pnl=-12.29 | balance=100004.58 | time=2026-04-02 17:30:00
+2026-06-08 05:05:12,768 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,768 | INFO     | backtest | 📅 Yeni gün: 2026-04-06 | Bakiye: $100,004.58
+2026-06-08 05:05:12,776 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,777 | INFO     | backtest | 📅 Yeni gün: 2026-04-07 | Bakiye: $100,004.58
+2026-06-08 05:05:12,785 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,785 | INFO     | backtest | 📅 Yeni gün: 2026-04-08 | Bakiye: $100,004.58
+2026-06-08 05:05:12,792 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,792 | INFO     | backtest | 📅 Yeni gün: 2026-04-09 | Bakiye: $100,004.58
+2026-06-08 05:05:12,799 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,800 | INFO     | backtest | 📅 Yeni gün: 2026-04-10 | Bakiye: $100,004.58
+2026-06-08 05:05:12,807 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,807 | INFO     | backtest | 📅 Yeni gün: 2026-04-13 | Bakiye: $100,004.58
+2026-06-08 05:05:12,814 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,814 | INFO     | backtest | 📅 Yeni gün: 2026-04-14 | Bakiye: $100,004.58
+2026-06-08 05:05:12,823 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,823 | INFO     | backtest | 📅 Yeni gün: 2026-04-15 | Bakiye: $100,004.58
+2026-06-08 05:05:12,834 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,834 | INFO     | backtest | 📅 Yeni gün: 2026-04-16 | Bakiye: $100,004.58
+2026-06-08 05:05:12,842 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,842 | INFO     | backtest | 📅 Yeni gün: 2026-04-17 | Bakiye: $100,004.58
+2026-06-08 05:05:12,849 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,849 | INFO     | backtest | 📅 Yeni gün: 2026-04-20 | Bakiye: $100,004.58
+2026-06-08 05:05:12,856 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,857 | INFO     | backtest | 📅 Yeni gün: 2026-04-21 | Bakiye: $100,004.58
+2026-06-08 05:05:12,870 | INFO     | strategy.voting | Bar 5630: STRONG_SHORT vetoed | probability=0.4178 < threshold=0.52
+2026-06-08 05:05:12,876 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,876 | INFO     | backtest | 📅 Yeni gün: 2026-04-22 | Bakiye: $100,004.58
+2026-06-08 05:05:12,885 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,885 | INFO     | backtest | 📅 Yeni gün: 2026-04-23 | Bakiye: $100,004.58
+2026-06-08 05:05:12,895 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,895 | INFO     | backtest | 📅 Yeni gün: 2026-04-24 | Bakiye: $100,004.58
+2026-06-08 05:05:12,904 | INFO     | strategy.voting | Bar 5704: STRONG_LONG vetoed | probability=0.3896 < threshold=0.52
+2026-06-08 05:05:12,910 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,910 | INFO     | backtest | 📅 Yeni gün: 2026-04-27 | Bakiye: $100,004.58
+2026-06-08 05:05:12,919 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,920 | INFO     | backtest | 📅 Yeni gün: 2026-04-28 | Bakiye: $100,004.58
+2026-06-08 05:05:12,930 | INFO     | strategy.voting | Bar 5756: STRONG_SHORT vetoed | probability=0.4381 < threshold=0.52
+2026-06-08 05:05:12,937 | INFO     | strategy.voting | Bar 5757: STRONG_SHORT vetoed | probability=0.4069 < threshold=0.52
+2026-06-08 05:05:12,946 | INFO     | strategy.voting | Bar 5758: STRONG_SHORT vetoed | probability=0.4103 < threshold=0.52
+2026-06-08 05:05:12,953 | INFO     | strategy.voting | Bar 5759: STRONG_SHORT vetoed | probability=0.3984 < threshold=0.52
+2026-06-08 05:05:12,962 | INFO     | strategy.voting | Bar 5761: STRONG_SHORT vetoed | probability=0.3755 < threshold=0.52
+2026-06-08 05:05:12,967 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,967 | INFO     | backtest | 📅 Yeni gün: 2026-04-29 | Bakiye: $100,004.58
+2026-06-08 05:05:12,975 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,975 | INFO     | backtest | 📅 Yeni gün: 2026-04-30 | Bakiye: $100,004.58
+2026-06-08 05:05:12,984 | INFO     | strategy.voting | Bar 5810: STRONG_LONG vetoed | probability=0.4878 < threshold=0.52
+2026-06-08 05:05:12,991 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:12,992 | INFO     | backtest | 📅 Yeni gün: 2026-05-01 | Bakiye: $100,004.58
+2026-06-08 05:05:13,001 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,001 | INFO     | backtest | 📅 Yeni gün: 2026-05-04 | Bakiye: $100,004.58
+2026-06-08 05:05:13,008 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,009 | INFO     | backtest | 📅 Yeni gün: 2026-05-05 | Bakiye: $100,004.58
+2026-06-08 05:05:13,016 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,016 | INFO     | backtest | 📅 Yeni gün: 2026-05-06 | Bakiye: $100,004.58
+2026-06-08 05:05:13,025 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,025 | INFO     | backtest | 📅 Yeni gün: 2026-05-07 | Bakiye: $100,004.58
+2026-06-08 05:05:13,033 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,033 | INFO     | backtest | 📅 Yeni gün: 2026-05-08 | Bakiye: $100,004.58
+2026-06-08 05:05:13,041 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,041 | INFO     | backtest | 📅 Yeni gün: 2026-05-11 | Bakiye: $100,004.58
+2026-06-08 05:05:13,048 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,048 | INFO     | backtest | 📅 Yeni gün: 2026-05-12 | Bakiye: $100,004.58
+2026-06-08 05:05:13,055 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,055 | INFO     | backtest | 📅 Yeni gün: 2026-05-13 | Bakiye: $100,004.58
+2026-06-08 05:05:13,064 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,064 | INFO     | backtest | 📅 Yeni gün: 2026-05-14 | Bakiye: $100,004.58
+2026-06-08 05:05:13,075 | INFO     | strategy.voting | Bar 6084: STRONG_LONG vetoed | probability=0.4724 < threshold=0.52
+2026-06-08 05:05:13,083 | INFO     | strategy.voting | Bar 6086: STRONG_LONG vetoed | probability=0.4806 < threshold=0.52
+2026-06-08 05:05:13,092 | INFO     | strategy.voting | Bar 6093: STRONG_SHORT vetoed | probability=0.4134 < threshold=0.52
+2026-06-08 05:05:13,098 | INFO     | strategy.voting | Bar 6094: STRONG_SHORT vetoed | probability=0.4138 < threshold=0.52
+2026-06-08 05:05:13,102 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,102 | INFO     | backtest | 📅 Yeni gün: 2026-05-15 | Bakiye: $100,004.58
+2026-06-08 05:05:13,112 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,112 | INFO     | backtest | 📅 Yeni gün: 2026-05-18 | Bakiye: $100,004.58
+2026-06-08 05:05:13,121 | INFO     | strategy.voting | Bar 6137: STRONG_LONG vetoed | probability=0.4737 < threshold=0.52
+2026-06-08 05:05:13,129 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,129 | INFO     | backtest | 📅 Yeni gün: 2026-05-19 | Bakiye: $100,004.58
+2026-06-08 05:05:13,138 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,138 | INFO     | backtest | 📅 Yeni gün: 2026-05-20 | Bakiye: $100,004.58
+2026-06-08 05:05:13,183 | INFO     | strategy.voting | Bar 6188: STRONG_SHORT vetoed | probability=0.4906 < threshold=0.52
+2026-06-08 05:05:13,191 | INFO     | strategy.voting | Bar 6189: STRONG_SHORT vetoed | probability=0.4849 < threshold=0.52
+2026-06-08 05:05:13,198 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,198 | INFO     | backtest | 📅 Yeni gün: 2026-05-21 | Bakiye: $100,004.58
+2026-06-08 05:05:13,206 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,206 | INFO     | backtest | 📅 Yeni gün: 2026-05-22 | Bakiye: $100,004.58
+2026-06-08 05:05:13,215 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,216 | INFO     | backtest | 📅 Yeni gün: 2026-05-26 | Bakiye: $100,004.58
+2026-06-08 05:05:13,225 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,225 | INFO     | backtest | 📅 Yeni gün: 2026-05-27 | Bakiye: $100,004.58
+2026-06-08 05:05:13,233 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,233 | INFO     | backtest | 📅 Yeni gün: 2026-05-28 | Bakiye: $100,004.58
+2026-06-08 05:05:13,240 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,240 | INFO     | backtest | 📅 Yeni gün: 2026-05-29 | Bakiye: $100,004.58
+2026-06-08 05:05:13,251 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 05:05:13,251 | INFO     | backtest | 📅 Yeni gün: 2026-06-01 | Bakiye: $100,004.58
+2026-06-08 05:05:13,261 | INFO     | strategy.voting | Bar 6377: STRONG_SHORT vetoed | probability=0.4864 < threshold=0.52
+2026-06-08 05:05:13,268 | INFO     | strategy.voting | Bar 6378: STRONG_SHORT vetoed | probability=0.4899 < threshold=0.52
+2026-06-08 05:05:13,275 | INFO     | backtest | 
+══════════════════════════════════════════════════════════════
+  nasdaq_bot_v2  |  BACKTEST SONUÇLARI
+══════════════════════════════════════════════════════════════
+  📅  Simülasyon Süresi   : 2.8 saniye
+  📊  İşlenen Bar Sayısı  : 6,192
+
+  ── PORTFÖY ──────────────────────────────────────────────
+  💰  Başlangıç Bakiyesi  : $  100,000.00
+  💵  Bitiş Bakiyesi      : $  100,004.58
+  📈  Net PnL             : $       +4.58  (+0.00%)
+  📉  Maks. Drawdown      : $       54.21  (0.05%)
+  💸  Toplam Komisyon     : $        5.60
+
+  ── TRADE İSTATİSTİKLERİ ─────────────────────────────────
+  🔢  Toplam İşlem        : 12
+  ✅  Kazanan             : 6
+  ❌  Kaybeden            : 6
+  🎯  Win Rate            : 50.0%
+  ⚖️   Profit Factor       : 1.112
+  📐  Ort. Kazanan R      : 0.02R
+
+  ── KAPANIM SEBEPLERİ ────────────────────────────────────
+  🟢  TP Hit              : 4
+  🔴  SL Hit              : 6
+  🗓️   Weekend Flatten     : 2
+  🛡️   Guardrail Kapanışı  : 0
+
+  ── QUANT METRİKLER ──────────────────────────────────────
+  📊  Sharpe Oranı        : -0.1537
+  📏  R:R Hedefi          : 1:1.8
+  ⚠️   Günlük DD Limiti   : %4.0
+  ⚠️   Toplam DD Limiti   : %9.0
+══════════════════════════════════════════════════════════════
+2026-06-08 05:05:13,275 | INFO     | backtest | 
+  ❌ PROP FIRM EŞİKLERİ AŞILDI — Strateji revize edilmeli
+══════════════════════════════════════════════════════════════
+

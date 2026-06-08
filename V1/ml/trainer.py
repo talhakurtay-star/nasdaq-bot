@@ -206,31 +206,40 @@ def build_feature_matrix(
 
 
 def chronological_split(
-    X: pd.DataFrame, y: pd.Series, train_ratio: float = TRAIN_RATIO
-) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
-    split_idx = int(len(X) * train_ratio)
-    X_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]
-    y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]
+    X: pd.DataFrame, y: pd.Series,
+    train_ratio: float = 0.70,
+    val_ratio: float   = 0.15,
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]:
+    """Kronolojik 3'lü split: train / val / test (sızıntısız)."""
+    n = len(X)
+    t = int(n * train_ratio)
+    v = int(n * (train_ratio + val_ratio))
+
+    X_train, y_train = X.iloc[:t],    y.iloc[:t]
+    X_val,   y_val   = X.iloc[t:v],   y.iloc[t:v]
+    X_test,  y_test  = X.iloc[v:],    y.iloc[v:]
 
     logger.info(
-        "Chronological split | train=%d (%s -> %s) | test=%d (%s -> %s)",
-        len(X_train),
-        X_train.index[0],
-        X_train.index[-1],
-        len(X_test),
-        X_test.index[0],
-        X_test.index[-1],
+        "3-way split | train=%d (%s→%s) | val=%d (%s→%s) | test=%d (%s→%s)",
+        len(X_train), X_train.index[0], X_train.index[-1],
+        len(X_val),   X_val.index[0],   X_val.index[-1],
+        len(X_test),  X_test.index[0],  X_test.index[-1],
     )
-    return X_train, X_test, y_train, y_test
+    return X_train, X_val, X_test, y_train, y_val, y_test
 
 
 def train_xgboost(
     name: str,
     X_train: pd.DataFrame,
     y_train: pd.Series,
-    X_test: pd.DataFrame,
-    y_test: pd.Series,
+    X_val: pd.DataFrame,
+    y_val: pd.Series,
 ) -> xgb.XGBClassifier:
+    """
+    Üç parçalı split: train (70%) → val (15%) → test (15%).
+    Early stopping yalnızca val setine bakar; test seti hiç görülmez.
+    Bu yapı validation sızıntısını tamamen engeller.
+    """
     if y_train.nunique() < 2:
         raise ValueError(f"{name}: training target has only one class.")
 
@@ -238,46 +247,41 @@ def train_xgboost(
     pos = int((y_train == 1).sum())
     scale_pos_weight = neg / pos if pos > 0 else 1.0
     logger.info(
-        "%s class balance | SL(0)=%d | TP(1)=%d | scale_pos_weight=%.3f",
-        name,
-        neg,
-        pos,
-        scale_pos_weight,
+        "%s | SL(0)=%d | TP(1)=%d | scale_pos_weight=%.3f",
+        name, neg, pos, scale_pos_weight,
     )
 
+    # Basit model: max_depth=3, güçlü regularizasyon → overfitting engellenir
     model = xgb.XGBClassifier(
-        n_estimators=1000,
-        max_depth=5,
-        learning_rate=0.02,
-        subsample=0.80,
-        colsample_bytree=0.75,
-        colsample_bylevel=0.75,
-        min_child_weight=6,
-        gamma=0.10,
-        reg_alpha=0.10,
-        reg_lambda=1.5,
+        n_estimators=500,
+        max_depth=3,
+        learning_rate=0.03,
+        subsample=0.70,
+        colsample_bytree=0.70,
+        colsample_bylevel=0.70,
+        min_child_weight=20,
+        gamma=0.5,
+        reg_alpha=0.5,
+        reg_lambda=3.0,
         scale_pos_weight=scale_pos_weight,
         objective="binary:logistic",
         eval_metric="auc",
         random_state=RANDOM_STATE,
         n_jobs=-1,
-        early_stopping_rounds=60,
+        early_stopping_rounds=50,
         verbosity=1,
     )
 
     logger.info("Training %s model...", name)
     t0 = time.time()
     model.fit(
-        X_train,
-        y_train,
-        eval_set=[(X_train, y_train), (X_test, y_test)],
-        verbose=50,
+        X_train, y_train,
+        eval_set=[(X_val, y_val)],   # sadece val seti — test sızdırmaz
+        verbose=100,
     )
     logger.info(
-        "%s training complete | elapsed=%.1fs | best_iteration=%s",
-        name,
-        time.time() - t0,
-        getattr(model, "best_iteration", "?"),
+        "%s done | %.1fs | best_iter=%s",
+        name, time.time() - t0, getattr(model, "best_iteration", "?"),
     )
     return model
 
@@ -347,9 +351,9 @@ def run_training() -> None:
         X_side = X_all.loc[common_idx]
         y_side = y_all.loc[common_idx].astype(int)
 
-        X_train, X_test, y_train, y_test = chronological_split(X_side, y_side)
-        model = train_xgboost(side, X_train, y_train, X_test, y_test)
-        print_metrics(side, model, X_test, y_test)
+        X_train, X_val, X_test, y_train, y_val, y_test = chronological_split(X_side, y_side)
+        model = train_xgboost(side, X_train, y_train, X_val, y_val)
+        print_metrics(side, model, X_test, y_test)   # test hiç görülmemiş veridir
         models[side] = model
 
     save_models(models)
