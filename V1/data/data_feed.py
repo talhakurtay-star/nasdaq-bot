@@ -249,9 +249,13 @@ class DataFeed:
                 sym = sorted(csvs)[0].replace("_15m.csv", "")
                 return self._load_symbol_cache(sym)
 
-        # 3) Manuel CSV modu
+        # 3) Manuel CSV modu — dosya gerçekten varsa kullan, yoksa cache'e düş
         if USE_CSV_DATA and self._cache_file is None:
-            return self._load_from_csv()
+            csv_path = os.path.join(CSV_DIR, CSV_FILE_NAME)
+            if os.path.exists(csv_path):
+                return self._load_from_csv()
+            else:
+                print(f"[DataFeed] {CSV_FILE_NAME} bulunamadı, cache moduna geçiliyor.")
 
         # 4) Eski cache modu
         return self._load_from_cache()

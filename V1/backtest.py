@@ -537,7 +537,7 @@ def run_backtest() -> None:
             elif bar_date > current_day:
                 guardrails.reset_daily_drawdown(portfolio)
                 current_day = bar_date
-                logger.info("📅 Yeni gün: %s | Bakiye: $%,.2f", bar_date, portfolio.balance)
+                logger.info("Yeni gun: %s | Bakiye: $%.2f", bar_date, portfolio.balance)
 
             simulator.update_and_check_positions(current_bar, portfolio, guardrails)
 
