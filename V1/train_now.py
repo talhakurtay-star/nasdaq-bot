@@ -25,7 +25,7 @@ logging.basicConfig(
 logger = logging.getLogger("train_now")
 
 TRAIN_RATIO   = 0.80
-LOOKAHEAD     = 30
+LOOKAHEAD     = 25
 RANDOM_STATE  = 42
 MODEL_FILES   = {"long": "xgb_model_long.json", "short": "xgb_model_short.json"}
 

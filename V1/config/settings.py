@@ -53,7 +53,7 @@ XGB_PROBABILITY_THRESHOLD = 0.54
 
 # ── Portföy ve Sermaye Ayarları ──────────────────────────────────────────────
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
-REWARD_RISK_RATIO = 1.5
+REWARD_RISK_RATIO = 1.3
 ATR_MULTIPLIER = float(os.getenv("STRESS_ATR_MULT", "1.5"))     # Stop Loss için ATR katsayısı
 
 # ── Risk Yönetimi ve Prop Firm Limitleri ──────────────────────────────────────
