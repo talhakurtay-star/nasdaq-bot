@@ -87,10 +87,15 @@ def _load_mt5_csv(path: str) -> pd.DataFrame:
       3) Datetime tek sütun halinde (ISO 8601)
       4) Noktalı virgül (;) ayraçlı MT5 formatı
     """
-    # Ayraç otomatik tespiti
+    # Ayraç otomatik tespiti (tab, noktalı virgül veya virgül)
     with open(path, "r", encoding="utf-8", errors="replace") as f:
         first_line = f.readline()
-    sep = ";" if first_line.count(";") > first_line.count(",") else ","
+    if first_line.count("\t") >= 3:
+        sep = "\t"
+    elif first_line.count(";") > first_line.count(","):
+        sep = ";"
+    else:
+        sep = ","
 
     df = pd.read_csv(path, header=0, sep=sep)
 
