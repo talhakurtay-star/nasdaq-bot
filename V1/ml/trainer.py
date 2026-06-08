@@ -212,8 +212,24 @@ def chronological_split(
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]:
     """Kronolojik 3'lü split: train / val / test (sızıntısız)."""
     n = len(X)
+
+    if n < 30:
+        raise ValueError(
+            f"Yetersiz veri: {n} sample var, en az 30 gerekli.\n"
+            "Olası sebepler:\n"
+            "  1. cache/cache_15m_360d.csv dosyası eksik veya çok kısa\n"
+            "  2. BACKTEST_DAYS çok düşük ayarlanmış\n"
+            "  3. WARMUP_BARS (210) sonrası yeterli bar kalmıyor\n"
+            "Çözüm: cache klasöründe cache_15m_360d.csv dosyasının mevcut olduğunu kontrol edin."
+        )
+
     t = int(n * train_ratio)
     v = int(n * (train_ratio + val_ratio))
+
+    # Her bölümün en az 1 satır içerdiğinden emin ol
+    t = max(t, 1)
+    v = max(v, t + 1)
+    v = min(v, n - 1)
 
     X_train, y_train = X.iloc[:t],    y.iloc[:t]
     X_val,   y_val   = X.iloc[t:v],   y.iloc[t:v]
