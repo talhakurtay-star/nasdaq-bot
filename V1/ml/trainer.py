@@ -33,7 +33,7 @@ if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
 from config.settings import ATR_MULTIPLIER, MODEL_DIR, REWARD_RISK_RATIO
-from data.data_feed import DataFeed
+from data.data_feed import DataFeed, load_all_symbols
 from ml.features import FeatureEngine
 
 logging.basicConfig(
@@ -335,27 +335,84 @@ def save_models(models: Dict[str, xgb.XGBClassifier]) -> Dict[str, str]:
     return saved
 
 
+def _load_training_data(feature_engine: FeatureEngine) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Multi-symbol varsa hepsini birleştir (evrensel model).
+    Yoksa tek sembol / cache ile devam et.
+
+    Returns (X_all, labels)
+    """
+    symbol_data = load_all_symbols()
+
+    if symbol_data:
+        logger.info("Evrensel model: %d sembol bulundu → hepsi birleştiriliyor.", len(symbol_data))
+        all_X: list[pd.DataFrame] = []
+        all_labels: list[pd.DataFrame] = []
+
+        for sym, raw_df in symbol_data.items():
+            try:
+                df = feature_engine.calculate_indicators(raw_df)
+                df = _apply_training_window(df)
+                if len(df) < 50:
+                    logger.warning("%s: yeterli bar yok (%d), atlandı.", sym, len(df))
+                    continue
+
+                lbl = generate_labels(df)
+                valid_mask = lbl["target_long"].notna() | lbl["target_short"].notna()
+                valid_indices = [df.index.get_loc(ts) for ts in lbl.index[valid_mask]]
+
+                X = build_feature_matrix(df, feature_engine, valid_indices)
+                X.replace([np.inf, -np.inf], np.nan, inplace=True)
+                X = X.dropna(axis=0)
+                lbl = lbl.loc[X.index]
+
+                # Zaman damgası çakışmasını önlemek için sembol prefixi ekle
+                new_idx = pd.Index([f"{sym}_{ts}" for ts in X.index], name="symbol_ts")
+                X.index    = new_idx
+                lbl.index  = new_idx
+
+                all_X.append(X)
+                all_labels.append(lbl)
+                logger.info("%s: %d sample eklendi.", sym, len(X))
+
+            except Exception as e:
+                logger.warning("%s eğitim verisi hazırlanırken hata: %s", sym, e)
+
+        if not all_X:
+            raise ValueError("Hiçbir sembolden eğitim verisi alınamadı.")
+
+        X_all    = pd.concat(all_X,    axis=0)
+        lbl_all  = pd.concat(all_labels, axis=0)
+        logger.info("Evrensel matris: %d sample x %d feature", len(X_all), X_all.shape[1])
+        return X_all, lbl_all
+
+    else:
+        # Tek sembol modu (eski davranış)
+        logger.info("cache/symbols/ bulunamadı, tek sembol modunda devam ediliyor.")
+        data_feed = DataFeed()
+        raw_df = data_feed.download_historical_data()
+        df = feature_engine.calculate_indicators(raw_df)
+        df = _apply_training_window(df)
+        logger.info("Bars available for training: %d", len(df))
+
+        labels = generate_labels(df)
+        valid_mask = labels["target_long"].notna() | labels["target_short"].notna()
+        valid_indices = [df.index.get_loc(ts) for ts in labels.index[valid_mask]]
+
+        X_all = build_feature_matrix(df, feature_engine, valid_indices)
+        X_all.replace([np.inf, -np.inf], np.nan, inplace=True)
+        X_all = X_all.dropna(axis=0)
+        labels = labels.loc[X_all.index]
+        return X_all, labels
+
+
 def run_training() -> None:
     logger.info("=" * 64)
-    logger.info("Dual-direction model training started")
+    logger.info("Universal dual-direction model training started")
     logger.info("=" * 64)
 
-    data_feed = DataFeed()
     feature_engine = FeatureEngine()
-
-    raw_df = data_feed.download_historical_data()
-    df = feature_engine.calculate_indicators(raw_df)
-    df = _apply_training_window(df)
-    logger.info("Bars available for training: %d", len(df))
-
-    labels = generate_labels(df)
-    valid_mask = labels["target_long"].notna() | labels["target_short"].notna()
-    valid_indices = [df.index.get_loc(ts) for ts in labels.index[valid_mask]]
-
-    X_all = build_feature_matrix(df, feature_engine, valid_indices)
-    X_all.replace([np.inf, -np.inf], np.nan, inplace=True)
-    X_all = X_all.dropna(axis=0)
-    labels = labels.loc[X_all.index]
+    X_all, labels = _load_training_data(feature_engine)
 
     logger.info("Clean shared feature matrix: %d samples x %d features", len(X_all), X_all.shape[1])
 
@@ -369,11 +426,11 @@ def run_training() -> None:
 
         X_train, X_val, X_test, y_train, y_val, y_test = chronological_split(X_side, y_side)
         model = train_xgboost(side, X_train, y_train, X_val, y_val)
-        print_metrics(side, model, X_test, y_test)   # test hiç görülmemiş veridir
+        print_metrics(side, model, X_test, y_test)
         models[side] = model
 
     save_models(models)
-    logger.info("Dual-direction training finished successfully.")
+    logger.info("Universal dual-direction training finished successfully.")
 
 
 if __name__ == "__main__":

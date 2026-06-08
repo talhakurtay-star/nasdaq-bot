@@ -1,15 +1,12 @@
 """
 data/data_feed.py
 -----------------
-Cache tabanlı ve CSV tabanlı veri besleyici.
+Cache tabanlı, CSV tabanlı ve multi-symbol veri besleyici.
 
-USE_CSV_DATA = True  → csv/nasdaq_15m.csv okunur (MT5 export formatı desteklenir).
-USE_CSV_DATA = False → cache/cache_15m_360d.csv okunur (eski davranış).
-
-MT5 manuel CSV formatı:
-  <DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<TICKVOL>,<VOL>,<SPREAD>
-  veya
-  Date,Time,Open,High,Low,Close,Volume
+Öncelik sırası:
+  1. cache/symbols/{symbol}_15m.csv varsa → multi-symbol mod (yfinance pipeline)
+  2. USE_CSV_DATA=True → csv/nasdaq_15m.csv (MT5 export)
+  3. cache/cache_15m_360d.csv → eski tekli cache modu
 """
 
 import os
@@ -20,6 +17,7 @@ try:
     from config.settings import (
         TIMEFRAME, BACKTEST_DAYS, CACHE_DIR,
         USE_CSV_DATA, CSV_DIR, CSV_FILE_NAME,
+        UNIVERSE,
     )
 except ImportError:
     TIMEFRAME     = "15m"
@@ -28,9 +26,11 @@ except ImportError:
     USE_CSV_DATA  = True
     CSV_DIR       = "csv"
     CSV_FILE_NAME = "nasdaq_15m.csv"
+    UNIVERSE      = []
 
 _BASE_DIR     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _MASTER_CACHE = os.path.join(_BASE_DIR, "cache", "cache_15m_360d.csv")
+_SYMBOLS_DIR  = os.path.join(_BASE_DIR, "cache", "symbols")
 
 _TF_MAP = {
     "1m":  "1min",
@@ -199,17 +199,76 @@ def _load_mt5_csv(path: str) -> pd.DataFrame:
     return df
 
 
+def load_all_symbols() -> dict[str, pd.DataFrame]:
+    """
+    cache/symbols/ klasöründeki tüm {symbol}_15m.csv dosyalarını yükler.
+    Multi-symbol backtest ve evrensel model eğitimi için kullanılır.
+
+    Returns
+    -------
+    dict[symbol → DataFrame]
+    """
+    if not os.path.isdir(_SYMBOLS_DIR):
+        return {}
+
+    result: dict[str, pd.DataFrame] = {}
+    for fname in sorted(os.listdir(_SYMBOLS_DIR)):
+        if not fname.endswith("_15m.csv"):
+            continue
+        symbol = fname.replace("_15m.csv", "")
+        path   = os.path.join(_SYMBOLS_DIR, fname)
+        try:
+            df = pd.read_csv(path, index_col=0, parse_dates=True)
+            df = df.dropna(subset=["Open", "High", "Low", "Close"])
+            df = df.sort_index()
+            result[symbol] = df
+            print(f"[DataFeed] {symbol}: {len(df)} bar ({df.index[0].date()} → {df.index[-1].date()})")
+        except Exception as e:
+            print(f"[DataFeed] UYARI: {fname} yüklenemedi: {e}")
+
+    print(f"[DataFeed] Toplam {len(result)} sembol yüklendi.")
+    return result
+
+
 class DataFeed:
-    def __init__(self, cache_file: str | None = None):
+    def __init__(self, cache_file: str | None = None, symbol: str | None = None):
         os.makedirs(CACHE_DIR, exist_ok=True)
         os.makedirs(CSV_DIR,   exist_ok=True)
-        self._cache_file = cache_file  # None → USE_CSV_DATA flag'ine göre karar verilir
+        self._cache_file = cache_file
+        self._symbol     = symbol  # Multi-symbol modda hangi sembol
 
     def download_historical_data(self, force_refresh: bool = False) -> pd.DataFrame:
+        # 1) Multi-symbol: cache/symbols/{symbol}_15m.csv
+        if self._symbol:
+            return self._load_symbol_cache(self._symbol)
+
+        # 2) Eğer cache/symbols/ klasöründe dosyalar varsa ilk sembolü döndür
+        if os.path.isdir(_SYMBOLS_DIR) and not self._cache_file:
+            csvs = [f for f in os.listdir(_SYMBOLS_DIR) if f.endswith("_15m.csv")]
+            if csvs:
+                sym = sorted(csvs)[0].replace("_15m.csv", "")
+                return self._load_symbol_cache(sym)
+
+        # 3) Manuel CSV modu
         if USE_CSV_DATA and self._cache_file is None:
             return self._load_from_csv()
-        else:
-            return self._load_from_cache()
+
+        # 4) Eski cache modu
+        return self._load_from_cache()
+
+    def _load_symbol_cache(self, symbol: str) -> pd.DataFrame:
+        path = os.path.join(_SYMBOLS_DIR, f"{symbol}_15m.csv")
+        if not os.path.exists(path):
+            raise FileNotFoundError(
+                f"{symbol} için cache bulunamadı: {path}\n"
+                "Önce 'python data/data_pipeline.py' çalıştırın."
+            )
+        df = pd.read_csv(path, index_col=0, parse_dates=True)
+        df = _ensure_spy_vix(df)
+        df = _resample(df, TIMEFRAME)
+        df = df.dropna(subset=["Open", "High", "Low", "Close"]).sort_index()
+        print(f"[DataFeed] {symbol}: {len(df)} bar")
+        return df
 
     # ------------------------------------------------------------------
 

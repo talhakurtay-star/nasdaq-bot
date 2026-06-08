@@ -28,14 +28,36 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 os.makedirs(CSV_DIR,   exist_ok=True)
 
 # ── Zaman ve Sembol Ayarları ──────────────────────────────────────────────────
-# SYMBOL      → yfinance veri çekme sembolü (QQQ/NASDAQ ETF proxy)
-# MT5_SYMBOL  → broker/MT5 işlem sembolü (ICMarkets: "NAS100", XM: "USTEC" vb.)
-SYMBOL = os.getenv("STRESS_SYMBOL", "TECH")
-MT5_SYMBOL = os.getenv("STRESS_MT5_SYMBOL", "TECH")
+SYMBOL     = os.getenv("STRESS_SYMBOL",     "QQQ")
+MT5_SYMBOL = os.getenv("STRESS_MT5_SYMBOL", "NAS100")
 
-VIX_SYMBOL = os.getenv("STRESS_VIX_SYMBOL", "^VIX")  # Volatilite endeksi
-SPY_SYMBOL = os.getenv("STRESS_SPY_SYMBOL", "SPY")    # Korelasyon referansı (S&P 500)
-WATCHLIST = [SYMBOL, SPY_SYMBOL, VIX_SYMBOL]
+VIX_SYMBOL = os.getenv("STRESS_VIX_SYMBOL", "^VIX")
+SPY_SYMBOL = os.getenv("STRESS_SPY_SYMBOL", "SPY")
+
+# NASDAQ 100'ün en likit 15 hissesi (ICMarkets CFD isimleri)
+# yfinance sembolü → MT5 CFD adı eşleşmesi
+UNIVERSE: list[str] = [
+    "AAPL",  # Apple
+    "MSFT",  # Microsoft
+    "NVDA",  # Nvidia
+    "AMZN",  # Amazon
+    "GOOGL", # Alphabet
+    "META",  # Meta
+    "TSLA",  # Tesla
+    "AVGO",  # Broadcom
+    "COST",  # Costco
+    "NFLX",  # Netflix
+    "AMD",   # AMD
+    "ADBE",  # Adobe
+    "QCOM",  # Qualcomm
+    "TXN",   # Texas Instruments
+    "AMAT",  # Applied Materials
+]
+
+# Aynı anda maksimum açık pozisyon sayısı
+MAX_OPEN_POSITIONS = int(os.getenv("STRESS_MAX_POSITIONS", "3"))
+
+WATCHLIST = UNIVERSE + [SPY_SYMBOL, VIX_SYMBOL]
 
 # TIMEFRAME: Grafik periyodu ("15m", "1h", "5m")
 TIMEFRAME = "15m"

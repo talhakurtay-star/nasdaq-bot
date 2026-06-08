@@ -44,10 +44,11 @@ from config.settings import (
     RSI_PERIOD,
     REWARD_RISK_RATIO,
     RISK_PER_TRADE,
+    MAX_OPEN_POSITIONS,
 )
 
 # ── Katman İmportları ─────────────────────────────────────────────────────────
-from data.data_feed          import DataFeed
+from data.data_feed          import DataFeed, load_all_symbols
 from ml.features             import FeatureEngine
 from strategy.engine         import StrategyEngine
 from strategy.voting         import VotingMechanism
@@ -365,94 +366,57 @@ def _stres_testi_metrikleri_yaz(
 
 # ── Ana Backtest Fonksiyonu ───────────────────────────────────────────────────
 
-def run_backtest() -> None:
-    logger = _setup_logging()
-    start_time = datetime.now()
-    logger.info("=" * 62)
-    logger.info("  nasdaq_bot_v2 BACKTEST BAŞLADI")
-    logger.info("=" * 62)
-
-    # ── 1. Veriyi İndir ve İndikatörleri Hesapla ─────────────────────────
-    logger.info("📥 Veri indiriliyor ve indikatörler hesaplanıyor...")
-    data_feed      = DataFeed()
-    feature_engine = FeatureEngine()
-
-    raw_df = data_feed.download_historical_data()
-    df     = feature_engine.calculate_indicators(raw_df)
-
-    total_bars = len(df)
-    warmup     = _get_warmup_bars()
-    sim_start, sim_end, eval_window = _get_simulation_bounds(df, warmup, logger)
-    if sim_end <= sim_start:
-        raise ValueError(
-            f"Simulasyon penceresi bos: window={eval_window}, start={sim_start}, end={sim_end}"
-        )
-    logger.info(
-        f"Toplam bar: {total_bars} | Isınma periyodu: {warmup} bar | "
-        f"Simüle edilecek bar: {sim_end - sim_start} | Pencere: {eval_window}"
-    )
-
-    # ── 2. Tüm Bileşenleri Örnekle ────────────────────────────────────────
-    strategy  = StrategyEngine()
-    voter     = VotingMechanism()
-    portfolio = PortfolioManager()
-    guardrails = RiskGuardrails()
-    simulator = BacktestSimulator()
-
-    # ── 3. Equity Curve ve Günlük İzleme Değişkenleri ────────────────────
-    equity_curve: List[float] = []   # İlk bar sonrası doldurulur (off-by-one fix)
-    current_day:  date | None = None
-
-    # ── 4. Ana Bar-by-Bar Simülasyon Döngüsü ─────────────────────────────
-    logger.info("🚀 Simülasyon döngüsü başlıyor...")
+def _run_single_symbol(
+    sym: str,
+    df: pd.DataFrame,
+    feature_engine: FeatureEngine,
+    strategy: StrategyEngine,
+    voter: VotingMechanism,
+    portfolio: PortfolioManager,
+    guardrails: RiskGuardrails,
+    simulator: BacktestSimulator,
+    open_positions: dict,
+    equity_curve: List[float],
+    logger: logging.Logger,
+) -> None:
+    """Tek sembol için simülasyon döngüsünü çalıştırır (multi-symbol içinden çağrılır)."""
+    warmup = _get_warmup_bars()
+    sim_start, sim_end, _ = _get_simulation_bounds(df, warmup, logger)
 
     for current_index in range(sim_start, sim_end):
         current_bar = df.iloc[current_index]
         timestamp   = df.index[current_index]
 
-        # ── 4a. Günlük Drawdown Sıfırlama ─────────────────────────────────
-        bar_date = pd.Timestamp(timestamp).date()
-        if current_day is None:
-            current_day = bar_date
-        elif bar_date > current_day:
-            # Yeni gün başladı — günlük sayaçları sıfırla
-            guardrails.reset_daily_drawdown(portfolio)
-            current_day = bar_date
-            logger.info(f"📅 Yeni gün: {bar_date} | Bakiye: ${portfolio.balance:,.2f}")
+        # Açık pozisyon varsa SL/TP kontrolü
+        if sym in open_positions:
+            portfolio.open_position = open_positions[sym]
+            result = simulator.update_and_check_positions(current_bar, portfolio, guardrails)
+            if result is not None:
+                del open_positions[sym]
+                portfolio.open_position = None
+            else:
+                open_positions[sym] = portfolio.open_position
+                portfolio.open_position = None
 
-        # ── 4b. Açık Pozisyon Güncelle (SL/TP/Flatten kontrolü) ───────────
-        simulator.update_and_check_positions(current_bar, portfolio, guardrails)
-
-        # ── 4c. Kill-Switch Aktifse döngüyü bitir ─────────────────────────
         if guardrails.kill_switch_active:
-            logger.critical(
-                f"🚨 Kill-Switch aktif. Simülasyon bar {current_index}'de durduruldu."
-            )
             break
 
-        # ── 4d. Yeni İşlem Açılabilir mi? ─────────────────────────────────
-        if portfolio.open_position is not None:
-            # Mevcut pozisyon henüz açık, yeni pozisyon açma
-            equity_curve.append(portfolio.equity)
+        # Max pozisyon kontrolü
+        if len(open_positions) >= MAX_OPEN_POSITIONS:
+            continue
+
+        if sym in open_positions:
             continue
 
         if not guardrails.is_trading_allowed(portfolio, timestamp):
-            equity_curve.append(portfolio.equity)
             continue
 
-        # ── 4e. Teknik Sinyal Üret ─────────────────────────────────────────
-        base_signal = strategy.generate_base_signal(df, current_index)
+        base_signal  = strategy.generate_base_signal(df, current_index)
+        final_signal = voter.decide_trade(df, current_index, base_signal, feature_engine)
 
-        # ── 4f. XGBoost Veto / Onay ────────────────────────────────────────
-        final_signal = voter.decide_trade(
-            df, current_index, base_signal, feature_engine
-        )
-
-        # ── 4g. Pozisyon Aç ────────────────────────────────────────────────
         if final_signal in ("STRONG_LONG", "STRONG_SHORT"):
             close_price = float(current_bar["Close"])
             atr_value   = float(current_bar.get("ATR", 0))
-
             if atr_value > 0:
                 portfolio.open_trade(
                     direction=final_signal,
@@ -460,19 +424,157 @@ def run_backtest() -> None:
                     atr_value=atr_value,
                     timestamp=timestamp,
                 )
-                guardrails.daily_trades_count += 1
-            else:
-                logger.debug(f"Bar {current_index}: ATR=0, pozisyon atlandı.")
+                if portfolio.open_position is not None:
+                    open_positions[sym] = portfolio.open_position
+                    portfolio.open_position = None
+                    guardrails.daily_trades_count += 1
 
-        # ── 4h. Equity Kaydı ───────────────────────────────────────────────
-        equity_curve.append(portfolio.equity)
 
-    # ── 5. Döngü Sonunda Açık Kalan Pozisyonu Kapat ───────────────────────
-    if portfolio.open_position is not None:
-        last_close = float(df.iloc[sim_end - 1]["Close"])
-        last_ts    = df.index[sim_end - 1]
-        portfolio.close_trade(last_close, last_ts, reason="FORCE_CLOSE")
-        logger.info("🔚 Açık pozisyon simülasyon sonunda zorla kapatıldı.")
+def run_backtest() -> None:
+    logger = _setup_logging()
+    start_time = datetime.now()
+    logger.info("=" * 62)
+    logger.info("  nasdaq_bot_v2 BACKTEST BAŞLADI")
+    logger.info("=" * 62)
+
+    feature_engine = FeatureEngine()
+    strategy   = StrategyEngine()
+    voter      = VotingMechanism()
+    portfolio  = PortfolioManager()
+    guardrails = RiskGuardrails()
+    simulator  = BacktestSimulator()
+
+    # ── Multi-symbol mi, tek sembol mü? ──────────────────────────────────
+    symbol_data = load_all_symbols()
+
+    if symbol_data:
+        logger.info("📊 Multi-symbol backtest: %d sembol", len(symbol_data))
+
+        # Her sembol için indikatörleri hesapla
+        dfs: dict[str, pd.DataFrame] = {}
+        for sym, raw_df in symbol_data.items():
+            try:
+                dfs[sym] = feature_engine.calculate_indicators(raw_df)
+            except Exception as e:
+                logger.warning("%s indikatör hesaplamada hata: %s", sym, e)
+
+        # Tüm zaman damgalarını birleştir (union), kronolojik sırala
+        all_timestamps = sorted(set().union(*[set(df.index) for df in dfs.values()]))
+        logger.info("Toplam benzersiz timestamp: %d", len(all_timestamps))
+
+        equity_curve: List[float] = []
+        open_positions: dict[str, object] = {}
+        current_day: date | None = None
+
+        logger.info("🚀 Multi-symbol simülasyon başlıyor...")
+        for ts in all_timestamps:
+            bar_date = pd.Timestamp(ts).date()
+
+            # Günlük sıfırlama
+            if current_day is None:
+                current_day = bar_date
+            elif bar_date > current_day:
+                guardrails.reset_daily_drawdown(portfolio)
+                current_day = bar_date
+
+            if guardrails.kill_switch_active:
+                break
+
+            # Her sembol için o timestamp'teki barı işle
+            for sym, df in dfs.items():
+                if ts not in df.index:
+                    continue
+                current_index = df.index.get_loc(ts)
+                _run_single_symbol(
+                    sym=sym, df=df,
+                    feature_engine=feature_engine,
+                    strategy=strategy, voter=voter,
+                    portfolio=portfolio, guardrails=guardrails,
+                    simulator=simulator,
+                    open_positions=open_positions,
+                    equity_curve=equity_curve,
+                    logger=logger,
+                )
+
+            equity_curve.append(portfolio.equity)
+
+        # Açık kalan pozisyonları kapat
+        for sym, pos in list(open_positions.items()):
+            df = dfs[sym]
+            last_close = float(df.iloc[-1]["Close"])
+            last_ts    = df.index[-1]
+            portfolio.open_position = pos
+            portfolio.close_trade(last_close, last_ts, reason="FORCE_CLOSE")
+            portfolio.open_position = None
+
+    else:
+        # ── Tek sembol modu (eski davranış) ──────────────────────────────
+        logger.info("📥 Tek sembol modu — veri yükleniyor...")
+        raw_df = DataFeed().download_historical_data()
+        df     = feature_engine.calculate_indicators(raw_df)
+
+        total_bars = len(df)
+        warmup     = _get_warmup_bars()
+        sim_start, sim_end, eval_window = _get_simulation_bounds(df, warmup, logger)
+        if sim_end <= sim_start:
+            raise ValueError(f"Simülasyon penceresi boş: start={sim_start}, end={sim_end}")
+        logger.info(
+            "Toplam bar: %d | Isınma: %d | Simüle: %d | Pencere: %s",
+            total_bars, warmup, sim_end - sim_start, eval_window,
+        )
+
+        equity_curve: List[float] = []
+        current_day:  date | None = None
+        logger.info("🚀 Simülasyon döngüsü başlıyor...")
+
+        for current_index in range(sim_start, sim_end):
+            current_bar = df.iloc[current_index]
+            timestamp   = df.index[current_index]
+
+            bar_date = pd.Timestamp(timestamp).date()
+            if current_day is None:
+                current_day = bar_date
+            elif bar_date > current_day:
+                guardrails.reset_daily_drawdown(portfolio)
+                current_day = bar_date
+                logger.info("📅 Yeni gün: %s | Bakiye: $%,.2f", bar_date, portfolio.balance)
+
+            simulator.update_and_check_positions(current_bar, portfolio, guardrails)
+
+            if guardrails.kill_switch_active:
+                logger.critical("🚨 Kill-Switch aktif. Bar %d'de durduruldu.", current_index)
+                break
+
+            if portfolio.open_position is not None:
+                equity_curve.append(portfolio.equity)
+                continue
+
+            if not guardrails.is_trading_allowed(portfolio, timestamp):
+                equity_curve.append(portfolio.equity)
+                continue
+
+            base_signal  = strategy.generate_base_signal(df, current_index)
+            final_signal = voter.decide_trade(df, current_index, base_signal, feature_engine)
+
+            if final_signal in ("STRONG_LONG", "STRONG_SHORT"):
+                close_price = float(current_bar["Close"])
+                atr_value   = float(current_bar.get("ATR", 0))
+                if atr_value > 0:
+                    portfolio.open_trade(
+                        direction=final_signal,
+                        current_price=close_price,
+                        atr_value=atr_value,
+                        timestamp=timestamp,
+                    )
+                    guardrails.daily_trades_count += 1
+
+            equity_curve.append(portfolio.equity)
+
+        if portfolio.open_position is not None:
+            last_close = float(df.iloc[sim_end - 1]["Close"])
+            last_ts    = df.index[sim_end - 1]
+            portfolio.close_trade(last_close, last_ts, reason="FORCE_CLOSE")
+            logger.info("🔚 Açık pozisyon simülasyon sonunda zorla kapatıldı.")
 
     # ── 6. Sonuç Raporu ────────────────────────────────────────────────────
     _print_report(portfolio, simulator, equity_curve, start_time, logger)
