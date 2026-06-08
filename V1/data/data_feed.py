@@ -85,13 +85,19 @@ def _load_mt5_csv(path: str) -> pd.DataFrame:
       1) <DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<TICKVOL>,...
       2) Date,Time,Open,High,Low,Close,Volume,...
       3) Datetime tek sütun halinde (ISO 8601)
+      4) Noktalı virgül (;) ayraçlı MT5 formatı
     """
-    # Önce ham başlıkları oku
-    raw = pd.read_csv(path, nrows=0)
-    cols = [c.strip().strip("<>").upper() for c in raw.columns]
+    # Ayraç otomatik tespiti
+    with open(path, "r", encoding="utf-8", errors="replace") as f:
+        first_line = f.readline()
+    sep = ";" if first_line.count(";") > first_line.count(",") else ","
 
-    df = pd.read_csv(path, header=0)
+    df = pd.read_csv(path, header=0, sep=sep)
+
+    # Sütun isimlerini temizle: boşluk + <> kaldır, büyük harf yap
     df.columns = [c.strip().strip("<>").upper() for c in df.columns]
+
+    print(f"[DataFeed] CSV sütunları: {list(df.columns)}")
 
     # DATE + TIME sütunlarını birleştir
     if "DATE" in df.columns and "TIME" in df.columns:
@@ -114,7 +120,7 @@ def _load_mt5_csv(path: str) -> pd.DataFrame:
     df = df.set_index("Datetime")
     df.index = pd.DatetimeIndex(df.index)
 
-    # Sütunları standart OHLCV isimlerine map'le
+    # Sütunları standart OHLCV isimlerine map'le (her olası varyant dahil)
     rename_map = {
         "OPEN":    "Open",
         "HIGH":    "High",
@@ -123,8 +129,23 @@ def _load_mt5_csv(path: str) -> pd.DataFrame:
         "TICKVOL": "Volume",
         "VOL":     "Volume",
         "VOLUME":  "Volume",
+        "REAL_VOLUME": "Volume",
+        # yfinance-style
+        "ADJ CLOSE": "Close",
     }
-    df = df.rename(columns={c: rename_map[c] for c in df.columns if c in rename_map})
+    df = df.rename(columns={c: rename_map[c] for c in list(df.columns) if c in rename_map})
+
+    # Sütun bulunamadıysa pozisyon bazlı atama (son çare)
+    ohlc = ["Open", "High", "Low", "Close"]
+    missing = [c for c in ohlc if c not in df.columns]
+    if missing:
+        numeric_cols = [c for c in df.columns if pd.api.types.is_numeric_dtype(df[c]) or
+                        pd.to_numeric(df[c], errors="coerce").notna().mean() > 0.8]
+        print(f"[DataFeed] UYARI: {missing} sütunları bulunamadı, "
+              f"numerik sütunlar pozisyon bazlı atanıyor: {numeric_cols[:4]}")
+        for i, col in enumerate(ohlc):
+            if col not in df.columns and i < len(numeric_cols):
+                df = df.rename(columns={numeric_cols[i]: col})
 
     # Volume sütunu yoksa sıfırla oluştur
     if "Volume" not in df.columns:
@@ -134,6 +155,15 @@ def _load_mt5_csv(path: str) -> pd.DataFrame:
     for col in ("Open", "High", "Low", "Close", "Volume"):
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    # Hâlâ eksik sütun varsa açıklayıcı hata ver
+    missing_final = [c for c in ohlc if c not in df.columns]
+    if missing_final:
+        raise KeyError(
+            f"OHLC sütunları bulunamadı: {missing_final}\n"
+            f"CSV'deki sütunlar: {list(df.columns)}\n"
+            f"CSV dosyasının ilk satırını kontrol edin: {path}"
+        )
 
     df = df.dropna(subset=["Open", "High", "Low", "Close"])
     df = df.sort_index()  # kronolojik sıra
