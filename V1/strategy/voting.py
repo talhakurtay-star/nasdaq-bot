@@ -121,6 +121,13 @@ class VotingMechanism:
             logger.error("Bar %d: XGBoost prediction failed: %s. HOLD.", current_index, exc)
             return "HOLD"
 
+        # XGB veto devre dışı: model AUC ~0.46 (rastgele altı) olduğunda
+        # strateji motorunun filtrelerine güvenmek daha iyi sonuç verir.
+        # Threshold=0.0 ile tüm strateji sinyalleri geçer.
+        if self.threshold <= 0.0:
+            logger.debug("Bar %d: %s — XGB veto disabled, signal passed.", current_index, base_signal)
+            return base_signal
+
         if probability >= self.threshold:
             logger.info(
                 "Bar %d: %s approved | probability=%.4f >= threshold=%.2f",

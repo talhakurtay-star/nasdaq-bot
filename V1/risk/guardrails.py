@@ -88,6 +88,8 @@ class RiskGuardrails:
         self.kill_switch_active:       bool = False
         self.daily_drawdown_triggered: bool = False
         self.total_drawdown_triggered: bool = False
+        self.daily_trades_count:       int  = 0
+        self.max_daily_trades:         int  = 2  # Prop firm güvenliği: günde max 2 işlem
 
         logger.info(
             "RiskGuardrails başlatıldı | "
@@ -184,6 +186,7 @@ class RiskGuardrails:
             self.kill_switch_active = False
 
         portfolio.reset_daily_peak()
+        self.daily_trades_count = 0
         logger.info("Günlük drawdown sayacı sıfırlandı.")
 
     # ------------------------------------------------------------------
@@ -290,6 +293,11 @@ class RiskGuardrails:
         # Bu filtre SADECE yeni pozisyon açılmasını engeller;
         # açık pozisyonların SL/TP ile kapanmasına dokunmaz.
         weekday = timestamp.weekday()
+
+        # Günlük işlem limiti kontrolü
+        if self.daily_trades_count >= self.max_daily_trades:
+            logger.debug("Günlük max işlem sayısına ulaşıldı (%d). Yeni işlem açılmıyor.", self.max_daily_trades)
+            return False
 
         if BLOCK_FRIDAY_ENTRIES and weekday == _FRIDAY:
             logger.debug(

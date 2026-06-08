@@ -460,6 +460,7 @@ def run_backtest() -> None:
                     atr_value=atr_value,
                     timestamp=timestamp,
                 )
+                guardrails.daily_trades_count += 1
             else:
                 logger.debug(f"Bar {current_index}: ATR=0, pozisyon atlandı.")
 

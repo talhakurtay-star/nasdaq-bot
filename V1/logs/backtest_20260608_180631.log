@@ -1,0 +1,1269 @@
+2026-06-08 18:06:31,709 | INFO     | backtest | Log dosyası: /home/user/nasdaq-bot/V1/logs/backtest_20260608_180631.log
+2026-06-08 18:06:31,709 | INFO     | backtest | ==============================================================
+2026-06-08 18:06:31,710 | INFO     | backtest |   nasdaq_bot_v2 BACKTEST BAŞLADI
+2026-06-08 18:06:31,710 | INFO     | backtest | ==============================================================
+2026-06-08 18:06:31,710 | INFO     | backtest | 📥 Veri indiriliyor ve indikatörler hesaplanıyor...
+2026-06-08 18:06:31,740 | INFO     | backtest | Toplam bar: 6402 | Isınma periyodu: 210 bar | Simüle edilecek bar: 6192 | Pencere: FULL
+2026-06-08 18:06:31,741 | INFO     | strategy.engine | StrategyEngine | EMA 9/21 | ADX>20 | AlignBars 2-30 | RSI L[35-75] S[25-65]
+2026-06-08 18:06:31,744 | INFO     | strategy.voting | STRONG_LONG XGBoost model loaded: /home/user/nasdaq-bot/V1/models/xgb_model_long.json
+2026-06-08 18:06:31,747 | INFO     | strategy.voting | STRONG_SHORT XGBoost model loaded: /home/user/nasdaq-bot/V1/models/xgb_model_short.json
+2026-06-08 18:06:31,747 | INFO     | risk.portfolio | PortfolioManager initialized | balance=100000.00 | risk/trade=2.00% | ATRx=1.50 | RR=1:1.50 | max_lot=20.00 | max_notional_leverage=20.0x
+2026-06-08 18:06:31,747 | INFO     | risk.guardrails | RiskGuardrails başlatıldı | Günlük Limit=%4.0 | Toplam Limit=%9.0 | İşlem Saatleri=13:00–23:59 UTC | Hafta Sonu Holding=YASAK
+2026-06-08 18:06:31,747 | INFO     | execution.simulator | BacktestSimulator başlatıldı.
+2026-06-08 18:06:31,747 | INFO     | backtest | 🚀 Simülasyon döngüsü başlıyor...
+2026-06-08 18:06:31,750 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,750 | INFO     | backtest | 📅 Yeni gün: 2025-06-20 | Bakiye: $100,000.00
+2026-06-08 18:06:31,760 | WARNING  | risk.portfolio | Lot cap active | raw=5071.5871 -> final=20.0000 | cap=20.0000 | risk_target=2000.00
+2026-06-08 18:06:31,760 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 50.3650 | lot=20.0000 | SL=49.9706 | TP=50.9565 | risk_target=2000.00 | cost_ratio=11.9%
+2026-06-08 18:06:31,762 | INFO     | risk.portfolio | Position closed [SL] @ 49.9706 | net_pnl=-8.09 | balance=99991.71 | time=2025-06-20 20:30:00
+2026-06-08 18:06:31,769 | WARNING  | risk.portfolio | Lot cap active | raw=6709.2080 -> final=20.0000 | cap=20.0000 | risk_target=1999.83
+2026-06-08 18:06:31,769 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 49.8950 | lot=20.0000 | SL=50.1931 | TP=49.4479 | risk_target=1999.83 | cost_ratio=15.6%
+2026-06-08 18:06:31,770 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:31,770 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 49.8900 | net_pnl=-0.10 | balance=99991.41 | time=2025-06-20 23:00:00
+2026-06-08 18:06:31,770 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 49.8900 | PnL=-0.10 USD
+2026-06-08 18:06:31,771 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,771 | INFO     | backtest | 📅 Yeni gün: 2025-06-23 | Bakiye: $99,991.41
+2026-06-08 18:06:31,778 | WARNING  | risk.portfolio | Lot cap active | raw=5504.8421 -> final=20.0000 | cap=20.0000 | risk_target=1999.83
+2026-06-08 18:06:31,778 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 49.2450 | lot=20.0000 | SL=49.6083 | TP=48.7001 | risk_target=1999.82 | cost_ratio=12.8%
+2026-06-08 18:06:31,778 | INFO     | risk.portfolio | Position closed [SL] @ 49.6083 | net_pnl=-7.46 | balance=99983.75 | time=2025-06-23 17:00:00
+2026-06-08 18:06:31,785 | WARNING  | risk.portfolio | Lot cap active | raw=4628.4681 -> final=20.0000 | cap=20.0000 | risk_target=1999.68
+2026-06-08 18:06:31,785 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 49.3950 | lot=20.0000 | SL=49.8270 | TP=48.7469 | risk_target=1999.67 | cost_ratio=10.7%
+2026-06-08 18:06:31,786 | INFO     | risk.portfolio | Position closed [TP] @ 48.7469 | net_pnl=+12.77 | balance=99996.32 | time=2025-06-23 19:15:00
+2026-06-08 18:06:31,787 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,787 | INFO     | backtest | 📅 Yeni gün: 2025-06-24 | Bakiye: $99,996.32
+2026-06-08 18:06:31,794 | WARNING  | risk.portfolio | Lot cap active | raw=4992.9840 -> final=20.0000 | cap=20.0000 | risk_target=1999.93
+2026-06-08 18:06:31,794 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 49.7250 | lot=20.0000 | SL=49.3245 | TP=50.3258 | risk_target=1999.92 | cost_ratio=11.7%
+2026-06-08 18:06:31,796 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,797 | INFO     | backtest | 📅 Yeni gün: 2025-06-25 | Bakiye: $99,996.12
+2026-06-08 18:06:31,797 | INFO     | risk.portfolio | Position closed [SL] @ 49.3245 | net_pnl=-8.21 | balance=99987.91 | time=2025-06-25 16:45:00
+2026-06-08 18:06:31,803 | WARNING  | risk.portfolio | Lot cap active | raw=5870.2388 -> final=20.0000 | cap=20.0000 | risk_target=1999.76
+2026-06-08 18:06:31,803 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 49.5450 | lot=20.0000 | SL=49.8857 | TP=49.0340 | risk_target=1999.75 | cost_ratio=13.6%
+2026-06-08 18:06:31,804 | INFO     | risk.portfolio | Position closed [SL] @ 49.8857 | net_pnl=-7.01 | balance=99980.70 | time=2025-06-25 18:45:00
+2026-06-08 18:06:31,810 | WARNING  | risk.portfolio | Lot cap active | raw=6399.1806 -> final=20.0000 | cap=20.0000 | risk_target=1999.61
+2026-06-08 18:06:31,810 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 49.8950 | lot=20.0000 | SL=49.5825 | TP=50.3637 | risk_target=1999.61 | cost_ratio=14.9%
+2026-06-08 18:06:31,811 | INFO     | risk.portfolio | Position closed [TP] @ 50.3637 | net_pnl=+9.17 | balance=99989.68 | time=2025-06-25 21:45:00
+2026-06-08 18:06:31,812 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,812 | INFO     | backtest | 📅 Yeni gün: 2025-06-26 | Bakiye: $99,989.68
+2026-06-08 18:06:31,820 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,820 | INFO     | backtest | 📅 Yeni gün: 2025-06-27 | Bakiye: $99,989.68
+2026-06-08 18:06:31,827 | WARNING  | risk.portfolio | Lot cap active | raw=3766.1141 -> final=20.0000 | cap=20.0000 | risk_target=1999.79
+2026-06-08 18:06:31,827 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.5950 | lot=20.0000 | SL=52.1260 | TP=50.7985 | risk_target=1999.79 | cost_ratio=8.8%
+2026-06-08 18:06:31,828 | INFO     | risk.portfolio | Position closed [SL] @ 52.1260 | net_pnl=-10.83 | balance=99978.64 | time=2025-06-27 19:15:00
+2026-06-08 18:06:31,834 | WARNING  | risk.portfolio | Lot cap active | raw=4400.0744 -> final=20.0000 | cap=20.0000 | risk_target=1999.57
+2026-06-08 18:06:31,834 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.7450 | lot=20.0000 | SL=52.1994 | TP=51.0633 | risk_target=1999.57 | cost_ratio=10.4%
+2026-06-08 18:06:31,836 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:31,836 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 51.8400 | net_pnl=-2.11 | balance=99976.33 | time=2025-06-27 23:00:00
+2026-06-08 18:06:31,836 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 51.8400 | PnL=-2.11 USD
+2026-06-08 18:06:31,836 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,836 | INFO     | backtest | 📅 Yeni gün: 2025-06-30 | Bakiye: $99,976.33
+2026-06-08 18:06:31,844 | WARNING  | risk.portfolio | Lot cap active | raw=4311.1304 -> final=20.0000 | cap=20.0000 | risk_target=1999.53
+2026-06-08 18:06:31,844 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.2550 | lot=20.0000 | SL=51.7188 | TP=50.5593 | risk_target=1999.52 | cost_ratio=10.1%
+2026-06-08 18:06:31,846 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,846 | INFO     | backtest | 📅 Yeni gün: 2025-07-01 | Bakiye: $99,976.12
+2026-06-08 18:06:31,846 | INFO     | risk.portfolio | Position closed [TP] @ 50.5593 | net_pnl=+13.71 | balance=99989.83 | time=2025-07-01 16:30:00
+2026-06-08 18:06:31,861 | WARNING  | risk.portfolio | Lot cap active | raw=4089.2981 -> final=20.0000 | cap=20.0000 | risk_target=1999.80
+2026-06-08 18:06:31,862 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 50.3050 | lot=20.0000 | SL=50.7940 | TP=49.5715 | risk_target=1999.79 | cost_ratio=9.5%
+2026-06-08 18:06:31,862 | INFO     | risk.portfolio | Position closed [SL] @ 50.7940 | net_pnl=-9.98 | balance=99979.65 | time=2025-07-01 17:00:00
+2026-06-08 18:06:31,869 | WARNING  | risk.portfolio | Lot cap active | raw=3370.1192 -> final=20.0000 | cap=20.0000 | risk_target=1999.59
+2026-06-08 18:06:31,869 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.3650 | lot=20.0000 | SL=51.7717 | TP=53.2550 | risk_target=1999.59 | cost_ratio=8.0%
+2026-06-08 18:06:31,869 | INFO     | risk.portfolio | Position closed [TP] @ 53.2550 | net_pnl=+17.59 | balance=99997.03 | time=2025-07-01 18:45:00
+2026-06-08 18:06:31,871 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,871 | INFO     | backtest | 📅 Yeni gün: 2025-07-02 | Bakiye: $99,997.03
+2026-06-08 18:06:31,879 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,879 | INFO     | backtest | 📅 Yeni gün: 2025-07-03 | Bakiye: $99,997.03
+2026-06-08 18:06:31,883 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,884 | INFO     | backtest | 📅 Yeni gün: 2025-07-07 | Bakiye: $99,997.03
+2026-06-08 18:06:31,902 | WARNING  | risk.portfolio | Lot cap active | raw=4202.3842 -> final=20.0000 | cap=20.0000 | risk_target=1999.94
+2026-06-08 18:06:31,902 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.4350 | lot=20.0000 | SL=52.9109 | TP=51.7211 | risk_target=1999.94 | cost_ratio=9.9%
+2026-06-08 18:06:31,902 | INFO     | risk.portfolio | Position closed [TP] @ 51.7211 | net_pnl=+14.07 | balance=100010.89 | time=2025-07-07 18:00:00
+2026-06-08 18:06:31,908 | WARNING  | risk.portfolio | Lot cap active | raw=4060.7373 -> final=20.0000 | cap=20.0000 | risk_target=2000.22
+2026-06-08 18:06:31,909 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.7550 | lot=20.0000 | SL=52.2476 | TP=51.0161 | risk_target=2000.21 | cost_ratio=9.5%
+2026-06-08 18:06:31,910 | INFO     | risk.portfolio | Position closed [TP] @ 51.0161 | net_pnl=+14.57 | balance=100025.25 | time=2025-07-07 21:15:00
+2026-06-08 18:06:31,911 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,911 | INFO     | backtest | 📅 Yeni gün: 2025-07-08 | Bakiye: $100,025.25
+2026-06-08 18:06:31,918 | WARNING  | risk.portfolio | Lot cap active | raw=3543.2272 -> final=20.0000 | cap=20.0000 | risk_target=2000.51
+2026-06-08 18:06:31,918 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.0650 | lot=20.0000 | SL=52.5004 | TP=53.9119 | risk_target=2000.50 | cost_ratio=8.4%
+2026-06-08 18:06:31,918 | INFO     | risk.portfolio | Position closed [SL] @ 52.5004 | net_pnl=-11.50 | balance=100013.54 | time=2025-07-08 18:15:00
+2026-06-08 18:06:31,924 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,924 | INFO     | backtest | 📅 Yeni gün: 2025-07-09 | Bakiye: $100,013.54
+2026-06-08 18:06:31,930 | WARNING  | risk.portfolio | Lot cap active | raw=4183.9075 -> final=20.0000 | cap=20.0000 | risk_target=2000.27
+2026-06-08 18:06:31,931 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.2850 | lot=20.0000 | SL=52.8069 | TP=54.0021 | risk_target=2000.27 | cost_ratio=10.0%
+2026-06-08 18:06:31,931 | INFO     | risk.portfolio | Position closed [SL] @ 52.8069 | net_pnl=-9.77 | balance=100003.55 | time=2025-07-09 17:30:00
+2026-06-08 18:06:31,937 | WARNING  | risk.portfolio | Lot cap active | raw=3668.1307 -> final=20.0000 | cap=20.0000 | risk_target=2000.07
+2026-06-08 18:06:31,937 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.0350 | lot=20.0000 | SL=52.5803 | TP=51.2171 | risk_target=2000.07 | cost_ratio=8.6%
+2026-06-08 18:06:31,939 | INFO     | risk.portfolio | Position closed [SL] @ 52.5803 | net_pnl=-11.12 | balance=99992.23 | time=2025-07-09 20:45:00
+2026-06-08 18:06:31,940 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,940 | INFO     | backtest | 📅 Yeni gün: 2025-07-10 | Bakiye: $99,992.23
+2026-06-08 18:06:31,947 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,947 | INFO     | backtest | 📅 Yeni gün: 2025-07-11 | Bakiye: $99,992.23
+2026-06-08 18:06:31,953 | WARNING  | risk.portfolio | Lot cap active | raw=3956.7141 -> final=20.0000 | cap=20.0000 | risk_target=1999.84
+2026-06-08 18:06:31,953 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.7450 | lot=20.0000 | SL=54.2504 | TP=52.9869 | risk_target=1999.84 | cost_ratio=9.4%
+2026-06-08 18:06:31,954 | INFO     | risk.portfolio | Position closed [SL] @ 54.2504 | net_pnl=-10.33 | balance=99981.69 | time=2025-07-11 17:30:00
+2026-06-08 18:06:31,961 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,961 | INFO     | backtest | 📅 Yeni gün: 2025-07-14 | Bakiye: $99,981.69
+2026-06-08 18:06:31,966 | WARNING  | risk.portfolio | Lot cap active | raw=3622.7415 -> final=20.0000 | cap=20.0000 | risk_target=1999.63
+2026-06-08 18:06:31,967 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.7450 | lot=20.0000 | SL=53.2970 | TP=51.9170 | risk_target=1999.63 | cost_ratio=8.6%
+2026-06-08 18:06:31,968 | INFO     | risk.portfolio | Position closed [SL] @ 53.2970 | net_pnl=-11.25 | balance=99970.22 | time=2025-07-14 19:00:00
+2026-06-08 18:06:31,973 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,973 | INFO     | backtest | 📅 Yeni gün: 2025-07-15 | Bakiye: $99,970.22
+2026-06-08 18:06:31,980 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,980 | INFO     | backtest | 📅 Yeni gün: 2025-07-16 | Bakiye: $99,970.22
+2026-06-08 18:06:31,988 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:31,988 | INFO     | backtest | 📅 Yeni gün: 2025-07-17 | Bakiye: $99,970.22
+2026-06-08 18:06:31,995 | WARNING  | risk.portfolio | Lot cap active | raw=4739.9386 -> final=20.0000 | cap=20.0000 | risk_target=1999.40
+2026-06-08 18:06:31,996 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.2750 | lot=20.0000 | SL=51.8532 | TP=52.9077 | risk_target=1999.40 | cost_ratio=11.2%
+2026-06-08 18:06:31,997 | INFO     | risk.portfolio | Position closed [TP] @ 52.9077 | net_pnl=+12.44 | balance=99982.46 | time=2025-07-17 20:15:00
+2026-06-08 18:06:32,002 | WARNING  | risk.portfolio | Lot cap active | raw=5399.8308 -> final=20.0000 | cap=20.0000 | risk_target=1999.65
+2026-06-08 18:06:32,002 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.9350 | lot=20.0000 | SL=52.5647 | TP=53.4905 | risk_target=1999.64 | cost_ratio=12.8%
+2026-06-08 18:06:32,003 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,003 | INFO     | backtest | 📅 Yeni gün: 2025-07-18 | Bakiye: $99,982.25
+2026-06-08 18:06:32,004 | INFO     | risk.portfolio | Position closed [TP] @ 53.4905 | net_pnl=+10.90 | balance=99993.14 | time=2025-07-18 16:30:00
+2026-06-08 18:06:32,011 | WARNING  | risk.portfolio | Lot cap active | raw=4626.0768 -> final=20.0000 | cap=20.0000 | risk_target=1999.86
+2026-06-08 18:06:32,011 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.2250 | lot=20.0000 | SL=52.6573 | TP=51.5765 | risk_target=1999.86 | cost_ratio=10.9%
+2026-06-08 18:06:32,012 | INFO     | risk.portfolio | Position closed [SL] @ 52.6573 | net_pnl=-8.86 | balance=99984.08 | time=2025-07-18 18:45:00
+2026-06-08 18:06:32,018 | WARNING  | risk.portfolio | Lot cap active | raw=4302.9271 -> final=20.0000 | cap=20.0000 | risk_target=1999.68
+2026-06-08 18:06:32,018 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.0750 | lot=20.0000 | SL=52.5397 | TP=51.3779 | risk_target=1999.68 | cost_ratio=10.1%
+2026-06-08 18:06:32,020 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:32,020 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 52.0200 | net_pnl=+0.89 | balance=99984.76 | time=2025-07-18 23:00:00
+2026-06-08 18:06:32,020 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 52.0200 | PnL=+0.89 USD
+2026-06-08 18:06:32,020 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,020 | INFO     | backtest | 📅 Yeni gün: 2025-07-21 | Bakiye: $99,984.76
+2026-06-08 18:06:32,026 | WARNING  | risk.portfolio | Lot cap active | raw=3155.6394 -> final=20.0000 | cap=20.0000 | risk_target=1999.70
+2026-06-08 18:06:32,026 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 50.8450 | lot=20.0000 | SL=51.4787 | TP=49.8945 | risk_target=1999.69 | cost_ratio=7.4%
+2026-06-08 18:06:32,029 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,029 | INFO     | backtest | 📅 Yeni gün: 2025-07-22 | Bakiye: $99,984.56
+2026-06-08 18:06:32,029 | INFO     | risk.portfolio | Position closed [SL] @ 51.4787 | net_pnl=-12.88 | balance=99971.68 | time=2025-07-22 16:30:00
+2026-06-08 18:06:32,035 | WARNING  | risk.portfolio | Lot cap active | raw=2453.7329 -> final=20.0000 | cap=20.0000 | risk_target=1999.43
+2026-06-08 18:06:32,035 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.6950 | lot=20.0000 | SL=51.8801 | TP=53.9173 | risk_target=1999.43 | cost_ratio=5.8%
+2026-06-08 18:06:32,038 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,038 | INFO     | backtest | 📅 Yeni gün: 2025-07-23 | Bakiye: $99,971.47
+2026-06-08 18:06:32,038 | INFO     | risk.portfolio | Position closed [TP] @ 53.9173 | net_pnl=+24.23 | balance=99995.70 | time=2025-07-23 16:30:00
+2026-06-08 18:06:32,043 | WARNING  | risk.portfolio | Lot cap active | raw=2642.2683 -> final=20.0000 | cap=20.0000 | risk_target=1999.91
+2026-06-08 18:06:32,044 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 54.7050 | lot=20.0000 | SL=53.9481 | TP=55.8403 | risk_target=1999.91 | cost_ratio=6.4%
+2026-06-08 18:06:32,046 | INFO     | risk.portfolio | Position closed [TP] @ 55.8403 | net_pnl=+22.48 | balance=100017.96 | time=2025-07-23 20:45:00
+2026-06-08 18:06:32,049 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,049 | INFO     | backtest | 📅 Yeni gün: 2025-07-24 | Bakiye: $100,017.96
+2026-06-08 18:06:32,058 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,059 | INFO     | backtest | 📅 Yeni gün: 2025-07-25 | Bakiye: $100,017.96
+2026-06-08 18:06:32,067 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,067 | INFO     | backtest | 📅 Yeni gün: 2025-07-28 | Bakiye: $100,017.96
+2026-06-08 18:06:32,081 | WARNING  | risk.portfolio | Lot cap active | raw=4504.5498 -> final=20.0000 | cap=20.0000 | risk_target=2000.36
+2026-06-08 18:06:32,081 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.5250 | lot=20.0000 | SL=58.9691 | TP=57.8589 | risk_target=2000.35 | cost_ratio=11.0%
+2026-06-08 18:06:32,082 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,082 | INFO     | backtest | 📅 Yeni gün: 2025-07-29 | Bakiye: $100,017.73
+2026-06-08 18:06:32,082 | INFO     | risk.portfolio | Position closed [TP] @ 57.8589 | net_pnl=+13.09 | balance=100030.82 | time=2025-07-29 18:15:00
+2026-06-08 18:06:32,094 | WARNING  | risk.portfolio | Lot cap active | raw=3897.0740 -> final=20.0000 | cap=20.0000 | risk_target=2000.62
+2026-06-08 18:06:32,094 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.8450 | lot=20.0000 | SL=58.3584 | TP=57.0750 | risk_target=2000.61 | cost_ratio=9.5%
+2026-06-08 18:06:32,108 | INFO     | risk.portfolio | Position closed [SL] @ 58.3584 | net_pnl=-10.50 | balance=100020.09 | time=2025-07-29 22:00:00
+2026-06-08 18:06:32,110 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,110 | INFO     | backtest | 📅 Yeni gün: 2025-07-30 | Bakiye: $100,020.09
+2026-06-08 18:06:32,118 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,118 | INFO     | backtest | 📅 Yeni gün: 2025-07-31 | Bakiye: $100,020.09
+2026-06-08 18:06:32,127 | WARNING  | risk.portfolio | Lot cap active | raw=3205.6597 -> final=20.0000 | cap=20.0000 | risk_target=2000.40
+2026-06-08 18:06:32,127 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 56.3850 | lot=20.0000 | SL=57.0090 | TP=55.4490 | risk_target=2000.40 | cost_ratio=7.7%
+2026-06-08 18:06:32,128 | INFO     | risk.portfolio | Position closed [TP] @ 55.4490 | net_pnl=+18.50 | balance=100038.36 | time=2025-07-31 22:00:00
+2026-06-08 18:06:32,134 | WARNING  | risk.portfolio | Lot cap active | raw=3623.9326 -> final=20.0000 | cap=20.0000 | risk_target=2000.77
+2026-06-08 18:06:32,134 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 55.3550 | lot=20.0000 | SL=55.9071 | TP=54.5269 | risk_target=2000.76 | cost_ratio=8.7%
+2026-06-08 18:06:32,135 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,135 | INFO     | backtest | 📅 Yeni gün: 2025-08-01 | Bakiye: $100,038.14
+2026-06-08 18:06:32,135 | INFO     | risk.portfolio | Position closed [TP] @ 54.5269 | net_pnl=+16.34 | balance=100054.48 | time=2025-08-01 16:30:00
+2026-06-08 18:06:32,148 | WARNING  | risk.portfolio | Lot cap active | raw=4211.8502 -> final=20.0000 | cap=20.0000 | risk_target=2001.09
+2026-06-08 18:06:32,149 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 54.9250 | lot=20.0000 | SL=54.4499 | TP=55.6377 | risk_target=2001.09 | cost_ratio=10.1%
+2026-06-08 18:06:32,149 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:32,149 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 54.8900 | net_pnl=-0.92 | balance=100053.34 | time=2025-08-01 23:00:00
+2026-06-08 18:06:32,149 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 54.8900 | PnL=-0.92 USD
+2026-06-08 18:06:32,149 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,150 | INFO     | backtest | 📅 Yeni gün: 2025-08-13 | Bakiye: $100,053.34
+2026-06-08 18:06:32,155 | WARNING  | risk.portfolio | Lot cap active | raw=3118.8521 -> final=20.0000 | cap=20.0000 | risk_target=2001.07
+2026-06-08 18:06:32,155 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.5950 | lot=20.0000 | SL=54.2366 | TP=52.6326 | risk_target=2001.06 | cost_ratio=7.4%
+2026-06-08 18:06:32,156 | INFO     | risk.portfolio | Position closed [SL] @ 54.2366 | net_pnl=-13.05 | balance=100040.08 | time=2025-08-13 18:00:00
+2026-06-08 18:06:32,163 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,163 | INFO     | backtest | 📅 Yeni gün: 2025-08-14 | Bakiye: $100,040.08
+2026-06-08 18:06:32,169 | WARNING  | risk.portfolio | Lot cap active | raw=3645.2954 -> final=20.0000 | cap=20.0000 | risk_target=2000.80
+2026-06-08 18:06:32,169 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.8750 | lot=20.0000 | SL=54.4239 | TP=53.0517 | risk_target=2000.80 | cost_ratio=8.7%
+2026-06-08 18:06:32,172 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,172 | INFO     | backtest | 📅 Yeni gün: 2025-08-15 | Bakiye: $100,039.86
+2026-06-08 18:06:32,175 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:32,175 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 53.6000 | net_pnl=+5.29 | balance=100045.15 | time=2025-08-15 23:00:00
+2026-06-08 18:06:32,175 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 53.6000 | PnL=+5.29 USD
+2026-06-08 18:06:32,175 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,175 | INFO     | backtest | 📅 Yeni gün: 2025-08-18 | Bakiye: $100,045.15
+2026-06-08 18:06:32,183 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,183 | INFO     | backtest | 📅 Yeni gün: 2025-08-19 | Bakiye: $100,045.15
+2026-06-08 18:06:32,193 | WARNING  | risk.portfolio | Lot cap active | raw=5099.6808 -> final=20.0000 | cap=20.0000 | risk_target=2000.90
+2026-06-08 18:06:32,193 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 54.6150 | lot=20.0000 | SL=54.2226 | TP=55.2035 | risk_target=2000.90 | cost_ratio=12.2%
+2026-06-08 18:06:32,194 | INFO     | risk.portfolio | Position closed [SL] @ 54.2226 | net_pnl=-8.06 | balance=100036.87 | time=2025-08-19 18:00:00
+2026-06-08 18:06:32,201 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,201 | INFO     | backtest | 📅 Yeni gün: 2025-08-20 | Bakiye: $100,036.87
+2026-06-08 18:06:32,210 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,211 | INFO     | backtest | 📅 Yeni gün: 2025-08-21 | Bakiye: $100,036.87
+2026-06-08 18:06:32,218 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,218 | INFO     | backtest | 📅 Yeni gün: 2025-08-22 | Bakiye: $100,036.87
+2026-06-08 18:06:32,226 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,227 | INFO     | backtest | 📅 Yeni gün: 2025-08-25 | Bakiye: $100,036.87
+2026-06-08 18:06:32,240 | WARNING  | risk.portfolio | Lot cap active | raw=6210.4406 -> final=20.0000 | cap=20.0000 | risk_target=2000.74
+2026-06-08 18:06:32,241 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 56.7350 | lot=20.0000 | SL=56.4128 | TP=57.2182 | risk_target=2000.73 | cost_ratio=15.1%
+2026-06-08 18:06:32,241 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,241 | INFO     | backtest | 📅 Yeni gün: 2025-08-26 | Bakiye: $100,036.64
+2026-06-08 18:06:32,241 | INFO     | risk.portfolio | Position closed [SL] @ 56.4128 | net_pnl=-6.67 | balance=100029.97 | time=2025-08-26 16:30:00
+2026-06-08 18:06:32,247 | WARNING  | risk.portfolio | Lot cap active | raw=5256.7890 -> final=20.0000 | cap=20.0000 | risk_target=2000.60
+2026-06-08 18:06:32,247 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 56.8750 | lot=20.0000 | SL=56.4944 | TP=57.4459 | risk_target=2000.59 | cost_ratio=12.8%
+2026-06-08 18:06:32,247 | INFO     | risk.portfolio | Position closed [TP] @ 57.4459 | net_pnl=+11.19 | balance=100040.93 | time=2025-08-26 17:00:00
+2026-06-08 18:06:32,257 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,257 | INFO     | backtest | 📅 Yeni gün: 2025-08-27 | Bakiye: $100,040.93
+2026-06-08 18:06:32,265 | WARNING  | risk.portfolio | Lot cap active | raw=4576.0183 -> final=20.0000 | cap=20.0000 | risk_target=2000.82
+2026-06-08 18:06:32,266 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 56.2950 | lot=20.0000 | SL=56.7322 | TP=55.6391 | risk_target=2000.81 | cost_ratio=11.0%
+2026-06-08 18:06:32,268 | INFO     | risk.portfolio | Position closed [SL] @ 56.7322 | net_pnl=-8.97 | balance=100031.73 | time=2025-08-27 22:15:00
+2026-06-08 18:06:32,275 | WARNING  | risk.portfolio | Lot cap active | raw=6510.3544 -> final=20.0000 | cap=20.0000 | risk_target=2000.63
+2026-06-08 18:06:32,275 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 56.1950 | lot=20.0000 | SL=56.5023 | TP=55.7340 | risk_target=2000.63 | cost_ratio=15.7%
+2026-06-08 18:06:32,275 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,275 | INFO     | backtest | 📅 Yeni gün: 2025-08-28 | Bakiye: $100,031.51
+2026-06-08 18:06:32,275 | INFO     | risk.portfolio | Position closed [SL] @ 56.5023 | net_pnl=-6.37 | balance=100025.14 | time=2025-08-28 16:30:00
+2026-06-08 18:06:32,281 | WARNING  | risk.portfolio | Lot cap active | raw=5139.9934 -> final=20.0000 | cap=20.0000 | risk_target=2000.50
+2026-06-08 18:06:32,282 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 56.1850 | lot=20.0000 | SL=56.5742 | TP=55.6012 | risk_target=2000.50 | cost_ratio=12.4%
+2026-06-08 18:06:32,282 | INFO     | risk.portfolio | Position closed [TP] @ 55.6012 | net_pnl=+11.45 | balance=100036.37 | time=2025-08-28 17:30:00
+2026-06-08 18:06:32,287 | WARNING  | risk.portfolio | Lot cap active | raw=4533.9448 -> final=20.0000 | cap=20.0000 | risk_target=2000.73
+2026-06-08 18:06:32,287 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 55.4050 | lot=20.0000 | SL=55.8463 | TP=54.7431 | risk_target=2000.72 | cost_ratio=10.9%
+2026-06-08 18:06:32,288 | INFO     | risk.portfolio | Position closed [TP] @ 54.7431 | net_pnl=+13.02 | balance=100049.16 | time=2025-08-28 17:45:00
+2026-06-08 18:06:32,290 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,290 | INFO     | backtest | 📅 Yeni gün: 2025-08-29 | Bakiye: $100,049.16
+2026-06-08 18:06:32,298 | WARNING  | risk.portfolio | Lot cap active | raw=4352.7098 -> final=20.0000 | cap=20.0000 | risk_target=2000.98
+2026-06-08 18:06:32,298 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 54.7150 | lot=20.0000 | SL=54.2553 | TP=55.4046 | risk_target=2000.98 | cost_ratio=10.4%
+2026-06-08 18:06:32,300 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:32,300 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 54.6300 | net_pnl=-1.92 | balance=100047.03 | time=2025-08-29 23:00:00
+2026-06-08 18:06:32,300 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 54.6300 | PnL=-1.92 USD
+2026-06-08 18:06:32,300 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,300 | INFO     | backtest | 📅 Yeni gün: 2025-09-02 | Bakiye: $100,047.03
+2026-06-08 18:06:32,306 | WARNING  | risk.portfolio | Lot cap active | raw=4474.6247 -> final=20.0000 | cap=20.0000 | risk_target=2000.94
+2026-06-08 18:06:32,306 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.2550 | lot=20.0000 | SL=53.7022 | TP=52.5842 | risk_target=2000.94 | cost_ratio=10.6%
+2026-06-08 18:06:32,307 | INFO     | risk.portfolio | Position closed [TP] @ 52.5842 | net_pnl=+13.20 | balance=100060.02 | time=2025-09-02 18:00:00
+2026-06-08 18:06:32,318 | WARNING  | risk.portfolio | Lot cap active | raw=6228.0270 -> final=20.0000 | cap=20.0000 | risk_target=2001.20
+2026-06-08 18:06:32,319 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.4450 | lot=20.0000 | SL=53.1237 | TP=53.9270 | risk_target=2001.20 | cost_ratio=14.8%
+2026-06-08 18:06:32,319 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,319 | INFO     | backtest | 📅 Yeni gün: 2025-09-03 | Bakiye: $100,059.80
+2026-06-08 18:06:32,319 | INFO     | risk.portfolio | Position closed [SL] @ 53.1237 | net_pnl=-6.64 | balance=100053.17 | time=2025-09-03 16:30:00
+2026-06-08 18:06:32,325 | WARNING  | risk.portfolio | Lot cap active | raw=5000.7094 -> final=20.0000 | cap=20.0000 | risk_target=2001.06
+2026-06-08 18:06:32,325 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 54.0150 | lot=20.0000 | SL=53.6148 | TP=54.6152 | risk_target=2001.06 | cost_ratio=11.9%
+2026-06-08 18:06:32,325 | INFO     | risk.portfolio | Position closed [SL] @ 53.6148 | net_pnl=-8.22 | balance=100044.73 | time=2025-09-03 16:45:00
+2026-06-08 18:06:32,335 | WARNING  | risk.portfolio | Lot cap active | raw=4808.1275 -> final=20.0000 | cap=20.0000 | risk_target=2000.89
+2026-06-08 18:06:32,335 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.8850 | lot=20.0000 | SL=53.3011 | TP=52.2608 | risk_target=2000.89 | cost_ratio=11.4%
+2026-06-08 18:06:32,336 | INFO     | risk.portfolio | Position closed [SL] @ 53.3011 | net_pnl=-8.54 | balance=100035.98 | time=2025-09-03 21:30:00
+2026-06-08 18:06:32,337 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,337 | INFO     | backtest | 📅 Yeni gün: 2025-09-04 | Bakiye: $100,035.98
+2026-06-08 18:06:32,343 | WARNING  | risk.portfolio | Lot cap active | raw=3911.0715 -> final=20.0000 | cap=20.0000 | risk_target=2000.72
+2026-06-08 18:06:32,343 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.5550 | lot=20.0000 | SL=53.0666 | TP=51.7877 | risk_target=2000.72 | cost_ratio=9.2%
+2026-06-08 18:06:32,346 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,346 | INFO     | backtest | 📅 Yeni gün: 2025-09-05 | Bakiye: $100,035.77
+2026-06-08 18:06:32,346 | INFO     | risk.portfolio | Position closed [SL] @ 53.0666 | net_pnl=-10.44 | balance=100025.33 | time=2025-09-05 16:30:00
+2026-06-08 18:06:32,352 | WARNING  | risk.portfolio | Lot cap active | raw=4386.0076 -> final=20.0000 | cap=20.0000 | risk_target=2000.51
+2026-06-08 18:06:32,352 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.9150 | lot=20.0000 | SL=53.4589 | TP=54.5992 | risk_target=2000.50 | cost_ratio=10.5%
+2026-06-08 18:06:32,353 | INFO     | risk.portfolio | Position closed [SL] @ 53.4589 | net_pnl=-9.34 | balance=100015.78 | time=2025-09-05 17:30:00
+2026-06-08 18:06:32,359 | WARNING  | risk.portfolio | Lot cap active | raw=3716.8307 -> final=20.0000 | cap=20.0000 | risk_target=2000.32
+2026-06-08 18:06:32,359 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.6150 | lot=20.0000 | SL=53.0768 | TP=54.4223 | risk_target=2000.31 | cost_ratio=8.9%
+2026-06-08 18:06:32,361 | INFO     | risk.portfolio | Position closed [TP] @ 54.4223 | net_pnl=+15.93 | balance=100031.49 | time=2025-09-05 22:15:00
+2026-06-08 18:06:32,361 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,361 | INFO     | backtest | 📅 Yeni gün: 2025-09-08 | Bakiye: $100,031.49
+2026-06-08 18:06:32,371 | WARNING  | risk.portfolio | Lot cap active | raw=4674.9290 -> final=20.0000 | cap=20.0000 | risk_target=2000.63
+2026-06-08 18:06:32,371 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.5450 | lot=20.0000 | SL=53.9729 | TP=52.9031 | risk_target=2000.63 | cost_ratio=11.1%
+2026-06-08 18:06:32,373 | INFO     | risk.portfolio | Position closed [SL] @ 53.9729 | net_pnl=-8.77 | balance=100022.50 | time=2025-09-08 22:45:00
+2026-06-08 18:06:32,373 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,373 | INFO     | backtest | 📅 Yeni gün: 2025-09-09 | Bakiye: $100,022.50
+2026-06-08 18:06:32,381 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,381 | INFO     | backtest | 📅 Yeni gün: 2025-09-10 | Bakiye: $100,022.50
+2026-06-08 18:06:32,389 | WARNING  | risk.portfolio | Lot cap active | raw=4269.6750 -> final=20.0000 | cap=20.0000 | risk_target=2000.45
+2026-06-08 18:06:32,389 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.2850 | lot=20.0000 | SL=53.7535 | TP=52.5822 | risk_target=2000.45 | cost_ratio=10.1%
+2026-06-08 18:06:32,390 | INFO     | risk.portfolio | Position closed [TP] @ 52.5822 | net_pnl=+13.85 | balance=100036.14 | time=2025-09-10 19:15:00
+2026-06-08 18:06:32,395 | WARNING  | risk.portfolio | Lot cap active | raw=3976.4105 -> final=20.0000 | cap=20.0000 | risk_target=2000.72
+2026-06-08 18:06:32,395 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.4550 | lot=20.0000 | SL=52.9581 | TP=51.7003 | risk_target=2000.72 | cost_ratio=9.4%
+2026-06-08 18:06:32,396 | INFO     | risk.portfolio | Position closed [TP] @ 51.7003 | net_pnl=+14.89 | balance=100050.81 | time=2025-09-10 20:30:00
+2026-06-08 18:06:32,397 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,397 | INFO     | backtest | 📅 Yeni gün: 2025-09-11 | Bakiye: $100,050.81
+2026-06-08 18:06:32,408 | WARNING  | risk.portfolio | Lot cap active | raw=4733.2099 -> final=20.0000 | cap=20.0000 | risk_target=2001.02
+2026-06-08 18:06:32,408 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.7950 | lot=20.0000 | SL=52.3722 | TP=53.4291 | risk_target=2001.01 | cost_ratio=11.2%
+2026-06-08 18:06:32,409 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,409 | INFO     | backtest | 📅 Yeni gün: 2025-09-12 | Bakiye: $100,050.60
+2026-06-08 18:06:32,409 | INFO     | risk.portfolio | Position closed [SL] @ 52.3722 | net_pnl=-8.66 | balance=100041.94 | time=2025-09-12 16:30:00
+2026-06-08 18:06:32,415 | WARNING  | risk.portfolio | Lot cap active | raw=3773.1443 -> final=20.0000 | cap=20.0000 | risk_target=2000.84
+2026-06-08 18:06:32,415 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.5150 | lot=20.0000 | SL=52.0453 | TP=50.7196 | risk_target=2000.83 | cost_ratio=8.9%
+2026-06-08 18:06:32,418 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:32,418 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 51.2600 | net_pnl=+4.89 | balance=100046.63 | time=2025-09-12 23:00:00
+2026-06-08 18:06:32,418 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 51.2600 | PnL=+4.89 USD
+2026-06-08 18:06:32,419 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,419 | INFO     | backtest | 📅 Yeni gün: 2025-09-15 | Bakiye: $100,046.63
+2026-06-08 18:06:32,426 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,427 | INFO     | backtest | 📅 Yeni gün: 2025-09-16 | Bakiye: $100,046.63
+2026-06-08 18:06:32,435 | WARNING  | risk.portfolio | Lot cap active | raw=4935.3211 -> final=20.0000 | cap=20.0000 | risk_target=2000.93
+2026-06-08 18:06:32,436 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.2650 | lot=20.0000 | SL=51.6704 | TP=50.6569 | risk_target=2000.93 | cost_ratio=11.6%
+2026-06-08 18:06:32,437 | INFO     | risk.portfolio | Position closed [SL] @ 51.6704 | net_pnl=-8.32 | balance=100038.11 | time=2025-09-16 22:00:00
+2026-06-08 18:06:32,443 | WARNING  | risk.portfolio | Lot cap active | raw=6178.1058 -> final=20.0000 | cap=20.0000 | risk_target=2000.76
+2026-06-08 18:06:32,443 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 51.8850 | lot=20.0000 | SL=51.5612 | TP=52.3708 | risk_target=2000.76 | cost_ratio=14.6%
+2026-06-08 18:06:32,443 | INFO     | risk.portfolio | Position closed [SL] @ 51.5612 | net_pnl=-6.68 | balance=100031.22 | time=2025-09-16 22:15:00
+2026-06-08 18:06:32,444 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,444 | INFO     | backtest | 📅 Yeni gün: 2025-09-17 | Bakiye: $100,031.22
+2026-06-08 18:06:32,449 | WARNING  | risk.portfolio | Lot cap active | raw=4656.6642 -> final=20.0000 | cap=20.0000 | risk_target=2000.62
+2026-06-08 18:06:32,449 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.7350 | lot=20.0000 | SL=52.3054 | TP=53.3794 | risk_target=2000.62 | cost_ratio=11.1%
+2026-06-08 18:06:32,450 | INFO     | risk.portfolio | Position closed [SL] @ 52.3054 | net_pnl=-8.80 | balance=100022.20 | time=2025-09-17 19:15:00
+2026-06-08 18:06:32,458 | WARNING  | risk.portfolio | Lot cap active | raw=3890.6092 -> final=20.0000 | cap=20.0000 | risk_target=2000.44
+2026-06-08 18:06:32,458 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.0050 | lot=20.0000 | SL=52.4908 | TP=53.7763 | risk_target=2000.44 | cost_ratio=9.3%
+2026-06-08 18:06:32,458 | INFO     | risk.portfolio | Position closed [SL] @ 52.4908 | net_pnl=-10.49 | balance=100011.50 | time=2025-09-17 21:30:00
+2026-06-08 18:06:32,459 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,459 | INFO     | backtest | 📅 Yeni gün: 2025-09-18 | Bakiye: $100,011.50
+2026-06-08 18:06:32,466 | WARNING  | risk.portfolio | Lot cap active | raw=3115.7704 -> final=20.0000 | cap=20.0000 | risk_target=2000.23
+2026-06-08 18:06:32,466 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.8550 | lot=20.0000 | SL=52.2130 | TP=53.8180 | risk_target=2000.23 | cost_ratio=7.4%
+2026-06-08 18:06:32,469 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,469 | INFO     | backtest | 📅 Yeni gün: 2025-09-19 | Bakiye: $100,011.29
+2026-06-08 18:06:32,469 | INFO     | risk.portfolio | Position closed [SL] @ 52.2130 | net_pnl=-13.05 | balance=99998.24 | time=2025-09-19 17:45:00
+2026-06-08 18:06:32,476 | WARNING  | risk.portfolio | Lot cap active | raw=4617.4044 -> final=20.0000 | cap=20.0000 | risk_target=1999.96
+2026-06-08 18:06:32,476 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.2050 | lot=20.0000 | SL=52.6381 | TP=51.5553 | risk_target=1999.96 | cost_ratio=10.9%
+2026-06-08 18:06:32,477 | INFO     | risk.portfolio | Position closed [SL] @ 52.6381 | net_pnl=-8.87 | balance=99989.16 | time=2025-09-19 20:30:00
+2026-06-08 18:06:32,484 | WARNING  | risk.portfolio | Lot cap active | raw=5843.5320 -> final=20.0000 | cap=20.0000 | risk_target=1999.78
+2026-06-08 18:06:32,485 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.8750 | lot=20.0000 | SL=52.5328 | TP=53.3883 | risk_target=1999.78 | cost_ratio=13.9%
+2026-06-08 18:06:32,485 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:32,485 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 53.1500 | net_pnl=+5.29 | balance=99994.23 | time=2025-09-19 23:00:00
+2026-06-08 18:06:32,486 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 53.1500 | PnL=+5.29 USD
+2026-06-08 18:06:32,486 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,486 | INFO     | backtest | 📅 Yeni gün: 2025-09-22 | Bakiye: $99,994.23
+2026-06-08 18:06:32,494 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,494 | INFO     | backtest | 📅 Yeni gün: 2025-09-23 | Bakiye: $99,994.23
+2026-06-08 18:06:32,506 | WARNING  | risk.portfolio | Lot cap active | raw=5681.5112 -> final=20.0000 | cap=20.0000 | risk_target=1999.88
+2026-06-08 18:06:32,506 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.2950 | lot=20.0000 | SL=53.6470 | TP=52.7670 | risk_target=1999.88 | cost_ratio=13.5%
+2026-06-08 18:06:32,507 | INFO     | risk.portfolio | Position closed [TP] @ 52.7670 | net_pnl=+10.35 | balance=100004.37 | time=2025-09-23 22:00:00
+2026-06-08 18:06:32,512 | WARNING  | risk.portfolio | Lot cap active | raw=5262.8379 -> final=20.0000 | cap=20.0000 | risk_target=2000.09
+2026-06-08 18:06:32,512 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.8050 | lot=20.0000 | SL=53.1850 | TP=52.2349 | risk_target=2000.08 | cost_ratio=12.5%
+2026-06-08 18:06:32,513 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,513 | INFO     | backtest | 📅 Yeni gün: 2025-09-24 | Bakiye: $100,004.16
+2026-06-08 18:06:32,514 | INFO     | risk.portfolio | Position closed [TP] @ 52.2349 | net_pnl=+11.19 | balance=100015.35 | time=2025-09-24 16:45:00
+2026-06-08 18:06:32,521 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,521 | INFO     | backtest | 📅 Yeni gün: 2025-09-25 | Bakiye: $100,015.35
+2026-06-08 18:06:32,529 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,529 | INFO     | backtest | 📅 Yeni gün: 2025-09-26 | Bakiye: $100,015.35
+2026-06-08 18:06:32,536 | WARNING  | risk.portfolio | Lot cap active | raw=5127.4025 -> final=20.0000 | cap=20.0000 | risk_target=2000.31
+2026-06-08 18:06:32,536 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 51.6450 | lot=20.0000 | SL=51.2549 | TP=52.2302 | risk_target=2000.30 | cost_ratio=12.1%
+2026-06-08 18:06:32,536 | INFO     | risk.portfolio | Position closed [SL] @ 51.2549 | net_pnl=-8.01 | balance=100007.13 | time=2025-09-26 17:15:00
+2026-06-08 18:06:32,542 | WARNING  | risk.portfolio | Lot cap active | raw=4796.0103 -> final=20.0000 | cap=20.0000 | risk_target=2000.14
+2026-06-08 18:06:32,542 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 51.6550 | lot=20.0000 | SL=51.2380 | TP=52.2806 | risk_target=2000.14 | cost_ratio=11.3%
+2026-06-08 18:06:32,545 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:32,545 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 51.8500 | net_pnl=+3.69 | balance=100010.62 | time=2025-09-26 23:00:00
+2026-06-08 18:06:32,545 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 51.8500 | PnL=+3.69 USD
+2026-06-08 18:06:32,545 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,545 | INFO     | backtest | 📅 Yeni gün: 2025-09-29 | Bakiye: $100,010.62
+2026-06-08 18:06:32,554 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,554 | INFO     | backtest | 📅 Yeni gün: 2025-09-30 | Bakiye: $100,010.62
+2026-06-08 18:06:32,562 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,562 | INFO     | backtest | 📅 Yeni gün: 2025-10-01 | Bakiye: $100,010.62
+2026-06-08 18:06:32,570 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,570 | INFO     | backtest | 📅 Yeni gün: 2025-10-02 | Bakiye: $100,010.62
+2026-06-08 18:06:32,578 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,579 | INFO     | backtest | 📅 Yeni gün: 2025-10-03 | Bakiye: $100,010.62
+2026-06-08 18:06:32,587 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,587 | INFO     | backtest | 📅 Yeni gün: 2025-10-06 | Bakiye: $100,010.62
+2026-06-08 18:06:32,594 | WARNING  | risk.portfolio | Lot cap active | raw=3381.9689 -> final=20.0000 | cap=20.0000 | risk_target=2000.21
+2026-06-08 18:06:32,595 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 62.2250 | lot=20.0000 | SL=62.8164 | TP=61.3378 | risk_target=2000.21 | cost_ratio=8.4%
+2026-06-08 18:06:32,596 | INFO     | risk.portfolio | Position closed [SL] @ 62.8164 | net_pnl=-12.08 | balance=99998.29 | time=2025-10-06 18:30:00
+2026-06-08 18:06:32,603 | WARNING  | risk.portfolio | Lot cap active | raw=3696.9244 -> final=20.0000 | cap=20.0000 | risk_target=1999.97
+2026-06-08 18:06:32,603 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 62.1250 | lot=20.0000 | SL=62.6660 | TP=61.3135 | risk_target=1999.96 | cost_ratio=9.2%
+2026-06-08 18:06:32,605 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,605 | INFO     | backtest | 📅 Yeni gün: 2025-10-07 | Bakiye: $99,998.04
+2026-06-08 18:06:32,605 | INFO     | risk.portfolio | Position closed [SL] @ 62.6660 | net_pnl=-11.07 | balance=99986.97 | time=2025-10-07 16:30:00
+2026-06-08 18:06:32,611 | WARNING  | risk.portfolio | Lot cap active | raw=2694.8517 -> final=20.0000 | cap=20.0000 | risk_target=1999.74
+2026-06-08 18:06:32,612 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 60.7250 | lot=20.0000 | SL=61.4671 | TP=59.6119 | risk_target=1999.73 | cost_ratio=6.7%
+2026-06-08 18:06:32,613 | INFO     | risk.portfolio | Position closed [TP] @ 59.6119 | net_pnl=+22.02 | balance=100008.75 | time=2025-10-07 20:00:00
+2026-06-08 18:06:32,617 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,617 | INFO     | backtest | 📅 Yeni gün: 2025-10-08 | Bakiye: $100,008.75
+2026-06-08 18:06:32,624 | WARNING  | risk.portfolio | Lot cap active | raw=3371.7796 -> final=20.0000 | cap=20.0000 | risk_target=2000.18
+2026-06-08 18:06:32,624 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 60.7250 | lot=20.0000 | SL=60.1318 | TP=61.6148 | risk_target=2000.17 | cost_ratio=8.4%
+2026-06-08 18:06:32,626 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,626 | INFO     | backtest | 📅 Yeni gün: 2025-10-09 | Bakiye: $100,008.51
+2026-06-08 18:06:32,627 | INFO     | risk.portfolio | Position closed [SL] @ 60.1318 | net_pnl=-12.10 | balance=99996.41 | time=2025-10-09 16:30:00
+2026-06-08 18:06:32,634 | WARNING  | risk.portfolio | Lot cap active | raw=3591.8159 -> final=20.0000 | cap=20.0000 | risk_target=1999.93
+2026-06-08 18:06:32,634 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 59.7850 | lot=20.0000 | SL=60.3418 | TP=58.9498 | risk_target=1999.92 | cost_ratio=8.8%
+2026-06-08 18:06:32,634 | INFO     | risk.portfolio | Position closed [SL] @ 60.3418 | net_pnl=-11.38 | balance=99984.79 | time=2025-10-09 17:45:00
+2026-06-08 18:06:32,644 | WARNING  | risk.portfolio | Lot cap active | raw=4048.1909 -> final=20.0000 | cap=20.0000 | risk_target=1999.70
+2026-06-08 18:06:32,644 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 60.0350 | lot=20.0000 | SL=60.5290 | TP=59.2940 | risk_target=1999.69 | cost_ratio=10.0%
+2026-06-08 18:06:32,646 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,646 | INFO     | backtest | 📅 Yeni gün: 2025-10-10 | Bakiye: $99,984.55
+2026-06-08 18:06:32,646 | INFO     | risk.portfolio | Position closed [TP] @ 59.2940 | net_pnl=+14.58 | balance=99999.13 | time=2025-10-10 17:00:00
+2026-06-08 18:06:32,661 | WARNING  | risk.portfolio | Lot cap active | raw=4245.7472 -> final=20.0000 | cap=20.0000 | risk_target=1999.98
+2026-06-08 18:06:32,661 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 59.0950 | lot=20.0000 | SL=59.5661 | TP=58.3884 | risk_target=1999.98 | cost_ratio=10.4%
+2026-06-08 18:06:32,662 | INFO     | risk.portfolio | Position closed [SL] @ 59.5661 | net_pnl=-9.66 | balance=99989.23 | time=2025-10-10 17:15:00
+2026-06-08 18:06:32,670 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,670 | INFO     | backtest | 📅 Yeni gün: 2025-10-13 | Bakiye: $99,989.23
+2026-06-08 18:06:32,677 | WARNING  | risk.portfolio | Lot cap active | raw=3036.5976 -> final=20.0000 | cap=20.0000 | risk_target=1999.78
+2026-06-08 18:06:32,678 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 59.5850 | lot=20.0000 | SL=58.9264 | TP=60.5728 | risk_target=1999.78 | cost_ratio=7.5%
+2026-06-08 18:06:32,680 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,680 | INFO     | backtest | 📅 Yeni gün: 2025-10-14 | Bakiye: $99,989.00
+2026-06-08 18:06:32,681 | INFO     | risk.portfolio | Position closed [SL] @ 58.9264 | net_pnl=-13.41 | balance=99975.59 | time=2025-10-14 16:30:00
+2026-06-08 18:06:32,688 | WARNING  | risk.portfolio | Lot cap active | raw=3314.8984 -> final=20.0000 | cap=20.0000 | risk_target=1999.51
+2026-06-08 18:06:32,688 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.4950 | lot=20.0000 | SL=59.0982 | TP=57.5902 | risk_target=1999.51 | cost_ratio=8.1%
+2026-06-08 18:06:32,689 | INFO     | risk.portfolio | Position closed [SL] @ 59.0982 | net_pnl=-12.30 | balance=99963.06 | time=2025-10-14 18:45:00
+2026-06-08 18:06:32,695 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,695 | INFO     | backtest | 📅 Yeni gün: 2025-10-15 | Bakiye: $99,963.06
+2026-06-08 18:06:32,704 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,704 | INFO     | backtest | 📅 Yeni gün: 2025-10-16 | Bakiye: $99,963.06
+2026-06-08 18:06:32,712 | WARNING  | risk.portfolio | Lot cap active | raw=2982.4143 -> final=20.0000 | cap=20.0000 | risk_target=1999.26
+2026-06-08 18:06:32,712 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 61.8850 | lot=20.0000 | SL=61.2147 | TP=62.8905 | risk_target=1999.26 | cost_ratio=7.5%
+2026-06-08 18:06:32,714 | INFO     | risk.portfolio | Position closed [SL] @ 61.2147 | net_pnl=-13.65 | balance=99949.16 | time=2025-10-16 21:30:00
+2026-06-08 18:06:32,716 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,716 | INFO     | backtest | 📅 Yeni gün: 2025-10-17 | Bakiye: $99,949.16
+2026-06-08 18:06:32,725 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,725 | INFO     | backtest | 📅 Yeni gün: 2025-10-20 | Bakiye: $99,949.16
+2026-06-08 18:06:32,733 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,733 | INFO     | backtest | 📅 Yeni gün: 2025-10-21 | Bakiye: $99,949.16
+2026-06-08 18:06:32,740 | WARNING  | risk.portfolio | Lot cap active | raw=3508.2504 -> final=20.0000 | cap=20.0000 | risk_target=1998.98
+2026-06-08 18:06:32,740 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 63.5250 | lot=20.0000 | SL=62.9552 | TP=64.3797 | risk_target=1998.98 | cost_ratio=8.8%
+2026-06-08 18:06:32,743 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,743 | INFO     | backtest | 📅 Yeni gün: 2025-10-22 | Bakiye: $99,948.90
+2026-06-08 18:06:32,743 | INFO     | risk.portfolio | Position closed [SL] @ 62.9552 | net_pnl=-11.65 | balance=99937.25 | time=2025-10-22 16:30:00
+2026-06-08 18:06:32,750 | WARNING  | risk.portfolio | Lot cap active | raw=3192.9650 -> final=20.0000 | cap=20.0000 | risk_target=1998.75
+2026-06-08 18:06:32,750 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 63.4650 | lot=20.0000 | SL=64.0910 | TP=62.5260 | risk_target=1998.74 | cost_ratio=8.0%
+2026-06-08 18:06:32,753 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,753 | INFO     | backtest | 📅 Yeni gün: 2025-10-23 | Bakiye: $99,937.00
+2026-06-08 18:06:32,753 | INFO     | risk.portfolio | Position closed [SL] @ 64.0910 | net_pnl=-12.78 | balance=99924.22 | time=2025-10-23 16:30:00
+2026-06-08 18:06:32,760 | WARNING  | risk.portfolio | Lot cap active | raw=3278.4817 -> final=20.0000 | cap=20.0000 | risk_target=1998.48
+2026-06-08 18:06:32,760 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 65.2250 | lot=20.0000 | SL=64.6154 | TP=66.1394 | risk_target=1998.48 | cost_ratio=8.3%
+2026-06-08 18:06:32,761 | INFO     | risk.portfolio | Position closed [SL] @ 64.6154 | net_pnl=-12.45 | balance=99911.51 | time=2025-10-23 17:00:00
+2026-06-08 18:06:32,769 | WARNING  | risk.portfolio | Lot cap active | raw=3235.6512 -> final=20.0000 | cap=20.0000 | risk_target=1998.23
+2026-06-08 18:06:32,769 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 65.1450 | lot=20.0000 | SL=64.5274 | TP=66.0713 | risk_target=1998.23 | cost_ratio=8.2%
+2026-06-08 18:06:32,769 | INFO     | risk.portfolio | Position closed [TP] @ 66.0713 | net_pnl=+18.26 | balance=99929.52 | time=2025-10-23 18:45:00
+2026-06-08 18:06:32,771 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,771 | INFO     | backtest | 📅 Yeni gün: 2025-10-24 | Bakiye: $99,929.52
+2026-06-08 18:06:32,790 | WARNING  | risk.portfolio | Lot cap active | raw=5198.3744 -> final=20.0000 | cap=20.0000 | risk_target=1998.59
+2026-06-08 18:06:32,790 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 65.9850 | lot=20.0000 | SL=66.3695 | TP=65.4083 | risk_target=1998.59 | cost_ratio=13.2%
+2026-06-08 18:06:32,791 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:32,791 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 65.9000 | net_pnl=+1.44 | balance=99930.69 | time=2025-10-24 23:00:00
+2026-06-08 18:06:32,791 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 65.9000 | PnL=+1.44 USD
+2026-06-08 18:06:32,791 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,791 | INFO     | backtest | 📅 Yeni gün: 2025-10-27 | Bakiye: $99,930.69
+2026-06-08 18:06:32,806 | WARNING  | risk.portfolio | Lot cap active | raw=4709.2113 -> final=20.0000 | cap=20.0000 | risk_target=1998.61
+2026-06-08 18:06:32,806 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 65.1750 | lot=20.0000 | SL=65.5994 | TP=64.5384 | risk_target=1998.61 | cost_ratio=11.9%
+2026-06-08 18:06:32,806 | INFO     | risk.portfolio | Position closed [SL] @ 65.5994 | net_pnl=-8.75 | balance=99921.68 | time=2025-10-27 15:45:00
+2026-06-08 18:06:32,813 | WARNING  | risk.portfolio | Lot cap active | raw=4065.2400 -> final=20.0000 | cap=20.0000 | risk_target=1998.43
+2026-06-08 18:06:32,813 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 65.1150 | lot=20.0000 | SL=65.6066 | TP=64.3776 | risk_target=1998.43 | cost_ratio=10.3%
+2026-06-08 18:06:32,813 | INFO     | risk.portfolio | Position closed [SL] @ 65.6066 | net_pnl=-10.09 | balance=99911.32 | time=2025-10-27 16:15:00
+2026-06-08 18:06:32,816 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,816 | INFO     | backtest | 📅 Yeni gün: 2025-10-28 | Bakiye: $99,911.32
+2026-06-08 18:06:32,824 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,824 | INFO     | backtest | 📅 Yeni gün: 2025-10-29 | Bakiye: $99,911.32
+2026-06-08 18:06:32,832 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,832 | INFO     | backtest | 📅 Yeni gün: 2025-10-30 | Bakiye: $99,911.32
+2026-06-08 18:06:32,840 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,840 | INFO     | backtest | 📅 Yeni gün: 2025-10-31 | Bakiye: $99,911.32
+2026-06-08 18:06:32,848 | WARNING  | risk.portfolio | Lot cap active | raw=3460.8630 -> final=20.0000 | cap=20.0000 | risk_target=1998.23
+2026-06-08 18:06:32,848 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 62.8150 | lot=20.0000 | SL=62.2376 | TP=63.6811 | risk_target=1998.22 | cost_ratio=8.7%
+2026-06-08 18:06:32,849 | INFO     | risk.portfolio | Position closed [SL] @ 62.2376 | net_pnl=-11.80 | balance=99899.27 | time=2025-10-31 18:15:00
+2026-06-08 18:06:32,854 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,854 | INFO     | backtest | 📅 Yeni gün: 2025-11-03 | Bakiye: $99,899.27
+2026-06-08 18:06:32,862 | WARNING  | risk.portfolio | Lot cap active | raw=3491.7873 -> final=20.0000 | cap=20.0000 | risk_target=1997.99
+2026-06-08 18:06:32,862 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 61.1350 | lot=20.0000 | SL=61.7072 | TP=60.2767 | risk_target=1997.98 | cost_ratio=8.7%
+2026-06-08 18:06:32,865 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,865 | INFO     | backtest | 📅 Yeni gün: 2025-11-04 | Bakiye: $99,899.03
+2026-06-08 18:06:32,865 | INFO     | risk.portfolio | Position closed [SL] @ 61.7072 | net_pnl=-11.69 | balance=99887.34 | time=2025-11-04 16:30:00
+2026-06-08 18:06:32,873 | WARNING  | risk.portfolio | Lot cap active | raw=3314.5490 -> final=20.0000 | cap=20.0000 | risk_target=1997.75
+2026-06-08 18:06:32,873 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 62.4050 | lot=20.0000 | SL=61.8023 | TP=63.3091 | risk_target=1997.74 | cost_ratio=8.3%
+2026-06-08 18:06:32,874 | INFO     | risk.portfolio | Position closed [SL] @ 61.8023 | net_pnl=-12.30 | balance=99874.79 | time=2025-11-04 19:15:00
+2026-06-08 18:06:32,882 | WARNING  | risk.portfolio | Lot cap active | raw=3991.3401 -> final=20.0000 | cap=20.0000 | risk_target=1997.50
+2026-06-08 18:06:32,882 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 61.1550 | lot=20.0000 | SL=61.6555 | TP=60.4043 | risk_target=1997.49 | cost_ratio=9.9%
+2026-06-08 18:06:32,883 | INFO     | risk.portfolio | Position closed [SL] @ 61.6555 | net_pnl=-10.26 | balance=99864.29 | time=2025-11-04 22:00:00
+2026-06-08 18:06:32,884 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,884 | INFO     | backtest | 📅 Yeni gün: 2025-11-05 | Bakiye: $99,864.29
+2026-06-08 18:06:32,891 | WARNING  | risk.portfolio | Lot cap active | raw=1222.9402 -> final=20.0000 | cap=20.0000 | risk_target=1997.29
+2026-06-08 18:06:32,891 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.3850 | lot=20.0000 | SL=60.0182 | TP=55.9352 | risk_target=1997.28 | cost_ratio=3.0%
+2026-06-08 18:06:32,893 | INFO     | risk.portfolio | Position closed [SL] @ 60.0182 | net_pnl=-32.90 | balance=99831.15 | time=2025-11-05 21:15:00
+2026-06-08 18:06:32,900 | WARNING  | risk.portfolio | Lot cap active | raw=1947.3436 -> final=20.0000 | cap=20.0000 | risk_target=1996.62
+2026-06-08 18:06:32,900 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 60.4450 | lot=20.0000 | SL=59.4197 | TP=61.9830 | risk_target=1996.62 | cost_ratio=4.8%
+2026-06-08 18:06:32,900 | INFO     | risk.portfolio | Position closed [SL] @ 59.4197 | net_pnl=-20.74 | balance=99810.16 | time=2025-11-05 22:30:00
+2026-06-08 18:06:32,901 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,901 | INFO     | backtest | 📅 Yeni gün: 2025-11-06 | Bakiye: $99,810.16
+2026-06-08 18:06:32,908 | WARNING  | risk.portfolio | Lot cap active | raw=1872.0370 -> final=20.0000 | cap=20.0000 | risk_target=1996.20
+2026-06-08 18:06:32,908 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 59.0150 | lot=20.0000 | SL=60.0813 | TP=57.4155 | risk_target=1996.20 | cost_ratio=4.6%
+2026-06-08 18:06:32,908 | INFO     | risk.portfolio | Position closed [TP] @ 57.4155 | net_pnl=+31.76 | balance=99841.69 | time=2025-11-06 17:45:00
+2026-06-08 18:06:32,915 | WARNING  | risk.portfolio | Lot cap active | raw=1833.0110 -> final=20.0000 | cap=20.0000 | risk_target=1996.83
+2026-06-08 18:06:32,915 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.3350 | lot=20.0000 | SL=58.4244 | TP=55.7009 | risk_target=1996.83 | cost_ratio=4.4%
+2026-06-08 18:06:32,917 | INFO     | risk.portfolio | Position closed [SL] @ 58.4244 | net_pnl=-22.02 | balance=99819.44 | time=2025-11-06 22:00:00
+2026-06-08 18:06:32,918 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,918 | INFO     | backtest | 📅 Yeni gün: 2025-11-07 | Bakiye: $99,819.44
+2026-06-08 18:06:32,925 | WARNING  | risk.portfolio | Lot cap active | raw=2728.5212 -> final=20.0000 | cap=20.0000 | risk_target=1996.39
+2026-06-08 18:06:32,925 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.1650 | lot=20.0000 | SL=57.8967 | TP=56.0675 | risk_target=1996.38 | cost_ratio=6.6%
+2026-06-08 18:06:32,928 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:32,928 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 57.4100 | net_pnl=-5.13 | balance=99814.08 | time=2025-11-07 23:00:00
+2026-06-08 18:06:32,928 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 57.4100 | PnL=-5.13 USD
+2026-06-08 18:06:32,929 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,929 | INFO     | backtest | 📅 Yeni gün: 2025-11-10 | Bakiye: $99,814.08
+2026-06-08 18:06:32,936 | WARNING  | risk.portfolio | Lot cap active | raw=3667.1698 -> final=20.0000 | cap=20.0000 | risk_target=1996.28
+2026-06-08 18:06:32,936 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 58.3150 | lot=20.0000 | SL=57.7706 | TP=59.1315 | risk_target=1996.28 | cost_ratio=9.0%
+2026-06-08 18:06:32,936 | INFO     | risk.portfolio | Position closed [SL] @ 57.7706 | net_pnl=-11.12 | balance=99802.73 | time=2025-11-10 17:15:00
+2026-06-08 18:06:32,944 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,944 | INFO     | backtest | 📅 Yeni gün: 2025-11-11 | Bakiye: $99,802.73
+2026-06-08 18:06:32,950 | WARNING  | risk.portfolio | Lot cap active | raw=3368.1366 -> final=20.0000 | cap=20.0000 | risk_target=1996.05
+2026-06-08 18:06:32,950 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 59.2750 | lot=20.0000 | SL=58.6824 | TP=60.1639 | risk_target=1996.05 | cost_ratio=8.3%
+2026-06-08 18:06:32,951 | INFO     | risk.portfolio | Position closed [SL] @ 58.6824 | net_pnl=-12.09 | balance=99790.40 | time=2025-11-11 18:00:00
+2026-06-08 18:06:32,958 | WARNING  | risk.portfolio | Lot cap active | raw=3433.8060 -> final=20.0000 | cap=20.0000 | risk_target=1995.81
+2026-06-08 18:06:32,958 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 59.4050 | lot=20.0000 | SL=58.8238 | TP=60.2768 | risk_target=1995.80 | cost_ratio=8.5%
+2026-06-08 18:06:32,960 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,960 | INFO     | backtest | 📅 Yeni gün: 2025-11-12 | Bakiye: $99,790.17
+2026-06-08 18:06:32,960 | INFO     | risk.portfolio | Position closed [TP] @ 60.2768 | net_pnl=+17.20 | balance=99807.36 | time=2025-11-12 16:30:00
+2026-06-08 18:06:32,968 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,968 | INFO     | backtest | 📅 Yeni gün: 2025-11-13 | Bakiye: $99,807.36
+2026-06-08 18:06:32,982 | WARNING  | risk.portfolio | Lot cap active | raw=3833.7515 -> final=20.0000 | cap=20.0000 | risk_target=1996.15
+2026-06-08 18:06:32,982 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 60.9050 | lot=20.0000 | SL=61.4257 | TP=60.1240 | risk_target=1996.14 | cost_ratio=9.5%
+2026-06-08 18:06:32,983 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,983 | INFO     | backtest | 📅 Yeni gün: 2025-11-14 | Bakiye: $99,807.12
+2026-06-08 18:06:32,983 | INFO     | risk.portfolio | Position closed [TP] @ 60.1240 | net_pnl=+15.38 | balance=99822.50 | time=2025-11-14 16:30:00
+2026-06-08 18:06:32,989 | WARNING  | risk.portfolio | Lot cap active | raw=2519.5994 -> final=20.0000 | cap=20.0000 | risk_target=1996.45
+2026-06-08 18:06:32,989 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 59.5750 | lot=20.0000 | SL=60.3674 | TP=58.3864 | risk_target=1996.45 | cost_ratio=6.2%
+2026-06-08 18:06:32,990 | INFO     | risk.portfolio | Position closed [SL] @ 60.3674 | net_pnl=-16.09 | balance=99806.17 | time=2025-11-14 17:15:00
+2026-06-08 18:06:32,996 | WARNING  | risk.portfolio | Lot cap active | raw=2416.3278 -> final=20.0000 | cap=20.0000 | risk_target=1996.12
+2026-06-08 18:06:32,996 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 59.3550 | lot=20.0000 | SL=60.1811 | TP=58.1159 | risk_target=1996.12 | cost_ratio=5.9%
+2026-06-08 18:06:32,997 | INFO     | risk.portfolio | Position closed [SL] @ 60.1811 | net_pnl=-16.76 | balance=99789.17 | time=2025-11-14 18:45:00
+2026-06-08 18:06:32,999 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:32,999 | INFO     | backtest | 📅 Yeni gün: 2025-11-17 | Bakiye: $99,789.17
+2026-06-08 18:06:33,007 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,007 | INFO     | backtest | 📅 Yeni gün: 2025-11-18 | Bakiye: $99,789.17
+2026-06-08 18:06:33,015 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,016 | INFO     | backtest | 📅 Yeni gün: 2025-11-19 | Bakiye: $99,789.17
+2026-06-08 18:06:33,023 | WARNING  | risk.portfolio | Lot cap active | raw=3533.9409 -> final=20.0000 | cap=20.0000 | risk_target=1995.78
+2026-06-08 18:06:33,023 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.7450 | lot=20.0000 | SL=58.3097 | TP=56.8979 | risk_target=1995.78 | cost_ratio=8.6%
+2026-06-08 18:06:33,026 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,026 | INFO     | backtest | 📅 Yeni gün: 2025-11-20 | Bakiye: $99,788.94
+2026-06-08 18:06:33,026 | INFO     | risk.portfolio | Position closed [SL] @ 58.3097 | net_pnl=-11.53 | balance=99777.41 | time=2025-11-20 16:30:00
+2026-06-08 18:06:33,033 | WARNING  | risk.portfolio | Lot cap active | raw=3689.3420 -> final=20.0000 | cap=20.0000 | risk_target=1995.55
+2026-06-08 18:06:33,033 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 58.8450 | lot=20.0000 | SL=58.3041 | TP=59.6563 | risk_target=1995.54 | cost_ratio=9.1%
+2026-06-08 18:06:33,033 | INFO     | risk.portfolio | Position closed [SL] @ 58.3041 | net_pnl=-11.05 | balance=99766.12 | time=2025-11-20 17:00:00
+2026-06-08 18:06:33,040 | WARNING  | risk.portfolio | Lot cap active | raw=3277.0461 -> final=20.0000 | cap=20.0000 | risk_target=1995.32
+2026-06-08 18:06:33,040 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 59.2050 | lot=20.0000 | SL=58.5961 | TP=60.1183 | risk_target=1995.32 | cost_ratio=8.1%
+2026-06-08 18:06:33,041 | INFO     | risk.portfolio | Position closed [SL] @ 58.5961 | net_pnl=-12.41 | balance=99753.48 | time=2025-11-20 18:45:00
+2026-06-08 18:06:33,043 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,043 | INFO     | backtest | 📅 Yeni gün: 2025-11-21 | Bakiye: $99,753.48
+2026-06-08 18:06:33,052 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,052 | INFO     | backtest | 📅 Yeni gün: 2025-11-24 | Bakiye: $99,753.48
+2026-06-08 18:06:33,061 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,061 | INFO     | backtest | 📅 Yeni gün: 2025-11-25 | Bakiye: $99,753.48
+2026-06-08 18:06:33,070 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,070 | INFO     | backtest | 📅 Yeni gün: 2025-11-26 | Bakiye: $99,753.48
+2026-06-08 18:06:33,079 | WARNING  | risk.portfolio | Lot cap active | raw=3348.9157 -> final=20.0000 | cap=20.0000 | risk_target=1995.07
+2026-06-08 18:06:33,080 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 64.5450 | lot=20.0000 | SL=65.1407 | TP=63.6514 | risk_target=1995.06 | cost_ratio=8.5%
+2026-06-08 18:06:33,082 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,082 | INFO     | backtest | 📅 Yeni gün: 2025-11-28 | Bakiye: $99,753.22
+2026-06-08 18:06:33,084 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,084 | INFO     | backtest | 📅 Yeni gün: 2025-12-01 | Bakiye: $99,753.22
+2026-06-08 18:06:33,084 | INFO     | risk.portfolio | Position closed [TP] @ 63.6514 | net_pnl=+17.62 | balance=99770.84 | time=2025-12-01 16:30:00
+2026-06-08 18:06:33,093 | WARNING  | risk.portfolio | Lot cap active | raw=3851.2151 -> final=20.0000 | cap=20.0000 | risk_target=1995.42
+2026-06-08 18:06:33,093 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 65.0650 | lot=20.0000 | SL=64.5469 | TP=65.8422 | risk_target=1995.41 | cost_ratio=9.8%
+2026-06-08 18:06:33,093 | INFO     | risk.portfolio | Position closed [SL] @ 64.5469 | net_pnl=-10.62 | balance=99759.95 | time=2025-12-01 17:15:00
+2026-06-08 18:06:33,101 | WARNING  | risk.portfolio | Lot cap active | raw=3564.2960 -> final=20.0000 | cap=20.0000 | risk_target=1995.20
+2026-06-08 18:06:33,101 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 64.9250 | lot=20.0000 | SL=64.3652 | TP=65.7647 | risk_target=1995.19 | cost_ratio=9.1%
+2026-06-08 18:06:33,102 | INFO     | risk.portfolio | Position closed [SL] @ 64.3652 | net_pnl=-11.45 | balance=99748.24 | time=2025-12-01 18:45:00
+2026-06-08 18:06:33,104 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,104 | INFO     | backtest | 📅 Yeni gün: 2025-12-02 | Bakiye: $99,748.24
+2026-06-08 18:06:33,112 | WARNING  | risk.portfolio | Lot cap active | raw=4144.3102 -> final=20.0000 | cap=20.0000 | risk_target=1994.96
+2026-06-08 18:06:33,112 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 63.1950 | lot=20.0000 | SL=63.6764 | TP=62.4729 | risk_target=1994.96 | cost_ratio=10.4%
+2026-06-08 18:06:33,114 | INFO     | risk.portfolio | Position closed [SL] @ 63.6764 | net_pnl=-9.88 | balance=99738.11 | time=2025-12-02 18:30:00
+2026-06-08 18:06:33,121 | WARNING  | risk.portfolio | Lot cap active | raw=4295.4996 -> final=20.0000 | cap=20.0000 | risk_target=1994.76
+2026-06-08 18:06:33,121 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 63.2050 | lot=20.0000 | SL=63.6694 | TP=62.5084 | risk_target=1994.76 | cost_ratio=10.8%
+2026-06-08 18:06:33,123 | INFO     | risk.portfolio | Position closed [SL] @ 63.6694 | net_pnl=-9.54 | balance=99728.31 | time=2025-12-02 22:00:00
+2026-06-08 18:06:33,124 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,124 | INFO     | backtest | 📅 Yeni gün: 2025-12-03 | Bakiye: $99,728.31
+2026-06-08 18:06:33,131 | WARNING  | risk.portfolio | Lot cap active | raw=3938.1507 -> final=20.0000 | cap=20.0000 | risk_target=1994.57
+2026-06-08 18:06:33,132 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 64.6250 | lot=20.0000 | SL=64.1185 | TP=65.3847 | risk_target=1994.56 | cost_ratio=10.0%
+2026-06-08 18:06:33,132 | INFO     | risk.portfolio | Position closed [SL] @ 64.1185 | net_pnl=-10.39 | balance=99717.67 | time=2025-12-03 17:00:00
+2026-06-08 18:06:33,140 | WARNING  | risk.portfolio | Lot cap active | raw=3564.3097 -> final=20.0000 | cap=20.0000 | risk_target=1994.35
+2026-06-08 18:06:33,140 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 64.0450 | lot=20.0000 | SL=63.4855 | TP=64.8843 | risk_target=1994.35 | cost_ratio=9.0%
+2026-06-08 18:06:33,143 | INFO     | risk.portfolio | Position closed [SL] @ 63.4855 | net_pnl=-11.44 | balance=99705.97 | time=2025-12-03 22:30:00
+2026-06-08 18:06:33,143 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,143 | INFO     | backtest | 📅 Yeni gün: 2025-12-04 | Bakiye: $99,705.97
+2026-06-08 18:06:33,152 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,152 | INFO     | backtest | 📅 Yeni gün: 2025-12-05 | Bakiye: $99,705.97
+2026-06-08 18:06:33,163 | WARNING  | risk.portfolio | Lot cap active | raw=4190.6647 -> final=20.0000 | cap=20.0000 | risk_target=1994.12
+2026-06-08 18:06:33,163 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 62.5650 | lot=20.0000 | SL=63.0408 | TP=61.8512 | risk_target=1994.11 | cost_ratio=10.5%
+2026-06-08 18:06:33,165 | INFO     | risk.portfolio | Position closed [TP] @ 61.8512 | net_pnl=+14.03 | balance=99719.74 | time=2025-12-05 22:30:00
+2026-06-08 18:06:33,172 | WARNING  | risk.portfolio | Lot cap active | raw=5451.6717 -> final=20.0000 | cap=20.0000 | risk_target=1994.39
+2026-06-08 18:06:33,172 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 61.8150 | lot=20.0000 | SL=62.1808 | TP=61.2663 | risk_target=1994.39 | cost_ratio=13.6%
+2026-06-08 18:06:33,173 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:33,173 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 61.6800 | net_pnl=+2.45 | balance=99721.95 | time=2025-12-05 23:00:00
+2026-06-08 18:06:33,173 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 61.6800 | PnL=+2.45 USD
+2026-06-08 18:06:33,173 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,173 | INFO     | backtest | 📅 Yeni gün: 2025-12-08 | Bakiye: $99,721.95
+2026-06-08 18:06:33,181 | WARNING  | risk.portfolio | Lot cap active | raw=3764.5074 -> final=20.0000 | cap=20.0000 | risk_target=1994.44
+2026-06-08 18:06:33,182 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 60.8650 | lot=20.0000 | SL=61.3948 | TP=60.0703 | risk_target=1994.43 | cost_ratio=9.3%
+2026-06-08 18:06:33,184 | INFO     | risk.portfolio | Position closed [TP] @ 60.0703 | net_pnl=+15.65 | balance=99737.36 | time=2025-12-08 21:45:00
+2026-06-08 18:06:33,186 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,187 | INFO     | backtest | 📅 Yeni gün: 2025-12-09 | Bakiye: $99,737.36
+2026-06-08 18:06:33,195 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,195 | INFO     | backtest | 📅 Yeni gün: 2025-12-10 | Bakiye: $99,737.36
+2026-06-08 18:06:33,206 | WARNING  | risk.portfolio | Lot cap active | raw=3894.6035 -> final=20.0000 | cap=20.0000 | risk_target=1994.75
+2026-06-08 18:06:33,206 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 59.2350 | lot=20.0000 | SL=59.7472 | TP=58.4667 | risk_target=1994.74 | cost_ratio=9.6%
+2026-06-08 18:06:33,207 | INFO     | risk.portfolio | Position closed [SL] @ 59.7472 | net_pnl=-10.48 | balance=99726.64 | time=2025-12-10 21:00:00
+2026-06-08 18:06:33,215 | WARNING  | risk.portfolio | Lot cap active | raw=3865.5533 -> final=20.0000 | cap=20.0000 | risk_target=1994.53
+2026-06-08 18:06:33,215 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 60.3750 | lot=20.0000 | SL=59.8590 | TP=61.1490 | risk_target=1994.53 | cost_ratio=9.6%
+2026-06-08 18:06:33,216 | INFO     | risk.portfolio | Position closed [TP] @ 61.1490 | net_pnl=+15.23 | balance=99741.63 | time=2025-12-10 22:30:00
+2026-06-08 18:06:33,216 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,216 | INFO     | backtest | 📅 Yeni gün: 2025-12-11 | Bakiye: $99,741.63
+2026-06-08 18:06:33,227 | WARNING  | risk.portfolio | Lot cap active | raw=3153.9769 -> final=20.0000 | cap=20.0000 | risk_target=1994.83
+2026-06-08 18:06:33,227 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 60.6250 | lot=20.0000 | SL=59.9925 | TP=61.5737 | risk_target=1994.83 | cost_ratio=7.8%
+2026-06-08 18:06:33,229 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,229 | INFO     | backtest | 📅 Yeni gün: 2025-12-12 | Bakiye: $99,741.39
+2026-06-08 18:06:33,229 | INFO     | risk.portfolio | Position closed [SL] @ 59.9925 | net_pnl=-12.89 | balance=99728.50 | time=2025-12-12 16:45:00
+2026-06-08 18:06:33,241 | WARNING  | risk.portfolio | Lot cap active | raw=4797.1094 -> final=20.0000 | cap=20.0000 | risk_target=1994.57
+2026-06-08 18:06:33,241 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.8350 | lot=20.0000 | SL=59.2508 | TP=58.2113 | risk_target=1994.57 | cost_ratio=11.8%
+2026-06-08 18:06:33,243 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:33,243 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 58.5100 | net_pnl=+6.27 | balance=99734.53 | time=2025-12-12 23:00:00
+2026-06-08 18:06:33,243 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 58.5100 | PnL=+6.27 USD
+2026-06-08 18:06:33,250 | WARNING  | risk.portfolio | Lot cap active | raw=4630.8684 -> final=20.0000 | cap=20.0000 | risk_target=1994.69
+2026-06-08 18:06:33,250 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.4850 | lot=20.0000 | SL=58.9157 | TP=57.8389 | risk_target=1994.69 | cost_ratio=11.3%
+2026-06-08 18:06:33,250 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,250 | INFO     | backtest | 📅 Yeni gün: 2025-12-15 | Bakiye: $99,734.30
+2026-06-08 18:06:33,251 | INFO     | risk.portfolio | Position closed [SL] @ 58.9157 | net_pnl=-8.85 | balance=99725.45 | time=2025-12-15 16:30:00
+2026-06-08 18:06:33,259 | WARNING  | risk.portfolio | Lot cap active | raw=2993.6975 -> final=20.0000 | cap=20.0000 | risk_target=1994.51
+2026-06-08 18:06:33,259 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.5850 | lot=20.0000 | SL=58.2512 | TP=56.5856 | risk_target=1994.50 | cost_ratio=7.3%
+2026-06-08 18:06:33,259 | INFO     | risk.portfolio | Position closed [SL] @ 58.2512 | net_pnl=-13.56 | balance=99711.66 | time=2025-12-15 18:15:00
+2026-06-08 18:06:33,266 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,266 | INFO     | backtest | 📅 Yeni gün: 2025-12-16 | Bakiye: $99,711.66
+2026-06-08 18:06:33,275 | WARNING  | risk.portfolio | Lot cap active | raw=3822.8029 -> final=20.0000 | cap=20.0000 | risk_target=1994.23
+2026-06-08 18:06:33,275 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.1350 | lot=20.0000 | SL=57.6567 | TP=56.3525 | risk_target=1994.23 | cost_ratio=9.3%
+2026-06-08 18:06:33,278 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,278 | INFO     | backtest | 📅 Yeni gün: 2025-12-17 | Bakiye: $99,711.43
+2026-06-08 18:06:33,278 | INFO     | risk.portfolio | Position closed [SL] @ 57.6567 | net_pnl=-10.66 | balance=99700.77 | time=2025-12-17 16:45:00
+2026-06-08 18:06:33,285 | WARNING  | risk.portfolio | Lot cap active | raw=4110.5465 -> final=20.0000 | cap=20.0000 | risk_target=1994.02
+2026-06-08 18:06:33,285 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 58.3050 | lot=20.0000 | SL=57.8199 | TP=59.0326 | risk_target=1994.01 | cost_ratio=10.1%
+2026-06-08 18:06:33,286 | INFO     | risk.portfolio | Position closed [SL] @ 57.8199 | net_pnl=-9.93 | balance=99690.60 | time=2025-12-17 17:45:00
+2026-06-08 18:06:33,293 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,293 | INFO     | backtest | 📅 Yeni gün: 2025-12-18 | Bakiye: $99,690.60
+2026-06-08 18:06:33,301 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,301 | INFO     | backtest | 📅 Yeni gün: 2025-12-19 | Bakiye: $99,690.60
+2026-06-08 18:06:33,310 | WARNING  | risk.portfolio | Lot cap active | raw=4297.3619 -> final=20.0000 | cap=20.0000 | risk_target=1993.81
+2026-06-08 18:06:33,310 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 58.2550 | lot=20.0000 | SL=57.7910 | TP=58.9509 | risk_target=1993.81 | cost_ratio=10.6%
+2026-06-08 18:06:33,313 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:33,313 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 58.2700 | net_pnl=+0.07 | balance=99690.44 | time=2025-12-19 23:00:00
+2026-06-08 18:06:33,313 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 58.2700 | PnL=+0.07 USD
+2026-06-08 18:06:33,313 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,313 | INFO     | backtest | 📅 Yeni gün: 2025-12-22 | Bakiye: $99,690.44
+2026-06-08 18:06:33,322 | WARNING  | risk.portfolio | Lot cap active | raw=4359.9055 -> final=20.0000 | cap=20.0000 | risk_target=1993.81
+2026-06-08 18:06:33,322 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 59.0150 | lot=20.0000 | SL=58.5577 | TP=59.7010 | risk_target=1993.80 | cost_ratio=10.8%
+2026-06-08 18:06:33,324 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,324 | INFO     | backtest | 📅 Yeni gün: 2025-12-23 | Bakiye: $99,690.20
+2026-06-08 18:06:33,325 | INFO     | risk.portfolio | Position closed [SL] @ 58.5577 | net_pnl=-9.38 | balance=99680.82 | time=2025-12-23 17:00:00
+2026-06-08 18:06:33,333 | WARNING  | risk.portfolio | Lot cap active | raw=6077.8710 -> final=20.0000 | cap=20.0000 | risk_target=1993.62
+2026-06-08 18:06:33,334 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.5950 | lot=20.0000 | SL=58.9230 | TP=58.1030 | risk_target=1993.61 | cost_ratio=14.9%
+2026-06-08 18:06:33,334 | INFO     | risk.portfolio | Position closed [SL] @ 58.9230 | net_pnl=-6.80 | balance=99673.79 | time=2025-12-23 17:15:00
+2026-06-08 18:06:33,344 | WARNING  | risk.portfolio | Lot cap active | raw=5868.5473 -> final=20.0000 | cap=20.0000 | risk_target=1993.48
+2026-06-08 18:06:33,344 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 59.3150 | lot=20.0000 | SL=58.9753 | TP=59.8245 | risk_target=1993.47 | cost_ratio=14.5%
+2026-06-08 18:06:33,346 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,346 | INFO     | backtest | 📅 Yeni gün: 2025-12-24 | Bakiye: $99,673.55
+2026-06-08 18:06:33,346 | INFO     | risk.portfolio | Position closed [SL] @ 58.9753 | net_pnl=-7.03 | balance=99666.52 | time=2025-12-24 16:30:00
+2026-06-08 18:06:33,353 | WARNING  | risk.portfolio | Lot cap active | raw=6090.2696 -> final=20.0000 | cap=20.0000 | risk_target=1993.33
+2026-06-08 18:06:33,353 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.7350 | lot=20.0000 | SL=59.0623 | TP=58.2441 | risk_target=1993.33 | cost_ratio=14.9%
+2026-06-08 18:06:33,354 | INFO     | risk.portfolio | Position closed [SL] @ 59.0623 | net_pnl=-6.78 | balance=99659.50 | time=2025-12-24 17:15:00
+2026-06-08 18:06:33,358 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,358 | INFO     | backtest | 📅 Yeni gün: 2025-12-26 | Bakiye: $99,659.50
+2026-06-08 18:06:33,366 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,366 | INFO     | backtest | 📅 Yeni gün: 2025-12-29 | Bakiye: $99,659.50
+2026-06-08 18:06:33,374 | WARNING  | risk.portfolio | Lot cap active | raw=8843.0987 -> final=20.0000 | cap=20.0000 | risk_target=1993.19
+2026-06-08 18:06:33,374 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 59.5350 | lot=20.0000 | SL=59.3096 | TP=59.8731 | risk_target=1993.19 | cost_ratio=21.9%
+2026-06-08 18:06:33,375 | INFO     | risk.portfolio | Position closed [SL] @ 59.3096 | net_pnl=-4.75 | balance=99654.52 | time=2025-12-29 16:45:00
+2026-06-08 18:06:33,383 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,383 | INFO     | backtest | 📅 Yeni gün: 2025-12-30 | Bakiye: $99,654.52
+2026-06-08 18:06:33,393 | WARNING  | risk.portfolio | Lot cap active | raw=7428.0117 -> final=20.0000 | cap=20.0000 | risk_target=1993.09
+2026-06-08 18:06:33,393 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.8750 | lot=20.0000 | SL=59.1433 | TP=58.4725 | risk_target=1993.09 | cost_ratio=18.3%
+2026-06-08 18:06:33,395 | INFO     | risk.portfolio | Position closed [SL] @ 59.1433 | net_pnl=-5.60 | balance=99648.68 | time=2025-12-30 21:45:00
+2026-06-08 18:06:33,397 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,397 | INFO     | backtest | 📅 Yeni gün: 2025-12-31 | Bakiye: $99,648.68
+2026-06-08 18:06:33,406 | WARNING  | risk.portfolio | Lot cap active | raw=6933.8116 -> final=20.0000 | cap=20.0000 | risk_target=1992.97
+2026-06-08 18:06:33,406 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.8850 | lot=20.0000 | SL=59.1724 | TP=58.4539 | risk_target=1992.97 | cost_ratio=17.0%
+2026-06-08 18:06:33,409 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,409 | INFO     | backtest | 📅 Yeni gün: 2026-01-02 | Bakiye: $99,648.45
+2026-06-08 18:06:33,409 | INFO     | risk.portfolio | Position closed [SL] @ 59.1724 | net_pnl=-5.99 | balance=99642.46 | time=2026-01-02 16:45:00
+2026-06-08 18:06:33,417 | WARNING  | risk.portfolio | Lot cap active | raw=4801.4496 -> final=20.0000 | cap=20.0000 | risk_target=1992.85
+2026-06-08 18:06:33,417 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 59.9850 | lot=20.0000 | SL=59.5699 | TP=60.6076 | risk_target=1992.84 | cost_ratio=11.9%
+2026-06-08 18:06:33,418 | INFO     | risk.portfolio | Position closed [SL] @ 59.5699 | net_pnl=-8.54 | balance=99633.68 | time=2026-01-02 17:15:00
+2026-06-08 18:06:33,427 | WARNING  | risk.portfolio | Lot cap active | raw=3897.1077 -> final=20.0000 | cap=20.0000 | risk_target=1992.67
+2026-06-08 18:06:33,427 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 59.6550 | lot=20.0000 | SL=59.1437 | TP=60.4220 | risk_target=1992.67 | cost_ratio=9.7%
+2026-06-08 18:06:33,429 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:33,430 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 59.6500 | net_pnl=-0.34 | balance=99633.11 | time=2026-01-02 23:00:00
+2026-06-08 18:06:33,430 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 59.6500 | PnL=-0.34 USD
+2026-06-08 18:06:33,430 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,430 | INFO     | backtest | 📅 Yeni gün: 2026-01-05 | Bakiye: $99,633.11
+2026-06-08 18:06:33,438 | WARNING  | risk.portfolio | Lot cap active | raw=3370.5061 -> final=20.0000 | cap=20.0000 | risk_target=1992.66
+2026-06-08 18:06:33,438 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 61.0350 | lot=20.0000 | SL=60.4438 | TP=61.9218 | risk_target=1992.66 | cost_ratio=8.4%
+2026-06-08 18:06:33,440 | INFO     | risk.portfolio | Position closed [TP] @ 61.9218 | net_pnl=+17.49 | balance=99650.35 | time=2026-01-05 18:45:00
+2026-06-08 18:06:33,446 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,446 | INFO     | backtest | 📅 Yeni gün: 2026-01-06 | Bakiye: $99,650.35
+2026-06-08 18:06:33,454 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,455 | INFO     | backtest | 📅 Yeni gün: 2026-01-07 | Bakiye: $99,650.35
+2026-06-08 18:06:33,467 | WARNING  | risk.portfolio | Lot cap active | raw=4741.0367 -> final=20.0000 | cap=20.0000 | risk_target=1993.01
+2026-06-08 18:06:33,467 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 64.6650 | lot=20.0000 | SL=65.0854 | TP=64.0344 | risk_target=1993.00 | cost_ratio=12.0%
+2026-06-08 18:06:33,468 | INFO     | risk.portfolio | Position closed [SL] @ 65.0854 | net_pnl=-8.67 | balance=99641.42 | time=2026-01-07 21:15:00
+2026-06-08 18:06:33,477 | WARNING  | risk.portfolio | Lot cap active | raw=5415.8650 -> final=20.0000 | cap=20.0000 | risk_target=1992.83
+2026-06-08 18:06:33,477 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 65.2550 | lot=20.0000 | SL=64.8870 | TP=65.8069 | risk_target=1992.82 | cost_ratio=13.8%
+2026-06-08 18:06:33,478 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,478 | INFO     | backtest | 📅 Yeni gün: 2026-01-08 | Bakiye: $99,641.16
+2026-06-08 18:06:33,478 | INFO     | risk.portfolio | Position closed [SL] @ 64.8870 | net_pnl=-7.62 | balance=99633.54 | time=2026-01-08 16:30:00
+2026-06-08 18:06:33,487 | WARNING  | risk.portfolio | Lot cap active | raw=3876.8300 -> final=20.0000 | cap=20.0000 | risk_target=1992.67
+2026-06-08 18:06:33,487 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 64.2450 | lot=20.0000 | SL=64.7590 | TP=63.4740 | risk_target=1992.67 | cost_ratio=9.8%
+2026-06-08 18:06:33,487 | INFO     | risk.portfolio | Position closed [TP] @ 63.4740 | net_pnl=+15.17 | balance=99648.45 | time=2026-01-08 17:30:00
+2026-06-08 18:06:33,495 | WARNING  | risk.portfolio | Lot cap active | raw=3763.6009 -> final=20.0000 | cap=20.0000 | risk_target=1992.97
+2026-06-08 18:06:33,495 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 63.6150 | lot=20.0000 | SL=64.1445 | TP=62.8207 | risk_target=1992.96 | cost_ratio=9.5%
+2026-06-08 18:06:33,495 | INFO     | risk.portfolio | Position closed [SL] @ 64.1445 | net_pnl=-10.85 | balance=99637.35 | time=2026-01-08 17:45:00
+2026-06-08 18:06:33,498 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,498 | INFO     | backtest | 📅 Yeni gün: 2026-01-09 | Bakiye: $99,637.35
+2026-06-08 18:06:33,507 | WARNING  | risk.portfolio | Lot cap active | raw=2953.9319 -> final=20.0000 | cap=20.0000 | risk_target=1992.75
+2026-06-08 18:06:33,507 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 66.0350 | lot=20.0000 | SL=65.3604 | TP=67.0469 | risk_target=1992.74 | cost_ratio=7.6%
+2026-06-08 18:06:33,507 | INFO     | risk.portfolio | Position closed [SL] @ 65.3604 | net_pnl=-13.75 | balance=99623.33 | time=2026-01-09 17:45:00
+2026-06-08 18:06:33,516 | WARNING  | risk.portfolio | Lot cap active | raw=3077.3666 -> final=20.0000 | cap=20.0000 | risk_target=1992.47
+2026-06-08 18:06:33,516 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 66.0650 | lot=20.0000 | SL=65.4175 | TP=67.0362 | risk_target=1992.46 | cost_ratio=7.9%
+2026-06-08 18:06:33,518 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:33,519 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 65.7000 | net_pnl=-7.56 | balance=99615.51 | time=2026-01-09 23:00:00
+2026-06-08 18:06:33,519 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 65.7000 | PnL=-7.56 USD
+2026-06-08 18:06:33,519 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,519 | INFO     | backtest | 📅 Yeni gün: 2026-01-12 | Bakiye: $99,615.51
+2026-06-08 18:06:33,527 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,527 | INFO     | backtest | 📅 Yeni gün: 2026-01-13 | Bakiye: $99,615.51
+2026-06-08 18:06:33,536 | WARNING  | risk.portfolio | Lot cap active | raw=2838.2243 -> final=20.0000 | cap=20.0000 | risk_target=1992.31
+2026-06-08 18:06:33,536 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 67.5150 | lot=20.0000 | SL=66.8130 | TP=68.5679 | risk_target=1992.30 | cost_ratio=7.3%
+2026-06-08 18:06:33,537 | INFO     | risk.portfolio | Position closed [SL] @ 66.8130 | net_pnl=-14.31 | balance=99600.93 | time=2026-01-13 18:45:00
+2026-06-08 18:06:33,547 | WARNING  | risk.portfolio | Lot cap active | raw=2284.9097 -> final=20.0000 | cap=20.0000 | risk_target=1992.02
+2026-06-08 18:06:33,547 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 64.8750 | lot=20.0000 | SL=65.7468 | TP=63.5673 | risk_target=1992.01 | cost_ratio=5.8%
+2026-06-08 18:06:33,548 | INFO     | risk.portfolio | Position closed [SL] @ 65.7468 | net_pnl=-17.70 | balance=99582.97 | time=2026-01-13 20:45:00
+2026-06-08 18:06:33,549 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,549 | INFO     | backtest | 📅 Yeni gün: 2026-01-14 | Bakiye: $99,582.97
+2026-06-08 18:06:33,562 | WARNING  | risk.portfolio | Lot cap active | raw=3324.8379 -> final=20.0000 | cap=20.0000 | risk_target=1991.66
+2026-06-08 18:06:33,563 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 68.0150 | lot=20.0000 | SL=67.4160 | TP=68.9135 | risk_target=1991.65 | cost_ratio=8.6%
+2026-06-08 18:06:33,564 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,564 | INFO     | backtest | 📅 Yeni gün: 2026-01-15 | Bakiye: $99,582.70
+2026-06-08 18:06:33,564 | INFO     | risk.portfolio | Position closed [TP] @ 68.9135 | net_pnl=+17.70 | balance=99600.39 | time=2026-01-15 16:30:00
+2026-06-08 18:06:33,573 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,573 | INFO     | backtest | 📅 Yeni gün: 2026-01-16 | Bakiye: $99,600.39
+2026-06-08 18:06:33,582 | WARNING  | risk.portfolio | Lot cap active | raw=2597.4287 -> final=20.0000 | cap=20.0000 | risk_target=1992.01
+2026-06-08 18:06:33,583 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 68.5150 | lot=20.0000 | SL=69.2819 | TP=67.3646 | risk_target=1992.00 | cost_ratio=6.7%
+2026-06-08 18:06:33,584 | INFO     | risk.portfolio | Position closed [SL] @ 69.2819 | net_pnl=-15.62 | balance=99584.50 | time=2026-01-16 21:00:00
+2026-06-08 18:06:33,592 | WARNING  | risk.portfolio | Lot cap active | raw=4044.5542 -> final=20.0000 | cap=20.0000 | risk_target=1991.69
+2026-06-08 18:06:33,592 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 69.3350 | lot=20.0000 | SL=68.8426 | TP=70.0737 | risk_target=1991.68 | cost_ratio=10.5%
+2026-06-08 18:06:33,593 | INFO     | risk.portfolio | Position closed [SL] @ 68.8426 | net_pnl=-10.12 | balance=99574.10 | time=2026-01-16 22:15:00
+2026-06-08 18:06:33,593 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,593 | INFO     | backtest | 📅 Yeni gün: 2026-01-20 | Bakiye: $99,574.10
+2026-06-08 18:06:33,601 | WARNING  | risk.portfolio | Lot cap active | raw=3052.5562 -> final=20.0000 | cap=20.0000 | risk_target=1991.48
+2026-06-08 18:06:33,602 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 67.3550 | lot=20.0000 | SL=68.0074 | TP=66.3764 | risk_target=1991.48 | cost_ratio=7.8%
+2026-06-08 18:06:33,602 | INFO     | risk.portfolio | Position closed [SL] @ 68.0074 | net_pnl=-13.32 | balance=99560.51 | time=2026-01-20 17:15:00
+2026-06-08 18:06:33,612 | WARNING  | risk.portfolio | Lot cap active | raw=2908.4945 -> final=20.0000 | cap=20.0000 | risk_target=1991.21
+2026-06-08 18:06:33,612 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 69.4350 | lot=20.0000 | SL=68.7504 | TP=70.4619 | risk_target=1991.20 | cost_ratio=7.6%
+2026-06-08 18:06:33,614 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,614 | INFO     | backtest | 📅 Yeni gün: 2026-01-21 | Bakiye: $99,560.24
+2026-06-08 18:06:33,615 | INFO     | risk.portfolio | Position closed [TP] @ 70.4619 | net_pnl=+20.26 | balance=99580.49 | time=2026-01-21 17:15:00
+2026-06-08 18:06:33,622 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,623 | INFO     | backtest | 📅 Yeni gün: 2026-01-22 | Bakiye: $99,580.49
+2026-06-08 18:06:33,635 | WARNING  | risk.portfolio | Lot cap active | raw=4015.6155 -> final=20.0000 | cap=20.0000 | risk_target=1991.61
+2026-06-08 18:06:33,635 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 70.2450 | lot=20.0000 | SL=70.7410 | TP=69.5011 | risk_target=1991.60 | cost_ratio=10.5%
+2026-06-08 18:06:33,637 | INFO     | risk.portfolio | Position closed [TP] @ 69.5011 | net_pnl=+14.60 | balance=99594.81 | time=2026-01-22 22:30:00
+2026-06-08 18:06:33,638 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,638 | INFO     | backtest | 📅 Yeni gün: 2026-01-23 | Bakiye: $99,594.81
+2026-06-08 18:06:33,646 | WARNING  | risk.portfolio | Lot cap active | raw=3723.9125 -> final=20.0000 | cap=20.0000 | risk_target=1991.90
+2026-06-08 18:06:33,646 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 68.7150 | lot=20.0000 | SL=69.2499 | TP=67.9127 | risk_target=1991.89 | cost_ratio=9.6%
+2026-06-08 18:06:33,647 | INFO     | risk.portfolio | Position closed [TP] @ 67.9127 | net_pnl=+15.78 | balance=99610.31 | time=2026-01-23 18:00:00
+2026-06-08 18:06:33,654 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,655 | INFO     | backtest | 📅 Yeni gün: 2026-01-26 | Bakiye: $99,610.31
+2026-06-08 18:06:33,662 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,663 | INFO     | backtest | 📅 Yeni gün: 2026-01-27 | Bakiye: $99,610.31
+2026-06-08 18:06:33,672 | WARNING  | risk.portfolio | Lot cap active | raw=4016.2724 -> final=20.0000 | cap=20.0000 | risk_target=1992.21
+2026-06-08 18:06:33,672 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 68.3050 | lot=20.0000 | SL=67.8090 | TP=69.0491 | risk_target=1992.20 | cost_ratio=10.4%
+2026-06-08 18:06:33,672 | INFO     | risk.portfolio | Position closed [SL] @ 67.8090 | net_pnl=-10.19 | balance=99599.85 | time=2026-01-27 17:45:00
+2026-06-08 18:06:33,679 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,679 | INFO     | backtest | 📅 Yeni gün: 2026-01-28 | Bakiye: $99,599.85
+2026-06-08 18:06:33,688 | WARNING  | risk.portfolio | Lot cap active | raw=3110.5008 -> final=20.0000 | cap=20.0000 | risk_target=1992.00
+2026-06-08 18:06:33,688 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 66.2250 | lot=20.0000 | SL=66.8654 | TP=65.2644 | risk_target=1991.99 | cost_ratio=7.9%
+2026-06-08 18:06:33,690 | INFO     | risk.portfolio | Position closed [TP] @ 65.2644 | net_pnl=+18.95 | balance=99618.53 | time=2026-01-28 21:30:00
+2026-06-08 18:06:33,693 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,694 | INFO     | backtest | 📅 Yeni gün: 2026-01-29 | Bakiye: $99,618.53
+2026-06-08 18:06:33,702 | WARNING  | risk.portfolio | Lot cap active | raw=2891.6830 -> final=20.0000 | cap=20.0000 | risk_target=1992.37
+2026-06-08 18:06:33,702 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 64.3750 | lot=20.0000 | SL=65.0640 | TP=63.3415 | risk_target=1992.37 | cost_ratio=7.3%
+2026-06-08 18:06:33,703 | INFO     | risk.portfolio | Position closed [TP] @ 63.3415 | net_pnl=+20.42 | balance=99638.69 | time=2026-01-29 17:45:00
+2026-06-08 18:06:33,709 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,710 | INFO     | backtest | 📅 Yeni gün: 2026-01-30 | Bakiye: $99,638.69
+2026-06-08 18:06:33,718 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,718 | INFO     | backtest | 📅 Yeni gün: 2026-02-02 | Bakiye: $99,638.69
+2026-06-08 18:06:33,727 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,727 | INFO     | backtest | 📅 Yeni gün: 2026-02-03 | Bakiye: $99,638.69
+2026-06-08 18:06:33,741 | WARNING  | risk.portfolio | Lot cap active | raw=3045.9643 -> final=20.0000 | cap=20.0000 | risk_target=1992.77
+2026-06-08 18:06:33,742 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 62.9750 | lot=20.0000 | SL=63.6292 | TP=61.9936 | risk_target=1992.77 | cost_ratio=7.6%
+2026-06-08 18:06:33,742 | INFO     | risk.portfolio | Position closed [SL] @ 63.6292 | net_pnl=-13.34 | balance=99625.10 | time=2026-02-03 21:45:00
+2026-06-08 18:06:33,744 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,744 | INFO     | backtest | 📅 Yeni gün: 2026-02-04 | Bakiye: $99,625.10
+2026-06-08 18:06:33,752 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,752 | INFO     | backtest | 📅 Yeni gün: 2026-02-05 | Bakiye: $99,625.10
+2026-06-08 18:06:33,766 | WARNING  | risk.portfolio | Lot cap active | raw=2289.8754 -> final=20.0000 | cap=20.0000 | risk_target=1992.50
+2026-06-08 18:06:33,766 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 66.1650 | lot=20.0000 | SL=67.0351 | TP=64.8598 | risk_target=1992.50 | cost_ratio=5.8%
+2026-06-08 18:06:33,768 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,768 | INFO     | backtest | 📅 Yeni gün: 2026-02-06 | Bakiye: $99,624.84
+2026-06-08 18:06:33,768 | INFO     | risk.portfolio | Position closed [SL] @ 67.0351 | net_pnl=-17.67 | balance=99607.17 | time=2026-02-06 16:30:00
+2026-06-08 18:06:33,783 | WARNING  | risk.portfolio | Lot cap active | raw=3210.4300 -> final=20.0000 | cap=20.0000 | risk_target=1992.14
+2026-06-08 18:06:33,783 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 66.9450 | lot=20.0000 | SL=66.3245 | TP=67.8758 | risk_target=1992.14 | cost_ratio=8.3%
+2026-06-08 18:06:33,784 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:33,784 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 66.7800 | net_pnl=-3.57 | balance=99603.33 | time=2026-02-06 23:00:00
+2026-06-08 18:06:33,785 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 66.7800 | PnL=-3.57 USD
+2026-06-08 18:06:33,785 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,785 | INFO     | backtest | 📅 Yeni gün: 2026-02-09 | Bakiye: $99,603.33
+2026-06-08 18:06:33,794 | WARNING  | risk.portfolio | Lot cap active | raw=3419.9528 -> final=20.0000 | cap=20.0000 | risk_target=1992.07
+2026-06-08 18:06:33,794 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 65.3150 | lot=20.0000 | SL=65.8975 | TP=64.4413 | risk_target=1992.06 | cost_ratio=8.7%
+2026-06-08 18:06:33,796 | INFO     | risk.portfolio | Position closed [SL] @ 65.8975 | net_pnl=-11.91 | balance=99591.16 | time=2026-02-09 21:45:00
+2026-06-08 18:06:33,799 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,799 | INFO     | backtest | 📅 Yeni gün: 2026-02-10 | Bakiye: $99,591.16
+2026-06-08 18:06:33,808 | WARNING  | risk.portfolio | Lot cap active | raw=3547.3276 -> final=20.0000 | cap=20.0000 | risk_target=1991.82
+2026-06-08 18:06:33,808 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 64.8050 | lot=20.0000 | SL=65.3665 | TP=63.9628 | risk_target=1991.82 | cost_ratio=9.0%
+2026-06-08 18:06:33,809 | INFO     | risk.portfolio | Position closed [SL] @ 65.3665 | net_pnl=-11.49 | balance=99579.41 | time=2026-02-10 18:30:00
+2026-06-08 18:06:33,821 | WARNING  | risk.portfolio | Lot cap active | raw=4090.0489 -> final=20.0000 | cap=20.0000 | risk_target=1991.59
+2026-06-08 18:06:33,821 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 64.9050 | lot=20.0000 | SL=65.3919 | TP=64.1746 | risk_target=1991.58 | cost_ratio=10.4%
+2026-06-08 18:06:33,823 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,823 | INFO     | backtest | 📅 Yeni gün: 2026-02-11 | Bakiye: $99,579.15
+2026-06-08 18:06:33,823 | INFO     | risk.portfolio | Position closed [TP] @ 64.1746 | net_pnl=+14.35 | balance=99593.50 | time=2026-02-11 16:30:00
+2026-06-08 18:06:33,832 | WARNING  | risk.portfolio | Lot cap active | raw=3825.3849 -> final=20.0000 | cap=20.0000 | risk_target=1991.87
+2026-06-08 18:06:33,832 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 64.3950 | lot=20.0000 | SL=64.9157 | TP=63.6140 | risk_target=1991.86 | cost_ratio=9.7%
+2026-06-08 18:06:33,832 | INFO     | risk.portfolio | Position closed [TP] @ 63.6140 | net_pnl=+15.37 | balance=99608.61 | time=2026-02-11 16:45:00
+2026-06-08 18:06:33,846 | WARNING  | risk.portfolio | Lot cap active | raw=3045.3023 -> final=20.0000 | cap=20.0000 | risk_target=1992.17
+2026-06-08 18:06:33,846 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 63.0550 | lot=20.0000 | SL=63.7092 | TP=62.0737 | risk_target=1992.17 | cost_ratio=7.6%
+2026-06-08 18:06:33,849 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,849 | INFO     | backtest | 📅 Yeni gün: 2026-02-12 | Bakiye: $99,608.35
+2026-06-08 18:06:33,849 | INFO     | risk.portfolio | Position closed [TP] @ 62.0737 | net_pnl=+19.38 | balance=99627.73 | time=2026-02-12 16:30:00
+2026-06-08 18:06:33,857 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,857 | INFO     | backtest | 📅 Yeni gün: 2026-02-13 | Bakiye: $99,627.73
+2026-06-08 18:06:33,870 | WARNING  | risk.portfolio | Lot cap active | raw=2931.1840 -> final=20.0000 | cap=20.0000 | risk_target=1992.55
+2026-06-08 18:06:33,871 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 59.3250 | lot=20.0000 | SL=60.0048 | TP=58.3053 | risk_target=1992.55 | cost_ratio=7.2%
+2026-06-08 18:06:33,872 | INFO     | risk.portfolio | Position closed [SL] @ 60.0048 | net_pnl=-13.84 | balance=99613.66 | time=2026-02-13 22:45:00
+2026-06-08 18:06:33,873 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,873 | INFO     | backtest | 📅 Yeni gün: 2026-02-17 | Bakiye: $99,613.66
+2026-06-08 18:06:33,882 | WARNING  | risk.portfolio | Lot cap active | raw=2832.9442 -> final=20.0000 | cap=20.0000 | risk_target=1992.27
+2026-06-08 18:06:33,882 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.7450 | lot=20.0000 | SL=59.4483 | TP=57.6901 | risk_target=1992.27 | cost_ratio=6.9%
+2026-06-08 18:06:33,883 | INFO     | risk.portfolio | Position closed [SL] @ 59.4483 | net_pnl=-14.30 | balance=99599.12 | time=2026-02-17 18:30:00
+2026-06-08 18:06:33,889 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,889 | INFO     | backtest | 📅 Yeni gün: 2026-02-18 | Bakiye: $99,599.12
+2026-06-08 18:06:33,899 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,899 | INFO     | backtest | 📅 Yeni gün: 2026-02-19 | Bakiye: $99,599.12
+2026-06-08 18:06:33,908 | WARNING  | risk.portfolio | Lot cap active | raw=4219.0741 -> final=20.0000 | cap=20.0000 | risk_target=1991.98
+2026-06-08 18:06:33,908 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.3550 | lot=20.0000 | SL=58.8271 | TP=57.6468 | risk_target=1991.98 | cost_ratio=10.3%
+2026-06-08 18:06:33,909 | INFO     | risk.portfolio | Position closed [TP] @ 57.6468 | net_pnl=+13.93 | balance=99612.82 | time=2026-02-19 18:45:00
+2026-06-08 18:06:33,917 | WARNING  | risk.portfolio | Lot cap active | raw=4088.9476 -> final=20.0000 | cap=20.0000 | risk_target=1992.26
+2026-06-08 18:06:33,918 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.5350 | lot=20.0000 | SL=58.0222 | TP=56.8042 | risk_target=1992.25 | cost_ratio=10.0%
+2026-06-08 18:06:33,919 | INFO     | risk.portfolio | Position closed [SL] @ 58.0222 | net_pnl=-9.98 | balance=99602.61 | time=2026-02-19 22:30:00
+2026-06-08 18:06:33,919 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,920 | INFO     | backtest | 📅 Yeni gün: 2026-02-20 | Bakiye: $99,602.61
+2026-06-08 18:06:33,927 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,927 | INFO     | backtest | 📅 Yeni gün: 2026-02-23 | Bakiye: $99,602.61
+2026-06-08 18:06:33,936 | WARNING  | risk.portfolio | Lot cap active | raw=3124.7012 -> final=20.0000 | cap=20.0000 | risk_target=1992.05
+2026-06-08 18:06:33,936 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 55.9650 | lot=20.0000 | SL=56.6025 | TP=55.0087 | risk_target=1992.05 | cost_ratio=7.5%
+2026-06-08 18:06:33,937 | INFO     | risk.portfolio | Position closed [TP] @ 55.0087 | net_pnl=+18.91 | balance=99621.30 | time=2026-02-23 17:45:00
+2026-06-08 18:06:33,944 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,944 | INFO     | backtest | 📅 Yeni gün: 2026-02-24 | Bakiye: $99,621.30
+2026-06-08 18:06:33,953 | WARNING  | risk.portfolio | Lot cap active | raw=3014.1379 -> final=20.0000 | cap=20.0000 | risk_target=1992.43
+2026-06-08 18:06:33,953 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 56.3650 | lot=20.0000 | SL=55.7040 | TP=57.3565 | risk_target=1992.42 | cost_ratio=7.3%
+2026-06-08 18:06:33,956 | INFO     | risk.portfolio | Position closed [TP] @ 57.3565 | net_pnl=+19.60 | balance=99640.67 | time=2026-02-24 22:45:00
+2026-06-08 18:06:33,963 | WARNING  | risk.portfolio | Lot cap active | raw=4559.3094 -> final=20.0000 | cap=20.0000 | risk_target=1992.81
+2026-06-08 18:06:33,963 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 57.6250 | lot=20.0000 | SL=57.1879 | TP=58.2806 | risk_target=1992.81 | cost_ratio=11.2%
+2026-06-08 18:06:33,964 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,964 | INFO     | backtest | 📅 Yeni gün: 2026-02-25 | Bakiye: $99,640.44
+2026-06-08 18:06:33,964 | INFO     | risk.portfolio | Position closed [SL] @ 57.1879 | net_pnl=-8.97 | balance=99631.47 | time=2026-02-25 16:45:00
+2026-06-08 18:06:33,971 | WARNING  | risk.portfolio | Lot cap active | raw=3414.4400 -> final=20.0000 | cap=20.0000 | risk_target=1992.63
+2026-06-08 18:06:33,971 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 57.8050 | lot=20.0000 | SL=57.2214 | TP=58.6804 | risk_target=1992.62 | cost_ratio=8.4%
+2026-06-08 18:06:33,972 | INFO     | risk.portfolio | Position closed [SL] @ 57.2214 | net_pnl=-11.90 | balance=99619.34 | time=2026-02-25 18:00:00
+2026-06-08 18:06:33,978 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,978 | INFO     | backtest | 📅 Yeni gün: 2026-02-26 | Bakiye: $99,619.34
+2026-06-08 18:06:33,987 | WARNING  | risk.portfolio | Lot cap active | raw=3987.5150 -> final=20.0000 | cap=20.0000 | risk_target=1992.39
+2026-06-08 18:06:33,987 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 56.9250 | lot=20.0000 | SL=57.4247 | TP=56.1755 | risk_target=1992.38 | cost_ratio=9.7%
+2026-06-08 18:06:33,987 | INFO     | risk.portfolio | Position closed [SL] @ 57.4247 | net_pnl=-10.22 | balance=99608.89 | time=2026-02-26 17:30:00
+2026-06-08 18:06:33,996 | WARNING  | risk.portfolio | Lot cap active | raw=3733.6670 -> final=20.0000 | cap=20.0000 | risk_target=1992.18
+2026-06-08 18:06:33,996 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.0550 | lot=20.0000 | SL=57.5886 | TP=56.2546 | risk_target=1992.17 | cost_ratio=9.1%
+2026-06-08 18:06:33,997 | INFO     | risk.portfolio | Position closed [TP] @ 56.2546 | net_pnl=+15.78 | balance=99624.44 | time=2026-02-26 19:15:00
+2026-06-08 18:06:33,997 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:33,997 | INFO     | backtest | 📅 Yeni gün: 2026-02-27 | Bakiye: $99,624.44
+2026-06-08 18:06:34,007 | WARNING  | risk.portfolio | Lot cap active | raw=3228.0812 -> final=20.0000 | cap=20.0000 | risk_target=1992.49
+2026-06-08 18:06:34,007 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 57.7950 | lot=20.0000 | SL=57.1778 | TP=58.7209 | risk_target=1992.48 | cost_ratio=7.9%
+2026-06-08 18:06:34,008 | INFO     | risk.portfolio | Position closed [TP] @ 58.7209 | net_pnl=+18.28 | balance=99642.49 | time=2026-02-27 20:15:00
+2026-06-08 18:06:34,015 | WARNING  | risk.portfolio | Lot cap active | raw=3871.6175 -> final=20.0000 | cap=20.0000 | risk_target=1992.85
+2026-06-08 18:06:34,016 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 58.7450 | lot=20.0000 | SL=58.2303 | TP=59.5171 | risk_target=1992.85 | cost_ratio=9.5%
+2026-06-08 18:06:34,017 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:34,017 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 59.0000 | net_pnl=+4.86 | balance=99647.12 | time=2026-02-27 23:00:00
+2026-06-08 18:06:34,017 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 59.0000 | PnL=+4.86 USD
+2026-06-08 18:06:34,017 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,017 | INFO     | backtest | 📅 Yeni gün: 2026-03-02 | Bakiye: $99,647.12
+2026-06-08 18:06:34,026 | WARNING  | risk.portfolio | Lot cap active | raw=2523.8967 -> final=20.0000 | cap=20.0000 | risk_target=1992.94
+2026-06-08 18:06:34,027 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.2550 | lot=20.0000 | SL=58.0446 | TP=56.0706 | risk_target=1992.94 | cost_ratio=6.1%
+2026-06-08 18:06:34,028 | INFO     | risk.portfolio | Position closed [SL] @ 58.0446 | net_pnl=-16.02 | balance=99630.87 | time=2026-03-02 20:00:00
+2026-06-08 18:06:34,036 | WARNING  | risk.portfolio | Lot cap active | raw=3750.4103 -> final=20.0000 | cap=20.0000 | risk_target=1992.62
+2026-06-08 18:06:34,037 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 58.1450 | lot=20.0000 | SL=57.6137 | TP=58.9420 | risk_target=1992.61 | cost_ratio=9.2%
+2026-06-08 18:06:34,038 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,038 | INFO     | backtest | 📅 Yeni gün: 2026-03-03 | Bakiye: $99,630.64
+2026-06-08 18:06:34,038 | INFO     | risk.portfolio | Position closed [SL] @ 57.6137 | net_pnl=-10.86 | balance=99619.78 | time=2026-03-03 16:30:00
+2026-06-08 18:06:34,052 | WARNING  | risk.portfolio | Lot cap active | raw=3036.9529 -> final=20.0000 | cap=20.0000 | risk_target=1992.40
+2026-06-08 18:06:34,052 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 57.1750 | lot=20.0000 | SL=56.5189 | TP=58.1591 | risk_target=1992.39 | cost_ratio=7.4%
+2026-06-08 18:06:34,052 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,053 | INFO     | backtest | 📅 Yeni gün: 2026-03-04 | Bakiye: $99,619.55
+2026-06-08 18:06:34,055 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,056 | INFO     | backtest | 📅 Yeni gün: 2026-03-05 | Bakiye: $99,619.55
+2026-06-08 18:06:34,056 | INFO     | risk.portfolio | Position closed [SL] @ 56.5189 | net_pnl=-13.35 | balance=99606.20 | time=2026-03-05 16:30:00
+2026-06-08 18:06:34,065 | WARNING  | risk.portfolio | Lot cap active | raw=2960.8117 -> final=20.0000 | cap=20.0000 | risk_target=1992.12
+2026-06-08 18:06:34,065 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 56.4850 | lot=20.0000 | SL=57.1578 | TP=55.4758 | risk_target=1992.12 | cost_ratio=7.2%
+2026-06-08 18:06:34,067 | INFO     | risk.portfolio | Position closed [TP] @ 55.4758 | net_pnl=+19.96 | balance=99625.94 | time=2026-03-05 21:30:00
+2026-06-08 18:06:34,069 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,069 | INFO     | backtest | 📅 Yeni gün: 2026-03-06 | Bakiye: $99,625.94
+2026-06-08 18:06:34,077 | WARNING  | risk.portfolio | Lot cap active | raw=3013.9417 -> final=20.0000 | cap=20.0000 | risk_target=1992.52
+2026-06-08 18:06:34,077 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 54.4250 | lot=20.0000 | SL=55.0861 | TP=53.4333 | risk_target=1992.51 | cost_ratio=7.2%
+2026-06-08 18:06:34,079 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:34,080 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 53.8900 | net_pnl=+10.48 | balance=99636.21 | time=2026-03-06 23:00:00
+2026-06-08 18:06:34,080 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 53.8900 | PnL=+10.48 USD
+2026-06-08 18:06:34,080 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,080 | INFO     | backtest | 📅 Yeni gün: 2026-03-09 | Bakiye: $99,636.21
+2026-06-08 18:06:34,093 | WARNING  | risk.portfolio | Lot cap active | raw=3930.2413 -> final=20.0000 | cap=20.0000 | risk_target=1992.72
+2026-06-08 18:06:34,093 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 54.4550 | lot=20.0000 | SL=53.9480 | TP=55.2155 | risk_target=1992.72 | cost_ratio=9.5%
+2026-06-08 18:06:34,094 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,094 | INFO     | backtest | 📅 Yeni gün: 2026-03-10 | Bakiye: $99,635.99
+2026-06-08 18:06:34,095 | INFO     | risk.portfolio | Position closed [SL] @ 53.9480 | net_pnl=-10.36 | balance=99625.63 | time=2026-03-10 15:30:00
+2026-06-08 18:06:34,103 | WARNING  | risk.portfolio | Lot cap active | raw=2656.2779 -> final=20.0000 | cap=20.0000 | risk_target=1992.51
+2026-06-08 18:06:34,103 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.5350 | lot=20.0000 | SL=54.2851 | TP=52.4098 | risk_target=1992.51 | cost_ratio=6.3%
+2026-06-08 18:06:34,104 | INFO     | risk.portfolio | Position closed [SL] @ 54.2851 | net_pnl=-15.22 | balance=99610.20 | time=2026-03-10 19:30:00
+2026-06-08 18:06:34,113 | WARNING  | risk.portfolio | Lot cap active | raw=3228.5450 -> final=20.0000 | cap=20.0000 | risk_target=1992.20
+2026-06-08 18:06:34,114 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.8150 | lot=20.0000 | SL=53.4321 | TP=51.8894 | risk_target=1992.20 | cost_ratio=7.7%
+2026-06-08 18:06:34,114 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,114 | INFO     | backtest | 📅 Yeni gün: 2026-03-11 | Bakiye: $99,609.99
+2026-06-08 18:06:34,116 | INFO     | risk.portfolio | Position closed [SL] @ 53.4321 | net_pnl=-12.55 | balance=99597.43 | time=2026-03-11 21:30:00
+2026-06-08 18:06:34,123 | WARNING  | risk.portfolio | Lot cap active | raw=4088.2797 -> final=20.0000 | cap=20.0000 | risk_target=1991.95
+2026-06-08 18:06:34,124 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.8150 | lot=20.0000 | SL=53.3278 | TP=54.5459 | risk_target=1991.94 | cost_ratio=9.8%
+2026-06-08 18:06:34,124 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,124 | INFO     | backtest | 📅 Yeni gün: 2026-03-12 | Bakiye: $99,597.22
+2026-06-08 18:06:34,124 | INFO     | risk.portfolio | Position closed [SL] @ 53.3278 | net_pnl=-9.96 | balance=99587.26 | time=2026-03-12 15:30:00
+2026-06-08 18:06:34,132 | WARNING  | risk.portfolio | Lot cap active | raw=3276.7924 -> final=20.0000 | cap=20.0000 | risk_target=1991.75
+2026-06-08 18:06:34,132 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.7850 | lot=20.0000 | SL=53.1772 | TP=54.6968 | risk_target=1991.74 | cost_ratio=7.9%
+2026-06-08 18:06:34,132 | INFO     | risk.portfolio | Position closed [SL] @ 53.1772 | net_pnl=-12.37 | balance=99574.68 | time=2026-03-12 16:15:00
+2026-06-08 18:06:34,140 | WARNING  | risk.portfolio | Lot cap active | raw=2903.7338 -> final=20.0000 | cap=20.0000 | risk_target=1991.49
+2026-06-08 18:06:34,140 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.9150 | lot=20.0000 | SL=53.6008 | TP=51.8862 | risk_target=1991.49 | cost_ratio=6.9%
+2026-06-08 18:06:34,141 | INFO     | risk.portfolio | Position closed [TP] @ 51.8862 | net_pnl=+20.37 | balance=99594.83 | time=2026-03-12 17:30:00
+2026-06-08 18:06:34,142 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,143 | INFO     | backtest | 📅 Yeni gün: 2026-03-13 | Bakiye: $99,594.83
+2026-06-08 18:06:34,151 | WARNING  | risk.portfolio | Lot cap active | raw=2807.3930 -> final=20.0000 | cap=20.0000 | risk_target=1991.90
+2026-06-08 18:06:34,151 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 50.7750 | lot=20.0000 | SL=51.4845 | TP=49.7107 | risk_target=1991.89 | cost_ratio=6.6%
+2026-06-08 18:06:34,154 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,154 | INFO     | backtest | 📅 Yeni gün: 2026-03-16 | Bakiye: $99,594.63
+2026-06-08 18:06:34,154 | INFO     | risk.portfolio | Position closed [SL] @ 51.4845 | net_pnl=-14.40 | balance=99580.23 | time=2026-03-16 15:30:00
+2026-06-08 18:06:34,177 | WARNING  | risk.portfolio | Lot cap active | raw=3552.2236 -> final=20.0000 | cap=20.0000 | risk_target=1991.60
+2026-06-08 18:06:34,178 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.0550 | lot=20.0000 | SL=51.4943 | TP=52.8960 | risk_target=1991.60 | cost_ratio=8.4%
+2026-06-08 18:06:34,178 | INFO     | risk.portfolio | Position closed [SL] @ 51.4943 | net_pnl=-11.42 | balance=99568.60 | time=2026-03-16 16:00:00
+2026-06-08 18:06:34,188 | WARNING  | risk.portfolio | Lot cap active | raw=3008.8875 -> final=20.0000 | cap=20.0000 | risk_target=1991.37
+2026-06-08 18:06:34,188 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 49.2050 | lot=20.0000 | SL=49.8668 | TP=48.2123 | risk_target=1991.37 | cost_ratio=7.0%
+2026-06-08 18:06:34,190 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,190 | INFO     | backtest | 📅 Yeni gün: 2026-03-17 | Bakiye: $99,568.41
+2026-06-08 18:06:34,190 | INFO     | risk.portfolio | Position closed [SL] @ 49.8668 | net_pnl=-13.44 | balance=99554.97 | time=2026-03-17 15:30:00
+2026-06-08 18:06:34,198 | WARNING  | risk.portfolio | Lot cap active | raw=2813.9584 -> final=20.0000 | cap=20.0000 | risk_target=1991.10
+2026-06-08 18:06:34,198 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 50.3750 | lot=20.0000 | SL=49.6674 | TP=51.4364 | risk_target=1991.10 | cost_ratio=6.6%
+2026-06-08 18:06:34,200 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,200 | INFO     | backtest | 📅 Yeni gün: 2026-03-18 | Bakiye: $99,554.77
+2026-06-08 18:06:34,200 | INFO     | risk.portfolio | Position closed [SL] @ 49.6674 | net_pnl=-14.35 | balance=99540.42 | time=2026-03-18 16:00:00
+2026-06-08 18:06:34,207 | WARNING  | risk.portfolio | Lot cap active | raw=3264.6399 -> final=20.0000 | cap=20.0000 | risk_target=1990.81
+2026-06-08 18:06:34,208 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 49.7750 | lot=20.0000 | SL=50.3848 | TP=48.8603 | risk_target=1990.80 | cost_ratio=7.6%
+2026-06-08 18:06:34,208 | INFO     | risk.portfolio | Position closed [SL] @ 50.3848 | net_pnl=-12.40 | balance=99527.82 | time=2026-03-18 17:00:00
+2026-06-08 18:06:34,216 | WARNING  | risk.portfolio | Lot cap active | raw=3460.6352 -> final=20.0000 | cap=20.0000 | risk_target=1990.56
+2026-06-08 18:06:34,216 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 51.0450 | lot=20.0000 | SL=50.4698 | TP=51.9078 | risk_target=1990.55 | cost_ratio=8.2%
+2026-06-08 18:06:34,218 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,218 | INFO     | backtest | 📅 Yeni gün: 2026-03-19 | Bakiye: $99,527.62
+2026-06-08 18:06:34,218 | INFO     | risk.portfolio | Position closed [SL] @ 50.4698 | net_pnl=-11.71 | balance=99515.91 | time=2026-03-19 15:30:00
+2026-06-08 18:06:34,227 | WARNING  | risk.portfolio | Lot cap active | raw=3522.0423 -> final=20.0000 | cap=20.0000 | risk_target=1990.32
+2026-06-08 18:06:34,227 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 51.3750 | lot=20.0000 | SL=50.8099 | TP=52.2227 | risk_target=1990.31 | cost_ratio=8.3%
+2026-06-08 18:06:34,229 | INFO     | risk.portfolio | Position closed [TP] @ 52.2227 | net_pnl=+16.74 | balance=99532.45 | time=2026-03-19 21:00:00
+2026-06-08 18:06:34,230 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,230 | INFO     | backtest | 📅 Yeni gün: 2026-03-20 | Bakiye: $99,532.45
+2026-06-08 18:06:34,243 | WARNING  | risk.portfolio | Lot cap active | raw=4995.9421 -> final=20.0000 | cap=20.0000 | risk_target=1990.65
+2026-06-08 18:06:34,243 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.0750 | lot=20.0000 | SL=51.4735 | TP=50.4773 | risk_target=1990.64 | cost_ratio=11.8%
+2026-06-08 18:06:34,244 | INFO     | risk.portfolio | Position closed [SL] @ 51.4735 | net_pnl=-8.17 | balance=99524.07 | time=2026-03-20 21:45:00
+2026-06-08 18:06:34,245 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,245 | INFO     | backtest | 📅 Yeni gün: 2026-03-23 | Bakiye: $99,524.07
+2026-06-08 18:06:34,252 | WARNING  | risk.portfolio | Lot cap active | raw=3309.0502 -> final=20.0000 | cap=20.0000 | risk_target=1990.48
+2026-06-08 18:06:34,252 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.8850 | lot=20.0000 | SL=52.2835 | TP=53.7873 | risk_target=1990.48 | cost_ratio=7.9%
+2026-06-08 18:06:34,253 | INFO     | risk.portfolio | Position closed [SL] @ 52.2835 | net_pnl=-12.24 | balance=99511.62 | time=2026-03-23 16:30:00
+2026-06-08 18:06:34,265 | WARNING  | risk.portfolio | Lot cap active | raw=4085.5077 -> final=20.0000 | cap=20.0000 | risk_target=1990.23
+2026-06-08 18:06:34,265 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.5150 | lot=20.0000 | SL=52.0279 | TP=53.2457 | risk_target=1990.23 | cost_ratio=9.7%
+2026-06-08 18:06:34,266 | INFO     | risk.portfolio | Position closed [SL] @ 52.0279 | net_pnl=-9.95 | balance=99501.46 | time=2026-03-23 21:45:00
+2026-06-08 18:06:34,266 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,266 | INFO     | backtest | 📅 Yeni gün: 2026-03-24 | Bakiye: $99,501.46
+2026-06-08 18:06:34,273 | WARNING  | risk.portfolio | Lot cap active | raw=3801.1110 -> final=20.0000 | cap=20.0000 | risk_target=1990.03
+2026-06-08 18:06:34,273 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.8450 | lot=20.0000 | SL=52.3685 | TP=51.0597 | risk_target=1990.03 | cost_ratio=9.0%
+2026-06-08 18:06:34,274 | INFO     | risk.portfolio | Position closed [SL] @ 52.3685 | net_pnl=-10.68 | balance=99490.57 | time=2026-03-24 16:45:00
+2026-06-08 18:06:34,281 | WARNING  | risk.portfolio | Lot cap active | raw=3901.8181 -> final=20.0000 | cap=20.0000 | risk_target=1989.81
+2026-06-08 18:06:34,281 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.8050 | lot=20.0000 | SL=52.2950 | TP=53.5700 | risk_target=1989.81 | cost_ratio=9.3%
+2026-06-08 18:06:34,283 | INFO     | risk.portfolio | Position closed [SL] @ 52.2950 | net_pnl=-10.41 | balance=99479.95 | time=2026-03-24 20:00:00
+2026-06-08 18:06:34,284 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,284 | INFO     | backtest | 📅 Yeni gün: 2026-03-25 | Bakiye: $99,479.95
+2026-06-08 18:06:34,292 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,292 | INFO     | backtest | 📅 Yeni gün: 2026-03-26 | Bakiye: $99,479.95
+2026-06-08 18:06:34,305 | WARNING  | risk.portfolio | Lot cap active | raw=5539.1303 -> final=20.0000 | cap=20.0000 | risk_target=1989.60
+2026-06-08 18:06:34,305 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.4650 | lot=20.0000 | SL=52.8242 | TP=51.9262 | risk_target=1989.59 | cost_ratio=13.2%
+2026-06-08 18:06:34,306 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,306 | INFO     | backtest | 📅 Yeni gün: 2026-03-27 | Bakiye: $99,479.74
+2026-06-08 18:06:34,306 | INFO     | risk.portfolio | Position closed [SL] @ 52.8242 | net_pnl=-7.40 | balance=99472.35 | time=2026-03-27 15:30:00
+2026-06-08 18:06:34,314 | WARNING  | risk.portfolio | Lot cap active | raw=4088.5193 -> final=20.0000 | cap=20.0000 | risk_target=1989.45
+2026-06-08 18:06:34,314 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.8450 | lot=20.0000 | SL=52.3316 | TP=51.1151 | risk_target=1989.44 | cost_ratio=9.7%
+2026-06-08 18:06:34,314 | INFO     | risk.portfolio | Position closed [TP] @ 51.1151 | net_pnl=+14.39 | balance=99486.53 | time=2026-03-27 16:00:00
+2026-06-08 18:06:34,323 | WARNING  | risk.portfolio | Lot cap active | raw=3388.0556 -> final=20.0000 | cap=20.0000 | risk_target=1989.73
+2026-06-08 18:06:34,323 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.4850 | lot=20.0000 | SL=52.0723 | TP=50.6041 | risk_target=1989.73 | cost_ratio=8.0%
+2026-06-08 18:06:34,326 | INFO     | risk.portfolio | Position closed [TP] @ 50.6041 | net_pnl=+17.42 | balance=99503.74 | time=2026-03-27 21:45:00
+2026-06-08 18:06:34,326 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,326 | INFO     | backtest | 📅 Yeni gün: 2026-03-30 | Bakiye: $99,503.74
+2026-06-08 18:06:34,335 | WARNING  | risk.portfolio | Lot cap active | raw=3723.6530 -> final=20.0000 | cap=20.0000 | risk_target=1990.07
+2026-06-08 18:06:34,335 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 51.8950 | lot=20.0000 | SL=51.3606 | TP=52.6967 | risk_target=1990.07 | cost_ratio=8.8%
+2026-06-08 18:06:34,338 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,338 | INFO     | backtest | 📅 Yeni gün: 2026-03-31 | Bakiye: $99,503.54
+2026-06-08 18:06:34,338 | INFO     | risk.portfolio | Position closed [TP] @ 52.6967 | net_pnl=+15.82 | balance=99519.36 | time=2026-03-31 16:30:00
+2026-06-08 18:06:34,345 | WARNING  | risk.portfolio | Lot cap active | raw=5149.7485 -> final=20.0000 | cap=20.0000 | risk_target=1990.39
+2026-06-08 18:06:34,346 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.7850 | lot=20.0000 | SL=52.3985 | TP=53.3648 | risk_target=1990.38 | cost_ratio=12.3%
+2026-06-08 18:06:34,346 | INFO     | risk.portfolio | Position closed [SL] @ 52.3985 | net_pnl=-7.94 | balance=99511.21 | time=2026-03-31 17:00:00
+2026-06-08 18:06:34,356 | WARNING  | risk.portfolio | Lot cap active | raw=3446.0086 -> final=20.0000 | cap=20.0000 | risk_target=1990.22
+2026-06-08 18:06:34,356 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.7550 | lot=20.0000 | SL=52.3325 | TP=50.8887 | risk_target=1990.22 | cost_ratio=8.1%
+2026-06-08 18:06:34,356 | INFO     | risk.portfolio | Position closed [SL] @ 52.3325 | net_pnl=-11.76 | balance=99499.24 | time=2026-03-31 19:30:00
+2026-06-08 18:06:34,358 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,358 | INFO     | backtest | 📅 Yeni gün: 2026-04-01 | Bakiye: $99,499.24
+2026-06-08 18:06:34,366 | WARNING  | risk.portfolio | Lot cap active | raw=3276.5481 -> final=20.0000 | cap=20.0000 | risk_target=1989.98
+2026-06-08 18:06:34,366 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 52.6250 | lot=20.0000 | SL=52.0177 | TP=53.5360 | risk_target=1989.98 | cost_ratio=7.8%
+2026-06-08 18:06:34,367 | INFO     | risk.portfolio | Position closed [TP] @ 53.5360 | net_pnl=+18.01 | balance=99517.04 | time=2026-04-01 17:30:00
+2026-06-08 18:06:34,374 | WARNING  | risk.portfolio | Lot cap active | raw=3220.6157 -> final=20.0000 | cap=20.0000 | risk_target=1990.34
+2026-06-08 18:06:34,374 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.7850 | lot=20.0000 | SL=53.1670 | TP=54.7120 | risk_target=1990.34 | cost_ratio=7.7%
+2026-06-08 18:06:34,377 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,377 | INFO     | backtest | 📅 Yeni gün: 2026-04-02 | Bakiye: $99,516.82
+2026-06-08 18:06:34,377 | INFO     | risk.portfolio | Position closed [SL] @ 53.1670 | net_pnl=-12.57 | balance=99504.25 | time=2026-04-02 16:30:00
+2026-06-08 18:06:34,385 | WARNING  | risk.portfolio | Lot cap active | raw=3295.9750 -> final=20.0000 | cap=20.0000 | risk_target=1990.08
+2026-06-08 18:06:34,385 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.8950 | lot=20.0000 | SL=53.4988 | TP=51.9893 | risk_target=1990.08 | cost_ratio=7.8%
+2026-06-08 18:06:34,386 | INFO     | risk.portfolio | Position closed [SL] @ 53.4988 | net_pnl=-12.29 | balance=99491.75 | time=2026-04-02 17:30:00
+2026-06-08 18:06:34,394 | WARNING  | risk.portfolio | Lot cap active | raw=2953.8946 -> final=20.0000 | cap=20.0000 | risk_target=1989.83
+2026-06-08 18:06:34,394 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.0550 | lot=20.0000 | SL=53.7286 | TP=52.0446 | risk_target=1989.83 | cost_ratio=7.0%
+2026-06-08 18:06:34,396 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,396 | INFO     | backtest | 📅 Yeni gün: 2026-04-06 | Bakiye: $99,491.54
+2026-06-08 18:06:34,397 | INFO     | risk.portfolio | Position closed [TP] @ 52.0446 | net_pnl=+20.00 | balance=99511.54 | time=2026-04-06 16:45:00
+2026-06-08 18:06:34,404 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,404 | INFO     | backtest | 📅 Yeni gün: 2026-04-07 | Bakiye: $99,511.54
+2026-06-08 18:06:34,415 | WARNING  | risk.portfolio | Lot cap active | raw=4102.9667 -> final=20.0000 | cap=20.0000 | risk_target=1990.23
+2026-06-08 18:06:34,415 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.9250 | lot=20.0000 | SL=53.4101 | TP=52.1974 | risk_target=1990.23 | cost_ratio=9.8%
+2026-06-08 18:06:34,416 | INFO     | risk.portfolio | Position closed [SL] @ 53.4101 | net_pnl=-9.92 | balance=99501.41 | time=2026-04-07 19:00:00
+2026-06-08 18:06:34,424 | WARNING  | risk.portfolio | Lot cap active | raw=3980.0330 -> final=20.0000 | cap=20.0000 | risk_target=1990.03
+2026-06-08 18:06:34,424 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.6850 | lot=20.0000 | SL=53.1850 | TP=54.4350 | risk_target=1990.02 | cost_ratio=9.5%
+2026-06-08 18:06:34,426 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,426 | INFO     | backtest | 📅 Yeni gün: 2026-04-08 | Bakiye: $99,501.19
+2026-06-08 18:06:34,426 | INFO     | risk.portfolio | Position closed [TP] @ 54.4350 | net_pnl=+14.78 | balance=99515.98 | time=2026-04-08 16:30:00
+2026-06-08 18:06:34,433 | WARNING  | risk.portfolio | Lot cap active | raw=2686.5645 -> final=20.0000 | cap=20.0000 | risk_target=1990.32
+2026-06-08 18:06:34,434 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 55.1650 | lot=20.0000 | SL=54.4242 | TP=56.2763 | risk_target=1990.32 | cost_ratio=6.5%
+2026-06-08 18:06:34,434 | INFO     | risk.portfolio | Position closed [SL] @ 54.4242 | net_pnl=-15.03 | balance=99500.72 | time=2026-04-08 17:30:00
+2026-06-08 18:06:34,443 | WARNING  | risk.portfolio | Lot cap active | raw=2767.8664 -> final=20.0000 | cap=20.0000 | risk_target=1990.01
+2026-06-08 18:06:34,443 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 54.7550 | lot=20.0000 | SL=54.0360 | TP=55.8335 | risk_target=1990.01 | cost_ratio=6.7%
+2026-06-08 18:06:34,445 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,445 | INFO     | backtest | 📅 Yeni gün: 2026-04-09 | Bakiye: $99,500.50
+2026-06-08 18:06:34,446 | INFO     | risk.portfolio | Position closed [SL] @ 54.0360 | net_pnl=-14.60 | balance=99485.91 | time=2026-04-09 16:45:00
+2026-06-08 18:06:34,455 | WARNING  | risk.portfolio | Lot cap active | raw=3326.3878 -> final=20.0000 | cap=20.0000 | risk_target=1989.72
+2026-06-08 18:06:34,455 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 54.3150 | lot=20.0000 | SL=54.9132 | TP=53.4178 | risk_target=1989.71 | cost_ratio=8.0%
+2026-06-08 18:06:34,455 | INFO     | risk.portfolio | Position closed [SL] @ 54.9132 | net_pnl=-12.18 | balance=99473.51 | time=2026-04-09 18:30:00
+2026-06-08 18:06:34,464 | WARNING  | risk.portfolio | Lot cap active | raw=3389.2553 -> final=20.0000 | cap=20.0000 | risk_target=1989.47
+2026-06-08 18:06:34,464 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 55.6450 | lot=20.0000 | SL=55.0580 | TP=56.5255 | risk_target=1989.47 | cost_ratio=8.2%
+2026-06-08 18:06:34,466 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,466 | INFO     | backtest | 📅 Yeni gün: 2026-04-10 | Bakiye: $99,473.28
+2026-06-08 18:06:34,468 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:34,469 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 55.5400 | net_pnl=-2.32 | balance=99470.96 | time=2026-04-10 23:00:00
+2026-06-08 18:06:34,469 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 55.5400 | PnL=-2.32 USD
+2026-06-08 18:06:34,469 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,469 | INFO     | backtest | 📅 Yeni gün: 2026-04-13 | Bakiye: $99,470.96
+2026-06-08 18:06:34,483 | WARNING  | risk.portfolio | Lot cap active | raw=4207.9661 -> final=20.0000 | cap=20.0000 | risk_target=1989.42
+2026-06-08 18:06:34,483 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 57.1050 | lot=20.0000 | SL=56.6322 | TP=57.8142 | risk_target=1989.41 | cost_ratio=10.3%
+2026-06-08 18:06:34,484 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,484 | INFO     | backtest | 📅 Yeni gün: 2026-04-14 | Bakiye: $99,470.73
+2026-06-08 18:06:34,485 | INFO     | risk.portfolio | Position closed [TP] @ 57.8142 | net_pnl=+13.95 | balance=99484.69 | time=2026-04-14 16:30:00
+2026-06-08 18:06:34,492 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,493 | INFO     | backtest | 📅 Yeni gün: 2026-04-15 | Bakiye: $99,484.69
+2026-06-08 18:06:34,505 | WARNING  | risk.portfolio | Lot cap active | raw=4312.7901 -> final=20.0000 | cap=20.0000 | risk_target=1989.69
+2026-06-08 18:06:34,505 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 58.7350 | lot=20.0000 | SL=59.1963 | TP=58.0430 | risk_target=1989.69 | cost_ratio=10.6%
+2026-06-08 18:06:34,506 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,507 | INFO     | backtest | 📅 Yeni gün: 2026-04-16 | Bakiye: $99,484.45
+2026-06-08 18:06:34,507 | INFO     | risk.portfolio | Position closed [TP] @ 58.0430 | net_pnl=+13.61 | balance=99498.06 | time=2026-04-16 16:30:00
+2026-06-08 18:06:34,514 | WARNING  | risk.portfolio | Lot cap active | raw=3813.8450 -> final=20.0000 | cap=20.0000 | risk_target=1989.96
+2026-06-08 18:06:34,515 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 57.6850 | lot=20.0000 | SL=58.2068 | TP=56.9023 | risk_target=1989.96 | cost_ratio=9.3%
+2026-06-08 18:06:34,517 | INFO     | risk.portfolio | Position closed [TP] @ 56.9023 | net_pnl=+15.43 | balance=99513.25 | time=2026-04-16 22:30:00
+2026-06-08 18:06:34,518 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,518 | INFO     | backtest | 📅 Yeni gün: 2026-04-17 | Bakiye: $99,513.25
+2026-06-08 18:06:34,526 | WARNING  | risk.portfolio | Lot cap active | raw=2914.0691 -> final=20.0000 | cap=20.0000 | risk_target=1990.27
+2026-06-08 18:06:34,527 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 59.4450 | lot=20.0000 | SL=58.7620 | TP=60.4695 | risk_target=1990.26 | cost_ratio=7.2%
+2026-06-08 18:06:34,529 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:34,530 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 59.2300 | net_pnl=-4.54 | balance=99508.48 | time=2026-04-17 23:00:00
+2026-06-08 18:06:34,530 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 59.2300 | PnL=-4.54 USD
+2026-06-08 18:06:34,530 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,530 | INFO     | backtest | 📅 Yeni gün: 2026-04-20 | Bakiye: $99,508.48
+2026-06-08 18:06:34,538 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,538 | INFO     | backtest | 📅 Yeni gün: 2026-04-21 | Bakiye: $99,508.48
+2026-06-08 18:06:34,549 | WARNING  | risk.portfolio | Lot cap active | raw=3186.5267 -> final=20.0000 | cap=20.0000 | risk_target=1990.17
+2026-06-08 18:06:34,549 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 60.1950 | lot=20.0000 | SL=60.8196 | TP=59.2582 | risk_target=1990.16 | cost_ratio=7.9%
+2026-06-08 18:06:34,551 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,551 | INFO     | backtest | 📅 Yeni gün: 2026-04-22 | Bakiye: $99,508.24
+2026-06-08 18:06:34,551 | INFO     | risk.portfolio | Position closed [TP] @ 59.2582 | net_pnl=+18.50 | balance=99526.74 | time=2026-04-22 17:30:00
+2026-06-08 18:06:34,559 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,559 | INFO     | backtest | 📅 Yeni gün: 2026-04-23 | Bakiye: $99,526.74
+2026-06-08 18:06:34,566 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,567 | INFO     | backtest | 📅 Yeni gün: 2026-04-24 | Bakiye: $99,526.74
+2026-06-08 18:06:34,575 | WARNING  | risk.portfolio | Lot cap active | raw=2459.6422 -> final=20.0000 | cap=20.0000 | risk_target=1990.53
+2026-06-08 18:06:34,575 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 54.1250 | lot=20.0000 | SL=53.3157 | TP=55.3389 | risk_target=1990.53 | cost_ratio=5.9%
+2026-06-08 18:06:34,578 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:34,578 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 54.1900 | net_pnl=+1.08 | balance=99527.60 | time=2026-04-24 23:00:00
+2026-06-08 18:06:34,578 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 54.1900 | PnL=+1.08 USD
+2026-06-08 18:06:34,578 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,579 | INFO     | backtest | 📅 Yeni gün: 2026-04-27 | Bakiye: $99,527.60
+2026-06-08 18:06:34,587 | WARNING  | risk.portfolio | Lot cap active | raw=3181.9303 -> final=20.0000 | cap=20.0000 | risk_target=1990.55
+2026-06-08 18:06:34,587 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 55.0350 | lot=20.0000 | SL=54.4094 | TP=55.9734 | risk_target=1990.55 | cost_ratio=7.7%
+2026-06-08 18:06:34,589 | INFO     | risk.portfolio | Position closed [SL] @ 54.4094 | net_pnl=-12.73 | balance=99514.66 | time=2026-04-27 21:00:00
+2026-06-08 18:06:34,592 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,592 | INFO     | backtest | 📅 Yeni gün: 2026-04-28 | Bakiye: $99,514.66
+2026-06-08 18:06:34,601 | WARNING  | risk.portfolio | Lot cap active | raw=3648.2551 -> final=20.0000 | cap=20.0000 | risk_target=1990.29
+2026-06-08 18:06:34,601 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 54.1750 | lot=20.0000 | SL=54.7205 | TP=53.3567 | risk_target=1990.29 | cost_ratio=8.7%
+2026-06-08 18:06:34,602 | INFO     | risk.portfolio | Position closed [TP] @ 53.3567 | net_pnl=+16.15 | balance=99530.59 | time=2026-04-28 18:15:00
+2026-06-08 18:06:34,610 | WARNING  | risk.portfolio | Lot cap active | raw=3782.1673 -> final=20.0000 | cap=20.0000 | risk_target=1990.61
+2026-06-08 18:06:34,610 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 53.3950 | lot=20.0000 | SL=53.9213 | TP=52.6055 | risk_target=1990.61 | cost_ratio=9.0%
+2026-06-08 18:06:34,612 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,612 | INFO     | backtest | 📅 Yeni gün: 2026-04-29 | Bakiye: $99,530.38
+2026-06-08 18:06:34,613 | INFO     | risk.portfolio | Position closed [TP] @ 52.6055 | net_pnl=+15.58 | balance=99545.96 | time=2026-04-29 17:30:00
+2026-06-08 18:06:34,620 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,620 | INFO     | backtest | 📅 Yeni gün: 2026-04-30 | Bakiye: $99,545.96
+2026-06-08 18:06:34,630 | WARNING  | risk.portfolio | Lot cap active | raw=3920.4252 -> final=20.0000 | cap=20.0000 | risk_target=1990.92
+2026-06-08 18:06:34,630 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 53.0450 | lot=20.0000 | SL=52.5372 | TP=53.8067 | risk_target=1990.91 | cost_ratio=9.4%
+2026-06-08 18:06:34,630 | INFO     | risk.portfolio | Position closed [TP] @ 53.8067 | net_pnl=+15.02 | balance=99560.76 | time=2026-04-30 17:30:00
+2026-06-08 18:06:34,639 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,639 | INFO     | backtest | 📅 Yeni gün: 2026-05-01 | Bakiye: $99,560.76
+2026-06-08 18:06:34,647 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,647 | INFO     | backtest | 📅 Yeni gün: 2026-05-04 | Bakiye: $99,560.76
+2026-06-08 18:06:34,658 | WARNING  | risk.portfolio | Lot cap active | raw=3989.4871 -> final=20.0000 | cap=20.0000 | risk_target=1991.22
+2026-06-08 18:06:34,658 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 54.5450 | lot=20.0000 | SL=55.0441 | TP=53.7963 | risk_target=1991.21 | cost_ratio=9.6%
+2026-06-08 18:06:34,660 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,660 | INFO     | backtest | 📅 Yeni gün: 2026-05-05 | Bakiye: $99,560.55
+2026-06-08 18:06:34,661 | INFO     | risk.portfolio | Position closed [SL] @ 55.0441 | net_pnl=-10.20 | balance=99550.34 | time=2026-05-05 16:30:00
+2026-06-08 18:06:34,668 | WARNING  | risk.portfolio | Lot cap active | raw=3563.6420 -> final=20.0000 | cap=20.0000 | risk_target=1991.01
+2026-06-08 18:06:34,668 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 55.3350 | lot=20.0000 | SL=54.7763 | TP=56.1731 | risk_target=1991.00 | cost_ratio=8.6%
+2026-06-08 18:06:34,669 | INFO     | risk.portfolio | Position closed [SL] @ 54.7763 | net_pnl=-11.39 | balance=99538.73 | time=2026-05-05 16:45:00
+2026-06-08 18:06:34,676 | WARNING  | risk.portfolio | Lot cap active | raw=2956.7758 -> final=20.0000 | cap=20.0000 | risk_target=1990.77
+2026-06-08 18:06:34,676 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 55.4650 | lot=20.0000 | SL=54.7917 | TP=56.4749 | risk_target=1990.77 | cost_ratio=7.2%
+2026-06-08 18:06:34,678 | INFO     | risk.portfolio | Position closed [TP] @ 56.4749 | net_pnl=+19.97 | balance=99558.48 | time=2026-05-05 21:00:00
+2026-06-08 18:06:34,679 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,679 | INFO     | backtest | 📅 Yeni gün: 2026-05-06 | Bakiye: $99,558.48
+2026-06-08 18:06:34,688 | WARNING  | risk.portfolio | Lot cap active | raw=1494.7860 -> final=20.0000 | cap=20.0000 | risk_target=1991.17
+2026-06-08 18:06:34,688 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 52.2450 | lot=20.0000 | SL=53.5771 | TP=50.2469 | risk_target=1991.17 | cost_ratio=3.5%
+2026-06-08 18:06:34,689 | INFO     | risk.portfolio | Position closed [TP] @ 50.2469 | net_pnl=+39.76 | balance=99598.03 | time=2026-05-06 18:00:00
+2026-06-08 18:06:34,697 | WARNING  | risk.portfolio | Lot cap active | raw=1427.8314 -> final=20.0000 | cap=20.0000 | risk_target=1991.96
+2026-06-08 18:06:34,697 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 50.4350 | lot=20.0000 | SL=51.8301 | TP=48.3424 | risk_target=1991.96 | cost_ratio=3.3%
+2026-06-08 18:06:34,698 | INFO     | risk.portfolio | Position closed [TP] @ 48.3424 | net_pnl=+41.66 | balance=99639.49 | time=2026-05-06 18:45:00
+2026-06-08 18:06:34,700 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,700 | INFO     | backtest | 📅 Yeni gün: 2026-05-07 | Bakiye: $99,639.49
+2026-06-08 18:06:34,710 | WARNING  | risk.portfolio | Lot cap active | raw=1746.0596 -> final=20.0000 | cap=20.0000 | risk_target=1992.79
+2026-06-08 18:06:34,710 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 49.4550 | lot=20.0000 | SL=48.3137 | TP=51.1670 | risk_target=1992.79 | cost_ratio=4.1%
+2026-06-08 18:06:34,712 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,712 | INFO     | backtest | 📅 Yeni gün: 2026-05-08 | Bakiye: $99,639.29
+2026-06-08 18:06:34,712 | INFO     | risk.portfolio | Position closed [SL] @ 48.3137 | net_pnl=-23.02 | balance=99616.27 | time=2026-05-08 16:30:00
+2026-06-08 18:06:34,726 | WARNING  | risk.portfolio | Lot cap active | raw=2510.0569 -> final=20.0000 | cap=20.0000 | risk_target=1992.33
+2026-06-08 18:06:34,726 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 48.4550 | lot=20.0000 | SL=49.2487 | TP=47.2644 | risk_target=1992.32 | cost_ratio=5.8%
+2026-06-08 18:06:34,727 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:34,727 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 48.3600 | net_pnl=+1.71 | balance=99617.79 | time=2026-05-08 23:00:00
+2026-06-08 18:06:34,727 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 48.3600 | PnL=+1.71 USD
+2026-06-08 18:06:34,727 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,728 | INFO     | backtest | 📅 Yeni gün: 2026-05-11 | Bakiye: $99,617.79
+2026-06-08 18:06:34,735 | WARNING  | risk.portfolio | Lot cap active | raw=2323.9445 -> final=20.0000 | cap=20.0000 | risk_target=1992.36
+2026-06-08 18:06:34,735 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 47.9950 | lot=20.0000 | SL=48.8523 | TP=46.7090 | risk_target=1992.35 | cost_ratio=5.4%
+2026-06-08 18:06:34,735 | INFO     | risk.portfolio | Position closed [SL] @ 48.8523 | net_pnl=-17.34 | balance=99600.25 | time=2026-05-11 17:15:00
+2026-06-08 18:06:34,742 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,743 | INFO     | backtest | 📅 Yeni gün: 2026-05-12 | Bakiye: $99,600.25
+2026-06-08 18:06:34,756 | WARNING  | risk.portfolio | Lot cap active | raw=3568.2754 -> final=20.0000 | cap=20.0000 | risk_target=1992.01
+2026-06-08 18:06:34,756 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 47.3650 | lot=20.0000 | SL=47.9233 | TP=46.5276 | risk_target=1992.00 | cost_ratio=8.2%
+2026-06-08 18:06:34,757 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,758 | INFO     | backtest | 📅 Yeni gün: 2026-05-13 | Bakiye: $99,600.06
+2026-06-08 18:06:34,758 | INFO     | risk.portfolio | Position closed [TP] @ 46.5276 | net_pnl=+16.56 | balance=99616.62 | time=2026-05-13 16:30:00
+2026-06-08 18:06:34,766 | WARNING  | risk.portfolio | Lot cap active | raw=3154.5929 -> final=20.0000 | cap=20.0000 | risk_target=1992.33
+2026-06-08 18:06:34,766 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 45.9650 | lot=20.0000 | SL=46.5966 | TP=45.0177 | risk_target=1992.33 | cost_ratio=7.2%
+2026-06-08 18:06:34,767 | INFO     | risk.portfolio | Position closed [TP] @ 45.0177 | net_pnl=+18.77 | balance=99635.21 | time=2026-05-13 17:45:00
+2026-06-08 18:06:34,773 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,773 | INFO     | backtest | 📅 Yeni gün: 2026-05-14 | Bakiye: $99,635.21
+2026-06-08 18:06:34,785 | WARNING  | risk.portfolio | Lot cap active | raw=3268.3234 -> final=20.0000 | cap=20.0000 | risk_target=1992.70
+2026-06-08 18:06:34,785 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 45.5050 | lot=20.0000 | SL=44.8953 | TP=46.4196 | risk_target=1992.70 | cost_ratio=7.5%
+2026-06-08 18:06:34,786 | INFO     | risk.portfolio | Position closed [SL] @ 44.8953 | net_pnl=-12.37 | balance=99622.65 | time=2026-05-14 19:45:00
+2026-06-08 18:06:34,795 | WARNING  | risk.portfolio | Lot cap active | raw=3850.2237 -> final=20.0000 | cap=20.0000 | risk_target=1992.45
+2026-06-08 18:06:34,795 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 44.7550 | lot=20.0000 | SL=45.2725 | TP=43.9788 | risk_target=1992.45 | cost_ratio=8.7%
+2026-06-08 18:06:34,796 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,796 | INFO     | backtest | 📅 Yeni gün: 2026-05-15 | Bakiye: $99,622.47
+2026-06-08 18:06:34,797 | INFO     | risk.portfolio | Position closed [SL] @ 45.2725 | net_pnl=-10.53 | balance=99611.94 | time=2026-05-15 16:30:00
+2026-06-08 18:06:34,810 | WARNING  | risk.portfolio | Lot cap active | raw=4594.9027 -> final=20.0000 | cap=20.0000 | risk_target=1992.24
+2026-06-08 18:06:34,811 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 43.8450 | lot=20.0000 | SL=44.2786 | TP=43.1946 | risk_target=1992.24 | cost_ratio=10.4%
+2026-06-08 18:06:34,811 | WARNING  | risk.guardrails | 🗓️ HAFTA SONU FLATTEN — Cuma 23:00 UTC | Zorla kapanış saati: 23:00. Açık pozisyon kapatılıyor...
+2026-06-08 18:06:34,812 | INFO     | risk.portfolio | Position closed [WEEKEND_FLATTEN] @ 43.3000 | net_pnl=+10.73 | balance=99622.49 | time=2026-05-15 23:00:00
+2026-06-08 18:06:34,812 | INFO     | execution.simulator | 🗓️ WEEKEND_FLATTEN kapanışı @ 43.3000 | PnL=+10.73 USD
+2026-06-08 18:06:34,812 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,812 | INFO     | backtest | 📅 Yeni gün: 2026-05-18 | Bakiye: $99,622.49
+2026-06-08 18:06:34,822 | WARNING  | risk.portfolio | Lot cap active | raw=3427.0434 -> final=20.0000 | cap=20.0000 | risk_target=1992.45
+2026-06-08 18:06:34,822 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 44.7750 | lot=20.0000 | SL=44.1936 | TP=45.6471 | risk_target=1992.45 | cost_ratio=7.8%
+2026-06-08 18:06:34,822 | INFO     | risk.portfolio | Position closed [SL] @ 44.1936 | net_pnl=-11.80 | balance=99610.51 | time=2026-05-18 18:00:00
+2026-06-08 18:06:34,828 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,828 | INFO     | backtest | 📅 Yeni gün: 2026-05-19 | Bakiye: $99,610.51
+2026-06-08 18:06:34,837 | WARNING  | risk.portfolio | Lot cap active | raw=3168.0929 -> final=20.0000 | cap=20.0000 | risk_target=1992.21
+2026-06-08 18:06:34,837 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 45.9650 | lot=20.0000 | SL=45.3362 | TP=46.9083 | risk_target=1992.21 | cost_ratio=7.3%
+2026-06-08 18:06:34,838 | INFO     | risk.portfolio | Position closed [SL] @ 45.3362 | net_pnl=-12.76 | balance=99597.57 | time=2026-05-19 19:30:00
+2026-06-08 18:06:34,843 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,843 | INFO     | backtest | 📅 Yeni gün: 2026-05-20 | Bakiye: $99,597.57
+2026-06-08 18:06:34,852 | WARNING  | risk.portfolio | Lot cap active | raw=3440.9412 -> final=20.0000 | cap=20.0000 | risk_target=1991.95
+2026-06-08 18:06:34,852 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 44.9750 | lot=20.0000 | SL=45.5539 | TP=44.1067 | risk_target=1991.95 | cost_ratio=7.8%
+2026-06-08 18:06:34,852 | INFO     | risk.portfolio | Position closed [SL] @ 45.5539 | net_pnl=-11.76 | balance=99585.63 | time=2026-05-20 17:15:00
+2026-06-08 18:06:34,860 | WARNING  | risk.portfolio | Lot cap active | raw=3201.1308 -> final=20.0000 | cap=20.0000 | risk_target=1991.71
+2026-06-08 18:06:34,860 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 44.9650 | lot=20.0000 | SL=45.5872 | TP=44.0317 | risk_target=1991.71 | cost_ratio=7.3%
+2026-06-08 18:06:34,860 | INFO     | risk.portfolio | Position closed [SL] @ 45.5872 | net_pnl=-12.63 | balance=99572.82 | time=2026-05-20 18:00:00
+2026-06-08 18:06:34,862 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,863 | INFO     | backtest | 📅 Yeni gün: 2026-05-21 | Bakiye: $99,572.82
+2026-06-08 18:06:34,872 | WARNING  | risk.portfolio | Lot cap active | raw=3856.7306 -> final=20.0000 | cap=20.0000 | risk_target=1991.46
+2026-06-08 18:06:34,872 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 46.7050 | lot=20.0000 | SL=46.1886 | TP=47.4795 | risk_target=1991.45 | cost_ratio=8.9%
+2026-06-08 18:06:34,875 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,875 | INFO     | backtest | 📅 Yeni gün: 2026-05-22 | Bakiye: $99,572.63
+2026-06-08 18:06:34,875 | INFO     | risk.portfolio | Position closed [TP] @ 47.4795 | net_pnl=+15.30 | balance=99587.94 | time=2026-05-22 16:30:00
+2026-06-08 18:06:34,883 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,883 | INFO     | backtest | 📅 Yeni gün: 2026-05-26 | Bakiye: $99,587.94
+2026-06-08 18:06:34,891 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,891 | INFO     | backtest | 📅 Yeni gün: 2026-05-27 | Bakiye: $99,587.94
+2026-06-08 18:06:34,901 | WARNING  | risk.portfolio | Lot cap active | raw=3536.3796 -> final=20.0000 | cap=20.0000 | risk_target=1991.76
+2026-06-08 18:06:34,901 | INFO     | risk.portfolio | Position opened [STRONG_LONG] @ 48.7350 | lot=20.0000 | SL=48.1718 | TP=49.5798 | risk_target=1991.75 | cost_ratio=8.2%
+2026-06-08 18:06:34,901 | INFO     | risk.portfolio | Position closed [SL] @ 48.1718 | net_pnl=-11.46 | balance=99576.28 | time=2026-05-27 17:30:00
+2026-06-08 18:06:34,908 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,908 | INFO     | backtest | 📅 Yeni gün: 2026-05-28 | Bakiye: $99,576.28
+2026-06-08 18:06:34,916 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,916 | INFO     | backtest | 📅 Yeni gün: 2026-05-29 | Bakiye: $99,576.28
+2026-06-08 18:06:34,924 | INFO     | risk.guardrails | Günlük drawdown sayacı sıfırlandı.
+2026-06-08 18:06:34,924 | INFO     | backtest | 📅 Yeni gün: 2026-06-01 | Bakiye: $99,576.28
+2026-06-08 18:06:34,933 | WARNING  | risk.portfolio | Lot cap active | raw=4218.0269 -> final=20.0000 | cap=20.0000 | risk_target=1991.53
+2026-06-08 18:06:34,934 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.0150 | lot=20.0000 | SL=51.4871 | TP=50.3068 | risk_target=1991.52 | cost_ratio=9.9%
+2026-06-08 18:06:34,934 | INFO     | risk.portfolio | Position closed [SL] @ 51.4871 | net_pnl=-9.65 | balance=99566.43 | time=2026-06-01 18:00:00
+2026-06-08 18:06:34,943 | WARNING  | risk.portfolio | Lot cap active | raw=4205.2379 -> final=20.0000 | cap=20.0000 | risk_target=1991.33
+2026-06-08 18:06:34,944 | INFO     | risk.portfolio | Position opened [STRONG_SHORT] @ 51.2050 | lot=20.0000 | SL=51.6785 | TP=50.4947 | risk_target=1991.32 | cost_ratio=9.9%
+2026-06-08 18:06:34,944 | INFO     | risk.portfolio | Position closed [SL] @ 51.6785 | net_pnl=-9.68 | balance=99556.55 | time=2026-06-01 21:00:00
+2026-06-08 18:06:34,947 | INFO     | backtest | 
+══════════════════════════════════════════════════════════════
+  nasdaq_bot_v2  |  BACKTEST SONUÇLARI
+══════════════════════════════════════════════════════════════
+  📅  Simülasyon Süresi   : 3.2 saniye
+  📊  İşlenen Bar Sayısı  : 6,192
+
+  ── PORTFÖY ──────────────────────────────────────────────
+  💰  Başlangıç Bakiyesi  : $  100,000.00
+  💵  Bitiş Bakiyesi      : $   99,556.55
+  📈  Net PnL             : $     -443.45  (-0.44%)
+  📉  Maks. Drawdown      : $      611.89  (0.61%)
+  💸  Toplam Komisyon     : $      106.73
+
+  ── TRADE İSTATİSTİKLERİ ─────────────────────────────────
+  🔢  Toplam İşlem        : 236
+  ✅  Kazanan             : 84
+  ❌  Kaybeden            : 152
+  🎯  Win Rate            : 35.6%
+  ⚖️   Profit Factor       : 0.762
+  📐  Ort. Kazanan R      : 0.01R
+
+  ── KAPANIM SEBEPLERİ ────────────────────────────────────
+  🟢  TP Hit              : 70
+  🔴  SL Hit              : 142
+  🗓️   Weekend Flatten     : 24
+  🛡️   Guardrail Kapanışı  : 0
+
+  ── QUANT METRİKLER ──────────────────────────────────────
+  📊  Sharpe Oranı        : -1.9171
+  📏  R:R Hedefi          : 1:1.5
+  ⚠️   Günlük DD Limiti   : %4.0
+  ⚠️   Toplam DD Limiti   : %9.0
+══════════════════════════════════════════════════════════════
+2026-06-08 18:06:34,947 | INFO     | backtest | 
+  ❌ PROP FIRM EŞİKLERİ AŞILDI — Strateji revize edilmeli
+══════════════════════════════════════════════════════════════
+
