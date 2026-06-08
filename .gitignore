@@ -2,3 +2,4 @@ V1/**/__pycache__/
 results/
 V1/temp_metrics.json
 V1/logs/
+V1/csv/
