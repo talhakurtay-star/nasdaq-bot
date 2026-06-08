@@ -1,9 +1,9 @@
 {
-  "net_pnl": 53.6519,
-  "net_pnl_pct": 0.0537,
-  "maks_drawdown_pct": -0.0506,
+  "net_pnl": 54.7265,
+  "net_pnl_pct": 0.0547,
+  "maks_drawdown_pct": -0.05,
   "win_rate_pct": 66.6667,
-  "sharpe": 4.6645,
+  "sharpe": 4.7957,
   "toplam_islem": 15,
   "kazanan": 10,
   "kaybeden": 5,
