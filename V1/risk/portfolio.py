@@ -16,6 +16,12 @@ from datetime import datetime
 from typing import Dict, Literal, Optional, Tuple
 
 try:
+    from notifications.telegram_bot import notify_trade_open, notify_trade_close
+    _TG_ENABLED = True
+except Exception:
+    _TG_ENABLED = False
+
+try:
     from config.settings import (
         ATR_MULTIPLIER,
         COMMISSION_RATE,
@@ -203,6 +209,19 @@ class PortfolioManager:
             self.balance * RISK_PER_TRADE,
             cost_ratio * 100,
         )
+        if _TG_ENABLED:
+            try:
+                notify_trade_open(
+                    direction=direction,
+                    entry_price=entry_price,
+                    stop_loss=stop_loss,
+                    take_profit=take_profit,
+                    lot_size=lot_size,
+                    timestamp=timestamp,
+                    balance=self.balance,
+                )
+            except Exception:
+                pass
         return position
 
     def close_trade(
@@ -255,6 +274,23 @@ class PortfolioManager:
             self.balance,
             timestamp,
         )
+        if _TG_ENABLED:
+            try:
+                total = len(self.trade_log)
+                wins  = sum(1 for t in self.trade_log if t["net_pnl"] > 0)
+                notify_trade_close(
+                    direction=pos.direction,
+                    entry_price=pos.entry_price,
+                    exit_price=exit_price,
+                    net_pnl=net_pnl,
+                    reason=reason,
+                    balance=self.balance,
+                    timestamp=timestamp,
+                    trade_count=total,
+                    win_count=wins,
+                )
+            except Exception:
+                pass
         return (net_pnl, reason)
 
     def _update_equity(self, current_price: float) -> None:

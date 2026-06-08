@@ -496,6 +496,26 @@ def run_backtest() -> None:
     except Exception as e:
         logger.error(f"HTML Rapor oluşturulurken hata oluştu: {e}")
 
+    # Telegram: Oturum Sonu Bildirimi
+    try:
+        from notifications.telegram_bot import notify_session_end
+        from backtest import _calculate_sharpe_ratio, _calculate_max_drawdown, _calculate_profit_factor
+        summary = portfolio.summary()
+        _, mdd_pct = _calculate_max_drawdown(equity_curve)
+        pf  = _calculate_profit_factor(portfolio.trade_log)
+        sh  = _calculate_sharpe_ratio(equity_curve)
+        notify_session_end(
+            balance=portfolio.balance,
+            net_pnl=summary["total_pnl"],
+            total_trades=summary["total_trades"],
+            win_rate=summary["win_rate_pct"],
+            profit_factor=pf,
+            max_dd_pct=mdd_pct,
+            sharpe=sh,
+        )
+    except Exception:
+        pass
+
 
 
 # ── Giriş Noktası ─────────────────────────────────────────────────────────────
