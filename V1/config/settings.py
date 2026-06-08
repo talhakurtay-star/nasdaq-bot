@@ -17,9 +17,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CACHE_DIR = os.path.join(str(BASE_DIR), "cache")
 MODEL_DIR = os.path.join(str(BASE_DIR), "models")
 
+# CSV veri kaynağı ayarları
+USE_CSV_DATA    = True
+CSV_DIR         = os.path.join(str(BASE_DIR), "csv")
+CSV_FILE_NAME   = "nasdaq_15m.csv"
+
 # Dizinlerin varlığını kontrol et
 os.makedirs(CACHE_DIR, exist_ok=True)
 os.makedirs(MODEL_DIR, exist_ok=True)
+os.makedirs(CSV_DIR,   exist_ok=True)
 
 # ── Zaman ve Sembol Ayarları ──────────────────────────────────────────────────
 # SYMBOL      → yfinance veri çekme sembolü (QQQ/NASDAQ ETF proxy)
