@@ -23,6 +23,7 @@ except ImportError:
 
 _BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _MASTER_CACHE = os.path.join(_BASE_DIR, "cache", "cache_15m_360d.csv")
+_DEFAULT_CACHE = _MASTER_CACHE
 
 _TF_MAP = {
     "1m":  "1min",
@@ -58,18 +59,27 @@ def _resample(df: pd.DataFrame, tf: str) -> pd.DataFrame:
 
 
 class DataFeed:
-    def __init__(self):
+    def __init__(self, cache_file: str | None = None):
+        """
+        Parameters
+        ----------
+        cache_file : str | None
+            Path to a CSV cache file.  If None (default) the master cache
+            cache/cache_15m_360d.csv is used — existing behaviour unchanged.
+        """
         os.makedirs(CACHE_DIR, exist_ok=True)
+        self._cache_file = cache_file if cache_file is not None else _DEFAULT_CACHE
 
     def download_historical_data(self, force_refresh: bool = False) -> pd.DataFrame:
-        if not os.path.exists(_MASTER_CACHE):
+        cache_path = self._cache_file
+        if not os.path.exists(cache_path):
             raise FileNotFoundError(
-                f"Master cache bulunamadı: {_MASTER_CACHE}\n"
-                "cache/cache_15m_360d.csv dosyasının mevcut olduğunu kontrol edin."
+                f"Cache dosyası bulunamadı: {cache_path}\n"
+                "Dosyanın mevcut olduğunu kontrol edin."
             )
 
-        df = pd.read_csv(_MASTER_CACHE, index_col=0, parse_dates=True)
-        print(f"[DataFeed] Master cache: {len(df)} bar "
+        df = pd.read_csv(cache_path, index_col=0, parse_dates=True)
+        print(f"[DataFeed] Cache ({os.path.basename(cache_path)}): {len(df)} bar "
               f"({df.index[0]} → {df.index[-1]})")
 
         # Zaman dilimine göre resample
