@@ -105,10 +105,21 @@ SPREAD_PENALTY = float(os.getenv("STRESS_SPREAD_PENALTY", "0.05"))
 COMMISSION_RATE = float(os.getenv("STRESS_COMMISSION_RATE", "0.0002"))
 
 # ── MetaTrader 5 Giriş Bilgileri ──────────────────────────────────────────────
-MT5_ACCOUNT = int(os.getenv("MT5_ACCOUNT", "5051110235"))
-MT5_PASSWORD = os.getenv("MT5_PASSWORD", "@iU2FcLc")
-MT5_SERVER = os.getenv("MT5_SERVER", "MetaQuotes-Demo")
-MT5_PATH = os.getenv("MT5_PATH", "")  # Boş ise varsayılan MT5 yolu otomatik aranır
+# GÜVENLİK: Varsayılan değer yok. Ortam değişkeni set edilmezse başlangıçta hata verir.
+# Kullanım: export MT5_ACCOUNT=12345678 MT5_PASSWORD=xxx MT5_SERVER=ICMarkets-Demo
+_mt5_account_str = os.getenv("MT5_ACCOUNT", "")
+MT5_ACCOUNT  = int(_mt5_account_str) if _mt5_account_str else 0
+MT5_PASSWORD = os.getenv("MT5_PASSWORD", "")
+MT5_SERVER   = os.getenv("MT5_SERVER",   "MetaQuotes-Demo")
+MT5_PATH     = os.getenv("MT5_PATH",     "")
+
+if not MT5_PASSWORD and os.getenv("STRESS_TEST_MODE", "0") != "1":
+    import warnings
+    warnings.warn(
+        "MT5_PASSWORD ortam değişkeni set edilmemiş. "
+        "Canlı trading için: export MT5_PASSWORD=sifreniz",
+        stacklevel=2,
+    )
 
 # ── Kontrat Parametreleri ─────────────────────────────────────────────────────
 CONTRACT_SIZE = float(os.getenv("STRESS_CONTRACT_SIZE", "1.0"))

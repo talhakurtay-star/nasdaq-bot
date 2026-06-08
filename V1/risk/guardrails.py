@@ -89,7 +89,10 @@ class RiskGuardrails:
         self.daily_drawdown_triggered: bool = False
         self.total_drawdown_triggered: bool = False
         self.daily_trades_count:       int  = 0
-        self.max_daily_trades:         int  = 2  # Prop firm güvenliği: günde max 2 işlem
+        self.max_daily_trades:         int  = 2   # Günde max 2 işlem
+        self.consecutive_sl_count:     int  = 0
+        self.circuit_breaker_active:   bool = False
+        self.max_consecutive_sl:       int  = 3   # 3 art arda SL → o gün dur
 
         logger.info(
             "RiskGuardrails başlatıldı | "
@@ -186,7 +189,9 @@ class RiskGuardrails:
             self.kill_switch_active = False
 
         portfolio.reset_daily_peak()
-        self.daily_trades_count = 0
+        self.daily_trades_count    = 0
+        self.consecutive_sl_count  = 0
+        self.circuit_breaker_active = False
         logger.info("Günlük drawdown sayacı sıfırlandı.")
 
     # ------------------------------------------------------------------
@@ -289,9 +294,13 @@ class RiskGuardrails:
         if not self.check_time_constraints(timestamp):
             return False
 
+        # ── Circuit Breaker: 3 art arda SL → o gün trading dur ───────────
+        if self.circuit_breaker_active:
+            logger.debug("⚡ Circuit breaker aktif — %d art arda SL. Bugün işlem yok.",
+                         self.consecutive_sl_count)
+            return False
+
         # ── Perşembe/Cuma Yeni İşlem Engeli (Weekend Flatten Tuzak Önleyici) ──
-        # Bu filtre SADECE yeni pozisyon açılmasını engeller;
-        # açık pozisyonların SL/TP ile kapanmasına dokunmaz.
         weekday = timestamp.weekday()
 
         # Günlük işlem limiti kontrolü
@@ -320,12 +329,36 @@ class RiskGuardrails:
     # 5. Durum Raporu
     # ------------------------------------------------------------------
 
+    def record_trade_result(self, won: bool) -> None:
+        """Her işlem kapanışında çağrılır. Circuit breaker sayacını günceller."""
+        if won:
+            self.consecutive_sl_count = 0
+        else:
+            self.consecutive_sl_count += 1
+            if self.consecutive_sl_count >= self.max_consecutive_sl:
+                self.circuit_breaker_active = True
+                logger.warning(
+                    "⚡ CIRCUIT BREAKER AKTİF — %d art arda SL. Bugün yeni işlem yok.",
+                    self.consecutive_sl_count,
+                )
+                try:
+                    from notifications.telegram_bot import notify_kill_switch
+                    notify_kill_switch(
+                        reason=f"{self.consecutive_sl_count} art arda SL — Circuit Breaker",
+                        balance=0.0,
+                        drawdown_pct=0.0,
+                    )
+                except Exception:
+                    pass
+
     def status(self) -> dict:
         """Guardrail'lerin anlık durumunu dict olarak döndürür."""
         return {
             "kill_switch_active":       self.kill_switch_active,
             "daily_drawdown_triggered": self.daily_drawdown_triggered,
             "total_drawdown_triggered": self.total_drawdown_triggered,
+            "circuit_breaker_active":   self.circuit_breaker_active,
+            "consecutive_sl_count":     self.consecutive_sl_count,
             "weekend_holding_allowed":  ALLOW_WEEKEND_HOLDING,
             "trade_window":             f"{TRADE_START_HOUR:02d}:00–{TRADE_END_HOUR:02d}:59 UTC",
             "force_close_hour_friday":  ZORLU_KAPANIS_SAATI,

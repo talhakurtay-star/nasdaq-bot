@@ -400,7 +400,7 @@ def run_backtest() -> None:
     simulator = BacktestSimulator()
 
     # ── 3. Equity Curve ve Günlük İzleme Değişkenleri ────────────────────
-    equity_curve: List[float] = [INITIAL_BALANCE]
+    equity_curve: List[float] = []   # İlk bar sonrası doldurulur (off-by-one fix)
     current_day:  date | None = None
 
     # ── 4. Ana Bar-by-Bar Simülasyon Döngüsü ─────────────────────────────
@@ -411,7 +411,7 @@ def run_backtest() -> None:
         timestamp   = df.index[current_index]
 
         # ── 4a. Günlük Drawdown Sıfırlama ─────────────────────────────────
-        bar_date = timestamp.date() if hasattr(timestamp, "date") else date.today()
+        bar_date = pd.Timestamp(timestamp).date()
         if current_day is None:
             current_day = bar_date
         elif bar_date > current_day:

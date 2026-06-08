@@ -329,6 +329,7 @@ class SubprocessYurutucu:
         logger.debug("   Komut: %s %s", self._py, betik)
 
         env = os.environ.copy()
+        env["STRESS_TEST_MODE"] = "1"   # MT5 şifre uyarısını bastır
         if ekstra_env:
             env.update(ekstra_env)
 

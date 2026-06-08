@@ -16,6 +16,7 @@ Entegrasyon:
 from __future__ import annotations
 
 import logging
+import random
 from typing import TYPE_CHECKING
 
 import pandas as pd
@@ -39,8 +40,10 @@ class BacktestSimulator:
     Bu, over-optimistic backtest sonuçlarını engeller.
     """
 
+    # Slippage: SL'de %0.02, TP'de 0 (TP limit emir, SL piyasa emri)
+    SL_SLIPPAGE_PCT = 0.0002
+
     def __init__(self) -> None:
-        # İstatistiksel izleme sayaçları
         self.bars_processed:   int = 0
         self.tp_hits:          int = 0
         self.sl_hits:          int = 0
@@ -123,27 +126,33 @@ class BacktestSimulator:
             sl_touched = bar_high >= pos.stop_loss
             tp_touched = bar_low  <= pos.take_profit
 
-        # Kritik Muhafazakâr Kural: Hem SL hem TP aynı bar içinde → SL kazanır
+        # Intra-bar çelişki: hem SL hem TP aynı bar → muhafazakâr kural: SL kazanır
         if sl_touched and tp_touched:
-            pnl, _ = portfolio.close_trade(pos.stop_loss, timestamp, reason="SL")
+            sl_fill = pos.stop_loss * (1 + self.SL_SLIPPAGE_PCT) if pos.is_long else pos.stop_loss * (1 - self.SL_SLIPPAGE_PCT)
+            pnl, _ = portfolio.close_trade(sl_fill, timestamp, reason="SL")
             self.sl_hits += 1
+            guardrails.record_trade_result(won=False)
             logger.debug(
-                f"⚠️  INTRA-BAR ÇELİŞKİ → Muhafazakâr kural: SL_HIT @ {pos.stop_loss:.4f} | "
+                f"⚠️  INTRA-BAR ÇELİŞKİ → SL_HIT @ {sl_fill:.4f} (slip) | "
                 f"PnL={pnl:+.2f} USD | Bar={timestamp}"
             )
             return "SL"
 
         if sl_touched:
-            pnl, _ = portfolio.close_trade(pos.stop_loss, timestamp, reason="SL")
+            sl_fill = pos.stop_loss * (1 + self.SL_SLIPPAGE_PCT) if pos.is_long else pos.stop_loss * (1 - self.SL_SLIPPAGE_PCT)
+            pnl, _ = portfolio.close_trade(sl_fill, timestamp, reason="SL")
             self.sl_hits += 1
+            guardrails.record_trade_result(won=False)
             logger.debug(
-                f"🔴 SL_HIT @ {pos.stop_loss:.4f} | PnL={pnl:+.2f} USD | Bar={timestamp}"
+                f"🔴 SL_HIT @ {sl_fill:.4f} (slip={self.SL_SLIPPAGE_PCT*100:.2f}%) | "
+                f"PnL={pnl:+.2f} USD | Bar={timestamp}"
             )
             return "SL"
 
         if tp_touched:
             pnl, _ = portfolio.close_trade(pos.take_profit, timestamp, reason="TP")
             self.tp_hits += 1
+            guardrails.record_trade_result(won=True)
             logger.debug(
                 f"🟢 TP_HIT @ {pos.take_profit:.4f} | PnL={pnl:+.2f} USD | Bar={timestamp}"
             )
