@@ -24,7 +24,7 @@ except ImportError:
     RSI_OVERSOLD   = 20
 
 # ── Strateji Parametreleri ────────────────────────────────────────────────────
-ADX_STRONG      = 24.0   # Güçlü trend eşiği
+ADX_STRONG      = 26.0   # Güçlü trend eşiği
 MAX_ALIGN_BARS  = 20     # Trendin en geç kaçıncı barında girilebilir
 MIN_ALIGN_BARS  = 2      # Çok erken (1.bar) girişi engelle
 RSI_LONG_MIN    = 38     # Long için RSI alt sınır
