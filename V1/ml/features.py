@@ -78,7 +78,44 @@ def _adx(h, l, c, p):
         dmn = pd.Series(talib.MINUS_DI(h.values.astype(float), l.values.astype(float),
                                         c.values.astype(float), timeperiod=p), index=c.index)
         return adx, dmp, dmn
-    return (pd.Series(np.nan, index=c.index),) * 3
+    
+    if _PTA:
+        try:
+            import pandas_ta as pta
+            adx_df = pta.adx(h, l, c, length=p)
+            if adx_df is not None and not adx_df.empty:
+                adx_col = [col for col in adx_df.columns if col.startswith("ADX")][0]
+                dmp_col = [col for col in adx_df.columns if col.startswith("DMP")][0]
+                dmn_col = [col for col in adx_df.columns if col.startswith("DMN")][0]
+                return adx_df[adx_col], adx_df[dmp_col], adx_df[dmn_col]
+        except Exception:
+            pass
+
+    # Pure pandas manual calculation of ADX, PLUS_DI, MINUS_DI
+    up_move = h.diff()
+    down_move = -l.diff()
+    
+    plus_dm = np.where((up_move > down_move) & (up_move > 0), up_move, 0.0)
+    minus_dm = np.where((down_move > up_move) & (down_move > 0), down_move, 0.0)
+    
+    tr = pd.concat([h - l, (h - c.shift()).abs(), (l - c.shift()).abs()], axis=1).max(axis=1)
+    
+    tr_smoothed = tr.ewm(alpha=1.0/p, adjust=False).mean()
+    plus_dm_smoothed = pd.Series(plus_dm, index=c.index).ewm(alpha=1.0/p, adjust=False).mean()
+    minus_dm_smoothed = pd.Series(minus_dm, index=c.index).ewm(alpha=1.0/p, adjust=False).mean()
+    
+    tr_smoothed_safe = tr_smoothed.replace(0, np.nan)
+    
+    plus_di = 100.0 * plus_dm_smoothed / tr_smoothed_safe
+    minus_di = 100.0 * minus_dm_smoothed / tr_smoothed_safe
+    
+    di_sum = plus_di + minus_di
+    di_sum_safe = di_sum.replace(0, np.nan)
+    
+    dx = 100.0 * (plus_di - minus_di).abs() / di_sum_safe
+    adx = dx.ewm(alpha=1.0/p, adjust=False).mean()
+    
+    return adx, plus_di, minus_di
 
 def _macd(s, fast, slow, signal):
     if _TALIB:

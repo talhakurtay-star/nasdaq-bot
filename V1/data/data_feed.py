@@ -126,18 +126,41 @@ def _load_mt5_csv(path: str) -> pd.DataFrame:
     df.index = pd.DatetimeIndex(df.index)
 
     # Sütunları standart OHLCV isimlerine map'le (her olası varyant dahil)
+    # Çift sütun (duplicate) oluşmasını önlemek için seçici davranıyoruz.
+    vol_candidates = ["REAL_VOLUME", "VOLUME", "VOL", "TICKVOL"]
+    chosen_vol_col = None
+    for c in vol_candidates:
+        if c in df.columns:
+            try:
+                col_series = pd.to_numeric(df[c], errors="coerce").fillna(0)
+                if (col_series != 0).any():
+                    chosen_vol_col = c
+                    break
+            except Exception:
+                pass
+    if not chosen_vol_col:
+        for c in vol_candidates:
+            if c in df.columns:
+                chosen_vol_col = c
+                break
+
+    close_candidates = ["ADJ CLOSE", "CLOSE"]
+    chosen_close_col = None
+    for c in close_candidates:
+        if c in df.columns:
+            chosen_close_col = c
+            break
+
     rename_map = {
-        "OPEN":    "Open",
-        "HIGH":    "High",
-        "LOW":     "Low",
-        "CLOSE":   "Close",
-        "TICKVOL": "Volume",
-        "VOL":     "Volume",
-        "VOLUME":  "Volume",
-        "REAL_VOLUME": "Volume",
-        # yfinance-style
-        "ADJ CLOSE": "Close",
+        "OPEN": "Open",
+        "HIGH": "High",
+        "LOW":  "Low",
     }
+    if chosen_close_col:
+        rename_map[chosen_close_col] = "Close"
+    if chosen_vol_col:
+        rename_map[chosen_vol_col] = "Volume"
+
     df = df.rename(columns={c: rename_map[c] for c in list(df.columns) if c in rename_map})
 
     # Sütun bulunamadıysa pozisyon bazlı atama (son çare)
