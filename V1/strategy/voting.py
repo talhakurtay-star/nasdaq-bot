@@ -83,6 +83,35 @@ class VotingMechanism:
             return float(raw_pred[0])
         return float(raw_pred[0, 1])
 
+    def get_signal_with_prob(
+        self,
+        df: pd.DataFrame,
+        current_index: int,
+        base_signal: SignalType,
+        feature_engine,
+    ) -> tuple[SignalType, float]:
+        """
+        decide_trade ile aynı mantık ama (signal, probability) tuple döndürür.
+        Multi-symbol sıralama için kullanılır.
+        """
+        if base_signal == "HOLD":
+            return "HOLD", 0.0
+        if base_signal not in self.models or self.models.get(base_signal) is None:
+            return "HOLD", 0.0
+        try:
+            features_df = feature_engine.generate_live_features(df, current_index)
+        except Exception:
+            return "HOLD", 0.0
+        if features_df is None or features_df.empty:
+            return "HOLD", 0.0
+        try:
+            probability = self._extract_probability(features_df, base_signal)
+        except Exception:
+            return "HOLD", 0.0
+        if self.threshold <= 0.0 or probability >= self.threshold:
+            return base_signal, probability
+        return "HOLD", probability
+
     def decide_trade(
         self,
         df: pd.DataFrame,

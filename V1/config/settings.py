@@ -37,25 +37,86 @@ SPY_SYMBOL = os.getenv("STRESS_SPY_SYMBOL", "SPY")
 # NASDAQ 100'ün en likit 15 hissesi (ICMarkets CFD isimleri)
 # yfinance sembolü → MT5 CFD adı eşleşmesi
 UNIVERSE: list[str] = [
-    "AAPL",  # Apple
-    "MSFT",  # Microsoft
-    "NVDA",  # Nvidia
-    "AMZN",  # Amazon
-    "GOOGL", # Alphabet
-    "META",  # Meta
-    "TSLA",  # Tesla
-    "AVGO",  # Broadcom
-    "COST",  # Costco
-    "NFLX",  # Netflix
-    "AMD",   # AMD
-    "ADBE",  # Adobe
-    "QCOM",  # Qualcomm
-    "TXN",   # Texas Instruments
-    "AMAT",  # Applied Materials
+    # ── Büyük Teknoloji (20) ──────────────────────────────────────────────
+    "AAPL",  "MSFT",  "GOOGL", "META",  "ORCL",
+    "CRM",   "ADBE",  "NOW",   "INTU",  "PANW",
+    "ZS",    "CRWD",  "DDOG",  "NET",   "SNOW",
+    "PLTR",  "FTNT",  "OKTA",  "MDB",   "SPLK",
+    # ── Yarı İletken (15) ────────────────────────────────────────────────
+    "NVDA",  "AMD",   "QCOM",  "AVGO",  "TXN",
+    "AMAT",  "LRCX",  "KLAC",  "MU",   "MRVL",
+    "ON",    "MPWR",  "SMCI",  "WOLF",  "SLAB",
+    # ── Tüketici / E-ticaret (10) ────────────────────────────────────────
+    "AMZN",  "TSLA",  "NFLX",  "COST",  "SBUX",
+    "BKNG",  "ABNB",  "UBER",  "LYFT",  "DASH",
+    # ── Sağlık / Biyoteknoloji (10) ──────────────────────────────────────
+    "ISRG",  "VRTX",  "REGN",  "MRNA",  "ILMN",
+    "IDXX",  "DXCM",  "PODD",  "HALO",  "ALGN",
+    # ── Fintech / Finans (10) ────────────────────────────────────────────
+    "PYPL",  "SQ",    "COIN",  "V",     "MA",
+    "AXP",   "SOFI",  "AFRM",  "HOOD",  "BILL",
+    # ── İletişim / Medya (8) ─────────────────────────────────────────────
+    "SPOT",  "PINS",  "SNAP",  "ROKU",  "TTD",
+    "MGNI",  "PARA",  "WBD",
+    # ── Sanayi / Savunma (8) ─────────────────────────────────────────────
+    "HON",   "GE",    "CAT",   "DE",
+    "RTX",   "LMT",   "NOC",   "BA",
+    # ── Enerji (7) ───────────────────────────────────────────────────────
+    "XOM",   "CVX",   "COP",   "SLB",
+    "HAL",   "BKR",   "OXY",
+    # ── Hammadde / Madencilik (5) ────────────────────────────────────────
+    "FCX",   "AA",    "NEM",   "GOLD",  "CLF",
+    # ── Defansif ETF (7) ─────────────────────────────────────────────────
+    "QQQ",   "SPY",   "IWM",   "XLF",
+    "XLE",   "XLV",   "GLD",
 ]
 
 # Aynı anda maksimum açık pozisyon sayısı
 MAX_OPEN_POSITIONS = int(os.getenv("STRESS_MAX_POSITIONS", "3"))
+
+# Sektörel korelasyon koruması: aynı sektörden max pozisyon sayısı
+MAX_SECTOR_POSITIONS = int(os.getenv("STRESS_MAX_SECTOR_POS", "2"))
+
+# Sektör → Sembol haritası (100 sembol, 10 sektör)
+SECTOR_MAP: dict[str, str] = {
+    # Büyük Teknoloji
+    "AAPL": "TECH", "MSFT": "TECH", "GOOGL": "TECH", "META": "TECH", "ORCL": "TECH",
+    "CRM":  "TECH", "ADBE": "TECH", "NOW":   "TECH", "INTU": "TECH", "PANW": "TECH",
+    "ZS":   "TECH", "CRWD": "TECH", "DDOG":  "TECH", "NET":  "TECH", "SNOW": "TECH",
+    "PLTR": "TECH", "FTNT": "TECH", "OKTA":  "TECH", "MDB":  "TECH", "SPLK": "TECH",
+    # Yarı İletken
+    "NVDA": "SEMI", "AMD":  "SEMI", "QCOM": "SEMI", "AVGO": "SEMI", "TXN":  "SEMI",
+    "AMAT": "SEMI", "LRCX": "SEMI", "KLAC": "SEMI", "MU":   "SEMI", "MRVL": "SEMI",
+    "ON":   "SEMI", "MPWR": "SEMI", "SMCI": "SEMI", "WOLF": "SEMI", "SLAB": "SEMI",
+    # Tüketici / E-ticaret
+    "AMZN": "CONSUMER", "TSLA": "CONSUMER", "NFLX": "CONSUMER", "COST": "CONSUMER",
+    "SBUX": "CONSUMER", "BKNG": "CONSUMER", "ABNB": "CONSUMER", "UBER": "CONSUMER",
+    "LYFT": "CONSUMER", "DASH": "CONSUMER",
+    # Sağlık / Biyoteknoloji
+    "ISRG": "HEALTH", "VRTX": "HEALTH", "REGN": "HEALTH", "MRNA": "HEALTH",
+    "ILMN": "HEALTH", "IDXX": "HEALTH", "DXCM": "HEALTH", "PODD": "HEALTH",
+    "HALO": "HEALTH", "ALGN": "HEALTH",
+    # Fintech / Finans
+    "PYPL": "FINTECH", "SQ":   "FINTECH", "COIN": "FINTECH", "V":    "FINTECH",
+    "MA":   "FINTECH", "AXP":  "FINTECH", "SOFI": "FINTECH", "AFRM": "FINTECH",
+    "HOOD": "FINTECH", "BILL": "FINTECH",
+    # İletişim / Medya
+    "SPOT": "MEDIA", "PINS": "MEDIA", "SNAP": "MEDIA", "ROKU": "MEDIA",
+    "TTD":  "MEDIA", "MGNI": "MEDIA", "PARA": "MEDIA", "WBD":  "MEDIA",
+    # Sanayi / Savunma
+    "HON": "INDUSTRIAL", "GE":  "INDUSTRIAL", "CAT": "INDUSTRIAL", "DE":  "INDUSTRIAL",
+    "RTX": "INDUSTRIAL", "LMT": "INDUSTRIAL", "NOC": "INDUSTRIAL", "BA":  "INDUSTRIAL",
+    # Enerji
+    "XOM": "ENERGY", "CVX": "ENERGY", "COP": "ENERGY", "SLB": "ENERGY",
+    "HAL": "ENERGY", "BKR": "ENERGY", "OXY": "ENERGY",
+    # Hammadde / Madencilik
+    "FCX": "MATERIALS", "AA": "MATERIALS", "NEM": "MATERIALS",
+    "GOLD": "MATERIALS", "CLF": "MATERIALS",
+    # Defansif ETF
+    "QQQ": "ETF_TECH", "SPY": "ETF_BROAD", "IWM": "ETF_SMALL",
+    "XLF": "ETF_FIN",  "XLE": "ETF_ENERGY","XLV": "ETF_HEALTH",
+    "GLD": "ETF_GOLD",
+}
 
 WATCHLIST = UNIVERSE + [SPY_SYMBOL, VIX_SYMBOL]
 

@@ -45,6 +45,8 @@ from config.settings import (
     REWARD_RISK_RATIO,
     RISK_PER_TRADE,
     MAX_OPEN_POSITIONS,
+    MAX_SECTOR_POSITIONS,
+    SECTOR_MAP,
 )
 
 # ── Katman İmportları ─────────────────────────────────────────────────────────
@@ -466,7 +468,9 @@ def run_backtest() -> None:
         open_positions: dict[str, object] = {}
         current_day: date | None = None
 
-        logger.info("🚀 Multi-symbol simülasyon başlıyor...")
+        logger.info("Korelasyon koruması: max %d pozisyon/sektör | max %d toplam",
+                    MAX_SECTOR_POSITIONS, MAX_OPEN_POSITIONS)
+        logger.info("Multi-symbol simülasyon başlıyor...")
         for ts in all_timestamps:
             bar_date = pd.Timestamp(ts).date()
 
@@ -475,26 +479,96 @@ def run_backtest() -> None:
                 current_day = bar_date
             elif bar_date > current_day:
                 guardrails.reset_daily_drawdown(portfolio)
+                portfolio.reset_daily_peak()
                 current_day = bar_date
+                logger.info("Yeni gun: %s | Bakiye: $%.2f | Acik pos: %d",
+                            bar_date, portfolio.balance, len(open_positions))
 
             if guardrails.kill_switch_active:
                 break
 
-            # Her sembol için o timestamp'teki barı işle
-            for sym, df in dfs.items():
-                if ts not in df.index:
+            # ── 1. GEÇIŞ: Açık pozisyonları güncelle (SL/TP kontrolü) ────
+            for sym in list(open_positions.keys()):
+                if sym not in dfs or ts not in dfs[sym].index:
                     continue
+                df = dfs[sym]
                 current_index = df.index.get_loc(ts)
-                _run_single_symbol(
-                    sym=sym, df=df,
-                    feature_engine=feature_engine,
-                    strategy=strategy, voter=voter,
-                    portfolio=portfolio, guardrails=guardrails,
-                    simulator=simulator,
-                    open_positions=open_positions,
-                    equity_curve=equity_curve,
-                    logger=logger,
+                portfolio.open_position = open_positions[sym]
+                result = simulator.update_and_check_positions(
+                    df.iloc[current_index], portfolio, guardrails
                 )
+                if result is not None:
+                    guardrails.record_trade_result(won=(result == "TP"))
+                    del open_positions[sym]
+                    portfolio.open_position = None
+                else:
+                    open_positions[sym] = portfolio.open_position
+                    portfolio.open_position = None
+
+            if guardrails.kill_switch_active:
+                break
+
+            # ── 2. GEÇIŞ: Sinyal toplama + Probability sıralaması ─────────
+            if (len(open_positions) < MAX_OPEN_POSITIONS
+                    and guardrails.is_trading_allowed(portfolio, pd.Timestamp(ts))):
+
+                signal_queue: list[tuple[str, str, float]] = []  # (sym, signal, prob)
+
+                for sym, df in dfs.items():
+                    if sym in open_positions:
+                        continue
+                    if ts not in df.index:
+                        continue
+                    current_index = df.index.get_loc(ts)
+                    base_sig = strategy.generate_base_signal(df, current_index)
+                    if base_sig == "HOLD":
+                        continue
+                    final_sig, prob = voter.get_signal_with_prob(
+                        df, current_index, base_sig, feature_engine
+                    )
+                    if final_sig != "HOLD":
+                        signal_queue.append((sym, final_sig, prob))
+
+                # Probability'ye göre sırala (yüksekten düşüğe)
+                signal_queue.sort(key=lambda x: x[2], reverse=True)
+
+                # Sektör sayacını hesapla (mevcut açık pozisyonlardan)
+                sector_counts: dict[str, int] = {}
+                for open_sym in open_positions:
+                    sec = SECTOR_MAP.get(open_sym, "OTHER")
+                    sector_counts[sec] = sector_counts.get(sec, 0) + 1
+
+                # En yüksek skorlu adayları sırayla değerlendir
+                for sym, final_sig, prob in signal_queue:
+                    if len(open_positions) >= MAX_OPEN_POSITIONS:
+                        break
+
+                    sector = SECTOR_MAP.get(sym, "OTHER")
+                    if sector_counts.get(sector, 0) >= MAX_SECTOR_POSITIONS:
+                        logger.debug("Sektör limiti: %s (%s) reddedildi | mevcut=%d",
+                                     sym, sector, sector_counts.get(sector, 0))
+                        continue
+
+                    df = dfs[sym]
+                    current_index = df.index.get_loc(ts)
+                    bar = df.iloc[current_index]
+                    atr = float(bar.get("ATR", 0))
+                    if atr <= 0:
+                        continue
+
+                    portfolio.open_trade(
+                        direction=final_sig,
+                        current_price=float(bar["Close"]),
+                        atr_value=atr,
+                        timestamp=pd.Timestamp(ts),
+                    )
+                    if portfolio.open_position is not None:
+                        open_positions[sym] = portfolio.open_position
+                        portfolio.open_position = None
+                        guardrails.daily_trades_count += 1
+                        sector_counts[sector] = sector_counts.get(sector, 0) + 1
+                        logger.info("Giris: %s [%s] prob=%.3f | sektor=%s",
+                                    sym, final_sig, prob, sector)
 
             equity_curve.append(portfolio.equity)
 
