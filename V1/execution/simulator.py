@@ -25,6 +25,17 @@ if TYPE_CHECKING:
     from risk.portfolio import PortfolioManager
     from risk.guardrails import RiskGuardrails
 
+try:
+    from config.settings import (
+        PARTIAL_CLOSE_R,
+        TRAILING_ACTIVATION_R,
+        TRAILING_ATR_MULT,
+    )
+except ImportError:
+    PARTIAL_CLOSE_R       = 1.0
+    TRAILING_ACTIVATION_R = 1.0
+    TRAILING_ATR_MULT     = 1.0
+
 logger = logging.getLogger(__name__)
 
 
@@ -118,7 +129,50 @@ class BacktestSimulator:
             )
             return "WEEKEND_FLATTEN"
 
-        # ── 3. Intra-bar SL / TP Kontrolü ────────────────────────────────
+        # ── 3. Kısmi Kâr (Partial Close at 1R) ──────────────────────────────
+        if not pos.partial_closed and pos.atr_at_open > 0:
+            partial_dist = pos.sl_distance * PARTIAL_CLOSE_R
+            if pos.is_long:
+                partial_hit = bar_high >= pos.entry_price + partial_dist
+            else:
+                partial_hit = bar_low <= pos.entry_price - partial_dist
+
+            if partial_hit:
+                partial_price = (
+                    pos.entry_price + partial_dist if pos.is_long
+                    else pos.entry_price - partial_dist
+                )
+                portfolio.partial_close(partial_price, timestamp, fraction=0.5)
+                pos.stop_loss = pos.entry_price  # breakeven'e çek
+                pos.trailing_active = True
+                logger.debug(
+                    "PARTIAL_CLOSE @ %.4f | SL->breakeven=%.4f | Bar=%s",
+                    partial_price, pos.entry_price, timestamp,
+                )
+
+        # ── 4. Trailing Stop Aktifleştirme + Güncelleme ───────────────────
+        # TRAILING_ACTIVATION_R kadar kazanç varsa trailing başlat
+        if not pos.trailing_active and pos.atr_at_open > 0:
+            activation_dist = pos.sl_distance * TRAILING_ACTIVATION_R
+            if pos.is_long:
+                trailing_triggered = bar_high >= pos.entry_price + activation_dist
+            else:
+                trailing_triggered = bar_low <= pos.entry_price - activation_dist
+            if trailing_triggered:
+                pos.trailing_active = True
+
+        if pos.trailing_active and pos.atr_at_open > 0:
+            trail_dist = pos.atr_at_open * TRAILING_ATR_MULT
+            if pos.is_long:
+                new_sl = bar_high - trail_dist
+                if new_sl > pos.stop_loss:
+                    pos.stop_loss = new_sl
+            else:
+                new_sl = bar_low + trail_dist
+                if new_sl < pos.stop_loss:
+                    pos.stop_loss = new_sl
+
+        # ── 5. Intra-bar SL / TP Kontrolü ────────────────────────────────
         if pos.is_long:
             sl_touched: bool = bar_low  <= pos.stop_loss
             tp_touched: bool = bar_high >= pos.take_profit

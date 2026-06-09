@@ -33,6 +33,9 @@ try:
         REWARD_RISK_RATIO,
         RISK_PER_TRADE,
         SPREAD_PENALTY,
+        PARTIAL_CLOSE_R,
+        TRAILING_ACTIVATION_R,
+        TRAILING_ATR_MULT,
     )
 except ImportError:
     ATR_MULTIPLIER = 1.5
@@ -42,9 +45,12 @@ except ImportError:
     INITIAL_BALANCE = 100_000.0
     MAX_LOT_LIMIT = 1000.0
     MAX_NOTIONAL_LEVERAGE = 20.0
-    REWARD_RISK_RATIO = 1.8
-    RISK_PER_TRADE = 0.0075
+    REWARD_RISK_RATIO = 2.5
+    RISK_PER_TRADE = 0.009
     SPREAD_PENALTY = 0.05
+    PARTIAL_CLOSE_R = 1.0
+    TRAILING_ACTIVATION_R = 1.0
+    TRAILING_ATR_MULT = 1.0
 
 DirectionType = Literal["STRONG_LONG", "STRONG_SHORT"]
 CloseReasonType = Literal["SL", "TP", "FORCE_CLOSE", "GUARDRAIL", "WEEKEND_FLATTEN"]
@@ -63,6 +69,12 @@ class Position:
     commission: float
     open_time: datetime
     metadata: Dict = field(default_factory=dict)
+
+    # Trailing stop ve kısmi kâr takibi
+    trailing_active: bool = False
+    partial_closed: bool = False        # 1R'da %50 kapatıldı mı
+    original_lot: float = 0.0          # Açılıştaki tam lot (kısmi kapanış için)
+    atr_at_open: float = 0.0           # Açılıştaki ATR değeri
 
     @property
     def is_long(self) -> bool:
@@ -195,6 +207,8 @@ class PortfolioManager:
             sl_distance=sl_distance,
             commission=commission,
             open_time=timestamp,
+            original_lot=lot_size,
+            atr_at_open=atr_value,
         )
         self.open_position = position
 
@@ -292,6 +306,59 @@ class PortfolioManager:
             except Exception:
                 pass
         return (net_pnl, reason)
+
+    def partial_close(
+        self,
+        exit_price: float,
+        timestamp: datetime,
+        fraction: float = 0.5,
+    ) -> float:
+        """
+        Pozisyonun fraction kadarını kapatır (varsayılan %50).
+        Geri kalan lot ile pozisyon açık kalır, trailing devam eder.
+        """
+        if self.open_position is None:
+            return 0.0
+
+        pos = self.open_position
+        close_lot = pos.lot_size * fraction
+        remain_lot = pos.lot_size * (1.0 - fraction)
+
+        if pos.is_long:
+            gross_pnl = (exit_price - pos.entry_price) * close_lot * CONTRACT_SIZE
+        else:
+            gross_pnl = (pos.entry_price - exit_price) * close_lot * CONTRACT_SIZE
+
+        exit_commission = exit_price * close_lot * CONTRACT_SIZE * COMMISSION_RATE
+        net_pnl = gross_pnl - exit_commission
+
+        self.balance += net_pnl
+        self._total_commission += exit_commission
+
+        # Geri kalan lot ile devam et
+        pos.lot_size = remain_lot
+        pos.partial_closed = True
+
+        record = {
+            "direction": pos.direction,
+            "open_time": pos.open_time,
+            "close_time": timestamp,
+            "entry_price": pos.entry_price,
+            "exit_price": exit_price,
+            "lot_size": close_lot,
+            "gross_pnl": round(gross_pnl, 4),
+            "commission": round(exit_commission, 4),
+            "net_pnl": round(net_pnl, 4),
+            "reason": "PARTIAL_TP",
+            "balance": round(self.balance, 4),
+        }
+        self.trade_log.append(record)
+
+        logger.info(
+            "Partial close %d%% @ %.4f | net_pnl=%+.2f | remaining_lot=%.4f",
+            int(fraction * 100), exit_price, net_pnl, remain_lot,
+        )
+        return net_pnl
 
     def _update_equity(self, current_price: float) -> None:
         if self.open_position is None:
