@@ -33,6 +33,14 @@ RSI_SHORT_MIN   = 30     # Short için RSI alt sınır
 RSI_SHORT_MAX   = 62     # Short için RSI üst sınır
 MACD_HIST_ACCEL = True   # MACD histogram ivmelenmelidir (değişim pozitif/negatif)
 
+# ── Üst Periyot / Rejim Filtresi ──────────────────────────────────────────────
+# H4_TREND_REQUIRED: False — H4 özelliği XGBoost'a bırakıldı; strateji motoru kullanmıyor
+# (Erken trend girişlerinde H4 henüz dönmemişken en iyi setuplara girilir)
+H4_TREND_REQUIRED   = False
+# ADX_PERSIST_MIN: son 5 bardan en az N tanesi ADX>18 olmalı (rejim filtresi)
+# Not: 2 = hafif filtre (erken trend girişlerine izin verir), 4 = katı filtre
+ADX_PERSIST_MIN     = 2
+
 SignalType = Literal["STRONG_LONG", "STRONG_SHORT", "HOLD"]
 logger = logging.getLogger(__name__)
 
@@ -42,9 +50,10 @@ class StrategyEngine:
     def __init__(self) -> None:
         logger.info(
             "StrategyEngine | EMA %d/%d | ADX>%.0f | AlignBars %d-%d | "
-            "RSI L[%d-%d] S[%d-%d]",
+            "RSI L[%d-%d] S[%d-%d] | H4Filter=%s | ADXPersist>=%d",
             EMA_FAST, EMA_SLOW, ADX_STRONG, MIN_ALIGN_BARS, MAX_ALIGN_BARS,
             RSI_LONG_MIN, RSI_LONG_MAX, RSI_SHORT_MIN, RSI_SHORT_MAX,
+            H4_TREND_REQUIRED, ADX_PERSIST_MIN,
         )
 
     def _get_bar(self, df: pd.DataFrame, idx: int) -> pd.Series | None:
@@ -78,6 +87,8 @@ class StrategyEngine:
             macd_hist  = float(bar.get("MACD_Hist",      0.0) or 0.0)
             align_bars = float(bar.get("EMA_Align_Bars", 0.0) or 0.0)
             close_vs_ema50  = float(bar.get("Close_vs_EMA50", 0.0) or 0.0)
+            h4_trend   = float(bar.get("H4_EMA_Trend",   0.0) or 0.0)
+            adx_persist = float(bar.get("ADX_Persistence", 5.0) or 5.0)
         except (KeyError, TypeError, ValueError) as exc:
             logger.warning("Bar %d okuma hatası: %s", current_index, exc)
             return "HOLD"
@@ -106,8 +117,8 @@ class StrategyEngine:
             and close_vs_ema50 > -0.02                   # EMA50 desteği (ödünç değil)
         ):
             logger.debug(
-                "Bar %d STRONG_LONG [ADX=%.1f AlignBars=%.0f RSI=%.1f MACDh=%.4f]",
-                current_index, adx, align_bars, rsi, macd_hist,
+                "Bar %d STRONG_LONG [ADX=%.1f AlignBars=%.0f RSI=%.1f MACDh=%.4f H4=%.0f Persist=%.0f]",
+                current_index, adx, align_bars, rsi, macd_hist, h4_trend, adx_persist,
             )
             return "STRONG_LONG"
 
@@ -122,8 +133,8 @@ class StrategyEngine:
             and close_vs_ema50 < 0.02
         ):
             logger.debug(
-                "Bar %d STRONG_SHORT [ADX=%.1f AlignBars=%.0f RSI=%.1f MACDh=%.4f]",
-                current_index, adx, align_bars, rsi, macd_hist,
+                "Bar %d STRONG_SHORT [ADX=%.1f AlignBars=%.0f RSI=%.1f MACDh=%.4f H4=%.0f Persist=%.0f]",
+                current_index, adx, align_bars, rsi, macd_hist, h4_trend, adx_persist,
             )
             return "STRONG_SHORT"
 

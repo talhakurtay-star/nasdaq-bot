@@ -28,9 +28,11 @@ except ImportError:
     CSV_FILE_NAME = "nasdaq_15m.csv"
     UNIVERSE      = []
 
-_BASE_DIR     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-_MASTER_CACHE = os.path.join(_BASE_DIR, "cache", "cache_15m_360d.csv")
-_SYMBOLS_DIR  = os.path.join(_BASE_DIR, "cache", "symbols")
+_BASE_DIR      = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_MASTER_CACHE  = os.path.join(_BASE_DIR, "cache", "cache_15m_360d.csv")
+_SYMBOLS_DIR   = os.path.join(_BASE_DIR, "cache", "symbols")
+# MT5 multi-symbol export klasörü (kullanıcının export ettiği CSV'ler burada)
+_MT5_MULTI_DIR = os.path.join(_BASE_DIR, "csv", "symbols")
 
 _TF_MAP = {
     "1m":  "1min",
@@ -201,24 +203,59 @@ def _load_mt5_csv(path: str) -> pd.DataFrame:
 
 def load_all_symbols() -> dict[str, pd.DataFrame]:
     """
-    cache/symbols/ klasöründeki tüm {symbol}_15m.csv dosyalarını yükler.
-    Multi-symbol backtest ve evrensel model eğitimi için kullanılır.
+    Multi-symbol veri yükleyici — öncelik sırası:
 
-    Returns
-    -------
-    dict[symbol → DataFrame]
+    1. csv/symbols/   — MT5'ten export edilmiş GERÇEK bağımsız semboller
+    2. cache/symbols/ — sentetik semboller (sadece REAL_SYMBOLS_ONLY=0 ise)
+
+    STRESS_SINGLE_SYMBOL=1 → multi-symbol tamamen devre dışı
+    REAL_SYMBOLS_ONLY=1    → sadece gerçek MT5 verisi (sentetik yok, varsayılan)
+    REAL_SYMBOLS_ONLY=0    → sentetik veriye de izin ver
     """
+    # STRESS_SINGLE_SYMBOL=1 → tek sembol modunu zorla
+    if os.getenv("STRESS_SINGLE_SYMBOL", "0") == "1":
+        return {}
+
+    # 1) MT5 gerçek veri klasörü
+    mt5_real_dir = _MT5_MULTI_DIR
+    has_real_data = (
+        os.path.isdir(mt5_real_dir)
+        and any(f.endswith("_15m.csv") for f in os.listdir(mt5_real_dir))
+    )
+
+    if has_real_data:
+        result = _load_symbols_from_dir(mt5_real_dir, loader="mt5")
+        if result:
+            print(f"[DataFeed] MT5 gerçek veri: {len(result)} sembol ({mt5_real_dir})")
+            return result
+
+    # 2) Sentetik cache — varsayılan olarak devre dışı (sadece açıkça izin verilirse)
+    real_only = os.getenv("REAL_SYMBOLS_ONLY", "1")
+    if real_only != "0":
+        print("[DataFeed] Sentetik semboller devre dışı (REAL_SYMBOLS_ONLY=1). "
+              "Gerçek veri için: csv/symbols/ klasörüne MT5 CSV'lerini kopyalayın.")
+        return {}
+
     if not os.path.isdir(_SYMBOLS_DIR):
         return {}
 
+    return _load_symbols_from_dir(_SYMBOLS_DIR, loader="csv")
+
+
+def _load_symbols_from_dir(directory: str, loader: str = "csv") -> dict[str, pd.DataFrame]:
+    """Belirtilen klasördeki tüm *_15m.csv dosyalarını yükler."""
     result: dict[str, pd.DataFrame] = {}
-    for fname in sorted(os.listdir(_SYMBOLS_DIR)):
+    for fname in sorted(os.listdir(directory)):
         if not fname.endswith("_15m.csv"):
             continue
         symbol = fname.replace("_15m.csv", "")
-        path   = os.path.join(_SYMBOLS_DIR, fname)
+        path   = os.path.join(directory, fname)
         try:
-            df = pd.read_csv(path, index_col=0, parse_dates=True)
+            if loader == "mt5":
+                df = _load_mt5_csv(path)
+                df = _ensure_spy_vix(df)
+            else:
+                df = pd.read_csv(path, index_col=0, parse_dates=True)
             df = df.dropna(subset=["Open", "High", "Low", "Close"])
             df = df.sort_index()
             result[symbol] = df
@@ -242,8 +279,9 @@ class DataFeed:
         if self._symbol:
             return self._load_symbol_cache(self._symbol)
 
-        # 2) Eğer cache/symbols/ klasöründe dosyalar varsa ilk sembolü döndür
-        if os.path.isdir(_SYMBOLS_DIR) and not self._cache_file:
+        # 2) cache/symbols/ klasörü varsa VE tek-sembol modu aktif değilse ilk sembolü döndür
+        single_sym_mode = os.getenv("STRESS_SINGLE_SYMBOL", "0") == "1"
+        if os.path.isdir(_SYMBOLS_DIR) and not self._cache_file and not single_sym_mode:
             csvs = [f for f in os.listdir(_SYMBOLS_DIR) if f.endswith("_15m.csv")]
             if csvs:
                 sym = sorted(csvs)[0].replace("_15m.csv", "")

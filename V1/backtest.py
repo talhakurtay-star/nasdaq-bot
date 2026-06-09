@@ -400,8 +400,11 @@ def _run_single_symbol(
                 open_positions[sym] = portfolio.open_position
                 portfolio.open_position = None
 
-        if guardrails.kill_switch_active:
+        if guardrails.total_drawdown_triggered:
+            logger.critical("🚨 Toplam DD limiti aşıldı. Simülasyon sonlandırıldı.")
             break
+        if guardrails.kill_switch_active:
+            continue
 
         # Max pozisyon kontrolü
         if len(open_positions) >= MAX_OPEN_POSITIONS:
@@ -484,8 +487,11 @@ def run_backtest() -> None:
                 logger.info("Yeni gun: %s | Bakiye: $%.2f | Acik pos: %d",
                             bar_date, portfolio.balance, len(open_positions))
 
-            if guardrails.kill_switch_active:
+            if guardrails.total_drawdown_triggered:
+                logger.critical("🚨 Toplam DD limiti aşıldı. Simülasyon sonlandırıldı.")
                 break
+            if guardrails.kill_switch_active:
+                continue
 
             # ── 1. GEÇIŞ: Açık pozisyonları güncelle (SL/TP kontrolü) ────
             for sym in list(open_positions.keys()):
@@ -505,8 +511,11 @@ def run_backtest() -> None:
                     open_positions[sym] = portfolio.open_position
                     portfolio.open_position = None
 
-            if guardrails.kill_switch_active:
+            if guardrails.total_drawdown_triggered:
+                logger.critical("🚨 Toplam DD limiti aşıldı. Simülasyon sonlandırıldı.")
                 break
+            if guardrails.kill_switch_active:
+                continue
 
             # ── 2. GEÇIŞ: Sinyal toplama + Probability sıralaması ─────────
             if (len(open_positions) < MAX_OPEN_POSITIONS
@@ -615,9 +624,13 @@ def run_backtest() -> None:
 
             simulator.update_and_check_positions(current_bar, portfolio, guardrails)
 
-            if guardrails.kill_switch_active:
-                logger.critical("🚨 Kill-Switch aktif. Bar %d'de durduruldu.", current_index)
+            # Toplam DD (kalıcı) → tamamen dur. Günlük DD → sadece o gün atla
+            if guardrails.total_drawdown_triggered:
+                logger.critical("🚨 Toplam DD limiti aşıldı. Simülasyon sonlandırıldı. Bar %d", current_index)
                 break
+            if guardrails.kill_switch_active:
+                logger.warning("⚠️ Günlük DD limiti — o gün işlem yok, yarın devam edilecek.")
+                continue
 
             if portfolio.open_position is not None:
                 equity_curve.append(portfolio.equity)

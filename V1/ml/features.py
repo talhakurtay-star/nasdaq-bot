@@ -202,6 +202,26 @@ class FeatureEngine:
         df['EMA_Fast_Slope'] = df[f'EMA_{EMA_FAST}'].diff(3) / df['ATR'].replace(0, np.nan)
         df['EMA_Slow_Slope'] = df[f'EMA_{EMA_SLOW}'].diff(3) / df['ATR'].replace(0, np.nan)
 
+        # ── Üst periyot trend filtreleri ──────────────────────────────────
+        # H4 (16 bar = 4 saat): fast/slow EMA ortalama karşılaştırması
+        h4_fast = df[f'EMA_{EMA_FAST}'].rolling(16).mean()
+        h4_slow = df[f'EMA_{EMA_SLOW}'].rolling(16).mean()
+        df['H4_EMA_Trend'] = np.where(h4_fast > h4_slow, 1.0, -1.0)
+
+        # D1 (96 bar ≈ 1 gün): close vs EMA200 (makro yön filtresi)
+        df['D1_Close_vs_EMA200'] = (
+            (df['Close'] - df[f'EMA_{EMA_200}']) / df[f'EMA_{EMA_200}'].replace(0, np.nan)
+        )
+
+        # ADX kalıcılığı: son 5 barda kaçı ADX>18 idi?  (rejim filtresi)
+        df['ADX_Persistence'] = (df['ADX'] > 18).astype(int).rolling(5, min_periods=1).sum()
+
+        # ADX eğimi: ADX 3 barda ne kadar değişti? (trend güçleniyor mu?)
+        df['ADX_Slope'] = df['ADX'].diff(3)
+
+        # ATR genişleme: volatilite artıyor mu?
+        df['ATR_Ratio'] = df['ATR'] / df['ATR'].rolling(20, min_periods=5).mean().replace(0, np.nan)
+
         return df
 
     def generate_live_features(self, df: pd.DataFrame, current_index: int) -> pd.DataFrame:
@@ -320,7 +340,8 @@ class FeatureEngine:
         # ── 13. ATR yüzde (normalize) ─────────────────────────────────────
         feat['ATR_Pct'] = atr / close if not np.isnan(atr) and close != 0 else 0.0
 
-        # ── 14. Üst periyot EMA trend (son 4 bar = ~1 saat) ──────────────
+        # ── 14. Üst periyot EMA trend ─────────────────────────────────────
+        # H1 (son 4 bar = 1 saat)
         if len(sliced) >= 4:
             last4 = sliced.iloc[-4:]
             h1ef  = float(last4[f'EMA_{EMA_FAST}'].mean())
@@ -328,6 +349,22 @@ class FeatureEngine:
             feat['H1_EMA_Trend'] = 1.0 if h1ef > h1es else -1.0
         else:
             feat['H1_EMA_Trend'] = 0.0
+
+        # H4 (son 16 bar = 4 saat) — yön filtresinin en güçlü katmanı
+        if len(sliced) >= 16:
+            last16 = sliced.iloc[-16:]
+            h4ef   = float(last16[f'EMA_{EMA_FAST}'].mean())
+            h4es   = float(last16[f'EMA_{EMA_SLOW}'].mean())
+            feat['H4_EMA_Trend'] = 1.0 if h4ef > h4es else -1.0
+        else:
+            feat['H4_EMA_Trend'] = feat['H1_EMA_Trend']  # fallback
+
+        # D1 bias: close vs EMA200 (makro yön)
+        e200 = float(bar.get(f'EMA_{EMA_200}', np.nan))
+        feat['D1_Close_vs_EMA200'] = (
+            (close - e200) / e200
+            if not np.isnan(e200) and e200 != 0 else 0.0
+        )
 
         # ── 15. Hacim özellikleri ─────────────────────────────────────────
         last20_vol = sliced['Volume'].iloc[-20:]
@@ -340,5 +377,27 @@ class FeatureEngine:
             feat['Volume_Trend'] = (vr - vo) / vo if vo > 0 else 0.0
         else:
             feat['Volume_Trend'] = 0.0
+
+        # ── 16. ADX rejim özellikleri ─────────────────────────────────────
+        # ADX kalıcılığı: son 5 barda kaç tanesi ADX>18 idi?
+        if len(sliced) >= 5:
+            adx_persistence = float(
+                sum(1 for i in range(-5, 0)
+                    if not np.isnan(float(sliced['ADX'].iloc[i] or 0))
+                    and float(sliced['ADX'].iloc[i] or 0) > 18)
+            )
+        else:
+            adx_persistence = float(not np.isnan(adx) and adx > 18)
+        feat['ADX_Persistence'] = adx_persistence
+
+        # ADX eğimi: son 3 barda ne kadar büyüdü / küçüldü?
+        if len(sliced) >= 4:
+            adx_old = float(sliced['ADX'].iloc[-4] or 0)
+            feat['ADX_Slope'] = (adx - adx_old) if not np.isnan(adx) else 0.0
+        else:
+            feat['ADX_Slope'] = 0.0
+
+        # ATR oranı: mevcut ATR / 20-bar ortalama ATR
+        feat['ATR_Ratio'] = float(bar.get('ATR_Ratio', 1.0) or 1.0)
 
         return pd.DataFrame([feat], index=[ts])
