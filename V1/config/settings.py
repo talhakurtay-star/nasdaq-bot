@@ -143,14 +143,15 @@ XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.0"))  # V
 # ── Portföy ve Sermaye Ayarları ──────────────────────────────────────────────
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
 REWARD_RISK_RATIO     = float(os.getenv("STRESS_RR",          "2.5"))
-PARTIAL_CLOSE_R       = float(os.getenv("STRESS_PARTIAL_R",   "1.0"))  # 1R'da %50 kâr al
-TRAILING_ACTIVATION_R = float(os.getenv("STRESS_TRAIL_R",     "1.0"))  # 1R sonrası trailing (partial ile eş zamanlı)
-TRAILING_ATR_MULT     = float(os.getenv("STRESS_TRAIL_ATR",   "0.8"))  # Trailing mesafesi — sıkı tutarak daha fazla kâr kilitler
+PARTIAL_CLOSE_R       = float(os.getenv("STRESS_PARTIAL_R",   "1.0"))  # 1R'da kısmi kâr al
+PARTIAL_CLOSE_FRAC    = float(os.getenv("STRESS_PARTIAL_FRAC", "0.25")) # kaç % kapatılacak (0.25 = %25 → kalan %75 TP'ye koşar)
+TRAILING_ACTIVATION_R = float(os.getenv("STRESS_TRAIL_R",     "1.0"))  # 1R sonrası trailing başlat
+TRAILING_ATR_MULT     = float(os.getenv("STRESS_TRAIL_ATR",   "3.5"))  # > ATR_MULT=2.5 → breakeven'den sonra kalan %50 TP'ye kadar serbest çalışır
 ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.5"))  # Geniş SL: erken tetiklenmeyi azaltır, WR artar
 
 # ── Risk Yönetimi ve Prop Firm Limitleri ──────────────────────────────────────
 # RISK_PER_TRADE: İşlem başına risk yüzdesi (Örn: 1.00 -> %1)
-RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "2.00"))  # 2×2%=4% = günlük DD limitine eşit (kill-switch korur)
+RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "2.50"))  # 2.5%: ~9%/ay IS | 3.0% ile STRESS_RISK_PCT=3.0 = ~15%/ay
 RISK_PER_TRADE = RISK_PER_TRADE_PCT / 100.0                     # Lojik işlemlerde kullanılan decimal değer
 
 # DAILY_DRAWDOWN_LIMIT: Günlük maksimum kayıp limiti (% cinsinden)

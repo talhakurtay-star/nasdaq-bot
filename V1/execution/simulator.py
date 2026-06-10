@@ -28,11 +28,13 @@ if TYPE_CHECKING:
 try:
     from config.settings import (
         PARTIAL_CLOSE_R,
+        PARTIAL_CLOSE_FRAC,
         TRAILING_ACTIVATION_R,
         TRAILING_ATR_MULT,
     )
 except ImportError:
     PARTIAL_CLOSE_R       = 1.0
+    PARTIAL_CLOSE_FRAC    = 0.25
     TRAILING_ACTIVATION_R = 1.0
     TRAILING_ATR_MULT     = 1.0
 
@@ -175,7 +177,7 @@ class BacktestSimulator:
                     pos.entry_price + partial_dist if pos.is_long
                     else pos.entry_price - partial_dist
                 )
-                portfolio.partial_close(partial_price, timestamp, fraction=0.5)
+                portfolio.partial_close(partial_price, timestamp, fraction=PARTIAL_CLOSE_FRAC)
                 pos.stop_loss = pos.entry_price  # breakeven'e çek
                 logger.debug(
                     "PARTIAL_CLOSE @ %.4f | SL->breakeven=%.4f | Bar=%s",

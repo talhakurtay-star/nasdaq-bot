@@ -208,6 +208,13 @@ class FeatureEngine:
         h4_slow = df[f'EMA_{EMA_SLOW}'].rolling(16).mean()
         df['H4_EMA_Trend'] = np.where(h4_fast > h4_slow, 1.0, -1.0)
 
+        # Close vs EMA50 — SHORT filtresi için kritik (engine.py'de kullanılır)
+        # Bug fix: generate_live_features()'da vardı ama calculate_indicators()'da eksikti
+        # → backtest'te her zaman 0.0 fallback kullanılıyordu, boğa piyasasında SHORT engellenemiyordu
+        df['Close_vs_EMA50'] = (
+            (df['Close'] - df[f'EMA_{EMA_50}']) / df[f'EMA_{EMA_50}'].replace(0, np.nan)
+        )
+
         # D1 (96 bar ≈ 1 gün): close vs EMA200 (makro yön filtresi)
         df['D1_Close_vs_EMA200'] = (
             (df['Close'] - df[f'EMA_{EMA_200}']) / df[f'EMA_{EMA_200}'].replace(0, np.nan)

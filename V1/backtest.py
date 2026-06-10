@@ -521,7 +521,8 @@ def run_backtest() -> None:
                     df.iloc[current_index], portfolio, guardrails
                 )
                 if result is not None:
-                    guardrails.record_trade_result(won=(result == "TP"))
+                    # record_trade_result simulator.py içinde zaten çağrılıyor (SL/TP kapanışlarında)
+                    # Burada tekrar çağırmak circuit_breaker'ı 2× tetikliyor → circuit break 1.5 SL'de patlıyor
                     del open_positions[sym]
                     portfolio.open_position = None
                 else:
