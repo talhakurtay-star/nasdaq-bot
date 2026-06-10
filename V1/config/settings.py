@@ -124,7 +124,7 @@ WATCHLIST = UNIVERSE + [SPY_SYMBOL, VIX_SYMBOL]
 TIMEFRAME = "15m"
 
 # BACKTEST_DAYS: Geriye dönük çekilecek veri gün sayısı
-BACKTEST_DAYS = 360
+BACKTEST_DAYS = int(os.getenv("BACKTEST_DAYS", "360"))
 
 # ── Teknik İndikatör Parametreleri ───────────────────────────────────────────
 EMA_FAST = int(os.getenv("STRESS_EMA_FAST", "9"))
