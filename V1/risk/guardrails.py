@@ -89,7 +89,7 @@ class RiskGuardrails:
         self.daily_drawdown_triggered: bool = False
         self.total_drawdown_triggered: bool = False
         self.daily_trades_count:       int  = 0
-        self.max_daily_trades:         int  = 2   # Günde max 2 işlem
+        self.max_daily_trades:         int  = 99  # Günlük limit yok — circuit breaker yönetir
         self.consecutive_sl_count:     int  = 0
         self.circuit_breaker_active:   bool = False
         self.max_consecutive_sl:       int  = 3   # 3 art arda SL → o gün dur

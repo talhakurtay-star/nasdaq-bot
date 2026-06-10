@@ -144,9 +144,9 @@ XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.0"))  # V
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
 REWARD_RISK_RATIO     = float(os.getenv("STRESS_RR",          "2.5"))
 PARTIAL_CLOSE_R       = float(os.getenv("STRESS_PARTIAL_R",   "1.0"))  # 1R'da %50 kâr al
-TRAILING_ACTIVATION_R = float(os.getenv("STRESS_TRAIL_R",     "1.0"))  # 1R sonrası trailing
+TRAILING_ACTIVATION_R = float(os.getenv("STRESS_TRAIL_R",     "1.0"))  # 1R sonrası trailing (partial ile eş zamanlı)
 TRAILING_ATR_MULT     = float(os.getenv("STRESS_TRAIL_ATR",   "1.2"))  # Trailing mesafesi (ATR çarpanı)
-ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.0"))  # Stop Loss için ATR katsayısı (genişletildi: 1.5→2.0)
+ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.0"))  # Stop Loss için ATR katsayısı
 
 # ── Risk Yönetimi ve Prop Firm Limitleri ──────────────────────────────────────
 # RISK_PER_TRADE: İşlem başına risk yüzdesi (Örn: 1.00 -> %1)
@@ -185,6 +185,7 @@ ATR_FLOOR = float(os.getenv("STRESS_ATR_FLOOR", "0.0"))
 # ATR_MIN_ENTRY: Giriş için minimum ATR. Bu değerin altındaysa trade bloklama.
 # NAS100 15m için tipik ATR: 20-80 puan. Çok düşük ATR = sıkışık piyasa = yüksek slippage.
 ATR_MIN_ENTRY = float(os.getenv("STRESS_ATR_MIN_ENTRY", "20.0"))
+ATR_MIN_PCT   = float(os.getenv("STRESS_ATR_MIN_PCT",   "0.0005"))  # 0.05% of price
 
 # COST_BENEFIT_MAX_RATIO: (Komisyon + Spread) / TP Kazancı max oranı.
 #   → Bu oranı aşan işlemler maliyet açısından verimsiz kabul edilir ve İPTAL edilir.

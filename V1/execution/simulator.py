@@ -177,7 +177,6 @@ class BacktestSimulator:
                 )
                 portfolio.partial_close(partial_price, timestamp, fraction=0.5)
                 pos.stop_loss = pos.entry_price  # breakeven'e çek
-                pos.trailing_active = True
                 logger.debug(
                     "PARTIAL_CLOSE @ %.4f | SL->breakeven=%.4f | Bar=%s",
                     partial_price, pos.entry_price, timestamp,

@@ -18,7 +18,7 @@ import pandas as pd
 
 try:
     from config.settings import (
-        EMA_FAST, EMA_SLOW, RSI_OVERBOUGHT, RSI_OVERSOLD, ATR_MIN_ENTRY,
+        EMA_FAST, EMA_SLOW, RSI_OVERBOUGHT, RSI_OVERSOLD, ATR_MIN_ENTRY, ATR_MIN_PCT,
     )
 except ImportError:
     EMA_FAST       = 9
@@ -26,6 +26,7 @@ except ImportError:
     RSI_OVERBOUGHT = 80
     RSI_OVERSOLD   = 20
     ATR_MIN_ENTRY  = 20.0
+    ATR_MIN_PCT    = 0.0005
 
 # ── Katman 1: Erken Trend Parametreleri ──────────────────────────────────────
 ADX_STRONG          = 18.0
@@ -110,8 +111,9 @@ class StrategyEngine:
             return "HOLD"
 
         # ATR çok düşükse piyasa sıkışık — giriş kalitesi düşük
-        atr = float(bar.get("ATR", 0.0) or 0.0)
-        if atr > 0 and atr < ATR_MIN_ENTRY:
+        atr   = float(bar.get("ATR",   0.0) or 0.0)
+        close = float(bar.get("Close", 0.0) or 0.0)
+        if atr > 0 and close > 0 and (atr / close) < ATR_MIN_PCT:
             return "HOLD"
 
         # MACD histogram ivmesi

@@ -267,6 +267,97 @@ def _load_symbols_from_dir(directory: str, loader: str = "csv") -> dict[str, pd.
     return result
 
 
+def download_yf_symbols(
+    symbols: list[str] | None = None,
+    period: str = "2y",
+    interval: str = "15m",
+    output_dir: str | None = None,
+) -> dict[str, pd.DataFrame]:
+    """
+    Download 15m OHLCV data for given symbols via yfinance and save as
+    MT5-compatible tab-separated CSV files in V1/csv/symbols/.
+
+    Format: DATE\tTIME\tOPEN\tHIGH\tLOW\tCLOSE\tTICKVOL\tVOL\tSPREAD
+
+    Parameters
+    ----------
+    symbols   : List of yfinance tickers (default: ["GLD", "TLT", "GC=F"])
+    period    : yfinance period string (default: "2y")
+    interval  : yfinance interval string (default: "15m")
+    output_dir: Directory to save CSVs (default: V1/csv/symbols/)
+
+    Returns
+    -------
+    dict mapping symbol → DataFrame (OHLCV with DatetimeIndex)
+    """
+    try:
+        import yfinance as yf
+    except ImportError:
+        raise ImportError("yfinance is required: pip install yfinance")
+
+    if symbols is None:
+        symbols = ["GLD", "TLT", "GC=F"]
+
+    if output_dir is None:
+        output_dir = _MT5_MULTI_DIR
+    os.makedirs(output_dir, exist_ok=True)
+
+    result: dict[str, pd.DataFrame] = {}
+
+    for sym in symbols:
+        print(f"[DataFeed] Downloading {sym} ({interval}, {period}) via yfinance...")
+        try:
+            ticker = yf.Ticker(sym)
+            df_raw = ticker.history(period=period, interval=interval, auto_adjust=True)
+
+            if df_raw is None or df_raw.empty:
+                print(f"[DataFeed] WARN: No data for {sym}, skipping.")
+                continue
+
+            # Standardise columns
+            df_raw = df_raw.rename(columns={
+                "Open":   "Open",
+                "High":   "High",
+                "Low":    "Low",
+                "Close":  "Close",
+                "Volume": "Volume",
+            })
+            df_raw = df_raw[["Open", "High", "Low", "Close", "Volume"]].copy()
+            df_raw = df_raw.dropna(subset=["Open", "High", "Low", "Close"])
+            df_raw.index = pd.DatetimeIndex(df_raw.index)
+            df_raw = df_raw.sort_index()
+
+            # Build safe filename: replace "=" with "_" for GC=F → GC_F
+            safe_sym = sym.replace("=", "_")
+            out_path = os.path.join(output_dir, f"{safe_sym}_15m.csv")
+
+            # Write MT5-compatible tab-separated CSV
+            with open(out_path, "w", encoding="utf-8") as fh:
+                fh.write("DATE\tTIME\tOPEN\tHIGH\tLOW\tCLOSE\tTICKVOL\tVOL\tSPREAD\n")
+                for ts, row in df_raw.iterrows():
+                    date_str = ts.strftime("%Y.%m.%d")
+                    time_str = ts.strftime("%H:%M")
+                    vol      = int(row["Volume"]) if not pd.isna(row["Volume"]) else 0
+                    fh.write(
+                        f"{date_str}\t{time_str}\t"
+                        f"{row['Open']:.6f}\t{row['High']:.6f}\t"
+                        f"{row['Low']:.6f}\t{row['Close']:.6f}\t"
+                        f"{vol}\t{vol}\t0\n"
+                    )
+
+            result[safe_sym] = df_raw
+            print(
+                f"[DataFeed] {sym} → {out_path} | "
+                f"{len(df_raw)} bars ({df_raw.index[0].date()} → {df_raw.index[-1].date()})"
+            )
+
+        except Exception as exc:
+            print(f"[DataFeed] ERROR downloading {sym}: {exc}")
+
+    print(f"[DataFeed] download_yf_symbols complete: {len(result)} symbols saved to {output_dir}")
+    return result
+
+
 class DataFeed:
     def __init__(self, cache_file: str | None = None, symbol: str | None = None):
         os.makedirs(CACHE_DIR, exist_ok=True)
