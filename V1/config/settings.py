@@ -145,12 +145,12 @@ INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
 REWARD_RISK_RATIO     = float(os.getenv("STRESS_RR",          "2.5"))
 PARTIAL_CLOSE_R       = float(os.getenv("STRESS_PARTIAL_R",   "1.0"))  # 1R'da %50 kâr al
 TRAILING_ACTIVATION_R = float(os.getenv("STRESS_TRAIL_R",     "1.0"))  # 1R sonrası trailing (partial ile eş zamanlı)
-TRAILING_ATR_MULT     = float(os.getenv("STRESS_TRAIL_ATR",   "1.2"))  # Trailing mesafesi (ATR çarpanı)
-ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.0"))  # Stop Loss için ATR katsayısı
+TRAILING_ATR_MULT     = float(os.getenv("STRESS_TRAIL_ATR",   "0.8"))  # Trailing mesafesi — sıkı tutarak daha fazla kâr kilitler
+ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.5"))  # Geniş SL: erken tetiklenmeyi azaltır, WR artar
 
 # ── Risk Yönetimi ve Prop Firm Limitleri ──────────────────────────────────────
 # RISK_PER_TRADE: İşlem başına risk yüzdesi (Örn: 1.00 -> %1)
-RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "1.20"))  # 3×1.2%=3.6% < 4% günlük DD
+RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "2.00"))  # 2×2%=4% = günlük DD limitine eşit (kill-switch korur)
 RISK_PER_TRADE = RISK_PER_TRADE_PCT / 100.0                     # Lojik işlemlerde kullanılan decimal değer
 
 # DAILY_DRAWDOWN_LIMIT: Günlük maksimum kayıp limiti (% cinsinden)
@@ -176,7 +176,7 @@ BLOCK_FRIDAY_ENTRIES = os.getenv("STRESS_BLOCK_FRIDAY", "False").lower() in ("tr
 # ── Pozisyon Boyutlandırma Güvenlik Limitleri ────────────────────────────────
 # MAX_LOT_LIMIT: ATR çok daralsa bile lot büyüklüğü bu değeri aşamaz.
 #   → Prop firm hesaplarında marjin patlamasını önler.
-MAX_LOT_LIMIT = float(os.getenv("STRESS_MAX_LOT", "20.0"))
+MAX_LOT_LIMIT = float(os.getenv("STRESS_MAX_LOT", "50.0"))  # Raised: 2% risk @ 21000 NAS100 ATR=30 → ~33 lots
 
 # ATR_FLOOR: ATR bu eşiğin altına düştüğünde minimum bu değer kullanılır.
 #   → Piyasanın aşırı sıkıştığı dönemlerde lot hesabının patlamasını engeller.

@@ -481,6 +481,7 @@ def run_backtest() -> None:
         equity_curve: List[float] = []
         open_positions: dict[str, object] = {}
         current_day: date | None = None
+        _kill_switch_warned_day: date | None = None  # log spam önleyici
 
         logger.info("Korelasyon koruması: max %d pozisyon/sektör | max %d toplam",
                     MAX_SECTOR_POSITIONS, MAX_OPEN_POSITIONS)
@@ -498,10 +499,15 @@ def run_backtest() -> None:
                 logger.info("Yeni gun: %s | Bakiye: $%.2f | Acik pos: %d",
                             bar_date, portfolio.balance, len(open_positions))
 
+            equity_curve.append(portfolio.equity)
+
             if guardrails.total_drawdown_triggered:
                 logger.critical("🚨 Toplam DD limiti aşıldı. Simülasyon sonlandırıldı.")
                 break
             if guardrails.kill_switch_active:
+                if _kill_switch_warned_day != current_day:
+                    _kill_switch_warned_day = current_day
+                    logger.warning("⚠️ Günlük DD limiti aşıldı (%s) — bugün yeni işlem yok.", current_day)
                 continue
 
             # ── 1. GEÇIŞ: Açık pozisyonları güncelle (SL/TP kontrolü) ────
@@ -590,8 +596,6 @@ def run_backtest() -> None:
                         logger.info("Giris: %s [%s] prob=%.3f | sektor=%s",
                                     sym, final_sig, prob, sector)
 
-            equity_curve.append(portfolio.equity)
-
         # Açık kalan pozisyonları kapat
         for sym, pos in list(open_positions.items()):
             df = dfs[sym]
@@ -619,6 +623,7 @@ def run_backtest() -> None:
 
         equity_curve: List[float] = []
         current_day:  date | None = None
+        _kill_switch_warned_day: date | None = None  # log spam önleyici
         logger.info("🚀 Simülasyon döngüsü başlıyor...")
 
         for current_index in range(sim_start, sim_end):
@@ -635,20 +640,24 @@ def run_backtest() -> None:
 
             simulator.update_and_check_positions(current_bar, portfolio, guardrails)
 
+            # Equity her bar'da kaydedilmeli — kill-switch günleri atlanırsa MDD hesabı bozulur
+            equity_curve.append(portfolio.equity)
+
             # Toplam DD (kalıcı) → tamamen dur. Günlük DD → sadece o gün atla
             if guardrails.total_drawdown_triggered:
                 logger.critical("🚨 Toplam DD limiti aşıldı. Simülasyon sonlandırıldı. Bar %d", current_index)
                 break
             if guardrails.kill_switch_active:
-                logger.warning("⚠️ Günlük DD limiti — o gün işlem yok, yarın devam edilecek.")
+                # Sadece günlük ilk tetiklemede log yaz — her bar'da spam önle
+                if _kill_switch_warned_day != current_day:
+                    _kill_switch_warned_day = current_day
+                    logger.warning("⚠️ Günlük DD limiti aşıldı (%s) — bugün yeni işlem yok.", current_day)
                 continue
 
             if portfolio.open_position is not None:
-                equity_curve.append(portfolio.equity)
                 continue
 
             if not guardrails.is_trading_allowed(portfolio, timestamp):
-                equity_curve.append(portfolio.equity)
                 continue
 
             base_signal  = strategy.generate_base_signal(df, current_index)
@@ -665,8 +674,6 @@ def run_backtest() -> None:
                         timestamp=timestamp,
                     )
                     guardrails.daily_trades_count += 1
-
-            equity_curve.append(portfolio.equity)
 
         if portfolio.open_position is not None:
             last_close = float(df.iloc[sim_end - 1]["Close"])
