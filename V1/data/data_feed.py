@@ -366,11 +366,18 @@ class DataFeed:
         self._symbol     = symbol  # Multi-symbol modda hangi sembol
 
     def download_historical_data(self, force_refresh: bool = False) -> pd.DataFrame:
-        # 1) Multi-symbol: cache/symbols/{symbol}_15m.csv
+        # 1) Belirli sembol isteniyorsa direkt cache'ten al
         if self._symbol:
             return self._load_symbol_cache(self._symbol)
 
-        # 2) cache/symbols/ klasörü varsa VE tek-sembol modu aktif değilse ilk sembolü döndür
+        # 2) MT5 CSV varsa her zaman önce onu kullan (csv/nasdaq_15m.csv)
+        #    Bu, cache/symbols/ içindeki sentetik verinin önüne geçer.
+        if USE_CSV_DATA and self._cache_file is None:
+            csv_path = os.path.join(CSV_DIR, CSV_FILE_NAME)
+            if os.path.exists(csv_path):
+                return self._load_from_csv()
+
+        # 3) cache/symbols/ — yalnızca tek-sembol modu kapalıysa kullan
         single_sym_mode = os.getenv("STRESS_SINGLE_SYMBOL", "0") == "1"
         if os.path.isdir(_SYMBOLS_DIR) and not self._cache_file and not single_sym_mode:
             csvs = [f for f in os.listdir(_SYMBOLS_DIR) if f.endswith("_15m.csv")]
@@ -378,15 +385,8 @@ class DataFeed:
                 sym = sorted(csvs)[0].replace("_15m.csv", "")
                 return self._load_symbol_cache(sym)
 
-        # 3) Manuel CSV modu — dosya gerçekten varsa kullan, yoksa cache'e düş
-        if USE_CSV_DATA and self._cache_file is None:
-            csv_path = os.path.join(CSV_DIR, CSV_FILE_NAME)
-            if os.path.exists(csv_path):
-                return self._load_from_csv()
-            else:
-                print(f"[DataFeed] {CSV_FILE_NAME} bulunamadı, cache moduna geçiliyor.")
-
         # 4) Eski cache modu
+        print(f"[DataFeed] {CSV_FILE_NAME} bulunamadı, cache moduna geçiliyor.")
         return self._load_from_cache()
 
     def _load_symbol_cache(self, symbol: str) -> pd.DataFrame:
