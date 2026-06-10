@@ -138,19 +138,19 @@ RSI_OVERSOLD = int(os.getenv("STRESS_RSI_OS", "20"))
 
 # ── XGBoost Olasılık Eşiği (Veto Mekanizması) ────────────────────────────────
 # Modelin güven skoru bu eşiğin altındaysa işlem VETO edilir.
-XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.54"))
+XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.0"))  # Varsayılan: kapalı (AUC<0.53)
 
 # ── Portföy ve Sermaye Ayarları ──────────────────────────────────────────────
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
-REWARD_RISK_RATIO = 2.5          # TP hedefi
-PARTIAL_CLOSE_R   = 999.0        # Kısmi kâr devre dışı
-TRAILING_ACTIVATION_R = 999.0    # Trailing devre dışı
-TRAILING_ATR_MULT = 1.5          # Trailing SL katsayısı
-ATR_MULTIPLIER = float(os.getenv("STRESS_ATR_MULT", "1.5"))     # Stop Loss için ATR katsayısı
+REWARD_RISK_RATIO     = float(os.getenv("STRESS_RR",          "2.5"))
+PARTIAL_CLOSE_R       = float(os.getenv("STRESS_PARTIAL_R",   "1.0"))  # 1R'da %50 kâr al
+TRAILING_ACTIVATION_R = float(os.getenv("STRESS_TRAIL_R",     "1.0"))  # 1R sonrası trailing
+TRAILING_ATR_MULT     = float(os.getenv("STRESS_TRAIL_ATR",   "1.2"))  # Trailing mesafesi (ATR çarpanı)
+ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.0"))  # Stop Loss için ATR katsayısı (genişletildi: 1.5→2.0)
 
 # ── Risk Yönetimi ve Prop Firm Limitleri ──────────────────────────────────────
 # RISK_PER_TRADE: İşlem başına risk yüzdesi (Örn: 1.00 -> %1)
-RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "0.90"))
+RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "1.20"))  # 3×1.2%=3.6% < 4% günlük DD
 RISK_PER_TRADE = RISK_PER_TRADE_PCT / 100.0                     # Lojik işlemlerde kullanılan decimal değer
 
 # DAILY_DRAWDOWN_LIMIT: Günlük maksimum kayıp limiti (% cinsinden)
@@ -162,8 +162,8 @@ TOTAL_DRAWDOWN_LIMIT = float(os.getenv("STRESS_TOTAL_DD", "9.0"))  # Varsayılan
 MAX_TOTAL_DRAWDOWN_PCT = TOTAL_DRAWDOWN_LIMIT / 100.0
 
 # ── Zaman Filtreleri ──────────────────────────────────────────────────────────
-TRADE_START_HOUR = int(os.getenv("STRESS_START_HOUR", "13"))     # UTC saat - NYSE pre/open çevresi
-TRADE_END_HOUR = int(os.getenv("STRESS_END_HOUR", "23"))         # UTC saat - Yeni işlem almama saati
+TRADE_START_HOUR = int(os.getenv("STRESS_START_HOUR", "1"))      # UTC: tüm gün (NAS100 CFD 24h)
+TRADE_END_HOUR   = int(os.getenv("STRESS_END_HOUR",   "23"))     # UTC: kapanış öncesi yeni işlem yok
 ZORLU_KAPANIS_SAATI = int(os.getenv("STRESS_FORCE_CLOSE_HOUR", "23"))
 ALLOW_WEEKEND_HOLDING = os.getenv("STRESS_ALLOW_WEEKEND", "False").lower() in ("true", "1", "yes")
 
@@ -180,8 +180,11 @@ MAX_LOT_LIMIT = float(os.getenv("STRESS_MAX_LOT", "20.0"))
 
 # ATR_FLOOR: ATR bu eşiğin altına düştüğünde minimum bu değer kullanılır.
 #   → Piyasanın aşırı sıkıştığı dönemlerde lot hesabının patlamasını engeller.
-#   → TECH/NAS100 için tipik ATR aralığı: 3.0 - 15.0 (15m tf)
 ATR_FLOOR = float(os.getenv("STRESS_ATR_FLOOR", "0.0"))
+
+# ATR_MIN_ENTRY: Giriş için minimum ATR. Bu değerin altındaysa trade bloklama.
+# NAS100 15m için tipik ATR: 20-80 puan. Çok düşük ATR = sıkışık piyasa = yüksek slippage.
+ATR_MIN_ENTRY = float(os.getenv("STRESS_ATR_MIN_ENTRY", "20.0"))
 
 # COST_BENEFIT_MAX_RATIO: (Komisyon + Spread) / TP Kazancı max oranı.
 #   → Bu oranı aşan işlemler maliyet açısından verimsiz kabul edilir ve İPTAL edilir.
@@ -193,8 +196,11 @@ ATR_FLOOR = float(os.getenv("STRESS_ATR_FLOOR", "0.0"))
 COST_BENEFIT_MAX_RATIO = float(os.getenv("STRESS_COST_RATIO", "0.60"))
 
 # ── İşlem Maliyetleri ─────────────────────────────────────────────────────────
-SPREAD_PENALTY = float(os.getenv("STRESS_SPREAD_PENALTY", "0.05"))
-COMMISSION_RATE = float(os.getenv("STRESS_COMMISSION_RATE", "0.0002"))
+# NAS100 gerçek maliyet modeli:
+# ICMarkets raw spread: USD 1.50/100k notional per side → 0.000015 per side
+# Spread: NAS100 ortalama 1.5 puan (index CFD tipik)
+SPREAD_PENALTY  = float(os.getenv("STRESS_SPREAD_PENALTY",   "1.5"))     # NAS100 puan cinsinden spread
+COMMISSION_RATE = float(os.getenv("STRESS_COMMISSION_RATE",  "0.000015")) # ICMarkets raw rate
 
 # ── MetaTrader 5 Giriş Bilgileri ──────────────────────────────────────────────
 # GÜVENLİK: Varsayılan değer yok. Ortam değişkeni set edilmezse başlangıçta hata verir.

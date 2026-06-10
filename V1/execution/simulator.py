@@ -107,17 +107,7 @@ class BacktestSimulator:
         # ── Equity mark-to-market güncelle ───────────────────────────────
         portfolio.update_equity_mark(bar_close)
 
-        # ── 1. Drawdown Kill-Switch: Guardrail aktifse zorla kapat ────────
-        if guardrails.check_drawdown_limits(portfolio):
-            pnl, reason = portfolio.close_trade(bar_close, timestamp, reason="GUARDRAIL")
-            self.guardrail_closes += 1
-            logger.warning(
-                f"🛡️ GUARDRAIL kapanışı | PnL={pnl:+.2f} USD | "
-                f"Bar={timestamp}"
-            )
-            return "GUARDRAIL"
-
-        # ── 2. Weekend Flatten: Cuma zorla kapanış ────────────────────────
+        # ── 1. Weekend Flatten: Cuma zorla kapanış ────────────────────────
         if guardrails.should_force_close(timestamp):
             pnl, reason = portfolio.close_trade(
                 bar_close, timestamp, reason="WEEKEND_FLATTEN"
@@ -129,7 +119,50 @@ class BacktestSimulator:
             )
             return "WEEKEND_FLATTEN"
 
-        # ── 3. Kısmi Kâr (Partial Close at 1R) ──────────────────────────────
+        # ── 2. SL / TP Kontrolü (GUARDRAIL'DEN ÖNCE) ─────────────────────
+        # Neden önce: Guardrail bar_close kullanır, SL ise gerçek SL fiyatını.
+        # Gap/ani hareket durumunda SL bypass edilmeden doğru fiyattan çıkış sağlanır.
+        if pos.is_long:
+            sl_touched_early: bool = bar_low  <= pos.stop_loss
+            tp_touched_early: bool = bar_high >= pos.take_profit
+        else:
+            sl_touched_early = bar_high >= pos.stop_loss
+            tp_touched_early = bar_low  <= pos.take_profit
+
+        if sl_touched_early and tp_touched_early:
+            sl_fill = pos.stop_loss * (1 + self.SL_SLIPPAGE_PCT) if pos.is_long else pos.stop_loss * (1 - self.SL_SLIPPAGE_PCT)
+            pnl, _ = portfolio.close_trade(sl_fill, timestamp, reason="SL")
+            self.sl_hits += 1
+            guardrails.record_trade_result(won=False)
+            logger.debug(f"⚠️  INTRA-BAR ÇELİŞKİ → SL_HIT @ {sl_fill:.4f} | PnL={pnl:+.2f} USD")
+            return "SL"
+
+        if sl_touched_early:
+            sl_fill = pos.stop_loss * (1 + self.SL_SLIPPAGE_PCT) if pos.is_long else pos.stop_loss * (1 - self.SL_SLIPPAGE_PCT)
+            pnl, _ = portfolio.close_trade(sl_fill, timestamp, reason="SL")
+            self.sl_hits += 1
+            guardrails.record_trade_result(won=False)
+            logger.debug(f"🔴 SL_HIT @ {sl_fill:.4f} | PnL={pnl:+.2f} USD | Bar={timestamp}")
+            return "SL"
+
+        if tp_touched_early:
+            pnl, _ = portfolio.close_trade(pos.take_profit, timestamp, reason="TP")
+            self.tp_hits += 1
+            guardrails.record_trade_result(won=True)
+            logger.debug(f"🟢 TP_HIT @ {pos.take_profit:.4f} | PnL={pnl:+.2f} USD | Bar={timestamp}")
+            return "TP"
+
+        # ── 3. Drawdown Kill-Switch: SL/TP'den sonra kontrol ─────────────
+        if guardrails.check_drawdown_limits(portfolio):
+            pnl, reason = portfolio.close_trade(bar_close, timestamp, reason="GUARDRAIL")
+            self.guardrail_closes += 1
+            logger.warning(
+                f"🛡️ GUARDRAIL kapanışı | PnL={pnl:+.2f} USD | "
+                f"Bar={timestamp}"
+            )
+            return "GUARDRAIL"
+
+        # ── 5. Kısmi Kâr (Partial Close at 1R) ──────────────────────────────
         if not pos.partial_closed and pos.atr_at_open > 0:
             partial_dist = pos.sl_distance * PARTIAL_CLOSE_R
             if pos.is_long:
@@ -150,7 +183,7 @@ class BacktestSimulator:
                     partial_price, pos.entry_price, timestamp,
                 )
 
-        # ── 4. Trailing Stop Aktifleştirme + Güncelleme ───────────────────
+        # ── 6. Trailing Stop Aktifleştirme + Güncelleme ───────────────────
         # TRAILING_ACTIVATION_R kadar kazanç varsa trailing başlat
         if not pos.trailing_active and pos.atr_at_open > 0:
             activation_dist = pos.sl_distance * TRAILING_ACTIVATION_R
@@ -172,47 +205,7 @@ class BacktestSimulator:
                 if new_sl < pos.stop_loss:
                     pos.stop_loss = new_sl
 
-        # ── 5. Intra-bar SL / TP Kontrolü ────────────────────────────────
-        if pos.is_long:
-            sl_touched: bool = bar_low  <= pos.stop_loss
-            tp_touched: bool = bar_high >= pos.take_profit
-        else:  # SHORT
-            sl_touched = bar_high >= pos.stop_loss
-            tp_touched = bar_low  <= pos.take_profit
-
-        # Intra-bar çelişki: hem SL hem TP aynı bar → muhafazakâr kural: SL kazanır
-        if sl_touched and tp_touched:
-            sl_fill = pos.stop_loss * (1 + self.SL_SLIPPAGE_PCT) if pos.is_long else pos.stop_loss * (1 - self.SL_SLIPPAGE_PCT)
-            pnl, _ = portfolio.close_trade(sl_fill, timestamp, reason="SL")
-            self.sl_hits += 1
-            guardrails.record_trade_result(won=False)
-            logger.debug(
-                f"⚠️  INTRA-BAR ÇELİŞKİ → SL_HIT @ {sl_fill:.4f} (slip) | "
-                f"PnL={pnl:+.2f} USD | Bar={timestamp}"
-            )
-            return "SL"
-
-        if sl_touched:
-            sl_fill = pos.stop_loss * (1 + self.SL_SLIPPAGE_PCT) if pos.is_long else pos.stop_loss * (1 - self.SL_SLIPPAGE_PCT)
-            pnl, _ = portfolio.close_trade(sl_fill, timestamp, reason="SL")
-            self.sl_hits += 1
-            guardrails.record_trade_result(won=False)
-            logger.debug(
-                f"🔴 SL_HIT @ {sl_fill:.4f} (slip={self.SL_SLIPPAGE_PCT*100:.2f}%) | "
-                f"PnL={pnl:+.2f} USD | Bar={timestamp}"
-            )
-            return "SL"
-
-        if tp_touched:
-            pnl, _ = portfolio.close_trade(pos.take_profit, timestamp, reason="TP")
-            self.tp_hits += 1
-            guardrails.record_trade_result(won=True)
-            logger.debug(
-                f"🟢 TP_HIT @ {pos.take_profit:.4f} | PnL={pnl:+.2f} USD | Bar={timestamp}"
-            )
-            return "TP"
-
-        # ── 4. Pozisyon Hâlâ Açık: Devam ─────────────────────────────────
+        # ── 7. Pozisyon Hâlâ Açık: Devam ─────────────────────────────────
         return None
 
     # ------------------------------------------------------------------

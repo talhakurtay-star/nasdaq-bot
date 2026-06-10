@@ -155,11 +155,10 @@ def _calculate_sharpe_ratio(
 
 def _calculate_max_drawdown(equity_curve: List[float]) -> tuple[float, float]:
     """
-    Maksimum Drawdown (MDD) — mutlak ve yüzde olarak.
+    Maksimum Drawdown (MDD) — running peak'ten mutlak ve yüzde.
 
-    Returns
-    -------
-    (mdd_usd, mdd_pct)
+    Returns (mdd_usd, mdd_pct_from_peak)
+    Prop firm check için ayrıca _dd_from_initial() kullanılır.
     """
     arr  = np.array(equity_curve)
     peak = np.maximum.accumulate(arr)
@@ -167,6 +166,17 @@ def _calculate_max_drawdown(equity_curve: List[float]) -> tuple[float, float]:
     mdd_usd = float(np.max(dd))
     mdd_pct = float(np.max(dd / np.where(peak == 0, 1, peak)) * 100)
     return mdd_usd, mdd_pct
+
+
+def _dd_from_initial(equity_curve: List[float]) -> float:
+    """Başlangıç bakiyesinden maksimum düşüş yüzdesi (prop firm kuralı)."""
+    if not equity_curve:
+        return 0.0
+    initial = equity_curve[0]
+    if initial <= 0:
+        return 0.0
+    min_eq = min(equity_curve)
+    return max(0.0, (initial - min_eq) / initial * 100)
 
 
 def _calculate_profit_factor(trade_log: list) -> float:
@@ -258,9 +268,10 @@ def _print_report(
 
     logger.info(report)
 
-    # Prop firm geçebilme ön değerlendirmesi
+    # Prop firm geçebilme ön değerlendirmesi (DD başlangıçtan ölçülür)
+    dd_from_initial = _dd_from_initial(equity_curve)
     passed = (
-        mdd_pct < MAX_TOTAL_DRAWDOWN_PCT * 100
+        dd_from_initial < MAX_TOTAL_DRAWDOWN_PCT * 100   # başlangıçtan DD < %9
         and total_return > 0
         and sharpe > 0
     )

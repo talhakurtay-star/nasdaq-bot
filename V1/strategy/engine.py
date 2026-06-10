@@ -1,8 +1,11 @@
 """
-strategy/engine.py — Yüksek kaliteli sinyal filtresi.
+strategy/engine.py — İki katmanlı sinyal motoru.
 
-Sadece güçlü, erken-trend, momentum teyitli setuplarda işlem açar.
-Daha az işlem ama daha yüksek win rate.
+Katman 1 — Erken Trend (EARLY):   EMA kesişimi sonrası ilk 1-25 bar
+Katman 2 — Trend İçi Pullback:    Yerleşik trend (25-120 bar) + RSI geri çekilmesi
+
+Her iki katman da aynı STRONG_LONG / STRONG_SHORT sinyalini döndürür.
+Daha fazla işlem fırsatı + yüksek win rate hedefi.
 """
 
 from __future__ import annotations
@@ -15,31 +18,36 @@ import pandas as pd
 
 try:
     from config.settings import (
-        EMA_FAST, EMA_SLOW, RSI_OVERBOUGHT, RSI_OVERSOLD,
+        EMA_FAST, EMA_SLOW, RSI_OVERBOUGHT, RSI_OVERSOLD, ATR_MIN_ENTRY,
     )
 except ImportError:
     EMA_FAST       = 9
     EMA_SLOW       = 21
     RSI_OVERBOUGHT = 80
     RSI_OVERSOLD   = 20
+    ATR_MIN_ENTRY  = 20.0
 
-# ── Strateji Parametreleri ────────────────────────────────────────────────────
-ADX_STRONG      = 22.0   # Güçlü trend eşiği
-MAX_ALIGN_BARS  = 20     # Trendin en geç kaçıncı barında girilebilir
-MIN_ALIGN_BARS  = 2      # Çok erken (1.bar) girişi engelle
-RSI_LONG_MIN    = 38     # Long için RSI alt sınır
-RSI_LONG_MAX    = 70     # Long için RSI üst sınır
-RSI_SHORT_MIN   = 30     # Short için RSI alt sınır
-RSI_SHORT_MAX   = 62     # Short için RSI üst sınır
-MACD_HIST_ACCEL = True   # MACD histogram ivmelenmelidir (değişim pozitif/negatif)
+# ── Katman 1: Erken Trend Parametreleri ──────────────────────────────────────
+ADX_STRONG          = 18.0
+EARLY_MIN_BARS      = 1
+EARLY_MAX_BARS      = 25
+RSI_EARLY_LONG_MIN  = 38
+RSI_EARLY_LONG_MAX  = 70
+RSI_EARLY_SHORT_MIN = 30
+RSI_EARLY_SHORT_MAX = 62
+
+# ── Katman 2: Pullback Parametreleri ─────────────────────────────────────────
+PULLBACK_MIN_BARS      = 25
+PULLBACK_MAX_BARS      = 120
+ADX_PULLBACK           = 20.0
+RSI_PULLBACK_LONG_MIN  = 35
+RSI_PULLBACK_LONG_MAX  = 52
+RSI_PULLBACK_SHORT_MIN = 48
+RSI_PULLBACK_SHORT_MAX = 65
 
 # ── Üst Periyot / Rejim Filtresi ──────────────────────────────────────────────
-# H4_TREND_REQUIRED: False — H4 özelliği XGBoost'a bırakıldı; strateji motoru kullanmıyor
-# (Erken trend girişlerinde H4 henüz dönmemişken en iyi setuplara girilir)
-H4_TREND_REQUIRED   = False
-# ADX_PERSIST_MIN: son 5 bardan en az N tanesi ADX>18 olmalı (rejim filtresi)
-# Not: 2 = hafif filtre (erken trend girişlerine izin verir), 4 = katı filtre
-ADX_PERSIST_MIN     = 2
+H4_TREND_REQUIRED = False
+ADX_PERSIST_MIN   = 2
 
 SignalType = Literal["STRONG_LONG", "STRONG_SHORT", "HOLD"]
 logger = logging.getLogger(__name__)
@@ -49,11 +57,16 @@ class StrategyEngine:
 
     def __init__(self) -> None:
         logger.info(
-            "StrategyEngine | EMA %d/%d | ADX>%.0f | AlignBars %d-%d | "
-            "RSI L[%d-%d] S[%d-%d] | H4Filter=%s | ADXPersist>=%d",
-            EMA_FAST, EMA_SLOW, ADX_STRONG, MIN_ALIGN_BARS, MAX_ALIGN_BARS,
-            RSI_LONG_MIN, RSI_LONG_MAX, RSI_SHORT_MIN, RSI_SHORT_MAX,
-            H4_TREND_REQUIRED, ADX_PERSIST_MIN,
+            "StrategyEngine v2 | EMA %d/%d | ADX>%.0f | "
+            "Early[%d-%d bars] RSI L[%d-%d] S[%d-%d] | "
+            "Pullback[%d-%d bars] RSI L[%d-%d] S[%d-%d]",
+            EMA_FAST, EMA_SLOW, ADX_STRONG,
+            EARLY_MIN_BARS, EARLY_MAX_BARS,
+            RSI_EARLY_LONG_MIN, RSI_EARLY_LONG_MAX,
+            RSI_EARLY_SHORT_MIN, RSI_EARLY_SHORT_MAX,
+            PULLBACK_MIN_BARS, PULLBACK_MAX_BARS,
+            RSI_PULLBACK_LONG_MIN, RSI_PULLBACK_LONG_MAX,
+            RSI_PULLBACK_SHORT_MIN, RSI_PULLBACK_SHORT_MAX,
         )
 
     def _get_bar(self, df: pd.DataFrame, idx: int) -> pd.Series | None:
@@ -80,15 +93,15 @@ class StrategyEngine:
             return "HOLD"
 
         try:
-            ema_fast   = float(bar[f"EMA_{EMA_FAST}"])
-            ema_slow   = float(bar[f"EMA_{EMA_SLOW}"])
-            rsi        = float(bar["RSI"])
-            adx        = float(bar.get("ADX",            0.0) or 0.0)
-            macd_hist  = float(bar.get("MACD_Hist",      0.0) or 0.0)
-            align_bars = float(bar.get("EMA_Align_Bars", 0.0) or 0.0)
-            close_vs_ema50  = float(bar.get("Close_vs_EMA50", 0.0) or 0.0)
-            h4_trend   = float(bar.get("H4_EMA_Trend",   0.0) or 0.0)
-            adx_persist = float(bar.get("ADX_Persistence", 5.0) or 5.0)
+            ema_fast       = float(bar[f"EMA_{EMA_FAST}"])
+            ema_slow       = float(bar[f"EMA_{EMA_SLOW}"])
+            rsi            = float(bar["RSI"])
+            adx            = float(bar.get("ADX",            0.0) or 0.0)
+            macd_hist      = float(bar.get("MACD_Hist",      0.0) or 0.0)
+            align_bars     = float(bar.get("EMA_Align_Bars", 0.0) or 0.0)
+            close_vs_ema50 = float(bar.get("Close_vs_EMA50", 0.0) or 0.0)
+            h4_trend       = float(bar.get("H4_EMA_Trend",   0.0) or 0.0)
+            adx_persist    = float(bar.get("ADX_Persistence", 5.0) or 5.0)
         except (KeyError, TypeError, ValueError) as exc:
             logger.warning("Bar %d okuma hatası: %s", current_index, exc)
             return "HOLD"
@@ -96,45 +109,83 @@ class StrategyEngine:
         if any(math.isnan(v) for v in (ema_fast, ema_slow, rsi)):
             return "HOLD"
 
-        # MACD histogram ivmesi (bir önceki bardan değişim)
+        # ATR çok düşükse piyasa sıkışık — giriş kalitesi düşük
+        atr = float(bar.get("ATR", 0.0) or 0.0)
+        if atr > 0 and atr < ATR_MIN_ENTRY:
+            return "HOLD"
+
+        # MACD histogram ivmesi
         if prev is not None:
-            prev_hist = float(prev.get("MACD_Hist", macd_hist) or macd_hist)
-            macd_accel_long  = (macd_hist - prev_hist) > 0   # histogram büyüyor
-            macd_accel_short = (macd_hist - prev_hist) < 0   # histogram küçülüyor
+            prev_hist        = float(prev.get("MACD_Hist", macd_hist) or macd_hist)
+            macd_accel_long  = (macd_hist - prev_hist) > 0
+            macd_accel_short = (macd_hist - prev_hist) < 0
         else:
-            macd_accel_long = macd_accel_short = True  # bilinmiyorsa filtre atla
+            macd_accel_long = macd_accel_short = True
 
-        adx_ok = not math.isnan(adx) and (adx >= ADX_STRONG)
+        adx_ok       = not math.isnan(adx) and adx >= ADX_STRONG
+        adx_pullback = not math.isnan(adx) and adx >= ADX_PULLBACK
 
-        # ── STRONG_LONG ────────────────────────────────────────────────────
+        uptrend   = ema_fast > ema_slow
+        downtrend = ema_fast < ema_slow
+
+        # ══ KATMAN 1: ERKEN TREND (bar 1-25) ══════════════════════════════
         if (
-            ema_fast > ema_slow                          # yukarı trend
-            and MIN_ALIGN_BARS <= align_bars <= MAX_ALIGN_BARS  # trend erken evre
-            and RSI_LONG_MIN <= rsi <= RSI_LONG_MAX      # RSI momentum bölgesi
-            and adx_ok                                   # güçlü trend
-            and macd_hist > 0                            # momentum yukarı
-            and macd_accel_long                          # momentum ivmeleniyor
-            and close_vs_ema50 > -0.02                   # EMA50 desteği (ödünç değil)
+            uptrend
+            and EARLY_MIN_BARS <= align_bars <= EARLY_MAX_BARS
+            and RSI_EARLY_LONG_MIN <= rsi <= RSI_EARLY_LONG_MAX
+            and adx_ok
+            and macd_hist > 0
+            and macd_accel_long
+            and close_vs_ema50 > -0.02
         ):
             logger.debug(
-                "Bar %d STRONG_LONG [ADX=%.1f AlignBars=%.0f RSI=%.1f MACDh=%.4f H4=%.0f Persist=%.0f]",
-                current_index, adx, align_bars, rsi, macd_hist, h4_trend, adx_persist,
+                "Bar %d EARLY_LONG [ADX=%.1f Bars=%.0f RSI=%.1f MACDh=%.4f]",
+                current_index, adx, align_bars, rsi, macd_hist,
             )
             return "STRONG_LONG"
 
-        # ── STRONG_SHORT ───────────────────────────────────────────────────
         if (
-            ema_fast < ema_slow
-            and -MAX_ALIGN_BARS <= align_bars <= -MIN_ALIGN_BARS
-            and RSI_SHORT_MIN <= rsi <= RSI_SHORT_MAX
+            downtrend
+            and -EARLY_MAX_BARS <= align_bars <= -EARLY_MIN_BARS
+            and RSI_EARLY_SHORT_MIN <= rsi <= RSI_EARLY_SHORT_MAX
             and adx_ok
             and macd_hist < 0
             and macd_accel_short
             and close_vs_ema50 < 0.02
         ):
             logger.debug(
-                "Bar %d STRONG_SHORT [ADX=%.1f AlignBars=%.0f RSI=%.1f MACDh=%.4f H4=%.0f Persist=%.0f]",
-                current_index, adx, align_bars, rsi, macd_hist, h4_trend, adx_persist,
+                "Bar %d EARLY_SHORT [ADX=%.1f Bars=%.0f RSI=%.1f MACDh=%.4f]",
+                current_index, adx, align_bars, rsi, macd_hist,
+            )
+            return "STRONG_SHORT"
+
+        # ══ KATMAN 2: TREND İÇİ PULLBACK (bar 25-120) ═════════════════════
+        # Yerleşik trend içinde RSI geri çekildikten sonra giriş
+        if (
+            uptrend
+            and PULLBACK_MIN_BARS <= align_bars <= PULLBACK_MAX_BARS
+            and RSI_PULLBACK_LONG_MIN <= rsi <= RSI_PULLBACK_LONG_MAX
+            and adx_pullback
+            and macd_hist > 0
+            and close_vs_ema50 > -0.015
+        ):
+            logger.debug(
+                "Bar %d PULLBACK_LONG [ADX=%.1f Bars=%.0f RSI=%.1f]",
+                current_index, adx, align_bars, rsi,
+            )
+            return "STRONG_LONG"
+
+        if (
+            downtrend
+            and -PULLBACK_MAX_BARS <= align_bars <= -PULLBACK_MIN_BARS
+            and RSI_PULLBACK_SHORT_MIN <= rsi <= RSI_PULLBACK_SHORT_MAX
+            and adx_pullback
+            and macd_hist < 0
+            and close_vs_ema50 < 0.015
+        ):
+            logger.debug(
+                "Bar %d PULLBACK_SHORT [ADX=%.1f Bars=%.0f RSI=%.1f]",
+                current_index, adx, align_bars, rsi,
             )
             return "STRONG_SHORT"
 
