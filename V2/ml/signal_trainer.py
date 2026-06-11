@@ -186,29 +186,66 @@ def build_datasets(df: pd.DataFrame) -> Tuple[
 
 
 def _train_one(X: pd.DataFrame, y: pd.Series, label: str, model_dir: str) -> None:
-    """Train and save one binary LightGBM classifier."""
-    if len(y) < 50:
+    """Train and save one binary LightGBM classifier with OOT validation split."""
+    if len(y) < 100:
         logger.warning("%s: only %d samples — skipping training.", label, len(y))
         return
 
-    dataset = lgb.Dataset(X, label=y)
-    params  = {
-        "objective":        "binary",
-        "metric":           "binary_logloss",
-        "num_leaves":       31,
-        "learning_rate":    0.05,
-        "feature_fraction": 0.8,
-        "bagging_fraction": 0.8,
-        "bagging_freq":     5,
-        "verbose":         -1,
+    # Chronological 80/20 split (no shuffle — respect time ordering)
+    split = int(len(X) * 0.8)
+    X_tr, X_val = X.iloc[:split], X.iloc[split:]
+    y_tr, y_val = y.iloc[:split], y.iloc[split:]
+
+    pos_rate = float(y_tr.mean())
+    scale_pos_weight = (1 - pos_rate) / max(pos_rate, 1e-6)
+
+    logger.info(
+        "%s | train=%d val=%d | win_rate_train=%.1f%% | scale_pos=%.1f",
+        label.upper(), len(y_tr), len(y_val), pos_rate * 100, scale_pos_weight,
+    )
+
+    dtrain = lgb.Dataset(X_tr, label=y_tr)
+    dval   = lgb.Dataset(X_val, label=y_val, reference=dtrain)
+
+    params = {
+        "objective":         "binary",
+        "metric":            "binary_logloss",
+        "num_leaves":        16,       # smaller → less overfitting
+        "learning_rate":     0.03,
+        "feature_fraction":  0.7,
+        "bagging_fraction":  0.8,
+        "bagging_freq":      5,
+        "min_child_samples": 30,       # require at least 30 samples per leaf
+        "lambda_l1":         0.1,
+        "lambda_l2":         0.1,
+        "scale_pos_weight":  scale_pos_weight,
+        "verbose":          -1,
         "n_jobs":           -1,
     }
     booster = lgb.train(
         params,
-        dataset,
-        num_boost_round=300,
-        valid_sets=[dataset],
-        callbacks=[lgb.log_evaluation(100)],
+        dtrain,
+        num_boost_round=500,
+        valid_sets=[dtrain, dval],
+        valid_names=["train", "val"],
+        callbacks=[
+            lgb.early_stopping(50, verbose=False),
+            lgb.log_evaluation(100),
+        ],
+    )
+
+    # OOT metrics
+    val_probs = booster.predict(X_val)
+    val_preds = (val_probs >= 0.5).astype(int)
+    tp = int(((val_preds == 1) & (y_val == 1)).sum())
+    fp = int(((val_preds == 1) & (y_val == 0)).sum())
+    fn = int(((val_preds == 0) & (y_val == 1)).sum())
+    prec = tp / max(tp + fp, 1)
+    rec  = tp / max(tp + fn, 1)
+    f1   = 2 * prec * rec / max(prec + rec, 1e-9)
+    logger.info(
+        "%s OOT → precision=%.3f recall=%.3f F1=%.3f best_iter=%d",
+        label.upper(), prec, rec, f1, booster.best_iteration,
     )
 
     os.makedirs(model_dir, exist_ok=True)
@@ -239,15 +276,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train V2 signal classifiers")
     parser.add_argument(
         "--csv",
-        default=os.path.join(_V1_ROOT, "cache", "cache_15m_360d.csv"),
+        default=os.path.join(_V1_ROOT, "csv", "nasdaq_15m.csv"),
         help="Path to NAS100 15m CSV file",
     )
     parser.add_argument("--model-dir", default=LGBM_MODEL_DIR)
     args = parser.parse_args()
 
     from ml.features_v2 import FeatureEngineV2
+    from data.data_feed import _load_mt5_csv, _ensure_spy_vix
     fe  = FeatureEngineV2()
-    raw = pd.read_csv(args.csv, parse_dates=["Datetime"], index_col="Datetime")
+    raw = _load_mt5_csv(args.csv)
+    raw = _ensure_spy_vix(raw)
     raw.sort_index(inplace=True)
     df  = fe.calculate_indicators(raw)
 

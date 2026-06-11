@@ -258,8 +258,16 @@ def run_backtest(csv_path: str | None = None) -> dict:
         logger.info("No CSV provided — using V1 DataFeed...")
         raw_df = DataFeed().download_historical_data()
 
-    logger.info("Raw data: %d bars | %s → %s", len(raw_df),
-                raw_df.index[0], raw_df.index[-1])
+    # Apply BACKTEST_DAYS window (same as V1 DataFeed)
+    try:
+        from config.settings import BACKTEST_DAYS
+    except ImportError:
+        BACKTEST_DAYS = 360
+    from datetime import timedelta
+    cutoff = raw_df.index.max() - timedelta(days=BACKTEST_DAYS)
+    raw_df = raw_df[raw_df.index >= cutoff]
+    logger.info("Raw data (last %d days): %d bars | %s → %s",
+                BACKTEST_DAYS, len(raw_df), raw_df.index[0], raw_df.index[-1])
 
     # ── 2. Feature engineering ───────────────────────────────────────────
     logger.info("Computing V2 indicators...")

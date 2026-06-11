@@ -261,31 +261,50 @@ class EnsembleSignal:
             logger.debug("LGBM prediction error: %s", exc)
             return 0.5
 
-    @staticmethod
     def _build_feature_row(
+        self,
         df: pd.DataFrame,
         current_index: int,
         feature_engine=None,
     ) -> pd.DataFrame | None:
-        """Build a single-row DataFrame of ML features for current bar."""
-        if feature_engine is not None:
-            try:
-                return feature_engine.generate_live_features(df, current_index)
-            except Exception as exc:
-                logger.debug("Feature engine error: %s", exc)
+        """Build a single-row DataFrame of ML features for current bar.
+        Columns are aligned to the model's expected SIGNAL_FEATURES order."""
+        # Get the feature column list from the model (stored at training time)
+        feature_names = self._get_model_feature_names()
+
+        try:
+            if feature_engine is not None:
+                raw = feature_engine.generate_live_features(df, current_index)
+            else:
+                row = df.iloc[current_index]
+                raw = pd.DataFrame([{
+                    col: float(val)
+                    for col, val in row.items()
+                    if isinstance(val, (int, float, np.floating, np.integer))
+                    and not (isinstance(val, float) and np.isnan(val))
+                }])
+
+            if raw is None or raw.empty:
                 return None
 
-        # Minimal fallback: use numeric columns directly
-        try:
-            row = df.iloc[current_index]
-            numeric = {
-                col: float(val)
-                for col, val in row.items()
-                if isinstance(val, (int, float, np.floating, np.integer))
-                and not (isinstance(val, float) and np.isnan(val))
-            }
-            if not numeric:
-                return None
-            return pd.DataFrame([numeric])
-        except Exception:
+            if feature_names:
+                # Reindex to match exact training column order; fill missing with 0
+                raw = raw.reindex(columns=feature_names, fill_value=0.0)
+            return raw
+        except Exception as exc:
+            logger.debug("Feature build error: %s", exc)
             return None
+
+    def _get_model_feature_names(self) -> list:
+        """Return the feature names the long model was trained on (if available)."""
+        if self._lgbm_long is not None:
+            try:
+                return self._lgbm_long.feature_name()
+            except Exception:
+                pass
+        if self._lgbm_short is not None:
+            try:
+                return self._lgbm_short.feature_name()
+            except Exception:
+                pass
+        return []

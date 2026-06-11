@@ -51,9 +51,11 @@ ENSEMBLE_MIN_SCORE    = 0.52   # minimum ensemble score to pass a LONG/SHORT
 LGBM_MODEL_DIR        = os.path.join(os.path.dirname(__file__), '..', 'models')
 
 # LightGBM confidence thresholds
-LGBM_LONG_CONFIRM   = 0.52  # prob >= this AND rule_signal == LONG → LONG
-LGBM_LONG_VETO      = 0.45  # prob <  this AND rule_signal == LONG → HOLD (veto)
-# 0.45–0.52 range: rule engine wins alone
+# NOTE: Model predicts ~0.28 mean prob (win rate ~31%). Until a better model is
+# trained, veto is disabled (0.0) so rule engine makes all decisions.
+# When a well-calibrated model is available, set LGBM_LONG_VETO = 0.30
+LGBM_LONG_CONFIRM   = 0.99  # effectively disabled — require very high confidence to confirm
+LGBM_LONG_VETO      = 0.00  # disabled — ML veto requires prob < 0.0 (impossible)
 
 # ── Stage 3: Adaptive Exit ────────────────────────────────────────────────────
 EXIT_MOMENTUM_THRESHOLD = 0.35  # score below this → EXIT_NOW
