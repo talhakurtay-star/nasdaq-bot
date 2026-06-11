@@ -220,8 +220,8 @@ class FeatureEngine:
             (df['Close'] - df[f'EMA_{EMA_200}']) / df[f'EMA_{EMA_200}'].replace(0, np.nan)
         )
 
-        # ADX kalıcılığı: son 5 barda kaçı ADX>18 idi?  (rejim filtresi)
-        df['ADX_Persistence'] = (df['ADX'] > 18).astype(int).rolling(5, min_periods=1).sum()
+        # ADX kalıcılığı: son 5 barda kaçı ADX>22 idi? (engine ADX_STRONG ile uyumlu)
+        df['ADX_Persistence'] = (df['ADX'] > 22).astype(int).rolling(5, min_periods=1).sum()
 
         # ADX eğimi: ADX 3 barda ne kadar değişti? (trend güçleniyor mu?)
         df['ADX_Slope'] = df['ADX'].diff(3)

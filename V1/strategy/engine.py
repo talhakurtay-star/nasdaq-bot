@@ -50,7 +50,7 @@ RSI_PULLBACK_SHORT_MAX = 65
 # H4 trend filtresi: H4 yönüne karşı gelen işlemleri engeller
 # Close_vs_EMA50 bug fix sonrası bu filtre de aktif ediliyor
 H4_TREND_REQUIRED = False  # 15m verisinden hesaplanan H4 proxy güvenilir değil; Close_vs_EMA50 ile filtreleniyor
-ADX_PERSIST_MIN   = 2
+ADX_PERSIST_MIN   = 0  # Devre dışı — ADX eşiği (ADX_STRONG=22) zaten filtre görevi görür
 
 SignalType = Literal["STRONG_LONG", "STRONG_SHORT", "HOLD"]
 logger = logging.getLogger(__name__)
