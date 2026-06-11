@@ -46,9 +46,12 @@ import pandas as pd
 _V2_ROOT = Path(__file__).resolve().parent
 _V1_ROOT = _V2_ROOT.parent / "V1"
 
-for _p in (str(_V2_ROOT), str(_V1_ROOT)):
-    if _p not in sys.path:
-        sys.path.insert(0, _p)
+# V1 inserted first, then V2 inserted at 0 so V2 wins for package resolution
+# (V2/config, V2/ml, V2/pipeline take priority over V1 equivalents)
+if str(_V1_ROOT) not in sys.path:
+    sys.path.insert(0, str(_V1_ROOT))
+if str(_V2_ROOT) not in sys.path:
+    sys.path.insert(0, str(_V2_ROOT))
 
 # Encoding safety
 try:
