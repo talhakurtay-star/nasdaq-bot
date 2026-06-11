@@ -9,13 +9,27 @@ V2-specific overrides and additions are declared below.
 
 import os
 import sys
+import importlib.util
 
-# ── Inherit everything from V1 ────────────────────────────────────────────────
+# ── Inherit everything from V1 via direct file load (avoids circular import) ──
+# We cannot use `from config.settings import *` because when V2 is first on
+# sys.path, that resolves back to this file itself → circular import.
+# Instead, load V1/config/settings.py directly via importlib.
 _V1_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', 'V1'))
-if _V1_ROOT not in sys.path:
-    sys.path.insert(0, _V1_ROOT)
+_V1_SETTINGS = os.path.join(_V1_ROOT, 'config', 'settings.py')
 
-from config.settings import *  # noqa: F401,F403  (intentional wildcard inherit)
+_spec = importlib.util.spec_from_file_location("_v1_settings", _V1_SETTINGS)
+_v1_mod = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_v1_mod)  # type: ignore[arg-type]
+
+# Inject all V1 public names into this module's namespace
+for _k, _v in vars(_v1_mod).items():
+    if not _k.startswith('__'):
+        globals()[_k] = _v
+
+# Also make V1 available for submodule imports (risk/, data/, etc.)
+if _V1_ROOT not in sys.path:
+    sys.path.append(_V1_ROOT)
 
 # ── Stage 1: Market Regime Detection ─────────────────────────────────────────
 # ADX thresholds for regime classification

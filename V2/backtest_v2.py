@@ -46,12 +46,17 @@ import pandas as pd
 _V2_ROOT = Path(__file__).resolve().parent
 _V1_ROOT = _V2_ROOT.parent / "V1"
 
-# V1 inserted first, then V2 inserted at 0 so V2 wins for package resolution
-# (V2/config, V2/ml, V2/pipeline take priority over V1 equivalents)
-if str(_V1_ROOT) not in sys.path:
-    sys.path.insert(0, str(_V1_ROOT))
-if str(_V2_ROOT) not in sys.path:
-    sys.path.insert(0, str(_V2_ROOT))
+# Ensure sys.path order: V2 first, V1 second.
+# When running as `python V2/backtest_v2.py`, Python auto-inserts V2/ at index 0.
+# We must guarantee V1 is also on the path (append rather than insert to keep V2 at 0).
+_paths_to_add = [str(_V2_ROOT), str(_V1_ROOT)]
+for _p in _paths_to_add:
+    # Remove duplicates, then re-insert in correct order at positions 0 and 1
+    while _p in sys.path:
+        sys.path.remove(_p)
+# Now insert V1 at 0, then V2 at 0 → V2 ends up at 0, V1 at 1
+sys.path.insert(0, str(_V1_ROOT))
+sys.path.insert(0, str(_V2_ROOT))
 
 # Encoding safety
 try:
