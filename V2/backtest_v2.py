@@ -81,6 +81,7 @@ from config.settings import (  # noqa: E402
     EMA_SLOW,
     RSI_PERIOD,
     ATR_PERIOD,
+    BREAKOUT_SL_MULT,
 )
 
 # ── V2 pipeline ───────────────────────────────────────────────────────────────
@@ -249,23 +250,10 @@ def run_backtest(csv_path: str | None = None) -> dict:
 
     # ── 1. Data ───────────────────────────────────────────────────────────
     if csv_path and os.path.exists(csv_path):
-        logger.info("Loading CSV: %s", csv_path)
-        raw_df = pd.read_csv(csv_path)
-        # Detect datetime column
-        for col in ("Datetime", "datetime", "Date", "date", "Time", "timestamp"):
-            if col in raw_df.columns:
-                raw_df[col] = pd.to_datetime(raw_df[col])
-                raw_df = raw_df.set_index(col)
-                break
-        else:
-            raw_df.index = pd.to_datetime(raw_df.index)
-        raw_df = raw_df.sort_index()
-        if "Volume" not in raw_df.columns:
-            raw_df["Volume"] = 1.0
-        for c in ("Open", "High", "Low", "Close"):
-            if c in raw_df.columns:
-                raw_df[c] = pd.to_numeric(raw_df[c], errors="coerce")
-        raw_df = raw_df.dropna(subset=["Close"])
+        logger.info("Loading CSV via V1 DataFeed: %s", csv_path)
+        from data.data_feed import _load_mt5_csv, _ensure_spy_vix
+        raw_df = _load_mt5_csv(csv_path)
+        raw_df = _ensure_spy_vix(raw_df)
     else:
         logger.info("No CSV provided — using V1 DataFeed...")
         raw_df = DataFeed().download_historical_data()
@@ -320,27 +308,44 @@ def run_backtest(csv_path: str | None = None) -> dict:
         if guardrails.total_drawdown_triggered:
             logger.critical("Total DD limit hit — stopping simulation at bar %d", idx)
             break
+
+        # ── Step 1: V1 simulator — SL/TP/trailing/weekend flatten ────────
+        # Must run every bar regardless of kill switch (to close open positions)
+        if portfolio.open_position is not None:
+            simulator.update_and_check_positions(bar, portfolio, guardrails)
+
         if guardrails.kill_switch_active:
             if _kill_warned_day != current_day:
                 _kill_warned_day = current_day
                 logger.warning("Daily DD limit hit on %s — no new trades today", current_day)
-            # Still need to update open positions via simulator
-            if portfolio.open_position is not None:
-                simulator.update_and_check_positions(bar, portfolio, guardrails)
             continue
 
-        # ── V1 simulator: SL/TP/trailing (always runs first) ─────────────
-        # The orchestrator's process_bar() also calls simulator internally;
-        # call it only if orchestrator is NOT calling it (it does call it)
+        if not guardrails.is_trading_allowed(portfolio, timestamp):
+            continue
 
-        # ── Pipeline orchestrator ─────────────────────────────────────────
-        result = orchestrator.process_bar(df, idx, pd.Timestamp(timestamp), bar)
+        # ── Step 2: Skip if position already open ────────────────────────
+        if portfolio.open_position is not None:
+            continue
 
-        if result.get("trade_closed") and result.get("close_reason") == "EARLY_EXIT":
-            simulator.adaptive_exits = getattr(simulator, "adaptive_exits", 0) + 1
+        # ── Step 3: Pipeline — regime + ensemble signal (Stage 1 & 2) ────
+        regime = orchestrator.stage1.detect(df, idx)
+        signal, score = orchestrator.stage2.generate(df, idx, regime, feature_engine)
 
-        if result.get("trade_opened"):
-            guardrails.daily_trades_count += 1
+        # ── Step 4: Execute signal via portfolio (same as V1) ─────────────
+        if signal in ("STRONG_LONG", "STRONG_SHORT"):
+            close_price = float(bar.get("Close", 0.0))
+            atr_value   = float(bar.get("ATR", 0.0) or 0.0)
+            if atr_value > 0:
+                # BREAKOUT regime: tighten SL distance
+                effective_atr = atr_value * BREAKOUT_SL_MULT if regime == "BREAKOUT" else atr_value
+                portfolio.open_trade(
+                    direction=signal,
+                    current_price=close_price,
+                    atr_value=effective_atr,
+                    timestamp=timestamp,
+                )
+                if portfolio.open_position is not None:
+                    guardrails.daily_trades_count += 1
 
     # Close any still-open position at end of simulation
     if portfolio.open_position is not None:
