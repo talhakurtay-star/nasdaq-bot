@@ -179,26 +179,98 @@ def _dd_from_initial(equity_curve: List[float]) -> float:
     return max(0.0, (initial - min_eq) / initial * 100)
 
 
+def _aggregate_trades(trade_log: list) -> list:
+    """
+    Her mantıksal işlem için toplam PnL'i hesaplar.
+    PARTIAL_TP + final kapanış aynı open_time'a aittir → grupla.
+    Döndürür: [{"net_pnl": toplam, "reason": son_sebep, ...}, ...]
+    """
+    from collections import defaultdict
+    groups: dict = defaultdict(lambda: {"net_pnl": 0.0, "reason": "", "direction": ""})
+    for t in trade_log:
+        key = t.get("open_time", id(t))
+        groups[key]["net_pnl"]   += t["net_pnl"]
+        groups[key]["direction"]  = t.get("direction", "")
+        if t.get("reason") != "PARTIAL_TP":  # son gerçek kapanış sebebini tut
+            groups[key]["reason"] = t.get("reason", "")
+    return list(groups.values())
+
+
 def _calculate_profit_factor(trade_log: list) -> float:
-    """Gross kazanç / Gross kayıp oranı."""
-    gross_profit = sum(t["net_pnl"] for t in trade_log if t["net_pnl"] > 0)
-    gross_loss   = abs(sum(t["net_pnl"] for t in trade_log if t["net_pnl"] < 0))
+    """Gross kazanç / Gross kayıp oranı (partial dahil toplam PnL)."""
+    agg = _aggregate_trades(trade_log)
+    gross_profit = sum(t["net_pnl"] for t in agg if t["net_pnl"] > 0)
+    gross_loss   = abs(sum(t["net_pnl"] for t in agg if t["net_pnl"] < 0))
     if gross_loss == 0:
         return float("inf") if gross_profit > 0 else 0.0
     return round(gross_profit / gross_loss, 3)
 
 
 def _calculate_avg_rr(trade_log: list) -> float:
-    """Kazanan işlemlerin ortalama R değeri (net_pnl / risk_amount)."""
-    if not trade_log:
-        return 0.0
-    winners = [t for t in trade_log if t["net_pnl"] > 0]
+    """Kazanan işlemlerin ortalama R değeri (partial dahil)."""
+    agg = _aggregate_trades(trade_log)
+    winners = [t for t in agg if t["net_pnl"] > 0]
     if not winners:
         return 0.0
-    # risk_amount ≈ initial_balance * RISK_PER_TRADE (sabit ref değeri)
     risk_ref = INITIAL_BALANCE * RISK_PER_TRADE
     avg_r = np.mean([t["net_pnl"] / risk_ref for t in winners])
     return round(float(avg_r), 3)
+
+
+# ── Veri Doğrulaması ──────────────────────────────────────────────────────────
+
+def _validate_nas100_data(df: pd.DataFrame, logger: logging.Logger) -> None:
+    """
+    CSV verisi NAS100 15m formatına uygun mu kontrol eder.
+    Uyumsuzsa kritik uyarı basar; programı durdurmaz, sadece bilgilendirir.
+    """
+    issues = []
+
+    # Yeterli bar var mı?
+    MIN_BARS = 5_000  # ~52 gün (24h CFD)
+    if len(df) < MIN_BARS:
+        issues.append(
+            f"⚠️  ÇOK AZ VERİ: {len(df):,} bar mevcut (min önerilen: {MIN_BARS:,}).\n"
+            f"   MT5'ten en az 18 ay NAS100 M15 verisi export edin.\n"
+            f"   Export: Grafik → Sağ tık → 'Veriyi Kaydet' → CSV"
+        )
+
+    # Fiyat aralığı NAS100 mı?
+    if "Close" in df.columns:
+        close_median = float(df["Close"].median())
+        if not (5_000 < close_median < 35_000):
+            issues.append(
+                f"⚠️  YANLIŞ SEMBOL: Medyan kapanış fiyatı {close_median:,.0f}.\n"
+                f"   NAS100 beklenen aralık: 5,000 – 35,000.\n"
+                f"   CSV dosyasının NAS100/USTEC/US100 verisi içerdiğinden emin olun."
+            )
+
+    # ATR_MIN_ENTRY doğrulaması
+    if "ATR" in df.columns:
+        atr_median = float(df["ATR"].dropna().median())
+        if atr_median < 5:
+            issues.append(
+                f"⚠️  ATR ÇOK KÜÇÜK: Medyan ATR = {atr_median:.4f}.\n"
+                f"   NAS100 15m için tipik ATR: 15-80 puan.\n"
+                f"   Veri birimi veya sembol yanlış olabilir."
+            )
+
+    if issues:
+        logger.critical(
+            "\n" + "━" * 62 + "\n"
+            "  ❌  VERİ DOĞRULAMA SORUNU — sonuçlar güvenilmez olabilir\n" +
+            "━" * 62 + "\n" +
+            "\n".join(f"  {i}" for i in issues) + "\n" +
+            "━" * 62
+        )
+    else:
+        logger.info(
+            "✅ Veri doğrulandı: %d bar | fiyat aralığı NAS100 uyumlu | "
+            "tarih: %s → %s",
+            len(df),
+            df.index[0].date() if hasattr(df.index[0], 'date') else df.index[0],
+            df.index[-1].date() if hasattr(df.index[-1], 'date') else df.index[-1],
+        )
 
 
 # ── Raporlama ─────────────────────────────────────────────────────────────────
@@ -217,10 +289,12 @@ def _print_report(
     trade_log  = portfolio.trade_log
     sim_stats  = simulator.stats()
 
-    total_trades  = summary["total_trades"]
-    winning       = summary["winning_trades"]
+    # İşlem istatistikleri — partial + final PnL birleştirilmiş (doğru WR için)
+    agg_trades    = _aggregate_trades(trade_log)
+    total_trades  = len(agg_trades)
+    winning       = sum(1 for t in agg_trades if t["net_pnl"] > 0)
     losing        = total_trades - winning
-    win_rate      = summary["win_rate_pct"]
+    win_rate      = (winning / total_trades * 100) if total_trades else 0.0
 
     sharpe         = _calculate_sharpe_ratio(equity_curve)
     mdd_usd, mdd_pct = _calculate_max_drawdown(equity_curve)
@@ -610,6 +684,10 @@ def run_backtest() -> None:
         # ── Tek sembol modu (eski davranış) ──────────────────────────────
         logger.info("📥 Tek sembol modu — veri yükleniyor...")
         raw_df = DataFeed().download_historical_data()
+
+        # ── Veri doğrulaması ────────────────────────────────────────────────
+        _validate_nas100_data(raw_df, logger)
+
         df     = feature_engine.calculate_indicators(raw_df)
 
         total_bars = len(df)
