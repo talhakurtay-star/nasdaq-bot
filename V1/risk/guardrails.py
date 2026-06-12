@@ -33,8 +33,10 @@ Entegrasyon akışı
 from __future__ import annotations
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import TYPE_CHECKING
+
+import pandas as pd
 
 if TYPE_CHECKING:
     from risk.portfolio import PortfolioManager
@@ -67,6 +69,33 @@ logger = logging.getLogger(__name__)
 # Cuma günü: Python'da weekday() → 0=Pazartesi … 4=Cuma
 _FRIDAY   = 4
 _THURSDAY = 3  # Perşembe
+
+# ── Yüksek Etkili Haber Saatleri (UTC) ───────────────────────────────────────
+# Funding Pips Master hesap kuralı: kırmızı haber ±5 dk yeni işlem yasak.
+# Backtest/sinyal modunda bu saatler etrafında giriş engellenir.
+# Kaynak: Forexfactory kırmızı haberler → genellikle aşağıdaki saatlerde gelir.
+# HABER_FILTER_ENABLED env ile açılıp kapatılabilir.
+_NEWS_FILTER_ENABLED = True  # Master hesapta zorunlu
+_NEWS_BLOCK_MINUTES  = 5     # haber öncesi/sonrası kaç dakika engel
+
+# Haftalık sabit yüksek etkili haber saatleri (UTC, (weekday, hour, minute))
+# 0=Pazartesi … 4=Cuma
+_HIGH_IMPACT_NEWS: list[tuple[int, int, int]] = [
+    # Pazartesi
+    (0, 14, 0),   # ABD ISM İmalat PMI
+    # Salı
+    (1, 13, 30),  # ABD JOLTS / Ticaret Dengesi
+    # Çarşamba
+    (2, 13, 15),  # ADP İstihdam
+    (2, 13, 30),  # ABD Çekirdek TÜFE / PPI
+    (2, 19, 0),   # FOMC Toplantı Tutanakları
+    # Perşembe
+    (3, 13, 30),  # Haftalık İşsizlik Başvuruları + çeşitli ABD verileri
+    (3, 15, 0),   # ABD ISM Hizmetler PMI
+    # Cuma
+    (4, 13, 30),  # Tarım Dışı İstihdam (NFP) — en kritik haber
+    (4, 15, 0),   # Michigan Tüketici Güveni
+]
 
 
 class RiskGuardrails:
@@ -308,6 +337,10 @@ class RiskGuardrails:
             logger.debug("Günlük max işlem sayısına ulaşıldı (%d). Yeni işlem açılmıyor.", self.max_daily_trades)
             return False
 
+        # ── Haber Filtresi: Yüksek Etkili Haber ±5 dk Engeli ────────────────
+        if _NEWS_FILTER_ENABLED and self._is_near_news(timestamp):
+            return False
+
         if BLOCK_FRIDAY_ENTRIES and weekday == _FRIDAY:
             logger.debug(
                 f"⏰ CUMA GÜNÜ — Yeni işlem açılmıyor (BLOCK_FRIDAY_ENTRIES=True). "
@@ -328,6 +361,30 @@ class RiskGuardrails:
     # ------------------------------------------------------------------
     # 5. Durum Raporu
     # ------------------------------------------------------------------
+
+    def _is_near_news(self, timestamp: datetime) -> bool:
+        """
+        Verilen bar, yüksek etkili bir haber saatine ±_NEWS_BLOCK_MINUTES dakika
+        yakınsa True döndürür → o barda yeni işlem açılmaz.
+        """
+        try:
+            ts = pd.Timestamp(timestamp)
+            bar_weekday = ts.weekday()
+            bar_minutes = ts.hour * 60 + ts.minute
+
+            for (news_day, news_hour, news_min) in _HIGH_IMPACT_NEWS:
+                if bar_weekday != news_day:
+                    continue
+                news_total = news_hour * 60 + news_min
+                if abs(bar_minutes - news_total) <= _NEWS_BLOCK_MINUTES:
+                    logger.debug(
+                        "📰 Haber filtresi: %s bölge içinde (%02d:%02d ±%d dk). İşlem engellendi.",
+                        ts.strftime("%A %H:%M"), news_hour, news_min, _NEWS_BLOCK_MINUTES,
+                    )
+                    return True
+        except Exception:
+            pass
+        return False
 
     def record_trade_result(self, won: bool) -> None:
         """Her işlem kapanışında çağrılır. Circuit breaker sayacını günceller."""
