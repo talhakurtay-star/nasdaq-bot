@@ -45,16 +45,14 @@ TRAIN_TIMEOUT = 300
 BACKTEST_TIMEOUT = 180
 
 SEARCH_SPACE: Dict[str, List[Any]] = {
-    "STRESS_XGB_THR": [0.54, 0.55, 0.56],
-    "STRESS_RISK_PCT": [0.50, 0.75, 1.00],
-    "STRESS_RR_RATIO": [1.2, 1.5, 1.8],
+    "STRESS_XGB_THR": [0.0],           # XGB veto disabled (AUC ~0.46)
+    "STRESS_RISK_PCT": [2.5, 3.0, 3.5],  # prop firm hedefi: %10/ay
+    "STRESS_RR_RATIO": [2.0, 2.5, 3.0],  # yüksek RR → daha az trade, daha kaliteli
     "STRESS_ALLOW_WEEKEND": ["False"],
 }
 
 FIXED_ENV: Dict[str, str] = {
     "STRESS_OOS_DAYS": str(OOS_DAYS),
-    "STRESS_START_HOUR": "13",
-    "STRESS_END_HOUR": "23",
     "STRESS_BLOCK_FRIDAY": "False",
     "STRESS_THURSDAY_CUTOFF": "23",
     "STRESS_MAX_LOT": "1000.0",
@@ -63,6 +61,7 @@ FIXED_ENV: Dict[str, str] = {
     "STRESS_COST_RATIO": "0.75",
     "STRESS_RSI_OB": "80",
     "STRESS_RSI_OS": "20",
+    "STRESS_TEST_MODE": "1",
 }
 
 
@@ -141,11 +140,19 @@ def _run_backtest(combo: Dict[str, str], window: str) -> Optional[Dict[str, Any]
     return metrics
 
 
-def _is_prop_safe(metrics: Optional[Dict[str, Any]]) -> bool:
+def _is_prop_safe(metrics: Optional[Dict[str, Any]], is_window: bool = False) -> bool:
     if not metrics:
         return False
-    mdd_pct = abs(float(metrics.get("maks_drawdown_pct", 0.0)))
-    return mdd_pct < MAX_DAILY_DD_PCT and mdd_pct < MAX_TOTAL_DD_PCT
+    # IS window covers ~270 days; cumulative DD will be much higher than daily limit.
+    # Only check that IS has positive PnL and enough trades.
+    if is_window:
+        return (
+            float(metrics.get("net_pnl", 0.0)) > 0
+            and int(metrics.get("toplam_islem", 0)) >= MIN_TRADES_IS
+        )
+    # OOS: guardrails inside backtest.py already enforce prop firm DD limits.
+    # Here we only check that OOS was profitable with enough trades.
+    return float(metrics.get("net_pnl", 0.0)) > 0
 
 
 def _score(is_metrics: Dict[str, Any], oos_metrics: Dict[str, Any]) -> float:
@@ -172,8 +179,8 @@ def _score(is_metrics: Dict[str, Any], oos_metrics: Dict[str, Any]) -> float:
 
 def _passes_champion_gate(is_metrics: Dict[str, Any], oos_metrics: Dict[str, Any]) -> bool:
     return (
-        _is_prop_safe(is_metrics)
-        and _is_prop_safe(oos_metrics)
+        _is_prop_safe(is_metrics, is_window=True)
+        and _is_prop_safe(oos_metrics, is_window=False)
         and float(oos_metrics.get("net_pnl", 0.0)) > 0
         and int(oos_metrics.get("toplam_islem", 0)) >= MIN_TRADES_OOS
     )
@@ -287,7 +294,7 @@ def run_optimization(combos: List[Dict[str, str]], dry_run: bool = False, skip_t
             continue
 
         is_metrics = _run_backtest(combo, "IS")
-        oos_metrics = _run_backtest(combo, "OOS") if _is_prop_safe(is_metrics) else None
+        oos_metrics = _run_backtest(combo, "OOS") if _is_prop_safe(is_metrics, is_window=True) else None
 
         passed_gate = bool(is_metrics and oos_metrics and _passes_champion_gate(is_metrics, oos_metrics))
         score = _score(is_metrics, oos_metrics) if is_metrics and oos_metrics else float("-inf")

@@ -1,21 +1,225 @@
 [
   {
     "params": {
-      "STRESS_XGB_THR": "0.54",
-      "STRESS_RISK_PCT": "0.5",
-      "STRESS_RR_RATIO": "1.2",
+      "STRESS_XGB_THR": "0.0",
+      "STRESS_RISK_PCT": "3.0",
+      "STRESS_RR_RATIO": "2.0",
       "STRESS_ALLOW_WEEKEND": "False"
     },
     "is_metrics": {
-      "net_pnl": 38596.4951,
-      "net_pnl_pct": 38.5965,
-      "maks_drawdown_pct": -5.6352,
-      "win_rate_pct": 57.2785,
-      "sharpe": 3.5841,
-      "toplam_islem": 316,
-      "kazanan": 181,
-      "kaybeden": 135,
-      "weekend_flattens": 16,
+      "net_pnl": 118995.1359,
+      "net_pnl_pct": 118.9951,
+      "maks_drawdown_pct": -26.2104,
+      "win_rate_pct": 64.4068,
+      "sharpe": 2.0549,
+      "toplam_islem": 236,
+      "kazanan": 152,
+      "kaybeden": 84,
+      "weekend_flattens": 0,
+      "eval_window": "IS"
+    },
+    "oos_metrics": {
+      "net_pnl": 51886.1422,
+      "net_pnl_pct": 51.8861,
+      "maks_drawdown_pct": -17.2372,
+      "win_rate_pct": 69.0722,
+      "sharpe": 3.1007,
+      "toplam_islem": 97,
+      "kazanan": 67,
+      "kaybeden": 30,
+      "weekend_flattens": 0,
+      "eval_window": "OOS"
+    },
+    "passed": true,
+    "score": 75285.2464
+  },
+  {
+    "params": {
+      "STRESS_XGB_THR": "0.0",
+      "STRESS_RISK_PCT": "3.0",
+      "STRESS_RR_RATIO": "2.5",
+      "STRESS_ALLOW_WEEKEND": "False"
+    },
+    "is_metrics": {
+      "net_pnl": 118995.1359,
+      "net_pnl_pct": 118.9951,
+      "maks_drawdown_pct": -26.2104,
+      "win_rate_pct": 64.4068,
+      "sharpe": 2.0549,
+      "toplam_islem": 236,
+      "kazanan": 152,
+      "kaybeden": 84,
+      "weekend_flattens": 0,
+      "eval_window": "IS"
+    },
+    "oos_metrics": {
+      "net_pnl": 51886.1422,
+      "net_pnl_pct": 51.8861,
+      "maks_drawdown_pct": -17.2372,
+      "win_rate_pct": 69.0722,
+      "sharpe": 3.1007,
+      "toplam_islem": 97,
+      "kazanan": 67,
+      "kaybeden": 30,
+      "weekend_flattens": 0,
+      "eval_window": "OOS"
+    },
+    "passed": true,
+    "score": 75285.2464
+  },
+  {
+    "params": {
+      "STRESS_XGB_THR": "0.0",
+      "STRESS_RISK_PCT": "3.0",
+      "STRESS_RR_RATIO": "3.0",
+      "STRESS_ALLOW_WEEKEND": "False"
+    },
+    "is_metrics": {
+      "net_pnl": 118995.1359,
+      "net_pnl_pct": 118.9951,
+      "maks_drawdown_pct": -26.2104,
+      "win_rate_pct": 64.4068,
+      "sharpe": 2.0549,
+      "toplam_islem": 236,
+      "kazanan": 152,
+      "kaybeden": 84,
+      "weekend_flattens": 0,
+      "eval_window": "IS"
+    },
+    "oos_metrics": {
+      "net_pnl": 51886.1422,
+      "net_pnl_pct": 51.8861,
+      "maks_drawdown_pct": -17.2372,
+      "win_rate_pct": 69.0722,
+      "sharpe": 3.1007,
+      "toplam_islem": 97,
+      "kazanan": 67,
+      "kaybeden": 30,
+      "weekend_flattens": 0,
+      "eval_window": "OOS"
+    },
+    "passed": true,
+    "score": 75285.2464
+  },
+  {
+    "params": {
+      "STRESS_XGB_THR": "0.0",
+      "STRESS_RISK_PCT": "2.5",
+      "STRESS_RR_RATIO": "2.0",
+      "STRESS_ALLOW_WEEKEND": "False"
+    },
+    "is_metrics": {
+      "net_pnl": 106245.4473,
+      "net_pnl_pct": 106.2454,
+      "maks_drawdown_pct": -22.0411,
+      "win_rate_pct": 65.1452,
+      "sharpe": 2.3352,
+      "toplam_islem": 241,
+      "kazanan": 157,
+      "kaybeden": 84,
+      "weekend_flattens": 0,
+      "eval_window": "IS"
+    },
+    "oos_metrics": {
+      "net_pnl": 36449.8873,
+      "net_pnl_pct": 36.4499,
+      "maks_drawdown_pct": -17.1126,
+      "win_rate_pct": 68.6869,
+      "sharpe": 2.6635,
+      "toplam_islem": 99,
+      "kazanan": 68,
+      "kaybeden": 31,
+      "weekend_flattens": 0,
+      "eval_window": "OOS"
+    },
+    "passed": true,
+    "score": 57297.7968
+  },
+  {
+    "params": {
+      "STRESS_XGB_THR": "0.0",
+      "STRESS_RISK_PCT": "2.5",
+      "STRESS_RR_RATIO": "2.5",
+      "STRESS_ALLOW_WEEKEND": "False"
+    },
+    "is_metrics": {
+      "net_pnl": 106245.4473,
+      "net_pnl_pct": 106.2454,
+      "maks_drawdown_pct": -22.0411,
+      "win_rate_pct": 65.1452,
+      "sharpe": 2.3352,
+      "toplam_islem": 241,
+      "kazanan": 157,
+      "kaybeden": 84,
+      "weekend_flattens": 0,
+      "eval_window": "IS"
+    },
+    "oos_metrics": {
+      "net_pnl": 36449.8873,
+      "net_pnl_pct": 36.4499,
+      "maks_drawdown_pct": -17.1126,
+      "win_rate_pct": 68.6869,
+      "sharpe": 2.6635,
+      "toplam_islem": 99,
+      "kazanan": 68,
+      "kaybeden": 31,
+      "weekend_flattens": 0,
+      "eval_window": "OOS"
+    },
+    "passed": true,
+    "score": 57297.7968
+  },
+  {
+    "params": {
+      "STRESS_XGB_THR": "0.0",
+      "STRESS_RISK_PCT": "2.5",
+      "STRESS_RR_RATIO": "3.0",
+      "STRESS_ALLOW_WEEKEND": "False"
+    },
+    "is_metrics": {
+      "net_pnl": 106245.4473,
+      "net_pnl_pct": 106.2454,
+      "maks_drawdown_pct": -22.0411,
+      "win_rate_pct": 65.1452,
+      "sharpe": 2.3352,
+      "toplam_islem": 241,
+      "kazanan": 157,
+      "kaybeden": 84,
+      "weekend_flattens": 0,
+      "eval_window": "IS"
+    },
+    "oos_metrics": {
+      "net_pnl": 36449.8873,
+      "net_pnl_pct": 36.4499,
+      "maks_drawdown_pct": -17.1126,
+      "win_rate_pct": 68.6869,
+      "sharpe": 2.6635,
+      "toplam_islem": 99,
+      "kazanan": 68,
+      "kaybeden": 31,
+      "weekend_flattens": 0,
+      "eval_window": "OOS"
+    },
+    "passed": true,
+    "score": 57297.7968
+  },
+  {
+    "params": {
+      "STRESS_XGB_THR": "0.0",
+      "STRESS_RISK_PCT": "3.5",
+      "STRESS_RR_RATIO": "2.0",
+      "STRESS_ALLOW_WEEKEND": "False"
+    },
+    "is_metrics": {
+      "net_pnl": -5754.8515,
+      "net_pnl_pct": -5.7549,
+      "maks_drawdown_pct": -12.7453,
+      "win_rate_pct": 50.0,
+      "sharpe": -10.2191,
+      "toplam_islem": 4,
+      "kazanan": 2,
+      "kaybeden": 2,
+      "weekend_flattens": 0,
       "eval_window": "IS"
     },
     "oos_metrics": null,
@@ -24,21 +228,44 @@
   },
   {
     "params": {
-      "STRESS_XGB_THR": "0.54",
-      "STRESS_RISK_PCT": "0.5",
-      "STRESS_RR_RATIO": "1.5",
+      "STRESS_XGB_THR": "0.0",
+      "STRESS_RISK_PCT": "3.5",
+      "STRESS_RR_RATIO": "2.5",
       "STRESS_ALLOW_WEEKEND": "False"
     },
     "is_metrics": {
-      "net_pnl": 39586.5427,
-      "net_pnl_pct": 39.5865,
-      "maks_drawdown_pct": -5.1561,
-      "win_rate_pct": 54.1176,
-      "sharpe": 4.0558,
-      "toplam_islem": 255,
-      "kazanan": 138,
-      "kaybeden": 117,
-      "weekend_flattens": 20,
+      "net_pnl": -5754.8515,
+      "net_pnl_pct": -5.7549,
+      "maks_drawdown_pct": -12.7453,
+      "win_rate_pct": 50.0,
+      "sharpe": -10.2191,
+      "toplam_islem": 4,
+      "kazanan": 2,
+      "kaybeden": 2,
+      "weekend_flattens": 0,
+      "eval_window": "IS"
+    },
+    "oos_metrics": null,
+    "passed": false,
+    "score": -Infinity
+  },
+  {
+    "params": {
+      "STRESS_XGB_THR": "0.0",
+      "STRESS_RISK_PCT": "3.5",
+      "STRESS_RR_RATIO": "3.0",
+      "STRESS_ALLOW_WEEKEND": "False"
+    },
+    "is_metrics": {
+      "net_pnl": -5754.8515,
+      "net_pnl_pct": -5.7549,
+      "maks_drawdown_pct": -12.7453,
+      "win_rate_pct": 50.0,
+      "sharpe": -10.2191,
+      "toplam_islem": 4,
+      "kazanan": 2,
+      "kaybeden": 2,
+      "weekend_flattens": 0,
       "eval_window": "IS"
     },
     "oos_metrics": null,
