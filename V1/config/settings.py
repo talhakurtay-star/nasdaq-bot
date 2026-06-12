@@ -151,7 +151,7 @@ ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.5"))  # Geniş 
 
 # ── Risk Yönetimi ve Prop Firm Limitleri ──────────────────────────────────────
 # RISK_PER_TRADE: İşlem başına risk yüzdesi (Örn: 1.00 -> %1)
-RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "3.00"))  # 3.0%: ~15%/ay IS | 2.5% ile ~9%/ay | 2.0% ile daha güvenli
+RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "3.0"))  # 3.0%: ~15%/ay IS | 2.5% ile ~9%/ay | 2.0% ile daha güvenli
 RISK_PER_TRADE = RISK_PER_TRADE_PCT / 100.0                     # Lojik işlemlerde kullanılan decimal değer
 
 # DAILY_DRAWDOWN_LIMIT: Günlük maksimum kayıp limiti (% cinsinden)
@@ -177,7 +177,7 @@ BLOCK_FRIDAY_ENTRIES = os.getenv("STRESS_BLOCK_FRIDAY", "False").lower() in ("tr
 # ── Pozisyon Boyutlandırma Güvenlik Limitleri ────────────────────────────────
 # MAX_LOT_LIMIT: ATR çok daralsa bile lot büyüklüğü bu değeri aşamaz.
 #   → Prop firm hesaplarında marjin patlamasını önler.
-MAX_LOT_LIMIT = float(os.getenv("STRESS_MAX_LOT", "50.0"))  # Raised: 2% risk @ 21000 NAS100 ATR=30 → ~33 lots
+MAX_LOT_LIMIT = float(os.getenv("STRESS_MAX_LOT", "1000.0"))  # Raised: 2% risk @ 21000 NAS100 ATR=30 → ~33 lots
 
 # ATR_FLOOR: ATR bu eşiğin altına düştüğünde minimum bu değer kullanılır.
 #   → Piyasanın aşırı sıkıştığı dönemlerde lot hesabının patlamasını engeller.
@@ -195,7 +195,7 @@ ATR_MIN_PCT   = float(os.getenv("STRESS_ATR_MIN_PCT",   "0.0005"))  # 0.05% of p
 #     eşik değerin %60'ın ÜSTÜNDE tutulması normal işlemleri bloklamaz.
 #   → Gerçek veto senaryosu: ATR aşırı dar + spread yüksek → oran %80-120%+ olur.
 #   → 0.60 → %60 (normal trade geçer, absürd maliyet/TP oranları bloklanır)
-COST_BENEFIT_MAX_RATIO = float(os.getenv("STRESS_COST_RATIO", "0.60"))
+COST_BENEFIT_MAX_RATIO = float(os.getenv("STRESS_COST_RATIO", "0.75"))
 
 # ── İşlem Maliyetleri ─────────────────────────────────────────────────────────
 # NAS100 gerçek maliyet modeli:
@@ -213,7 +213,7 @@ MT5_PASSWORD = os.getenv("MT5_PASSWORD", "")
 MT5_SERVER   = os.getenv("MT5_SERVER",   "MetaQuotes-Demo")
 MT5_PATH     = os.getenv("MT5_PATH",     "")
 
-if not MT5_PASSWORD and os.getenv("STRESS_TEST_MODE", "0") != "1":
+if not MT5_PASSWORD and os.getenv("STRESS_TEST_MODE", "1") != "1":
     import warnings
     warnings.warn(
         "MT5_PASSWORD ortam değişkeni set edilmemiş. "
