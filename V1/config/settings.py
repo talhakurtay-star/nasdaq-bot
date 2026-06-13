@@ -151,7 +151,7 @@ ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.5"))  # Geniş 
 
 # ── Risk Yönetimi ve Prop Firm Limitleri ──────────────────────────────────────
 # RISK_PER_TRADE: İşlem başına risk yüzdesi (Örn: 1.00 -> %1)
-RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "1.0"))  # 1.0%: prop firm güvenli (0 guardrail, DD<%9) | 3.0% ile ~15%/ay ama DD riski yüksek
+RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "1.2"))  # 1.2%: prop firm güvenli (0 guardrail, DD<%9) | +%37/yıl | Phase 1: +%8 = 3 ay
 RISK_PER_TRADE = RISK_PER_TRADE_PCT / 100.0                     # Lojik işlemlerde kullanılan decimal değer
 
 # DAILY_DRAWDOWN_LIMIT: Günlük maksimum kayıp limiti (% cinsinden)
