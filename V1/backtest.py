@@ -329,7 +329,8 @@ def _print_report(
 
   ── KAPANIM SEBEPLERİ ────────────────────────────────────
   🟢  TP Hit              : {sim_stats['tp_hits']}
-  🔴  SL Hit              : {sim_stats['sl_hits']}
+  🟡  Trailing (kârda)    : {sim_stats.get('trail_hits', 0)}
+  🔴  SL Hit (zararda)    : {sim_stats['sl_hits']}
   🗓️   Weekend Flatten     : {sim_stats['weekend_flattens']}
   🛡️   Guardrail Kapanışı  : {sim_stats['guardrail_closes']}
 

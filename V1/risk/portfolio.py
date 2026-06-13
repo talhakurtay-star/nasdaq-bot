@@ -53,7 +53,7 @@ except ImportError:
     TRAILING_ATR_MULT = 1.0
 
 DirectionType = Literal["STRONG_LONG", "STRONG_SHORT"]
-CloseReasonType = Literal["SL", "TP", "FORCE_CLOSE", "GUARDRAIL", "WEEKEND_FLATTEN"]
+CloseReasonType = Literal["SL", "TP", "TRAIL", "FORCE_CLOSE", "GUARDRAIL", "WEEKEND_FLATTEN"]
 
 logger = logging.getLogger(__name__)
 
@@ -383,8 +383,17 @@ class PortfolioManager:
         logger.debug("Daily peak equity reset -> %.2f", self.equity)
 
     def summary(self) -> Dict:
-        total_trades = len(self.trade_log)
-        winning = sum(1 for t in self.trade_log if t["net_pnl"] > 0)
+        # Mantıksal işlem bazında grupla: aynı open_time'a ait PARTIAL_TP + final
+        # kapanış TEK işlem sayılır. Aksi halde kısmi kapanışlar ayrı "kazanan"
+        # gibi görünüp win-rate'i yapay şişirir (örn. 380 işlem/%66 yerine 234/%50).
+        from collections import defaultdict
+        grouped: Dict = defaultdict(float)
+        for t in self.trade_log:
+            key = t.get("open_time", id(t))
+            grouped[key] += t["net_pnl"]
+
+        total_trades = len(grouped)
+        winning = sum(1 for pnl in grouped.values() if pnl > 0)
         win_rate = (winning / total_trades * 100) if total_trades else 0.0
         total_pnl = self.balance - INITIAL_BALANCE
 

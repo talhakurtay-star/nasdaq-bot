@@ -564,6 +564,8 @@ def generate_html_report(portfolio, initial_balance: float, scenario_name: str =
         reason = t["reason"]
         if reason == "TP":
             reason_badge = f'<span class="badge badge-tp">TP</span>'
+        elif reason == "TRAIL":
+            reason_badge = f'<span class="badge badge-tp">Trailing</span>'
         elif reason == "SL":
             reason_badge = f'<span class="badge badge-sl">SL</span>'
         elif reason == "FORCE_CLOSE":
@@ -607,7 +609,7 @@ def generate_html_report(portfolio, initial_balance: float, scenario_name: str =
         """
         table_rows.append(row)
 
-    table_rows_html = "\\n".join(table_rows)
+    table_rows_html = "\n".join(table_rows)
 
     # 4. JSON verilerinin hazırlanması
     equity_data_json = json.dumps(equity_curve)

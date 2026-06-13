@@ -60,6 +60,7 @@ class BacktestSimulator:
         self.bars_processed:   int = 0
         self.tp_hits:          int = 0
         self.sl_hits:          int = 0
+        self.trail_hits:       int = 0   # trailing stop ile KÂRDA kapanan işlemler
         self.force_closes:     int = 0
         self.guardrail_closes: int = 0
 
@@ -133,19 +134,33 @@ class BacktestSimulator:
 
         if sl_touched_early and tp_touched_early:
             sl_fill = pos.stop_loss * (1 + self.SL_SLIPPAGE_PCT) if pos.is_long else pos.stop_loss * (1 - self.SL_SLIPPAGE_PCT)
-            pnl, _ = portfolio.close_trade(sl_fill, timestamp, reason="SL")
-            self.sl_hits += 1
-            guardrails.record_trade_result(won=False)
-            logger.debug(f"⚠️  INTRA-BAR ÇELİŞKİ → SL_HIT @ {sl_fill:.4f} | PnL={pnl:+.2f} USD")
-            return "SL"
+            # Trailing SL kâra çekilmiş olabilir → kapanış sebebini PnL'e göre belirle
+            is_trail_profit = pos.trailing_active and (sl_fill > pos.entry_price if pos.is_long else sl_fill < pos.entry_price)
+            reason = "TRAIL" if is_trail_profit else "SL"
+            pnl, _ = portfolio.close_trade(sl_fill, timestamp, reason=reason)
+            won = pnl > 0
+            if won:
+                self.trail_hits += 1
+            else:
+                self.sl_hits += 1
+            guardrails.record_trade_result(won=won)
+            logger.debug(f"⚠️  INTRA-BAR ÇELİŞKİ → {reason} @ {sl_fill:.4f} | PnL={pnl:+.2f} USD")
+            return reason
 
         if sl_touched_early:
             sl_fill = pos.stop_loss * (1 + self.SL_SLIPPAGE_PCT) if pos.is_long else pos.stop_loss * (1 - self.SL_SLIPPAGE_PCT)
-            pnl, _ = portfolio.close_trade(sl_fill, timestamp, reason="SL")
-            self.sl_hits += 1
-            guardrails.record_trade_result(won=False)
-            logger.debug(f"🔴 SL_HIT @ {sl_fill:.4f} | PnL={pnl:+.2f} USD | Bar={timestamp}")
-            return "SL"
+            # Trailing SL kâra çekilmiş olabilir → kapanış sebebini PnL'e göre belirle
+            is_trail_profit = pos.trailing_active and (sl_fill > pos.entry_price if pos.is_long else sl_fill < pos.entry_price)
+            reason = "TRAIL" if is_trail_profit else "SL"
+            pnl, _ = portfolio.close_trade(sl_fill, timestamp, reason=reason)
+            won = pnl > 0
+            if won:
+                self.trail_hits += 1
+            else:
+                self.sl_hits += 1
+            guardrails.record_trade_result(won=won)
+            logger.debug(f"{'🟡 TRAIL' if won else '🔴 SL_HIT'} @ {sl_fill:.4f} | PnL={pnl:+.2f} USD | Bar={timestamp}")
+            return reason
 
         if tp_touched_early:
             pnl, _ = portfolio.close_trade(pos.take_profit, timestamp, reason="TP")
@@ -215,12 +230,13 @@ class BacktestSimulator:
 
     def stats(self) -> dict:
         """Simülatör istatistiklerini döndürür."""
-        total_closed = self.tp_hits + self.sl_hits + self.force_closes + self.guardrail_closes
+        total_closed = self.tp_hits + self.sl_hits + self.trail_hits + self.force_closes + self.guardrail_closes
         return {
             "bars_processed":   self.bars_processed,
             "total_closed":     total_closed,
             "tp_hits":          self.tp_hits,
             "sl_hits":          self.sl_hits,
+            "trail_hits":       self.trail_hits,
             "weekend_flattens": self.force_closes,
             "guardrail_closes": self.guardrail_closes,
         }
