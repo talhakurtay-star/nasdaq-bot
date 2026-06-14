@@ -155,11 +155,11 @@ RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "1.2"))  # 1.2%: prop fi
 RISK_PER_TRADE = RISK_PER_TRADE_PCT / 100.0                     # Lojik işlemlerde kullanılan decimal değer
 
 # DAILY_DRAWDOWN_LIMIT: Günlük maksimum kayıp limiti (% cinsinden)
-DAILY_DRAWDOWN_LIMIT = float(os.getenv("STRESS_DAILY_DD", "4.0"))  # Varsayılan %4.0
+DAILY_DRAWDOWN_LIMIT = float(os.getenv("STRESS_DAILY_DD", "2.8"))  # %2.8: prop firm %3 limitinin altında güvenli tampon
 MAX_DAILY_DRAWDOWN_PCT = DAILY_DRAWDOWN_LIMIT / 100.0
 
 # TOTAL_DRAWDOWN_LIMIT: Hesap genelinde maksimum kayıp limiti (% cinsinden)
-TOTAL_DRAWDOWN_LIMIT = float(os.getenv("STRESS_TOTAL_DD", "9.0"))  # Varsayılan %9.0
+TOTAL_DRAWDOWN_LIMIT = float(os.getenv("STRESS_TOTAL_DD", "5.5"))  # %5.5: 2 Step Pro max loss %6'nın altında güvenli tampon
 MAX_TOTAL_DRAWDOWN_PCT = TOTAL_DRAWDOWN_LIMIT / 100.0
 
 # ── Zaman Filtreleri ──────────────────────────────────────────────────────────
