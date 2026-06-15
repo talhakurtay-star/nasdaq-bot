@@ -151,7 +151,7 @@ ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.5"))  # Geniş 
 
 # ── Risk Yönetimi ve Prop Firm Limitleri ──────────────────────────────────────
 # RISK_PER_TRADE: İşlem başına risk yüzdesi (Örn: 1.00 -> %1)
-RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "0.5"))  # 0.5%: Max DD=%8.99 (prop firm %10 altında), +%18/yıl gerçek OOS
+RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "0.75"))  # 0.75%: MaxDD=%8.88 (prop firm %10 altında), +%31/yıl
 RISK_PER_TRADE = RISK_PER_TRADE_PCT / 100.0                     # Lojik işlemlerde kullanılan decimal değer
 
 # DAILY_DRAWDOWN_LIMIT: Günlük maksimum kayıp limiti (% cinsinden)
