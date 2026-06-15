@@ -52,8 +52,9 @@ class BacktestSimulator:
     Bu, over-optimistic backtest sonuçlarını engeller.
     """
 
-    # Slippage: SL'de %0.02, TP'de 0 (TP limit emir, SL piyasa emri)
+    # Slippage: SL'de %0.02 adverse (piyasa emri), TP'de %0.01 adverse (limit tam dolmayabilir)
     SL_SLIPPAGE_PCT = 0.0002
+    TP_SLIPPAGE_PCT = 0.0001
 
     def __init__(self) -> None:
         self.bars_processed:   int = 0
@@ -163,10 +164,12 @@ class BacktestSimulator:
             return reason
 
         if tp_touched_early:
-            pnl, _ = portfolio.close_trade(pos.take_profit, timestamp, reason="TP")
+            # TP limit emir: küçük adverse slippage gerçekçi dolum modeli
+            tp_fill = pos.take_profit * (1 - self.TP_SLIPPAGE_PCT) if pos.is_long else pos.take_profit * (1 + self.TP_SLIPPAGE_PCT)
+            pnl, _ = portfolio.close_trade(tp_fill, timestamp, reason="TP")
             self.tp_hits += 1
             guardrails.record_trade_result(won=True)
-            logger.debug(f"🟢 TP_HIT @ {pos.take_profit:.4f} | PnL={pnl:+.2f} USD | Bar={timestamp}")
+            logger.debug(f"🟢 TP_HIT @ {tp_fill:.4f} | PnL={pnl:+.2f} USD | Bar={timestamp}")
             return "TP"
 
         # ── 3. Drawdown Kill-Switch: SL/TP'den sonra kontrol ─────────────

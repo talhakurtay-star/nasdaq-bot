@@ -78,23 +78,23 @@ _THURSDAY = 3  # Perşembe
 _NEWS_FILTER_ENABLED = True  # Master hesapta zorunlu
 _NEWS_BLOCK_MINUTES  = 5     # haber öncesi/sonrası kaç dakika engel
 
-# Haftalık sabit yüksek etkili haber saatleri (UTC, (weekday, hour, minute))
-# 0=Pazartesi … 4=Cuma
-_HIGH_IMPACT_NEWS: list[tuple[int, int, int]] = [
+# Haftalık sabit yüksek etkili haber saatleri (UTC, (weekday, hour, minute, block_minutes))
+# 0=Pazartesi … 4=Cuma  |  block_minutes: haber öncesi/sonrası kaç dakika blok
+_HIGH_IMPACT_NEWS: list[tuple[int, int, int, int]] = [
     # Pazartesi
-    (0, 14, 0),   # ABD ISM İmalat PMI
+    (0, 14,  0,  5),   # ABD ISM İmalat PMI
     # Salı
-    (1, 13, 30),  # ABD JOLTS / Ticaret Dengesi
+    (1, 13, 30,  5),   # ABD JOLTS / Ticaret Dengesi
     # Çarşamba
-    (2, 13, 15),  # ADP İstihdam
-    (2, 13, 30),  # ABD Çekirdek TÜFE / PPI
-    (2, 19, 0),   # FOMC Toplantı Tutanakları
+    (2, 13, 15,  5),   # ADP İstihdam
+    (2, 13, 30,  5),   # ABD Çekirdek TÜFE / PPI
+    (2, 19,  0, 90),   # FOMC — 90 dk önce/sonra blok (mega volatilite)
     # Perşembe
-    (3, 13, 30),  # Haftalık İşsizlik Başvuruları + çeşitli ABD verileri
-    (3, 15, 0),   # ABD ISM Hizmetler PMI
+    (3, 13, 30,  5),   # Haftalık İşsizlik Başvuruları
+    (3, 15,  0,  5),   # ABD ISM Hizmetler PMI
     # Cuma
-    (4, 13, 30),  # Tarım Dışı İstihdam (NFP) — en kritik haber
-    (4, 15, 0),   # Michigan Tüketici Güveni
+    (4, 13, 30, 60),   # NFP — 60 dk önce/sonra blok (en kritik haber)
+    (4, 15,  0,  5),   # Michigan Tüketici Güveni
 ]
 
 
@@ -364,22 +364,22 @@ class RiskGuardrails:
 
     def _is_near_news(self, timestamp: datetime) -> bool:
         """
-        Verilen bar, yüksek etkili bir haber saatine ±_NEWS_BLOCK_MINUTES dakika
-        yakınsa True döndürür → o barda yeni işlem açılmaz.
+        Verilen bar, yüksek etkili bir haber saatine yakınsa True döndürür.
+        Her haberin kendi blok süresi var (FOMC=90dk, NFP=60dk, diğerleri=5dk).
         """
         try:
             ts = pd.Timestamp(timestamp)
             bar_weekday = ts.weekday()
             bar_minutes = ts.hour * 60 + ts.minute
 
-            for (news_day, news_hour, news_min) in _HIGH_IMPACT_NEWS:
+            for (news_day, news_hour, news_min, block_min) in _HIGH_IMPACT_NEWS:
                 if bar_weekday != news_day:
                     continue
                 news_total = news_hour * 60 + news_min
-                if abs(bar_minutes - news_total) <= _NEWS_BLOCK_MINUTES:
+                if abs(bar_minutes - news_total) <= block_min:
                     logger.debug(
                         "📰 Haber filtresi: %s bölge içinde (%02d:%02d ±%d dk). İşlem engellendi.",
-                        ts.strftime("%A %H:%M"), news_hour, news_min, _NEWS_BLOCK_MINUTES,
+                        ts.strftime("%A %H:%M"), news_hour, news_min, block_min,
                     )
                     return True
         except Exception:
@@ -407,6 +407,30 @@ class RiskGuardrails:
                     )
                 except Exception:
                     pass
+
+    def get_streak_risk_mult(self) -> float:
+        """
+        Art arda SL sayısına göre risk çarpanı döndürür.
+        Cascade drawdown önlemi: üst üste kayıplar küçülüyor.
+        """
+        if self.consecutive_sl_count >= 2:
+            return 0.5   # 2+ SL sonrası yarı risk
+        if self.consecutive_sl_count == 1:
+            return 0.75  # 1 SL sonrası çeyrek indirim
+        return 1.0
+
+    def get_daily_dd_risk_mult(self, portfolio: "PortfolioManager") -> float:
+        """
+        Günlük drawdown %3'ü aştığında risk yarıya iner.
+        Prop firm %4 limitine buffer bırakır.
+        """
+        if portfolio.daily_peak_equity <= 0:
+            return 1.0
+        daily_dd = (portfolio.daily_peak_equity - portfolio.equity) / portfolio.daily_peak_equity
+        if daily_dd >= 0.03:
+            logger.debug("Günlük DD =%{:.2f} → risk 0.5x".format(daily_dd * 100))
+            return 0.5
+        return 1.0
 
     def status(self) -> dict:
         """Guardrail'lerin anlık durumunu dict olarak döndürür."""

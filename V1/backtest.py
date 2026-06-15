@@ -814,7 +814,11 @@ def run_backtest() -> None:
 
             # Rejim filtresi: yatay/volatil piyasalarda risk kıs veya pas geç
             regime_mult = _get_regime_risk_mult(current_bar, df, current_index)
-            risk_mult   = xgb_mult * regime_mult
+            # Cascade SL koruması: üst üste kayıplar risk küçültür
+            streak_mult = guardrails.get_streak_risk_mult()
+            # Günlük DD %3+ → risk yarıya in
+            daily_dd_mult = guardrails.get_daily_dd_risk_mult(portfolio)
+            risk_mult   = xgb_mult * regime_mult * streak_mult * daily_dd_mult
 
             if final_signal in ("STRONG_LONG", "STRONG_SHORT") and risk_mult > 0.0:
                 close_price = float(current_bar["Close"])
