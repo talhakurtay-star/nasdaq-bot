@@ -104,12 +104,13 @@ def _get_simulation_bounds(
     date_to   = os.environ.get("SIM_DATE_TO")
     if date_from or date_to:
         positions = np.arange(len(df))
+        idx = pd.DatetimeIndex(df.index)
         if date_from:
-            mask_from = df.index >= pd.Timestamp(date_from)
-            positions = positions[mask_from.values]
+            mask_from = idx >= pd.Timestamp(date_from)
+            positions = positions[mask_from[positions]]
         if date_to:
-            mask_to = df.index < pd.Timestamp(date_to)
-            positions = positions[np.isin(positions, np.flatnonzero(mask_to))]
+            mask_to = idx < pd.Timestamp(date_to)
+            positions = positions[mask_to[positions]]
         if len(positions) == 0:
             raise ValueError(f"Date range {date_from}→{date_to} has no bars.")
         start_idx = max(warmup, int(positions[0]))
