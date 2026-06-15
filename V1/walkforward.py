@@ -239,7 +239,7 @@ def main():
             t0 = time.time()
             train_quarter_model(df_train, feature_engine)
             logger.info("  Model hazır (%.1fs)", time.time() - t0)
-            xgb_threshold = 0.54  # Eğitilmiş modeli kullan
+            xgb_threshold = 0.45  # Dinamik risk alt sınırı (0.45-0.60=0.5x, 0.60-0.70=1x, >0.70=1.2x)
 
         # Çeyreği backtest et
         metrics = run_quarter_backtest(

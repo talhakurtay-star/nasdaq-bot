@@ -111,7 +111,7 @@ class PortfolioManager:
         )
         return max(0.0, min(MAX_LOT_LIMIT, notional_cap_lot))
 
-    def calculate_position_size(self, current_price: float, atr_value: float) -> float:
+    def calculate_position_size(self, current_price: float, atr_value: float, risk_multiplier: float = 1.0) -> float:
         if atr_value <= 0:
             logger.warning("Invalid ATR %.6f. Lot size=0.", atr_value)
             return 0.0
@@ -121,7 +121,7 @@ class PortfolioManager:
             logger.warning("Invalid SL distance %.6f. Lot size=0.", sl_distance)
             return 0.0
 
-        risk_amount = self.balance * RISK_PER_TRADE
+        risk_amount = self.balance * RISK_PER_TRADE * risk_multiplier
         raw_lot = risk_amount / (sl_distance * CONTRACT_SIZE)
         lot_cap = self._dynamic_lot_cap(current_price)
         lot_size = min(raw_lot, lot_cap)
@@ -153,12 +153,13 @@ class PortfolioManager:
         current_price: float,
         atr_value: float,
         timestamp: datetime,
+        risk_multiplier: float = 1.0,
     ) -> Optional[Position]:
         if self.open_position is not None:
             logger.warning("Open position exists. New trade skipped.")
             return None
 
-        lot_size = self.calculate_position_size(current_price, atr_value)
+        lot_size = self.calculate_position_size(current_price, atr_value, risk_multiplier=risk_multiplier)
         if lot_size <= 0:
             logger.warning("Invalid lot size. Trade skipped.")
             return None

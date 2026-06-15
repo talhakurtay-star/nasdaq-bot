@@ -760,9 +760,23 @@ def run_backtest() -> None:
                 continue
 
             base_signal  = strategy.generate_base_signal(df, current_index)
-            final_signal = voter.decide_trade(df, current_index, base_signal, feature_engine)
+            final_signal, xgb_prob = voter.get_signal_with_prob(df, current_index, base_signal, feature_engine)
 
-            if final_signal in ("STRONG_LONG", "STRONG_SHORT"):
+            # XGB olasılığına göre dinamik risk çarpanı
+            if xgb_prob < 0.45:
+                risk_mult = 0.0   # işlem açma
+            elif xgb_prob < 0.60:
+                risk_mult = 0.5
+            elif xgb_prob < 0.70:
+                risk_mult = 1.0
+            else:
+                risk_mult = 1.2
+
+            # XGB devre dışıysa (threshold=0) tüm sinyaller tam risk ile geçer
+            if voter.threshold <= 0.0:
+                risk_mult = 1.0
+
+            if final_signal in ("STRONG_LONG", "STRONG_SHORT") and risk_mult > 0.0:
                 close_price = float(current_bar["Close"])
                 atr_value   = float(current_bar.get("ATR", 0))
                 if atr_value > 0:
@@ -771,6 +785,7 @@ def run_backtest() -> None:
                         current_price=close_price,
                         atr_value=atr_value,
                         timestamp=timestamp,
+                        risk_multiplier=risk_mult,
                     )
                     guardrails.daily_trades_count += 1
 
