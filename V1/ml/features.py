@@ -229,6 +229,13 @@ class FeatureEngine:
         # ATR genişleme: volatilite artıyor mu?
         df['ATR_Ratio'] = df['ATR'] / df['ATR'].rolling(20, min_periods=5).mean().replace(0, np.nan)
 
+        # Volume konfirmasyon: mevcut hacim 20 bar ortalamasına oranı
+        if 'Volume' in df.columns:
+            vol_ma = df['Volume'].rolling(20, min_periods=5).mean().replace(0, np.nan)
+            df['Volume_Ratio'] = df['Volume'] / vol_ma
+        else:
+            df['Volume_Ratio'] = 1.0  # veri yoksa nötr
+
         return df
 
     def generate_live_features(self, df: pd.DataFrame, current_index: int) -> pd.DataFrame:

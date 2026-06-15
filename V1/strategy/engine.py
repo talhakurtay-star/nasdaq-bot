@@ -105,6 +105,7 @@ class StrategyEngine:
             close_vs_ema50 = float(bar.get("Close_vs_EMA50", 0.0) or 0.0)
             h4_trend       = float(bar.get("H4_EMA_Trend",   0.0) or 0.0)
             adx_persist    = float(bar.get("ADX_Persistence", 5.0) or 5.0)
+            bb_pct         = float(bar.get("BB_Pct",          0.5) or 0.5)
         except (KeyError, TypeError, ValueError) as exc:
             logger.warning("Bar %d okuma hatası: %s", current_index, exc)
             return "HOLD"

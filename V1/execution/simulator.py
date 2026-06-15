@@ -197,10 +197,15 @@ class BacktestSimulator:
                     else pos.entry_price - partial_dist
                 )
                 portfolio.partial_close(partial_price, timestamp, fraction=PARTIAL_CLOSE_FRAC)
-                pos.stop_loss = pos.entry_price  # breakeven'e çek
+                # Breakeven SL: sadece mevcut SL entry'nin altındaysa çek
+                # (trailing zaten SL'i entry üstüne taşımışsa geri düşürme)
+                if pos.is_long and pos.stop_loss < pos.entry_price:
+                    pos.stop_loss = pos.entry_price
+                elif not pos.is_long and pos.stop_loss > pos.entry_price:
+                    pos.stop_loss = pos.entry_price
                 logger.debug(
-                    "PARTIAL_CLOSE @ %.4f | SL->breakeven=%.4f | Bar=%s",
-                    partial_price, pos.entry_price, timestamp,
+                    "PARTIAL_CLOSE @ %.4f | SL=%.4f (breakeven=%.4f) | Bar=%s",
+                    partial_price, pos.stop_loss, pos.entry_price, timestamp,
                 )
 
         # ── 6. Trailing Stop Aktifleştirme + Güncelleme ───────────────────
