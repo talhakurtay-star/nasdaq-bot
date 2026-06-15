@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import logging
 import os
+import pickle
 from typing import Optional
 
 import pandas as pd
@@ -39,11 +40,21 @@ MODEL_FILES = {
 }
 
 
+CALIBRATED_FILES = {
+    "STRONG_LONG":  "xgb_model_long_calibrated.pkl",
+    "STRONG_SHORT": "xgb_model_short_calibrated.pkl",
+}
+
+
 class VotingMechanism:
     """XGBoost probability filter with independent long and short models."""
 
     def __init__(self) -> None:
         self.models: dict[str, Optional[xgb.Booster]] = {
+            "STRONG_LONG": None,
+            "STRONG_SHORT": None,
+        }
+        self.calibrated: dict[str, Optional[object]] = {
             "STRONG_LONG": None,
             "STRONG_SHORT": None,
         }
@@ -69,9 +80,24 @@ class VotingMechanism:
             logger.error("%s model could not be loaded (%s): %s", signal, model_path, exc)
             return None
 
+    def _load_calibrated(self, signal: SignalType, filename: str) -> Optional[object]:
+        cal_path = os.path.join(MODEL_DIR, filename)
+        if not os.path.exists(cal_path):
+            return None
+        try:
+            with open(cal_path, "rb") as f:
+                cal = pickle.load(f)
+            logger.info("%s kalibre model yüklendi: %s", signal, cal_path)
+            return cal
+        except Exception as exc:
+            logger.warning("%s kalibrasyon yüklenemedi: %s", signal, exc)
+            return None
+
     def _load_models(self) -> None:
         for signal, filename in MODEL_FILES.items():
             self.models[signal] = self._load_one(signal, filename)
+        for signal, filename in CALIBRATED_FILES.items():
+            self.calibrated[signal] = self._load_calibrated(signal, filename)
 
     def _extract_probability(self, features_df: pd.DataFrame, signal: SignalType) -> float:
         model = self.models.get(signal)
@@ -79,9 +105,19 @@ class VotingMechanism:
             return 0.0
 
         raw_pred = model.predict(xgb.DMatrix(features_df))
-        if raw_pred.ndim == 1:
-            return float(raw_pred[0])
-        return float(raw_pred[0, 1])
+        raw_prob = float(raw_pred[0]) if raw_pred.ndim == 1 else float(raw_pred[0, 1])
+
+        # Kalibre iso model varsa ham prob'u düzelt
+        cal = self.calibrated.get(signal)
+        if cal is not None:
+            try:
+                iso = cal.get("iso")
+                if iso is not None:
+                    return float(iso.predict([raw_prob])[0])
+            except Exception:
+                pass
+
+        return raw_prob
 
     def get_signal_with_prob(
         self,

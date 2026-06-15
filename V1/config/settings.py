@@ -138,7 +138,7 @@ RSI_OVERSOLD = int(os.getenv("STRESS_RSI_OS", "20"))
 
 # ── XGBoost Olasılık Eşiği (Veto Mekanizması) ────────────────────────────────
 # Modelin güven skoru bu eşiğin altındaysa işlem VETO edilir.
-XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.45"))  # 0.45: dinamik risk alt sınırı (prob<0.45=no trade, 0.45-0.60=0.5x, 0.60-0.70=1x, >0.70=1.2x)
+XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.0"))   # 0.0: XGB devre dışı — OOS'ta model işe yaramıyor, saf teknik strateji daha iyi
 
 # ── Portföy ve Sermaye Ayarları ──────────────────────────────────────────────
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))

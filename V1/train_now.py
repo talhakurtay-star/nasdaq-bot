@@ -12,6 +12,7 @@ from datetime import timedelta
 
 import numpy as np
 import pandas as pd
+from sklearn.isotonic import IsotonicRegression
 from sklearn.metrics import accuracy_score, classification_report, roc_auc_score
 import xgboost as xgb
 
@@ -226,9 +227,27 @@ def main():
         model = train_model(side, X_train, y_train, X_val, y_val)
         print_metrics(side, model, X_test, y_test)  # test hiç görülmemiş veri
 
+        # Probability calibration: val seti üzerinde isotonic regression
+        # XGB ham prob → gerçek frekans eşleştirmesi → dinamik risk güvenilir olur
+        import pickle
+        val_proba = model.predict_proba(X_val)[:, 1]
+        iso = IsotonicRegression(out_of_bounds="clip")
+        iso.fit(val_proba, y_val.values)
+
+        # Test kalitesi
+        test_raw  = model.predict_proba(X_test)[:, 1]
+        test_cal  = iso.predict(test_raw)
+        raw_auc = roc_auc_score(y_test, test_raw) if y_test.nunique() > 1 else 0.0
+        cal_auc = roc_auc_score(y_test, test_cal) if y_test.nunique() > 1 else 0.0
+        logger.info("%s | Ham AUC=%.4f → Kalibre AUC=%.4f", side, raw_auc, cal_auc)
+
         path = os.path.join(MODEL_DIR, MODEL_FILES[side])
         model.save_model(path)
-        logger.info("Model kaydedildi → %s (%.1f KB)", path, os.path.getsize(path) / 1024)
+
+        cal_path = path.replace(".json", "_calibrated.pkl")
+        with open(cal_path, "wb") as f:
+            pickle.dump({"iso": iso, "side": side}, f)
+        logger.info("Model kaydedildi → %s | Kalibrasyon → %s", path, cal_path)
 
     logger.info("=" * 64)
     logger.info("Eğitim tamamlandı!")
