@@ -471,6 +471,36 @@ def _stres_testi_metrikleri_yaz(
     except OSError as e:
         print(f"[STRES-KANCA] UYARI: temp_metrics.json yazılamadı: {e}")
 
+# ── Rejim Filtresi ───────────────────────────────────────────────────────────
+
+def _get_regime_risk_mult(bar: pd.Series, df: pd.DataFrame, current_index: int) -> float:
+    """
+    Piyasa rejimini tespit eder ve risk çarpanı döndürür.
+
+    VOLATILE_EXTREME (ATR z-score > 2.5): 0.0 — haber/spike dönemi, pas geç
+    VOLATILE_HIGH    (ATR z-score > 1.5): 0.5 — yüksek volatilite, yarı risk
+    TREND                                : 1.0 — normal risk
+    """
+    if current_index < 50:
+        return 1.0
+
+    atr_window = df["ATR"].iloc[current_index - 50:current_index]
+    atr_mean   = float(atr_window.mean())
+    atr_std    = float(atr_window.std())
+    atr_cur    = float(bar.get("ATR", atr_mean) or atr_mean)
+
+    if atr_std <= 0:
+        return 1.0
+
+    z = (atr_cur - atr_mean) / atr_std
+    if z > 2.5:
+        return 0.0   # aşırı volatilite spike → pas geç
+    if z > 1.5:
+        return 0.5   # yüksek volatilite → yarı risk
+
+    return 1.0
+
+
 # ── Ana Backtest Fonksiyonu ───────────────────────────────────────────────────
 
 def _run_single_symbol(
@@ -764,17 +794,21 @@ def run_backtest() -> None:
 
             # XGB olasılığına göre dinamik risk çarpanı
             if xgb_prob < 0.45:
-                risk_mult = 0.0   # işlem açma
+                xgb_mult = 0.0   # işlem açma
             elif xgb_prob < 0.60:
-                risk_mult = 0.5
+                xgb_mult = 0.5
             elif xgb_prob < 0.70:
-                risk_mult = 1.0
+                xgb_mult = 1.0
             else:
-                risk_mult = 1.2
+                xgb_mult = 1.2
 
-            # XGB devre dışıysa (threshold=0) tüm sinyaller tam risk ile geçer
+            # XGB devre dışıysa (threshold=0) tüm sinyaller tam XGB çarpanıyla geçer
             if voter.threshold <= 0.0:
-                risk_mult = 1.0
+                xgb_mult = 1.0
+
+            # Rejim filtresi: yatay/volatil piyasalarda risk kıs veya pas geç
+            regime_mult = _get_regime_risk_mult(current_bar, df, current_index)
+            risk_mult   = xgb_mult * regime_mult
 
             if final_signal in ("STRONG_LONG", "STRONG_SHORT") and risk_mult > 0.0:
                 close_price = float(current_bar["Close"])
