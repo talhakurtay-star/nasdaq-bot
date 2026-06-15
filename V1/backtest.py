@@ -420,14 +420,9 @@ def _stres_testi_metrikleri_yaz(
         win_rate    = kazanan / toplam_islem * 100.0
         net_pnl_pct = net_pnl / initial_balance * 100.0 if initial_balance else 0.0
  
-        # Sharpe (işlem başına PnL serisi)
-        if len(pnl_listesi) >= 2:
-            n   = len(pnl_listesi)
-            ort = sum(pnl_listesi) / n
-            std = math.sqrt(sum((x - ort) ** 2 for x in pnl_listesi) / (n - 1))
-            sharpe = ((ort / std) * math.sqrt(252.0)) if std > 1e-10 else 0.0
-        else:
-            sharpe = 0.0
+        # Sharpe — equity curve üzerinden hesaplanır (bar başına getiri, yıllıklandırılmış)
+        equity_curve_local = getattr(portfolio_manager, "equity_curve", [])
+        sharpe = _calculate_sharpe_ratio(equity_curve_local) if len(equity_curve_local) >= 2 else 0.0
  
         # Max Drawdown — equity_curve'den (varsa)
         equity_curve = getattr(portfolio_manager, "equity_curve", [])
@@ -590,9 +585,10 @@ def run_backtest() -> None:
     if symbol_data:
         logger.info("📊 Multi-symbol backtest: %d sembol", len(symbol_data))
 
-        # Her sembol için indikatörleri hesapla
+        # Her sembol için veri doğrula ve indikatörleri hesapla
         dfs: dict[str, pd.DataFrame] = {}
         for sym, raw_df in symbol_data.items():
+            _validate_nas100_data(raw_df, logger)
             try:
                 dfs[sym] = feature_engine.calculate_indicators(raw_df)
             except Exception as e:
@@ -833,12 +829,13 @@ def run_backtest() -> None:
     _print_report(portfolio, simulator, equity_curve, start_time, logger)
     
     portfolio.equity_curve = equity_curve
-    
-    # Timestamps'leri eşleştirip portfolio nesnesine ekle
-    timestamps = [str(ts) for ts in df.index[max(0, sim_start - 1):sim_end]]
-    if len(equity_curve) == len(timestamps):
-        portfolio.equity_timestamps = timestamps
-    else:
+
+    # Timestamps — tek sembol modunda df mevcuttur; multi-symbol'de indeks kullan
+    try:
+        timestamps = [str(ts) for ts in df.index[max(0, sim_start - 1):sim_end]]
+        portfolio.equity_timestamps = timestamps if len(equity_curve) == len(timestamps) \
+            else [str(i) for i in range(len(equity_curve))]
+    except NameError:
         portfolio.equity_timestamps = [str(i) for i in range(len(equity_curve))]
 
     _stres_testi_metrikleri_yaz(portfolio, portfolio.trade_log, INITIAL_BALANCE)

@@ -146,54 +146,44 @@ def train_quarter_model(df_train_raw, feature_engine):
 
 
 def run_quarter_backtest(date_from: str, date_to: str, xgb_threshold: float) -> dict:
+    """Backtest çalıştırır ve temp_metrics.json üzerinden sonuçları okur."""
+    import json
+
+    base_dir  = os.path.dirname(os.path.abspath(__file__))
+    json_path = os.path.join(base_dir, "temp_metrics.json")
+
+    # Eski dosyayı sil — yeni çalıştırma yazana kadar karışmasın
+    try:
+        os.remove(json_path)
+    except FileNotFoundError:
+        pass
+
     env = os.environ.copy()
-    env["SIM_DATE_FROM"]      = date_from
-    env["SIM_DATE_TO"]        = date_to
+    env["SIM_DATE_FROM"]        = date_from
+    env["SIM_DATE_TO"]          = date_to
     env["STRESS_XGB_THRESHOLD"] = str(xgb_threshold)
-    env["WALKFORWARD_QUIET"]  = "1"
+    env["WALKFORWARD_QUIET"]    = "1"
 
-    result = subprocess.run(
-        [sys.executable, os.path.join(os.path.dirname(__file__), "backtest.py")],
+    subprocess.run(
+        [sys.executable, os.path.join(base_dir, "backtest.py")],
         capture_output=True, text=True, env=env,
-        cwd=os.path.dirname(__file__),
+        cwd=base_dir,
     )
-    output = result.stdout + result.stderr
 
-    # Parse key metrics from output
-    metrics = {}
-    for line in output.split("\n"):
-        if "Net PnL" in line and "%" in line:
-            try:
-                pct = float(line.split("(")[1].split("%")[0].replace("+", ""))
-                metrics["pnl_pct"] = pct
-            except Exception:
-                pass
-        if "Bitiş Bakiyesi" in line:
-            try:
-                bal = float(line.split("$")[1].strip().replace(",", "").split()[0])
-                metrics["end_balance"] = bal
-            except Exception:
-                pass
-        if "Win Rate" in line:
-            try:
-                wr = float(line.split(":")[1].strip().replace("%", ""))
-                metrics["win_rate"] = wr
-            except Exception:
-                pass
-        if "Toplam İşlem" in line:
-            try:
-                n = int(line.split(":")[1].strip())
-                metrics["trades"] = n
-            except Exception:
-                pass
-        if "Maks. Drawdown" in line and "%" in line:
-            try:
-                dd = float(line.split("(")[1].split("%")[0])
-                metrics["max_dd"] = dd
-            except Exception:
-                pass
-
-    return metrics
+    # temp_metrics.json'dan oku
+    try:
+        with open(json_path, "r", encoding="utf-8") as f:
+            raw = json.load(f)
+        return {
+            "pnl_pct":    raw.get("net_pnl_pct", 0.0),
+            "end_balance": 100_000 * (1 + raw.get("net_pnl_pct", 0.0) / 100),
+            "win_rate":   raw.get("win_rate_pct", 0.0),
+            "trades":     raw.get("toplam_islem", 0),
+            "max_dd":     abs(raw.get("maks_drawdown_pct", 0.0)),
+        }
+    except Exception as exc:
+        logger.error("temp_metrics.json okunamadı: %s", exc)
+        return {}
 
 
 def main():

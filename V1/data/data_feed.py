@@ -198,6 +198,25 @@ def _load_mt5_csv(path: str) -> pd.DataFrame:
     df = df.dropna(subset=["Open", "High", "Low", "Close"])
     df = df.sort_index()  # kronolojik sıra
 
+    # ── Veri kalite kontrolleri ───────────────────────────────────────────
+    # Duplikate timestamp tespiti
+    dup_count = df.index.duplicated().sum()
+    if dup_count > 0:
+        print(f"[DataFeed] UYARI: {dup_count} duplikate timestamp tespit edildi → kaldırılıyor.")
+        df = df[~df.index.duplicated(keep="first")]
+
+    # OHLC mantık kontrolü: High < Low veya Close dışarıda
+    bad_hl = (df["High"] < df["Low"]).sum()
+    if bad_hl > 0:
+        print(f"[DataFeed] UYARI: {bad_hl} barda High < Low — bu barlar çıkarılıyor.")
+        df = df[df["High"] >= df["Low"]]
+
+    # Sıfır veya negatif fiyat
+    bad_price = (df[["Open", "High", "Low", "Close"]] <= 0).any(axis=1).sum()
+    if bad_price > 0:
+        print(f"[DataFeed] UYARI: {bad_price} barda sıfır/negatif fiyat — çıkarılıyor.")
+        df = df[(df[["Open", "High", "Low", "Close"]] > 0).all(axis=1)]
+
     return df
 
 
