@@ -91,6 +91,8 @@ class PortfolioManager:
         self.daily_peak_equity: float = INITIAL_BALANCE
         self.trade_log: list = []
         self._total_commission: float = 0.0
+        self.equity_curve: list = []
+        self.equity_timestamps: list = []
 
         logger.info(
             "PortfolioManager initialized | balance=%.2f | risk/trade=%.2f%% | "

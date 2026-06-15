@@ -424,18 +424,10 @@ def _stres_testi_metrikleri_yaz(
         equity_curve_local = getattr(portfolio_manager, "equity_curve", [])
         sharpe = _calculate_sharpe_ratio(equity_curve_local) if len(equity_curve_local) >= 2 else 0.0
  
-        # Max Drawdown — equity_curve'den (varsa)
-        equity_curve = getattr(portfolio_manager, "equity_curve", [])
-        mdd = 0.0
-        if len(equity_curve) >= 2:
-            tepe = equity_curve[0]
-            for deger in equity_curve[1:]:
-                if deger > tepe:
-                    tepe = deger
-                if tepe > 1e-10:
-                    dd = (deger - tepe) / tepe * 100.0
-                    if dd < mdd:
-                        mdd = dd
+        # Max Drawdown — merkezi _calculate_max_drawdown fonksiyonu kullanılıyor
+        equity_curve_local = getattr(portfolio_manager, "equity_curve", [])
+        _, mdd_pos = _calculate_max_drawdown(equity_curve_local) if len(equity_curve_local) >= 2 else (0.0, 0.0)
+        mdd = -mdd_pos  # negatif olarak sakla (eski format uyumluluğu)
  
         weekend_flattens = sum(
             1 for t in trades
@@ -585,12 +577,15 @@ def run_backtest() -> None:
     if symbol_data:
         logger.info("📊 Multi-symbol backtest: %d sembol", len(symbol_data))
 
-        # Her sembol için veri doğrula ve indikatörleri hesapla
+        # Her sembol için veri doğrula, indikatör hesapla ve index dict'i hazırla
         dfs: dict[str, pd.DataFrame] = {}
+        dfs_idx: dict[str, dict] = {}  # {sym: {timestamp: integer_index}} — O(1) lookup
         for sym, raw_df in symbol_data.items():
             _validate_nas100_data(raw_df, logger)
             try:
-                dfs[sym] = feature_engine.calculate_indicators(raw_df)
+                df_ind = feature_engine.calculate_indicators(raw_df)
+                dfs[sym] = df_ind
+                dfs_idx[sym] = {ts: i for i, ts in enumerate(df_ind.index)}
             except Exception as e:
                 logger.warning("%s indikatör hesaplamada hata: %s", sym, e)
 
@@ -635,7 +630,9 @@ def run_backtest() -> None:
                 if sym not in dfs or ts not in dfs[sym].index:
                     continue
                 df = dfs[sym]
-                current_index = df.index.get_loc(ts)
+                current_index = dfs_idx[sym].get(ts, -1)
+                if current_index < 0:
+                    continue
                 portfolio.open_position = open_positions[sym]
                 result = simulator.update_and_check_positions(
                     df.iloc[current_index], portfolio, guardrails
@@ -664,9 +661,9 @@ def run_backtest() -> None:
                 for sym, df in dfs.items():
                     if sym in open_positions:
                         continue
-                    if ts not in df.index:
+                    current_index = dfs_idx[sym].get(ts, -1)
+                    if current_index < 0:
                         continue
-                    current_index = df.index.get_loc(ts)
                     base_sig = strategy.generate_base_signal(df, current_index)
                     if base_sig == "HOLD":
                         continue
@@ -696,11 +693,23 @@ def run_backtest() -> None:
                                      sym, sector, sector_counts.get(sector, 0))
                         continue
 
-                    df = dfs[sym]
-                    current_index = df.index.get_loc(ts)
+                    df            = dfs[sym]
+                    current_index = dfs_idx[sym].get(ts, -1)
+                    if current_index < 0:
+                        continue
                     bar = df.iloc[current_index]
                     atr = float(bar.get("ATR", 0))
                     if atr <= 0:
+                        continue
+
+                    # Rejim filtresi + XGB çarpanı (tek sembol moduyla tutarlı)
+                    regime_mult = _get_regime_risk_mult(bar, df, current_index)
+                    if voter.threshold <= 0.0:
+                        ms_risk_mult = regime_mult
+                    else:
+                        xgb_mult = 0.5 if prob < 0.60 else (1.0 if prob < 0.70 else 1.2)
+                        ms_risk_mult = xgb_mult * regime_mult
+                    if ms_risk_mult <= 0.0:
                         continue
 
                     portfolio.open_trade(
@@ -708,6 +717,7 @@ def run_backtest() -> None:
                         current_price=float(bar["Close"]),
                         atr_value=atr,
                         timestamp=pd.Timestamp(ts),
+                        risk_multiplier=ms_risk_mult,
                     )
                     if portfolio.open_position is not None:
                         open_positions[sym] = portfolio.open_position

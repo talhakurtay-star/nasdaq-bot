@@ -20,9 +20,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from config.settings import ATR_MULTIPLIER, MODEL_DIR, REWARD_RISK_RATIO
 from ml.features import FeatureEngine
+from ml.labeling import generate_labels, LOOKAHEAD
 
 BACKTEST_DAYS     = int(os.getenv("BACKTEST_DAYS", "360"))
-TRAIN_WINDOW_DAYS = int(os.getenv("TRAIN_WINDOW_DAYS", "180"))  # backtest'ten önceki kaç günü eğitimde kullan
+TRAIN_WINDOW_DAYS = int(os.getenv("TRAIN_WINDOW_DAYS", "180"))
 
 logging.basicConfig(
     level=logging.INFO,
@@ -32,7 +33,6 @@ logging.basicConfig(
 logger = logging.getLogger("train_now")
 
 TRAIN_RATIO   = 0.80
-LOOKAHEAD     = 25
 RANDOM_STATE  = 42
 MODEL_FILES   = {"long": "xgb_model_long.json", "short": "xgb_model_short.json"}
 
@@ -77,50 +77,14 @@ def load_training_data() -> pd.DataFrame:
     return df_train
 
 
-def _first_touch_label(high_arr, low_arr, start_idx, sl_price, tp_price, direction):
-    n = len(high_arr)
-    for j in range(start_idx + 1, min(start_idx + 1 + LOOKAHEAD, n)):
-        if direction == "long":
-            sl_hit = low_arr[j] <= sl_price
-            tp_hit = high_arr[j] >= tp_price
-        else:
-            sl_hit = high_arr[j] >= sl_price
-            tp_hit = low_arr[j] <= tp_price
-        if sl_hit and tp_hit:
-            return 0.0
-        if sl_hit:
-            return 0.0
-        if tp_hit:
-            return 1.0
-    return np.nan
-
-
-def generate_labels(df: pd.DataFrame) -> pd.DataFrame:
-    labels = pd.DataFrame(index=df.index, columns=["target_long", "target_short"], dtype=float)
-    close_arr = df["Close"].values
-    high_arr  = df["High"].values
-    low_arr   = df["Low"].values
-    atr_arr   = df["ATR"].values
-
-    for i in range(len(df) - 1):
-        atr = atr_arr[i]
-        if np.isnan(atr) or atr <= 0:
-            continue
-        entry   = close_arr[i]
-        sl_dist = atr * ATR_MULTIPLIER
-        tp_dist = sl_dist * REWARD_RISK_RATIO
-
-        labels.iat[i, 0] = _first_touch_label(high_arr, low_arr, i, entry - sl_dist, entry + tp_dist, "long")
-        labels.iat[i, 1] = _first_touch_label(high_arr, low_arr, i, entry + sl_dist, entry - tp_dist, "short")
-
+def _log_label_stats(labels):
     for col in labels.columns:
-        valid  = labels[col].dropna()
-        pos    = int((valid == 1).sum())
-        neg    = int((valid == 0).sum())
-        total  = pos + neg
+        valid = labels[col].dropna()
+        pos   = int((valid == 1).sum())
+        neg   = int((valid == 0).sum())
+        total = pos + neg
         logger.info("%s | toplam=%d | TP(1)=%d (%0.1f%%) | SL(0)=%d",
                     col, total, pos, pos / total * 100 if total else 0, neg)
-    return labels
 
 
 def build_feature_matrix(df, feature_engine, valid_indices):
@@ -198,7 +162,8 @@ def main():
     df = feature_engine.calculate_indicators(raw_df)
     logger.info("İndikatörler hesaplandı: %d bar x %d sütun", len(df), len(df.columns))
 
-    labels = generate_labels(df)
+    labels = generate_labels(df, ATR_MULTIPLIER, REWARD_RISK_RATIO)
+    _log_label_stats(labels)
     valid_mask    = labels["target_long"].notna() | labels["target_short"].notna()
     valid_indices = [df.index.get_loc(ts) for ts in labels.index[valid_mask]]
 

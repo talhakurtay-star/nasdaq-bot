@@ -232,9 +232,10 @@ class FeatureEngine:
         return df
 
     def generate_live_features(self, df: pd.DataFrame, current_index: int) -> pd.DataFrame:
-        sliced = df.iloc[:current_index + 1].copy()
-        if len(sliced) < WARMUP_BARS:
+        if current_index < WARMUP_BARS - 1:
             return pd.DataFrame()
+        # Sabit pencere: tüm geçmişi kopyalamak yerine sadece WARMUP_BARS alıyoruz → O(1)
+        sliced = df.iloc[current_index - WARMUP_BARS + 1:current_index + 1]
 
         bar      = sliced.iloc[-1]
         prev_bar = sliced.iloc[-2]

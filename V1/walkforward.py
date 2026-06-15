@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from config.settings import ATR_MULTIPLIER, MODEL_DIR, REWARD_RISK_RATIO
 from ml.features import FeatureEngine
+from ml.labeling import generate_labels, LOOKAHEAD
 
 logging.basicConfig(
     level=logging.INFO,
@@ -35,66 +36,23 @@ logger = logging.getLogger("walkforward")
 
 BACKTEST_DAYS     = int(os.getenv("BACKTEST_DAYS", "360"))
 TRAIN_WINDOW_DAYS = int(os.getenv("TRAIN_WINDOW_DAYS", "180"))
-LOOKAHEAD         = 25
 RANDOM_STATE      = 42
 MODEL_FILES       = {"long": "xgb_model_long.json", "short": "xgb_model_short.json"}
 N_QUARTERS        = 3  # 360 gün → 3 x 120 gün çeyrek
 
 
 def load_full_csv() -> pd.DataFrame:
+    from data.data_feed import _load_mt5_csv, _ensure_spy_vix
     base_dir = os.path.dirname(os.path.abspath(__file__))
     csv_file = os.path.join(base_dir, "csv", "nasdaq_15m.csv")
-    df = pd.read_csv(
-        csv_file, sep="\t",
-        names=["Date", "Time", "Open", "High", "Low", "Close", "TickVol", "Vol", "Spread"],
-        skiprows=1, dtype=str,
-    )
-    df["Datetime"] = pd.to_datetime(df["Date"] + " " + df["Time"], format="%Y.%m.%d %H:%M:%S")
-    df = df.set_index("Datetime").drop(columns=["Date", "Time", "Vol", "Spread"])
-    df = df.rename(columns={"TickVol": "Volume"})
-    for col in ["Open", "High", "Low", "Close", "Volume"]:
-        df[col] = pd.to_numeric(df[col], errors="coerce")
-    return df.dropna(subset=["Open", "High", "Low", "Close"]).sort_index()
-
-
-def _first_touch_label(high_arr, low_arr, start_idx, sl_price, tp_price, direction):
-    n = len(high_arr)
-    for j in range(start_idx + 1, min(start_idx + 1 + LOOKAHEAD, n)):
-        if direction == "long":
-            sl_hit = low_arr[j] <= sl_price
-            tp_hit = high_arr[j] >= tp_price
-        else:
-            sl_hit = high_arr[j] >= sl_price
-            tp_hit = low_arr[j] <= tp_price
-        if sl_hit and tp_hit:
-            return 0.0
-        if sl_hit:
-            return 0.0
-        if tp_hit:
-            return 1.0
-    return np.nan
-
-
-def generate_labels(df):
-    labels = pd.DataFrame(index=df.index, columns=["target_long", "target_short"], dtype=float)
-    close_arr, high_arr, low_arr, atr_arr = (
-        df["Close"].values, df["High"].values, df["Low"].values, df["ATR"].values
-    )
-    for i in range(len(df) - 1):
-        atr = atr_arr[i]
-        if np.isnan(atr) or atr <= 0:
-            continue
-        entry   = close_arr[i]
-        sl_dist = atr * ATR_MULTIPLIER
-        tp_dist = sl_dist * REWARD_RISK_RATIO
-        labels.iat[i, 0] = _first_touch_label(high_arr, low_arr, i, entry - sl_dist, entry + tp_dist, "long")
-        labels.iat[i, 1] = _first_touch_label(high_arr, low_arr, i, entry + sl_dist, entry - tp_dist, "short")
-    return labels
+    df = _load_mt5_csv(csv_file)
+    df = _ensure_spy_vix(df)
+    return df
 
 
 def train_quarter_model(df_train_raw, feature_engine):
     df = feature_engine.calculate_indicators(df_train_raw)
-    labels = generate_labels(df)
+    labels = generate_labels(df, ATR_MULTIPLIER, REWARD_RISK_RATIO)
     valid_mask    = labels["target_long"].notna() | labels["target_short"].notna()
     valid_indices = [df.index.get_loc(ts) for ts in labels.index[valid_mask]]
 
@@ -201,9 +159,9 @@ def main():
 
     logger.info("Backtest dönemi: %s → %s", backtest_start.date(), max_date.date())
 
-    total_pnl_pct = 0.0
-    total_trades  = 0
-    quarter_results = []
+    compound_balance = 100_000.0  # zincirleme bakiye takibi
+    total_trades     = 0
+    quarter_results  = []
 
     for q in range(N_QUARTERS):
         q_start = backtest_start + timedelta(days=q * quarter_days)
@@ -236,27 +194,29 @@ def main():
             str(q_start.date()), str(q_end.date()), xgb_threshold
         )
 
-        pnl   = metrics.get("pnl_pct", 0.0)
+        pnl    = metrics.get("pnl_pct", 0.0)
         trades = metrics.get("trades", 0)
-        wr    = metrics.get("win_rate", 0.0)
-        dd    = metrics.get("max_dd", 0.0)
-        total_pnl_pct += pnl
-        total_trades  += trades
+        wr     = metrics.get("win_rate", 0.0)
+        dd     = metrics.get("max_dd", 0.0)
+        compound_balance *= (1 + pnl / 100.0)
+        total_trades     += trades
         quarter_results.append(metrics)
 
-        logger.info("  Sonuç  : PnL=%+.2f%% | İşlem=%d | WR=%.1f%% | MaxDD=%.2f%%",
-                    pnl, trades, wr, dd)
+        logger.info("  Sonuç  : PnL=%+.2f%% | İşlem=%d | WR=%.1f%% | MaxDD=%.2f%% | Bakiye=%.0f",
+                    pnl, trades, wr, dd, compound_balance)
 
     logger.info("")
     logger.info("=" * 64)
+    total_return_pct = (compound_balance / 100_000.0 - 1) * 100
     logger.info("WALK-FORWARD ÖZET")
     logger.info("=" * 64)
-    logger.info("  Toplam PnL    : %+.2f%% / yıl (~%+.2f%% / ay)",
-                total_pnl_pct, total_pnl_pct / 12)
+    logger.info("  Compound PnL  : %+.2f%% (zincirleme | basit toplam değil)", total_return_pct)
+    logger.info("  Bitiş Bakiye  : %.0f (başlangıç 100,000)", compound_balance)
     logger.info("  Toplam İşlem  : %d", total_trades)
     for i, r in enumerate(quarter_results):
-        logger.info("  Q%d: %+.2f%% | %d işlem | WR=%.1f%%",
-                    i + 1, r.get("pnl_pct", 0), r.get("trades", 0), r.get("win_rate", 0))
+        logger.info("  Q%d: %+.2f%% | %d işlem | WR=%.1f%% | MaxDD=%.2f%%",
+                    i + 1, r.get("pnl_pct", 0), r.get("trades", 0),
+                    r.get("win_rate", 0), r.get("max_dd", 0))
     logger.info("=" * 64)
 
 

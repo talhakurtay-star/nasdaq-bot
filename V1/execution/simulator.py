@@ -115,6 +115,7 @@ class BacktestSimulator:
                 bar_close, timestamp, reason="WEEKEND_FLATTEN"
             )
             self.force_closes += 1
+            guardrails.record_trade_result(won=pnl > 0)
             logger.info(
                 f"🗓️ WEEKEND_FLATTEN kapanışı @ {bar_close:.4f} | "
                 f"PnL={pnl:+.2f} USD"
@@ -172,6 +173,7 @@ class BacktestSimulator:
         if guardrails.check_drawdown_limits(portfolio):
             pnl, reason = portfolio.close_trade(bar_close, timestamp, reason="GUARDRAIL")
             self.guardrail_closes += 1
+            guardrails.record_trade_result(won=pnl > 0)
             logger.warning(
                 f"🛡️ GUARDRAIL kapanışı | PnL={pnl:+.2f} USD | "
                 f"Bar={timestamp}"
