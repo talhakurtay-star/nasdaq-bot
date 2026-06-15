@@ -142,7 +142,7 @@ XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.0"))   # 
 
 # ── Portföy ve Sermaye Ayarları ──────────────────────────────────────────────
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
-REWARD_RISK_RATIO     = float(os.getenv("STRESS_RR",          "2.5"))
+REWARD_RISK_RATIO     = float(os.getenv("STRESS_RR",          "3.5"))
 PARTIAL_CLOSE_R       = float(os.getenv("STRESS_PARTIAL_R",   "1.0"))  # 1R'da kısmi kâr al
 PARTIAL_CLOSE_FRAC    = float(os.getenv("STRESS_PARTIAL_FRAC", "0.25")) # kaç % kapatılacak (0.25 = %25 → kalan %75 TP'ye koşar)
 TRAILING_ACTIVATION_R = float(os.getenv("STRESS_TRAIL_R",     "1.0"))  # 1R sonrası trailing başlat
