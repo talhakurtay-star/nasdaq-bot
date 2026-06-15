@@ -99,6 +99,24 @@ def _get_simulation_bounds(
         IS   -> bars up to the last STRESS_OOS_DAYS days
         OOS  -> only the last STRESS_OOS_DAYS days
     """
+    # Date-range override for walk-forward
+    date_from = os.environ.get("SIM_DATE_FROM")
+    date_to   = os.environ.get("SIM_DATE_TO")
+    if date_from or date_to:
+        positions = np.arange(len(df))
+        if date_from:
+            mask_from = df.index >= pd.Timestamp(date_from)
+            positions = positions[mask_from.values]
+        if date_to:
+            mask_to = df.index < pd.Timestamp(date_to)
+            positions = positions[np.isin(positions, np.flatnonzero(mask_to))]
+        if len(positions) == 0:
+            raise ValueError(f"Date range {date_from}→{date_to} has no bars.")
+        start_idx = max(warmup, int(positions[0]))
+        end_idx   = int(positions[-1]) + 1
+        logger.info("Date-range window: %s → %s | bars=%d", date_from, date_to, end_idx - start_idx)
+        return start_idx, end_idx, f"RANGE[{date_from}:{date_to}]"
+
     window = os.environ.get("STRESS_EVAL_WINDOW", "FULL").upper()
     if window == "FULL":
         return warmup, len(df), "FULL"
