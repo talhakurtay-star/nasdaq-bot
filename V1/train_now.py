@@ -1,11 +1,14 @@
 """
-train_now.py — MT5 olmadan cache'den eğitim çalıştırıcı.
+train_now.py — MT5 olmadan CSV'den eğitim çalıştırıcı.
+IS/OOS ayrımı otomatik: backtest son BACKTEST_DAYS günü kullanır,
+eğitim ondan önceki tüm veriyi kullanır → veri karışmaz.
 Çalıştır: python train_now.py
 """
 import logging
 import os
 import sys
 import time
+from datetime import timedelta
 
 import numpy as np
 import pandas as pd
@@ -14,8 +17,10 @@ import xgboost as xgb
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from config.settings import ATR_MULTIPLIER, MODEL_DIR, REWARD_RISK_RATIO, CACHE_DIR
+from config.settings import ATR_MULTIPLIER, MODEL_DIR, REWARD_RISK_RATIO
 from ml.features import FeatureEngine
+
+BACKTEST_DAYS = int(os.getenv("BACKTEST_DAYS", "360"))
 
 logging.basicConfig(
     level=logging.INFO,
@@ -30,13 +35,43 @@ RANDOM_STATE  = 42
 MODEL_FILES   = {"long": "xgb_model_long.json", "short": "xgb_model_short.json"}
 
 
-def load_cache() -> pd.DataFrame:
-    cache_file = os.path.join(CACHE_DIR, "cache_15m_360d.csv")
-    if not os.path.exists(cache_file):
-        raise FileNotFoundError(f"Cache bulunamadı: {cache_file}")
-    df = pd.read_csv(cache_file, index_col=0, parse_dates=True)
-    logger.info("Cache yüklendi: %d bar | %s → %s", len(df), df.index[0], df.index[-1])
-    return df
+def load_training_data() -> pd.DataFrame:
+    """
+    csv/nasdaq_15m.csv (MT5 formatı) yükler ve IS/OOS ayrımı uygular.
+    Backtest: son BACKTEST_DAYS gün  → model bu veriyi HİÇ görmez.
+    Eğitim  : backtest başlangıcından önceki TÜM veri.
+    """
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_file = os.path.join(base_dir, "csv", "nasdaq_15m.csv")
+    if not os.path.exists(csv_file):
+        raise FileNotFoundError(f"CSV bulunamadı: {csv_file}")
+
+    df = pd.read_csv(
+        csv_file,
+        sep="\t",
+        names=["Date", "Time", "Open", "High", "Low", "Close", "TickVol", "Vol", "Spread"],
+        skiprows=1,
+        dtype=str,
+    )
+    df["Datetime"] = pd.to_datetime(df["Date"] + " " + df["Time"], format="%Y.%m.%d %H:%M:%S")
+    df = df.set_index("Datetime").drop(columns=["Date", "Time", "Vol", "Spread"])
+    df = df.rename(columns={"Open": "Open", "High": "High", "Low": "Low",
+                             "Close": "Close", "TickVol": "Volume"})
+    for col in ["Open", "High", "Low", "Close", "Volume"]:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+    df = df.dropna(subset=["Open", "High", "Low", "Close"])
+    df = df.sort_index()
+
+    max_date = df.index.max()
+    backtest_start = max_date - timedelta(days=BACKTEST_DAYS)
+    df_train = df[df.index < backtest_start].copy()
+
+    logger.info("Tam CSV   : %d bar | %s → %s", len(df), df.index[0], max_date)
+    logger.info("Backtest  : %s → %s (%d gün) — eğitimden DIŞLANDI",
+                backtest_start.date(), max_date.date(), BACKTEST_DAYS)
+    logger.info("Eğitim IS : %d bar | %s → %s",
+                len(df_train), df_train.index[0], df_train.index[-1])
+    return df_train
 
 
 def _first_touch_label(high_arr, low_arr, start_idx, sl_price, tp_price, direction):
@@ -151,11 +186,12 @@ def print_metrics(name, model, X_test, y_test):
 
 def main():
     logger.info("=" * 64)
-    logger.info("Eğitim başlıyor (cache tabanlı, MT5 gereksiz)")
+    logger.info("Eğitim başlıyor (IS/OOS otomatik ayrım, MT5 gereksiz)")
+    logger.info("Backtest son %d günü kullanır → eğitim öncesi veri", BACKTEST_DAYS)
     logger.info("=" * 64)
 
     feature_engine = FeatureEngine()
-    raw_df = load_cache()
+    raw_df = load_training_data()
     df = feature_engine.calculate_indicators(raw_df)
     logger.info("İndikatörler hesaplandı: %d bar x %d sütun", len(df), len(df.columns))
 
