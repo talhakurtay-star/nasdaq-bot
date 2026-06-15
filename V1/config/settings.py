@@ -138,7 +138,7 @@ RSI_OVERSOLD = int(os.getenv("STRESS_RSI_OS", "20"))
 
 # ── XGBoost Olasılık Eşiği (Veto Mekanizması) ────────────────────────────────
 # Modelin güven skoru bu eşiğin altındaysa işlem VETO edilir.
-XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.54"))  # 0.54: kaliteli sinyal filtresi (+%60/yıl, 0 guardrail)
+XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.0"))   # 0.0: XGB devre dışı, saf teknik strateji (+%18/yıl, DD<%9)
 
 # ── Portföy ve Sermaye Ayarları ──────────────────────────────────────────────
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
@@ -151,7 +151,7 @@ ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.5"))  # Geniş 
 
 # ── Risk Yönetimi ve Prop Firm Limitleri ──────────────────────────────────────
 # RISK_PER_TRADE: İşlem başına risk yüzdesi (Örn: 1.00 -> %1)
-RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "1.2"))  # 1.2%: prop firm güvenli (0 guardrail, DD<%9) | +%37/yıl | Phase 1: +%8 = 3 ay
+RISK_PER_TRADE_PCT = float(os.getenv("STRESS_RISK_PCT", "0.5"))  # 0.5%: Max DD=%8.99 (prop firm %10 altında), +%18/yıl gerçek OOS
 RISK_PER_TRADE = RISK_PER_TRADE_PCT / 100.0                     # Lojik işlemlerde kullanılan decimal değer
 
 # DAILY_DRAWDOWN_LIMIT: Günlük maksimum kayıp limiti (% cinsinden)
