@@ -42,8 +42,8 @@ PULLBACK_MIN_BARS      = 25
 PULLBACK_MAX_BARS      = 120
 ADX_PULLBACK           = 22.0   # raised from 20
 RSI_PULLBACK_LONG_MIN  = 35
-RSI_PULLBACK_LONG_MAX  = 52
-RSI_PULLBACK_SHORT_MIN = 48
+RSI_PULLBACK_LONG_MAX  = 55
+RSI_PULLBACK_SHORT_MIN = 45
 RSI_PULLBACK_SHORT_MAX = 65
 
 # ── Üst Periyot / Rejim Filtresi ──────────────────────────────────────────────

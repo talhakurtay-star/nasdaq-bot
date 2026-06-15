@@ -799,7 +799,10 @@ def run_backtest() -> None:
             final_signal, xgb_prob = voter.get_signal_with_prob(df, current_index, base_signal, feature_engine)
 
             # XGB olasılığına göre dinamik risk çarpanı
-            if xgb_prob < 0.45:
+            # voter.threshold <= 0 → XGB devre dışı: tüm sinyaller tam çarpanla geçer
+            if voter.threshold <= 0.0:
+                xgb_mult = 1.0
+            elif xgb_prob < 0.45:
                 xgb_mult = 0.0   # işlem açma
             elif xgb_prob < 0.60:
                 xgb_mult = 0.5
@@ -807,10 +810,6 @@ def run_backtest() -> None:
                 xgb_mult = 1.0
             else:
                 xgb_mult = 1.2
-
-            # XGB devre dışıysa (threshold=0) tüm sinyaller tam XGB çarpanıyla geçer
-            if voter.threshold <= 0.0:
-                xgb_mult = 1.0
 
             # Rejim filtresi: yatay/volatil piyasalarda risk kıs veya pas geç
             regime_mult = _get_regime_risk_mult(current_bar, df, current_index)
