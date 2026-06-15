@@ -120,6 +120,7 @@ class RiskGuardrails:
         self.daily_trades_count:       int  = 0
         self.max_daily_trades:         int  = 99  # Günlük limit yok — circuit breaker yönetir
         self.consecutive_sl_count:     int  = 0
+        self.consecutive_win_count:    int  = 0   # art arda kazananlar
         self.circuit_breaker_active:   bool = False
         self.max_consecutive_sl:       int  = 3   # 3 art arda SL → o gün dur
 
@@ -218,8 +219,9 @@ class RiskGuardrails:
             self.kill_switch_active = False
 
         portfolio.reset_daily_peak()
-        self.daily_trades_count    = 0
-        self.consecutive_sl_count  = 0
+        self.daily_trades_count     = 0
+        self.consecutive_sl_count   = 0
+        self.consecutive_win_count  = 0
         self.circuit_breaker_active = False
         logger.info("Günlük drawdown sayacı sıfırlandı.")
 
@@ -387,11 +389,13 @@ class RiskGuardrails:
         return False
 
     def record_trade_result(self, won: bool) -> None:
-        """Her işlem kapanışında çağrılır. Circuit breaker sayacını günceller."""
+        """Her işlem kapanışında çağrılır. Circuit breaker ve streak sayaçlarını günceller."""
         if won:
             self.consecutive_sl_count = 0
+            self.consecutive_win_count += 1
         else:
             self.consecutive_sl_count += 1
+            self.consecutive_win_count = 0
             if self.consecutive_sl_count >= self.max_consecutive_sl:
                 self.circuit_breaker_active = True
                 logger.warning(
@@ -410,13 +414,18 @@ class RiskGuardrails:
 
     def get_streak_risk_mult(self) -> float:
         """
-        Art arda SL sayısına göre risk çarpanı döndürür.
-        Cascade drawdown önlemi: üst üste kayıplar küçülüyor.
+        Streak'e göre dinamik risk çarpanı.
+        Kayıp streak: cascade drawdown önlemi.
+        Kazanç streak: momentum ile risk artışı (max 1.2x, günlük DD limiti geçmez).
         """
         if self.consecutive_sl_count >= 2:
-            return 0.5   # 2+ SL sonrası yarı risk
+            return 0.5    # 2+ SL → yarı risk
         if self.consecutive_sl_count == 1:
-            return 0.75  # 1 SL sonrası çeyrek indirim
+            return 0.75   # 1 SL → %75 risk
+        if self.consecutive_win_count >= 3:
+            return 1.2    # 3+ kazanç → %120 risk (momentum)
+        if self.consecutive_win_count == 2:
+            return 1.1    # 2 kazanç → %110 risk
         return 1.0
 
     def get_daily_dd_risk_mult(self, portfolio: "PortfolioManager") -> float:
