@@ -20,7 +20,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config.settings import ATR_MULTIPLIER, MODEL_DIR, REWARD_RISK_RATIO
 from ml.features import FeatureEngine
 
-BACKTEST_DAYS = int(os.getenv("BACKTEST_DAYS", "360"))
+BACKTEST_DAYS     = int(os.getenv("BACKTEST_DAYS", "360"))
+TRAIN_WINDOW_DAYS = int(os.getenv("TRAIN_WINDOW_DAYS", "180"))  # backtest'ten önceki kaç günü eğitimde kullan
 
 logging.basicConfig(
     level=logging.INFO,
@@ -64,13 +65,14 @@ def load_training_data() -> pd.DataFrame:
 
     max_date = df.index.max()
     backtest_start = max_date - timedelta(days=BACKTEST_DAYS)
-    df_train = df[df.index < backtest_start].copy()
+    train_start    = backtest_start - timedelta(days=TRAIN_WINDOW_DAYS)
+    df_train = df[(df.index >= train_start) & (df.index < backtest_start)].copy()
 
-    logger.info("Tam CSV   : %d bar | %s → %s", len(df), df.index[0], max_date)
-    logger.info("Backtest  : %s → %s (%d gün) — eğitimden DIŞLANDI",
+    logger.info("Tam CSV      : %d bar | %s → %s", len(df), df.index[0], max_date)
+    logger.info("Backtest OOS : %s → %s (%d gün) — eğitimden DIŞLANDI",
                 backtest_start.date(), max_date.date(), BACKTEST_DAYS)
-    logger.info("Eğitim IS : %d bar | %s → %s",
-                len(df_train), df_train.index[0], df_train.index[-1])
+    logger.info("Eğitim IS    : %d bar | %s → %s  (son %d gün)",
+                len(df_train), df_train.index[0], df_train.index[-1], TRAIN_WINDOW_DAYS)
     return df_train
 
 
@@ -187,7 +189,7 @@ def print_metrics(name, model, X_test, y_test):
 def main():
     logger.info("=" * 64)
     logger.info("Eğitim başlıyor (IS/OOS otomatik ayrım, MT5 gereksiz)")
-    logger.info("Backtest son %d günü kullanır → eğitim öncesi veri", BACKTEST_DAYS)
+    logger.info("Eğitim penceresi: backtest'ten önceki son %d gün", TRAIN_WINDOW_DAYS)
     logger.info("=" * 64)
 
     feature_engine = FeatureEngine()
