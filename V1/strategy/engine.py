@@ -40,7 +40,7 @@ RSI_EARLY_SHORT_MAX = 62
 # ── Katman 2: Pullback Parametreleri ─────────────────────────────────────────
 PULLBACK_MIN_BARS      = 25
 PULLBACK_MAX_BARS      = 120
-ADX_PULLBACK           = 22.0   # raised from 20
+ADX_PULLBACK           = 25.0   # kurulu trendde daha güçlü ADX gereksin
 RSI_PULLBACK_LONG_MIN  = 35
 RSI_PULLBACK_LONG_MAX  = 55
 RSI_PULLBACK_SHORT_MIN = 45
