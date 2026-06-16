@@ -116,8 +116,10 @@ class StrategyEngine:
         # ATR çok düşükse piyasa sıkışık — giriş kalitesi düşük
         atr   = float(bar.get("ATR",   0.0) or 0.0)
         close = float(bar.get("Close", 0.0) or 0.0)
+        open_ = float(bar.get("Open",  close) or close)
         if atr > 0 and close > 0 and (atr / close) < ATR_MIN_PCT:
             return "HOLD"
+
 
         # MACD histogram ivmesi
         if prev is not None:
