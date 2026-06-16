@@ -31,7 +31,7 @@ except ImportError:
 # ── Katman 1: Erken Trend Parametreleri ──────────────────────────────────────
 ADX_STRONG          = 22.0   # raised from 18 → filter out choppy/low-momentum markets
 EARLY_MIN_BARS      = 1
-EARLY_MAX_BARS      = 25
+EARLY_MAX_BARS      = 30
 RSI_EARLY_LONG_MIN  = 38
 RSI_EARLY_LONG_MAX  = 70
 RSI_EARLY_SHORT_MIN = 30
@@ -106,6 +106,7 @@ class StrategyEngine:
             h4_trend       = float(bar.get("H4_EMA_Trend",   0.0) or 0.0)
             adx_persist    = float(bar.get("ADX_Persistence", 5.0) or 5.0)
             bb_pct         = float(bar.get("BB_Pct",          0.5) or 0.5)
+            rsi_change3    = float(bar.get("RSI_Change3",     0.0) or 0.0)
         except (KeyError, TypeError, ValueError) as exc:
             logger.warning("Bar %d okuma hatası: %s", current_index, exc)
             return "HOLD"

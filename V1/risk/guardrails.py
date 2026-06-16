@@ -431,6 +431,8 @@ class RiskGuardrails:
             return 0.5    # 2+ SL → yarı risk
         if self.consecutive_sl_count == 1:
             return 0.75   # 1 SL → %75 risk
+        if self.consecutive_win_count >= 4:
+            return 1.3    # 4+ kazanç → %130 risk (güçlü momentum)
         if self.consecutive_win_count >= 3:
             return 1.2    # 3+ kazanç → %120 risk (momentum)
         if self.consecutive_win_count == 2:
