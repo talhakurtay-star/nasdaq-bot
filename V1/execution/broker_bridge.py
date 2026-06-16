@@ -108,8 +108,8 @@ _MAX_RETRY:        int    = 3
 # Yeniden denemeler arası bekleme (saniye)
 _RETRY_DELAY:      float  = 1.5
 
-# İzin verilen maksimum slippage (puan)
-_MAX_SLIPPAGE:     int    = 30
+# NAS100 için gerçekçi slippage (spread ~0.5-2 puan)
+_MAX_SLIPPAGE:     int    = 5
 
 # Bağlantı kontrol aralığı (saniye)
 _HEARTBEAT_INTERVAL: int  = 60
@@ -325,6 +325,33 @@ class MetaTraderBridge:
     def has_open_position(self) -> bool:
         """Bot tarafından açılmış aktif pozisyon var mı?"""
         return len(self.get_open_positions()) > 0
+
+    def get_last_closed_deal_profit(self) -> float | None:
+        """
+        Son kapanan işlemin kâr/zararını döner.
+        Circuit breaker ve streak sayacı için main.py tarafından çağrılır.
+        None → geçmiş sorgulanamadı veya bugün kapanan işlem yok.
+        """
+        try:
+            bugun_baslangic = datetime.utcnow().replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
+            simdi = datetime.utcnow()
+            gecmis = mt5.history_deals_get(bugun_baslangic, simdi)
+            if gecmis is None:
+                return None
+            # Sadece botun çıkış dealleri (ENTRY_OUT = 1)
+            bot_deals = [
+                d for d in gecmis
+                if d.magic == self.magic_number and d.entry == 1
+            ]
+            if not bot_deals:
+                return None
+            son_deal = max(bot_deals, key=lambda d: d.time)
+            return float(son_deal.profit)
+        except Exception as exc:
+            logger.debug("Son deal geçmişi alınamadı: %s", exc)
+            return None
 
     def get_current_atr_price_info(self) -> dict[str, float]:
         """

@@ -25,11 +25,12 @@ ORTAM GEREKSİNİMLERİ
 
 from __future__ import annotations
 
+import json
 import logging
 import sys
 import time
 import traceback
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -96,8 +97,15 @@ ANA_DONGU_UYKU: float = 0.8
 # Veri indirirken ısınma için minimum bar sayısı
 MIN_INDICATOR_WARMUP_BARS: int = 50
 
-# Bağlantı kopması sonrası yeniden deneme beklemesi (saniye)
-RECONNECT_BEKLEME: int = 30
+# Bağlantı kopması sonrası yeniden deneme beklemesi — exponential backoff başlangıç (saniye)
+RECONNECT_BEKLEME: int = 15
+RECONNECT_MAX: int = 240   # Maksimum bekleme (saniye)
+
+# Bar verisinin kaç dakikadan eski ise "bayat" sayılacağı
+DATA_MAX_AGE_MINUTES: int = 30
+
+# Crash recovery durum dosyası
+STATE_FILE: Path = Path("logs") / "live_state.json"
 
 # Günlük drawdown sıfırlama saati (UTC) — prop firm kuralına göre ayarla
 GUNLUK_SIFIRLAMA_SAATI: int = 0    # 00:00 UTC
@@ -291,8 +299,10 @@ class LiveTradingEngine:
         self._calisma_sayaci:        int   = 0
         self._islem_sayaci:          int   = 0
         self._hata_sayaci:           int   = 0
+        self._reconnect_bekleme:     int   = RECONNECT_BEKLEME  # exponential backoff
+        # Circuit breaker: pozisyon kapanışını takip et
+        self._position_was_open:     bool  = False
         # Günlük drawdown hesabı için MT5 equity tepe değeri
-        # (ilk bar tetiklendiğinde canlı bakiyeyle güncellenecek)
         self._daily_peak_equity:     float = float(
             getattr(cfg, "INITIAL_BALANCE", 10_000.0)
         )
@@ -342,6 +352,9 @@ class LiveTradingEngine:
             mt5_symbol, getattr(cfg, "SYMBOL", "QQQ"),
         )
 
+        # 5. Crash recovery: MT5'teki mevcut durumu kontrol et
+        self._crash_recovery_kontrol()
+
         logger.info("✅ Tüm bileşenler hazır — Canlı döngü başlıyor.")
 
     def durdur(self) -> None:
@@ -388,10 +401,16 @@ class LiveTradingEngine:
                 if self.bridge and not self.bridge.ensure_connected():
                     logger.error(
                         "MT5 bağlantısı koptu. %d saniye sonra yeniden "
-                        "denenecek…", RECONNECT_BEKLEME
+                        "denenecek…", self._reconnect_bekleme
                     )
-                    time.sleep(RECONNECT_BEKLEME)
+                    time.sleep(self._reconnect_bekleme)
+                    # Exponential backoff: her başarısız denemede süreyi iki katına çıkar
+                    self._reconnect_bekleme = min(
+                        self._reconnect_bekleme * 2, RECONNECT_MAX
+                    )
                     continue
+                else:
+                    self._reconnect_bekleme = RECONNECT_BEKLEME  # başarıda sıfırla
 
                 # ── Bar kapanma tespiti ────────────────────────────────────
                 if (
@@ -431,8 +450,9 @@ class LiveTradingEngine:
                     )
                     break
 
-                logger.info("%d saniye beklenip devam ediliyor…", RECONNECT_BEKLEME)
-                time.sleep(RECONNECT_BEKLEME)
+                bekleme = min(RECONNECT_BEKLEME * (2 ** min(self._hata_sayaci - 1, 4)), RECONNECT_MAX)
+                logger.info("%d saniye beklenip devam ediliyor…", bekleme)
+                time.sleep(bekleme)
 
     # ── Bar Kapanış İş Akışı ───────────────────────────────────────────────
 
@@ -449,8 +469,24 @@ class LiveTradingEngine:
             Guardrails zaman filtreleri ve Cuma kontrolü için kullanılır.
         """
         try:
+            # ── Adım 0: Circuit breaker — önceki pozisyon kapandı mı? ─────
+            # Eğer geçen barda açık pozisyon vardıysa ve şimdi yoksa → kapandı
+            if self.bridge and self.guardrails:
+                simdiki_acik = self.bridge.has_open_position()
+                if self._position_was_open and not simdiki_acik:
+                    # Son deal kâr mı zarar mı?
+                    son_kar = self.bridge.get_last_closed_deal_profit()
+                    kazanc = (son_kar is not None and son_kar > 0)
+                    self.guardrails.record_trade_result(kazanc)
+                    logger.info(
+                        "📋 Pozisyon kapandı → Circuit breaker güncellendi | "
+                        "Sonuç: %s | Kâr: %s",
+                        "WIN" if kazanc else "LOSS",
+                        f"${son_kar:.2f}" if son_kar is not None else "bilinmiyor",
+                    )
+                self._position_was_open = simdiki_acik
+
             # ── Adım 1: Cuma zorla kapanış kontrolü ───────────────────────
-            # DÜZELTME: should_force_close(timestamp) imzasına uygun timestamp geçildi
             if self.guardrails and self.guardrails.should_force_close(simdi):
                 logger.warning(
                     "📅 Cuma zorla kapanış sinyali — tüm pozisyonlar kapatılıyor."
@@ -532,7 +568,39 @@ class LiveTradingEngine:
                 )
                 return
 
+            # ── Veri tazelik kontrolü ──────────────────────────────────────
+            # Son barın zaman damgası DATA_MAX_AGE_MINUTES'tan eski ise geç
+            try:
+                son_bar_zaman = df_ham.index[-1]
+                if hasattr(son_bar_zaman, "tzinfo") and son_bar_zaman.tzinfo is None:
+                    import pandas as pd
+                    son_bar_zaman = son_bar_zaman.tz_localize("UTC")
+                veri_yasi = (simdi.replace(tzinfo=timezone.utc) - son_bar_zaman).total_seconds() / 60
+                if veri_yasi > DATA_MAX_AGE_MINUTES:
+                    logger.warning(
+                        "⏰ VERİ BAYAT: Son bar %d dakika önce (%s) — "
+                        "yfinance gecikmiş olabilir, bar atlanıyor.",
+                        int(veri_yasi),
+                        son_bar_zaman.strftime("%H:%M"),
+                    )
+                    return
+                logger.debug("Veri tazeliği: %.1f dakika", veri_yasi)
+            except Exception as exc:
+                logger.debug("Veri tazelik kontrolü atlandı: %s", exc)
+
             df_ind = self.feature_engine.calculate_indicators(df_ham)
+
+            # ── İndikatör NaN doğrulaması ──────────────────────────────────
+            kritik_kolonlar = ["EMA_9", "EMA_21", "RSI", "ATR", "ADX"]
+            for kol in kritik_kolonlar:
+                if kol in df_ind.columns:
+                    nan_oran = df_ind[kol].isna().mean()
+                    if nan_oran > 0.1:
+                        logger.warning(
+                            "⚠️ %s indikatöründe >%%10 NaN (%.0f%%) — "
+                            "indikatör hesabı eksik olabilir.",
+                            kol, nan_oran * 100,
+                        )
 
             # ── Adım 6: Temel sinyal üret ──────────────────────────────────
             current_idx = len(df_ind) - 1
@@ -635,12 +703,36 @@ class LiveTradingEngine:
             if sonuc.success:
                 self._islem_sayaci += 1
                 self._hata_sayaci = 0   # Başarılı işlem hata sayacını sıfırlar
+                self._position_was_open = True
                 logger.info(
                     "✅ İŞLEM AÇILDI #%d\n   %s",
                     self._islem_sayaci, sonuc,
                 )
+                # Emir doğrulama: MT5'te pozisyon gerçekten açıldı mı?
+                time.sleep(0.5)
+                if self.bridge and not self.bridge.has_open_position():
+                    logger.error(
+                        "⚠️ EMIR DOĞRULAMA BAŞARISIZ: OrderResult success=True "
+                        "ama MT5'te açık pozisyon bulunamadı! "
+                        "Ticket: %d — Manuel kontrol gerekli.",
+                        sonuc.ticket,
+                    )
+                # Durum dosyasını güncelle (crash recovery için)
+                self._durum_kaydet(sonuc, canli_metrikler.equity)
             else:
                 logger.error("❌ İŞLEM BAŞARISIZ: %s", sonuc)
+
+            # ── Equity Snapshot ────────────────────────────────────────────
+            try:
+                _m = self.bridge.get_live_account_metrics() if self.bridge else None
+                if _m:
+                    logger.info(
+                        "📊 EQUITY SNAPSHOT | Bakiye: $%.2f | Equity: $%.2f | "
+                        "Açık PnL: $%.2f | Tepe: $%.2f",
+                        _m.balance, _m.equity, _m.profit, self._daily_peak_equity,
+                    )
+            except Exception:
+                pass
 
         except Exception as exc:
             self._hata_sayaci += 1
@@ -649,6 +741,62 @@ class LiveTradingEngine:
                 self._hata_sayaci, exc,
             )
             logger.debug(traceback.format_exc())
+
+    # ── Crash Recovery & Durum Kayıt ──────────────────────────────────────
+
+    def _crash_recovery_kontrol(self) -> None:
+        """
+        Bot başlarken MT5'teki mevcut pozisyonları kontrol eder.
+        Açık pozisyon bulunursa kritik uyarı verir — beklenmedik yeniden başlatma.
+        """
+        if not self.bridge:
+            return
+        try:
+            acik_poz = self.bridge.get_open_positions()
+            if acik_poz:
+                logger.critical(
+                    "🚨 CRASH RECOVERY: Bot başlarken %d açık pozisyon bulundu!\n"
+                    "   Bu, beklenmedik bir yeniden başlatma olduğunu gösterir.\n"
+                    "   Pozisyonlar: %s\n"
+                    "   Risk yönetimi için mevcut durumu manuel kontrol edin.",
+                    len(acik_poz),
+                    [(p["ticket"], p["type"], p["profit"]) for p in acik_poz],
+                )
+                self._position_was_open = True
+                # Önceki durum dosyasını oku
+                if STATE_FILE.exists():
+                    try:
+                        with open(STATE_FILE, "r") as f:
+                            onceki_durum = json.load(f)
+                        logger.warning(
+                            "📋 Önceki oturum durumu: %s", onceki_durum
+                        )
+                    except Exception:
+                        pass
+            else:
+                logger.info("✅ Crash recovery: Açık pozisyon yok — temiz başlangıç.")
+        except Exception as exc:
+            logger.warning("Crash recovery kontrolü yapılamadı: %s", exc)
+
+    def _durum_kaydet(self, sonuc, equity: float) -> None:
+        """Crash recovery için işlem durumunu diske yazar."""
+        try:
+            STATE_FILE.parent.mkdir(exist_ok=True)
+            durum = {
+                "timestamp":   datetime.utcnow().isoformat(),
+                "ticket":      sonuc.ticket,
+                "order_type":  sonuc.order_type,
+                "lot":         sonuc.lot,
+                "price":       sonuc.price,
+                "sl":          sonuc.sl,
+                "tp":          sonuc.tp,
+                "equity":      equity,
+                "islem_no":    self._islem_sayaci,
+            }
+            with open(STATE_FILE, "w") as f:
+                json.dump(durum, f, indent=2)
+        except Exception as exc:
+            logger.debug("Durum dosyası yazılamadı: %s", exc)
 
     # ── Günlük Drawdown Sıfırlama ──────────────────────────────────────────
 
