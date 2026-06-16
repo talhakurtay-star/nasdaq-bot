@@ -157,7 +157,7 @@ FUNDED_MODE = os.getenv("STRESS_FUNDED_MODE", "False").lower() in ("true", "1", 
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
 REWARD_RISK_RATIO     = float(os.getenv("STRESS_RR",          "4.0"))
 PARTIAL_CLOSE_R       = float(os.getenv("STRESS_PARTIAL_R",   "1.0"))  # 1R'da kısmi kâr al
-PARTIAL_CLOSE_FRAC    = float(os.getenv("STRESS_PARTIAL_FRAC", "0.15")) # 15% kapat → kalan %85 TP'ye koşar (WF: +36% vs +34%)
+PARTIAL_CLOSE_FRAC    = float(os.getenv("STRESS_PARTIAL_FRAC", "0.25")) # kaç % kapatılacak (0.25 = %25 → kalan %75 TP'ye koşar)
 TRAILING_ACTIVATION_R = float(os.getenv("STRESS_TRAIL_R",     "1.0"))  # 1R sonrası trailing başlat
 TRAILING_ATR_MULT     = float(os.getenv("STRESS_TRAIL_ATR",   "3.5"))  # > ATR_MULT=2.5 → breakeven'den sonra kalan %50 TP'ye kadar serbest çalışır
 ATR_MULTIPLIER        = float(os.getenv("STRESS_ATR_MULT",    "2.5"))  # Geniş SL: erken tetiklenmeyi azaltır, WR artar
