@@ -430,8 +430,10 @@ class RiskGuardrails:
 
     def get_daily_dd_risk_mult(self, portfolio: "PortfolioManager") -> float:
         """
-        Günlük drawdown %3'ü aştığında risk yarıya iner.
-        Prop firm %4 limitine buffer bırakır.
+        Katmanlı günlük DD koruması — prop firm limitleri için tampon:
+          %0–1.5  → 1.0x  (normal)
+          %1.5–3  → 0.75x (sarı uyarı — risk kıs)
+          %3+     → 0.5x  (kırmızı — yarı risk)
         """
         if portfolio.daily_peak_equity <= 0:
             return 1.0
@@ -439,6 +441,9 @@ class RiskGuardrails:
         if daily_dd >= 0.03:
             logger.debug("Günlük DD =%{:.2f} → risk 0.5x".format(daily_dd * 100))
             return 0.5
+        if daily_dd >= 0.015:
+            logger.debug("Günlük DD =%{:.2f} → risk 0.75x".format(daily_dd * 100))
+            return 0.75
         return 1.0
 
     def status(self) -> dict:
