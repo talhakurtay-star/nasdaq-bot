@@ -144,8 +144,8 @@ XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.0"))   # 
 # Challenge hedefine yaklaşıldığında risk otomatik azalır — challenge pasını garantiler.
 # Sermayeli botta KAPALI (False), prop firm botta AÇIK (True).
 PROFIT_LOCK_ENABLED     = os.getenv("STRESS_PROFIT_LOCK", "False").lower() in ("true", "1", "yes")
-PROFIT_LOCK_WARN_PCT    = float(os.getenv("STRESS_PROFIT_LOCK_WARN",  "0.06"))   # %6 kardan itibaren 0.75x
-PROFIT_LOCK_LOCK_PCT    = float(os.getenv("STRESS_PROFIT_LOCK_LOCK",  "0.075"))  # %7.5 kardan itibaren 0.40x
+PROFIT_LOCK_WARN_PCT    = float(os.getenv("STRESS_PROFIT_LOCK_WARN",  "0.045"))  # %4.5 kardan itibaren 0.75x (erken koruma)
+PROFIT_LOCK_LOCK_PCT    = float(os.getenv("STRESS_PROFIT_LOCK_LOCK",  "0.065"))  # %6.5 kardan itibaren 0.40x (erken koruma)
 
 # ── Funded Hesap Modu ─────────────────────────────────────────────────────────
 # Challenge geçtikten sonra funded hesapta çalışırken True yap.
