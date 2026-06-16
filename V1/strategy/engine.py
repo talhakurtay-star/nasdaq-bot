@@ -146,7 +146,6 @@ class StrategyEngine:
             and RSI_EARLY_LONG_MIN <= rsi <= RSI_EARLY_LONG_MAX
             and adx_ok
             and macd_hist > 0
-            and macd_accel_long
             and close_vs_ema50 > -0.015
             and h4_long_ok
         ):
@@ -162,7 +161,6 @@ class StrategyEngine:
             and RSI_EARLY_SHORT_MIN <= rsi <= RSI_EARLY_SHORT_MAX
             and adx_ok
             and macd_hist < 0
-            and macd_accel_short
             and close_vs_ema50 < 0.015
             and h4_short_ok
         ):
