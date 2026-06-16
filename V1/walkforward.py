@@ -124,7 +124,7 @@ def run_quarter_backtest(date_from: str, date_to: str, xgb_threshold: float) -> 
 
     subprocess.run(
         [sys.executable, os.path.join(base_dir, "backtest.py")],
-        capture_output=True, text=True, env=env,
+        capture_output=True, text=True, encoding="utf-8", errors="replace", env=env,
         cwd=base_dir,
     )
 
