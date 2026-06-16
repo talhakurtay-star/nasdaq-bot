@@ -52,6 +52,9 @@ try:
         TRADE_END_HOUR,
         TRADE_START_HOUR,
         ZORLU_KAPANIS_SAATI,
+        PROFIT_LOCK_ENABLED,
+        PROFIT_LOCK_WARN_PCT,
+        PROFIT_LOCK_LOCK_PCT,
     )
 except ImportError:
     ALLOW_WEEKEND_HOLDING   = False
@@ -61,6 +64,9 @@ except ImportError:
     MAX_TOTAL_DRAWDOWN_PCT  = 0.09
     THURSDAY_CUTOFF_HOUR    = 22
     TRADE_END_HOUR          = 23
+    PROFIT_LOCK_ENABLED     = False
+    PROFIT_LOCK_WARN_PCT    = 0.06
+    PROFIT_LOCK_LOCK_PCT    = 0.075
     TRADE_START_HOUR        = 16
     ZORLU_KAPANIS_SAATI     = 23
 
@@ -443,6 +449,27 @@ class RiskGuardrails:
             return 0.5
         if daily_dd >= 0.015:
             logger.debug("Günlük DD =%{:.2f} → risk 0.75x".format(daily_dd * 100))
+            return 0.75
+        return 1.0
+
+    def get_profit_lock_mult(self, portfolio: "PortfolioManager") -> float:
+        """
+        Profit-Lock: Challenge hedefine yaklaşıldığında risk otomatik azalır.
+        Kazanılan karı koruyarak challenge pasını garantiye alır.
+        Sadece PROFIT_LOCK_ENABLED=True ise aktif (prop firm botta açık, sermayeli botta kapalı).
+
+        Funding Pips Phase 1: +%8 hedef
+          %6+   → 0.75x (uyarı bölgesi — temkinli ol)
+          %7.5+ → 0.40x (kilitle ve geç)
+        """
+        if not PROFIT_LOCK_ENABLED or INITIAL_BALANCE <= 0:
+            return 1.0
+        profit_pct = (portfolio.equity - INITIAL_BALANCE) / INITIAL_BALANCE
+        if profit_pct >= PROFIT_LOCK_LOCK_PCT:
+            logger.info("💎 PROFIT-LOCK: Kâr %%%.1f → risk 0.40x (challenge garantiye alındı)", profit_pct * 100)
+            return 0.40
+        if profit_pct >= PROFIT_LOCK_WARN_PCT:
+            logger.debug("🟡 PROFIT-LOCK: Kâr %%%.1f → risk 0.75x (hedef yakın)", profit_pct * 100)
             return 0.75
         return 1.0
 

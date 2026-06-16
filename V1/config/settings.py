@@ -140,6 +140,13 @@ RSI_OVERSOLD = int(os.getenv("STRESS_RSI_OS", "20"))
 # Modelin güven skoru bu eşiğin altındaysa işlem VETO edilir.
 XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.0"))   # 0.0: XGB devre dışı — model prob < eşik → tüm trade veto olur
 
+# ── Prop Firm Profit-Lock ──────────────────────────────────────────────────────
+# Challenge hedefine yaklaşıldığında risk otomatik azalır — challenge pasını garantiler.
+# Sermayeli botta KAPALI (False), prop firm botta AÇIK (True).
+PROFIT_LOCK_ENABLED     = os.getenv("STRESS_PROFIT_LOCK", "False").lower() in ("true", "1", "yes")
+PROFIT_LOCK_WARN_PCT    = float(os.getenv("STRESS_PROFIT_LOCK_WARN",  "0.06"))   # %6 kardan itibaren 0.75x
+PROFIT_LOCK_LOCK_PCT    = float(os.getenv("STRESS_PROFIT_LOCK_LOCK",  "0.075"))  # %7.5 kardan itibaren 0.40x
+
 # ── Portföy ve Sermaye Ayarları ──────────────────────────────────────────────
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
 REWARD_RISK_RATIO     = float(os.getenv("STRESS_RR",          "3.5"))
