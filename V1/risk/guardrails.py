@@ -33,6 +33,7 @@ Entegrasyon akışı
 from __future__ import annotations
 
 import logging
+import os
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING
 
@@ -55,6 +56,7 @@ try:
         PROFIT_LOCK_ENABLED,
         PROFIT_LOCK_WARN_PCT,
         PROFIT_LOCK_LOCK_PCT,
+        FUNDED_MODE,
     )
 except ImportError:
     ALLOW_WEEKEND_HOLDING   = False
@@ -67,6 +69,7 @@ except ImportError:
     PROFIT_LOCK_ENABLED     = False
     PROFIT_LOCK_WARN_PCT    = 0.06
     PROFIT_LOCK_LOCK_PCT    = 0.075
+    FUNDED_MODE             = False
     TRADE_START_HOUR        = 16
     ZORLU_KAPANIS_SAATI     = 23
 
@@ -124,7 +127,7 @@ class RiskGuardrails:
         self.daily_drawdown_triggered: bool = False
         self.total_drawdown_triggered: bool = False
         self.daily_trades_count:       int  = 0
-        self.max_daily_trades:         int  = 99  # Günlük limit yok — circuit breaker yönetir
+        self.max_daily_trades:         int  = int(os.getenv("STRESS_MAX_DAILY_TRADES", "99"))
         self.consecutive_sl_count:     int  = 0
         self.consecutive_win_count:    int  = 0   # art arda kazananlar
         self.circuit_breaker_active:   bool = False
@@ -462,7 +465,7 @@ class RiskGuardrails:
           %6+   → 0.75x (uyarı bölgesi — temkinli ol)
           %7.5+ → 0.40x (kilitle ve geç)
         """
-        if not PROFIT_LOCK_ENABLED or INITIAL_BALANCE <= 0:
+        if not PROFIT_LOCK_ENABLED or FUNDED_MODE or INITIAL_BALANCE <= 0:
             return 1.0
         profit_pct = (portfolio.equity - INITIAL_BALANCE) / INITIAL_BALANCE
         if profit_pct >= PROFIT_LOCK_LOCK_PCT:

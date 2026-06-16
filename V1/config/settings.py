@@ -147,6 +147,12 @@ PROFIT_LOCK_ENABLED     = os.getenv("STRESS_PROFIT_LOCK", "False").lower() in ("
 PROFIT_LOCK_WARN_PCT    = float(os.getenv("STRESS_PROFIT_LOCK_WARN",  "0.06"))   # %6 kardan itibaren 0.75x
 PROFIT_LOCK_LOCK_PCT    = float(os.getenv("STRESS_PROFIT_LOCK_LOCK",  "0.075"))  # %7.5 kardan itibaren 0.40x
 
+# ── Funded Hesap Modu ─────────────────────────────────────────────────────────
+# Challenge geçtikten sonra funded hesapta çalışırken True yap.
+# Funded modda profit-lock devre dışı, risk tam güçte, sadece DD koruma aktif.
+# Kullanım: settings.py'de FUNDED_MODE = True, veya ortam değişkeni set et.
+FUNDED_MODE = os.getenv("STRESS_FUNDED_MODE", "False").lower() in ("true", "1", "yes")
+
 # ── Portföy ve Sermaye Ayarları ──────────────────────────────────────────────
 INITIAL_BALANCE = float(os.getenv("STRESS_INITIAL_BALANCE", "100000.0"))
 REWARD_RISK_RATIO     = float(os.getenv("STRESS_RR",          "3.7"))
