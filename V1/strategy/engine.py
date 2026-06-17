@@ -40,11 +40,18 @@ RSI_EARLY_SHORT_MAX = 62
 # ── Katman 2: Pullback Parametreleri ─────────────────────────────────────────
 PULLBACK_MIN_BARS      = 25
 PULLBACK_MAX_BARS      = 120
-ADX_PULLBACK           = 25.0   # raised from 22 → kurulu trendde daha güçlü ADX = daha yüksek WR
+ADX_PULLBACK           = 25.0   # long için ADX eşiği
+ADX_PULLBACK_SHORT     = 28.0   # short için daha yüksek ADX → zayıf short sinyalleri filtreler
 RSI_PULLBACK_LONG_MIN  = 35
 RSI_PULLBACK_LONG_MAX  = 62
 RSI_PULLBACK_SHORT_MIN = 45
 RSI_PULLBACK_SHORT_MAX = 65
+
+# ── D1 EMA200 Trend Filtresi ──────────────────────────────────────────────────
+# Uzun vadeli trendle çelişen girişleri engeller.
+# -0.02 / +0.02 → fiyat EMA200'ün %2'den fazla ters tarafındaysa sinyal bloklanır.
+D1_LONG_EMA200_MIN  = -0.02   # fiyat EMA200'ün en az %2 altındaysa long engelle
+D1_SHORT_EMA200_MAX =  0.02   # fiyat EMA200'ün en az %2 üstündeyse short engelle
 
 # ── Üst Periyot / Rejim Filtresi ──────────────────────────────────────────────
 # H4 trend filtresi: H4 yönüne karşı gelen işlemleri engeller
@@ -102,11 +109,12 @@ class StrategyEngine:
             adx            = float(bar.get("ADX",            0.0) or 0.0)
             macd_hist      = float(bar.get("MACD_Hist",      0.0) or 0.0)
             align_bars     = float(bar.get("EMA_Align_Bars", 0.0) or 0.0)
-            close_vs_ema50 = float(bar.get("Close_vs_EMA50", 0.0) or 0.0)
-            h4_trend       = float(bar.get("H4_EMA_Trend",   0.0) or 0.0)
-            adx_persist    = float(bar.get("ADX_Persistence", 5.0) or 5.0)
-            bb_pct         = float(bar.get("BB_Pct",          0.5) or 0.5)
-            rsi_change3    = float(bar.get("RSI_Change3",     0.0) or 0.0)
+            close_vs_ema50     = float(bar.get("Close_vs_EMA50",      0.0) or 0.0)
+            h4_trend           = float(bar.get("H4_EMA_Trend",        0.0) or 0.0)
+            adx_persist        = float(bar.get("ADX_Persistence",     5.0) or 5.0)
+            bb_pct             = float(bar.get("BB_Pct",              0.5) or 0.5)
+            rsi_change3        = float(bar.get("RSI_Change3",         0.0) or 0.0)
+            d1_close_vs_ema200 = float(bar.get("D1_Close_vs_EMA200",  0.0) or 0.0)
         except (KeyError, TypeError, ValueError) as exc:
             logger.warning("Bar %d okuma hatası: %s", current_index, exc)
             return "HOLD"
@@ -130,14 +138,19 @@ class StrategyEngine:
         else:
             macd_accel_long = macd_accel_short = True
 
-        adx_ok       = not math.isnan(adx) and adx >= ADX_STRONG
-        adx_pullback = not math.isnan(adx) and adx >= ADX_PULLBACK
+        adx_ok             = not math.isnan(adx) and adx >= ADX_STRONG
+        adx_pullback       = not math.isnan(adx) and adx >= ADX_PULLBACK
+        adx_pullback_short = not math.isnan(adx) and adx >= ADX_PULLBACK_SHORT
 
         uptrend   = ema_fast > ema_slow
         downtrend = ema_fast < ema_slow
 
         h4_long_ok  = (not H4_TREND_REQUIRED) or h4_trend >= 0
         h4_short_ok = (not H4_TREND_REQUIRED) or h4_trend <= 0
+
+        # D1 EMA200 makro trend filtresi
+        d1_long_ok  = d1_close_vs_ema200 >= D1_LONG_EMA200_MIN
+        d1_short_ok = d1_close_vs_ema200 <= D1_SHORT_EMA200_MAX
 
         # ══ KATMAN 1: ERKEN TREND (bar 1-25) ══════════════════════════════
         if (
@@ -148,6 +161,7 @@ class StrategyEngine:
             and macd_hist > 0
             and close_vs_ema50 > -0.015
             and h4_long_ok
+            and d1_long_ok
         ):
             logger.debug(
                 "Bar %d EARLY_LONG [ADX=%.1f Bars=%.0f RSI=%.1f MACDh=%.4f]",
@@ -163,6 +177,7 @@ class StrategyEngine:
             and macd_hist < 0
             and close_vs_ema50 < 0.015
             and h4_short_ok
+            and d1_short_ok
         ):
             logger.debug(
                 "Bar %d EARLY_SHORT [ADX=%.1f Bars=%.0f RSI=%.1f MACDh=%.4f]",
@@ -180,6 +195,7 @@ class StrategyEngine:
             and macd_hist > 0
             and close_vs_ema50 > -0.015
             and h4_long_ok
+            and d1_long_ok
         ):
             logger.debug(
                 "Bar %d PULLBACK_LONG [ADX=%.1f Bars=%.0f RSI=%.1f]",
@@ -191,10 +207,11 @@ class StrategyEngine:
             downtrend
             and -PULLBACK_MAX_BARS <= align_bars <= -PULLBACK_MIN_BARS
             and RSI_PULLBACK_SHORT_MIN <= rsi <= RSI_PULLBACK_SHORT_MAX
-            and adx_pullback
+            and adx_pullback_short
             and macd_hist < 0
             and close_vs_ema50 < 0.015
             and h4_short_ok
+            and d1_short_ok
         ):
             logger.debug(
                 "Bar %d PULLBACK_SHORT [ADX=%.1f Bars=%.0f RSI=%.1f]",

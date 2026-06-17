@@ -139,6 +139,9 @@ RSI_OVERSOLD = int(os.getenv("STRESS_RSI_OS", "20"))
 # ── XGBoost Olasılık Eşiği (Veto Mekanizması) ────────────────────────────────
 # Modelin güven skoru bu eşiğin altındaysa işlem VETO edilir.
 XGB_PROBABILITY_THRESHOLD = float(os.getenv("STRESS_XGB_THRESHOLD", "0.0"))   # 0.0: XGB devre dışı — model prob < eşik → tüm trade veto olur
+# Yön bazlı eşikler — tek yönlü XGB aktivasyonu için
+XGB_LONG_THRESHOLD  = float(os.getenv("STRESS_XGB_LONG_THR",  "0.50"))  # Long AUC=0.629 → aktif
+XGB_SHORT_THRESHOLD = float(os.getenv("STRESS_XGB_SHORT_THR", "0.0"))   # Short AUC=0.565 → devre dışı
 
 # ── Prop Firm Profit-Lock ──────────────────────────────────────────────────────
 # Challenge hedefine yaklaşıldığında risk otomatik azalır — challenge pasını garantiler.

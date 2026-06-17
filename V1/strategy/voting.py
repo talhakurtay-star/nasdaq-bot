@@ -22,12 +22,14 @@ except ImportError as exc:
     raise ImportError("xgboost package is missing. Install with: pip install xgboost") from exc
 
 try:
-    from config.settings import XGB_PROBABILITY_THRESHOLD
+    from config.settings import XGB_PROBABILITY_THRESHOLD, XGB_LONG_THRESHOLD, XGB_SHORT_THRESHOLD
     from config import settings as _cfg
 
     MODEL_DIR: str = _cfg.MODEL_DIR
 except ImportError:
     XGB_PROBABILITY_THRESHOLD = 0.54
+    XGB_LONG_THRESHOLD  = 0.50
+    XGB_SHORT_THRESHOLD = 0.0
     MODEL_DIR = "models"
 
 from strategy.engine import SignalType
@@ -59,6 +61,11 @@ class VotingMechanism:
             "STRONG_SHORT": None,
         }
         self.threshold: float = XGB_PROBABILITY_THRESHOLD
+        # Yön bazlı eşikler: STRESS_XGB_THRESHOLD=0 iken bile yön bazlı aktif olabilir
+        self.thresholds: dict[str, float] = {
+            "STRONG_LONG":  XGB_LONG_THRESHOLD,
+            "STRONG_SHORT": XGB_SHORT_THRESHOLD,
+        }
         self._load_models()
 
     def _load_one(self, signal: SignalType, filename: str) -> Optional[xgb.Booster]:
@@ -144,7 +151,9 @@ class VotingMechanism:
             probability = self._extract_probability(features_df, base_signal)
         except Exception:
             return "HOLD", 0.0
-        if self.threshold <= 0.0 or probability >= self.threshold:
+        direction_thr = self.thresholds.get(base_signal, self.threshold)
+        effective_thr = max(self.threshold, direction_thr)
+        if effective_thr <= 0.0 or probability >= effective_thr:
             return base_signal, probability
         return "HOLD", probability
 
@@ -186,20 +195,21 @@ class VotingMechanism:
             logger.error("Bar %d: XGBoost prediction failed: %s. HOLD.", current_index, exc)
             return "HOLD"
 
-        # XGB veto devre dışı: model AUC ~0.46 (rastgele altı) olduğunda
-        # strateji motorunun filtrelerine güvenmek daha iyi sonuç verir.
-        # Threshold=0.0 ile tüm strateji sinyalleri geçer.
-        if self.threshold <= 0.0:
+        # Yön bazlı threshold kullan; global threshold=0 olsa bile aktif olabilir
+        direction_thr = self.thresholds.get(base_signal, self.threshold)
+        effective_thr = max(self.threshold, direction_thr)
+
+        if effective_thr <= 0.0:
             logger.debug("Bar %d: %s — XGB veto disabled, signal passed.", current_index, base_signal)
             return base_signal
 
-        if probability >= self.threshold:
+        if probability >= effective_thr:
             logger.info(
                 "Bar %d: %s approved | probability=%.4f >= threshold=%.2f",
                 current_index,
                 base_signal,
                 probability,
-                self.threshold,
+                effective_thr,
             )
             return base_signal
 
@@ -208,6 +218,6 @@ class VotingMechanism:
             current_index,
             base_signal,
             probability,
-            self.threshold,
+            effective_thr,
         )
         return "HOLD"
